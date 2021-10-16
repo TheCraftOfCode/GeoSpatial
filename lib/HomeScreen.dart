@@ -12,15 +12,6 @@ class HomeScreen extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Stack(children: [
-          Container(
-            constraints: BoxConstraints.expand(),
-            // decoration: BoxDecoration(
-            //  gradient: LinearGradient(
-            //       begin: Alignment(2.5,0.5),
-            //       end: Alignment(-0.4,-6.818380082762587e-9),
-            //       colors: [Color.fromRGBO(0, 255, 71, 0.6000000238418579),Color.fromRGBO(0, 189, 177, 0.7599999904632568),]
-            //   ),),
-          ),
           SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
