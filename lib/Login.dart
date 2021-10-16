@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:geo_spatial/main.dart' as main;
 import 'package:google_fonts/google_fonts.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class Login extends StatelessWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +62,7 @@ class HomeScreen extends StatelessWidget {
                       style: GoogleFonts.montserrat(fontSize: 15),
                       decoration: InputDecoration(
                           labelText: 'Password',
-                          labelStyle: GoogleFonts.montserrat(fontSize: 12),
-                          focusColor: Colors.greenAccent,
-                          hoverColor: Colors.greenAccent),
+                          labelStyle: GoogleFonts.montserrat(fontSize: 12),),
                       keyboardType: TextInputType.visiblePassword,
                     ),
                   ),
@@ -73,7 +71,8 @@ class HomeScreen extends StatelessWidget {
                     width: 200,
                     padding: EdgeInsets.only(left: 30, top: 50),
                     child: OutlinedButton.icon(
-                      onPressed: () {},
+                      onPressed: () { //HomePage(),
+                      },
                       icon: Icon(
                         Icons.arrow_forward_ios_rounded,
                         color: Colors.black,

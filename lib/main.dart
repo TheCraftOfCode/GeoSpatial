@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geo_spatial/HomeScreen.dart';
+import 'package:geo_spatial/Login.dart';
 
 void main() {
   runApp(
@@ -31,7 +31,7 @@ ThemeData theme = ThemeData(
   ),
   buttonColor: Color(0xffA3D2CA),
   backgroundColor: Color(0xffF7F3E9),
-  hintColor: Color(0xffF05945),
+  hintColor: Color(0xff5EAAA8),
 );
 
 class MyApp extends StatelessWidget {
@@ -39,6 +39,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeScreen();
+    return Login();
   }
 }
