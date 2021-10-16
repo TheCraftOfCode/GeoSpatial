@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:geo_spatial/Globals.dart' as Globals;
+import 'package:geo_spatial/Constants/Globals.dart' as Globals;
 import 'package:google_fonts/google_fonts.dart';
-import 'package:geo_spatial/IndividualDataCollection.dart';
+import 'package:geo_spatial/Screens/IndividualDataCollection.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
