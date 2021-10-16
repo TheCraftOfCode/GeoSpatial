@@ -30,7 +30,7 @@ class FormCard extends StatelessWidget {
                     letterSpacing: 0.8,
                     color: Colors.deepPurpleAccent)),
             SizedBox(
-              height: 40,
+              height: 20,
             ),
             TextField(
               decoration: InputDecoration(
@@ -38,12 +38,12 @@ class FormCard extends StatelessWidget {
                   labelStyle:
                       TextStyle(color: Colors.deepPurpleAccent, fontSize: 14.0),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0)),
+                      borderRadius: BorderRadius.circular(10.0)),
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0))),
+                      borderRadius: BorderRadius.circular(10.0))),
             ),
             SizedBox(
-              height: 40,
+              height: 20,
             ),
             TextField(
               obscureText: true,
@@ -52,9 +52,9 @@ class FormCard extends StatelessWidget {
                   labelStyle:
                       TextStyle(color: Colors.deepPurpleAccent, fontSize: 14.0),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0)),
+                      borderRadius: BorderRadius.circular(10.0)),
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0))),
+                      borderRadius: BorderRadius.circular(10.0))),
             ),
             SizedBox(
               height: 70,

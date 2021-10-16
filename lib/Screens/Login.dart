@@ -45,7 +45,7 @@ class _MyAppState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xffEAE7FA),
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -68,10 +68,10 @@ class _MyAppState extends State<Login> {
               child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: 220,
+                    height: 230,
                   ),
                   FormCard(),
-                  SizedBox(height: 20),
+                  SizedBox(height: 25),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
