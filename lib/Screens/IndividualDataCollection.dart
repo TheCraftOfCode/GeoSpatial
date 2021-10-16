@@ -12,7 +12,9 @@ class _IndividualDataCollectionState extends State<IndividualDataCollection> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Text('Individual Data'),
+        body: Center(
+          child: Text('Individual Data'),
+        ),
       ),
     );
   }
