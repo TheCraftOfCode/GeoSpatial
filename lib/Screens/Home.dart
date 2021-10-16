@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geo_spatial/Constants/Globals.dart' as Globals;
+import 'package:geo_spatial/Screens/IndividualDataCollection.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Home extends StatefulWidget {
@@ -15,9 +16,7 @@ class _FavoriteWidgetState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: Globals.theme,
-      home: Scaffold(
+      return Scaffold(
         appBar: AppBar(
             elevation: 0,
             title: Text(
@@ -38,17 +37,16 @@ class _FavoriteWidgetState extends State<Home> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CardWidget('Individual data', 'Individual data entry for everyone in home', 'assets/svg/female.svg', '',
+              CardWidget('Individual data', 'Individual data entry for everyone in home', 'assets/svg/female.svg', IndividualDataCollection(),
                   Color(0xFFF700FF), Color(0xFF2B2BFF)),
-              CardWidget('Community Details', 'Data entry for communities', 'assets/svg/house.svg', '',
+              CardWidget('Community Details', 'Data entry for communities', 'assets/svg/house.svg', IndividualDataCollection(),
                   Color(0xFF2E2FFF), Color(0xFF4FD586)),
-              CardWidget('View saved data', 'View all data saved in local storage', 'assets/svg/storage_image.svg', '',
+              CardWidget('View saved data', 'View all data saved in local storage', 'assets/svg/storage_image.svg', IndividualDataCollection(),
                   Color(0xFFFFA200), Color(0xFFBA0000)),
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }
 
@@ -59,7 +57,7 @@ class CardWidget extends StatelessWidget {
   final String heading;
   final String subHeading;
   final String imageUrl;
-  final String route;
+  final Widget route;
   final Color startingColor;
   final Color endingColor;
 
@@ -92,7 +90,7 @@ class CardWidget extends StatelessWidget {
               highlightColor: Color(0x3CFFFFFF),
               borderRadius: BorderRadius.circular(20),
               onTap: () {
-                print("tapped");
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => route));
               },
               child: Row(
                 children: [

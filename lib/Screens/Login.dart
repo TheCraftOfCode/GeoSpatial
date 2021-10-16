@@ -8,10 +8,7 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: Globals.theme,
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+      return Scaffold(
         body: Stack(children: [
           SingleChildScrollView(
             child: Column(
@@ -88,7 +85,6 @@ class Login extends StatelessWidget {
             ),
           )
         ]),
-      ),
     );
   }
 }
