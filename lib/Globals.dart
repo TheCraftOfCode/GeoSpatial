@@ -4,7 +4,6 @@ ThemeData theme = ThemeData(
   brightness: Brightness.light,
   primaryColor: Color(0xff5EAAA8),
   canvasColor: Color(0xffF7F3E9),
-  accentColor: Color(0xffF05945),
   scaffoldBackgroundColor: Color(0xffF7F3E9),
   cardColor: Colors.white,
   focusColor: Color(0xff5EAAA8),
@@ -17,7 +16,6 @@ ThemeData theme = ThemeData(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(20))),
   ),
-  buttonColor: Color(0xffA3D2CA),
   backgroundColor: Color(0xffF7F3E9),
-  hintColor: Color(0xff5EAAA8),
+  hintColor: Color(0xff5EAAA8), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Color(0xffF05945)),
 );
