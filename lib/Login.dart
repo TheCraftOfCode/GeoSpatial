@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:geo_spatial/main.dart' as main;
+import 'package:geo_spatial/Globals.dart' as Globals;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:geo_spatial/IndividualDataCollection.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -8,7 +9,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: main.theme,
+      theme: Globals.theme,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Stack(children: [
@@ -18,12 +19,12 @@ class Login extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                    padding: EdgeInsets.only(left: 30, top: 40),
+                    padding: EdgeInsets.only(left: 30, top: 70),
                     child: Text(
                       'Geo Title (temp)',
                       style: GoogleFonts.montserrat(
                           fontSize: 40,
-                          color: Colors.black,
+                          color: Color(0xffF05945),
                           fontWeight: FontWeight.bold),
                     )),
                 Padding(
@@ -32,12 +33,12 @@ class Login extends StatelessWidget {
                     'Login',
                     style: GoogleFonts.montserrat(
                         fontSize: 35,
-                        color: Colors.black,
+                        color: Color(0xffF05945),
                         fontWeight: FontWeight.bold),
                   ),
                 ),
                 SizedBox(
-                  height: 200,
+                  height: 150,
                 ),
                 // TODO: Add an image for login
                 Padding(
@@ -55,7 +56,7 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 30.0, top: 20.0),
+                  padding: const EdgeInsets.only(left: 30.0, top: 30.0),
                   child: Container(
                     width: 250,
                     child: TextField(
@@ -71,8 +72,7 @@ class Login extends StatelessWidget {
                     width: 200,
                     padding: EdgeInsets.only(left: 30, top: 50),
                     child: OutlinedButton.icon(
-                      onPressed: () { //HomePage(),
-                      },
+                      onPressed: () { IndividualDataCollection();},
                       icon: Icon(
                         Icons.arrow_forward_ios_rounded,
                         color: Colors.black,
