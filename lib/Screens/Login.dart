@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Constants/Globals.dart' as Globals;
+import 'package:geo_spatial/Screens/Home.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:geo_spatial/Screens/IndividualDataCollection.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -61,6 +61,7 @@ class Login extends StatelessWidget {
                     width: 250,
                     child: TextField(
                       style: GoogleFonts.montserrat(fontSize: 15),
+                      obscureText: true,
                       decoration: InputDecoration(
                           labelText: 'Password',
                           labelStyle: GoogleFonts.montserrat(fontSize: 12),),
@@ -72,7 +73,7 @@ class Login extends StatelessWidget {
                     width: 200,
                     padding: EdgeInsets.only(left: 30, top: 50),
                     child: OutlinedButton.icon(
-                      onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (context) => IndividualDataCollection()));},
+                      onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));},
                       icon: Icon(
                         Icons.arrow_forward_ios_rounded,
                         color: Colors.black,
