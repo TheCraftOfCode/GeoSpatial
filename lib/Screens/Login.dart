@@ -1,90 +1,141 @@
 import 'package:flutter/material.dart';
-import 'package:geo_spatial/Constants/Globals.dart' as Globals;
+import 'package:geo_spatial/Widgets/FormCard.dart';
 import 'package:geo_spatial/Screens/Home.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+class Login extends StatefulWidget {
+  @override
+  _MyAppState createState() => new _MyAppState();
+}
+
+class _MyAppState extends State<Login> {
+  bool _isSelected = false;
+
+  void _radio() {
+    setState(() {
+      _isSelected = !_isSelected;
+    });
+  }
+
+  Widget radioButton(bool isSelected) => Container(
+        width: 16.0,
+        height: 16.0,
+        padding: EdgeInsets.all(2.0),
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(width: 2.0, color: Colors.black)),
+        child: isSelected
+            ? Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+              )
+            : Container(),
+      );
+
+  Widget horizontalLine() => Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        child: Container(
+          width: 120,
+          height: 1.0,
+          color: Colors.black26.withOpacity(.2),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
-        body: Stack(children: [
+    return new Scaffold(
+      backgroundColor: Colors.white,
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 0.0),
+                child: Image.asset("assets/image_01.png"),
+              ),
+              Expanded(
+                child: Container(),
+              ),
+              Expanded(child: Image.asset("assets/image_02.png"))
+            ],
+          ),
           SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                    padding: EdgeInsets.only(left: 30, top: 70),
-                    child: Text(
-                      'Geo Title (temp)',
-                      style: GoogleFonts.montserrat(
-                          fontSize: 40,
-                          color: Color(0xffF05945),
-                          fontWeight: FontWeight.bold),
-                    )),
-                Padding(
-                  padding: EdgeInsets.only(left: 30, top: 20),
-                  child: Text(
-                    'Login',
-                    style: GoogleFonts.montserrat(
-                        fontSize: 35,
-                        color: Color(0xffF05945),
-                        fontWeight: FontWeight.bold),
+            child: Padding(
+              padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 60.0),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 220,
                   ),
-                ),
-                SizedBox(
-                  height: 150,
-                ),
-                // TODO: Add an image for login
-                Padding(
-                  padding: const EdgeInsets.only(left: 30.0, top: 20.0),
-                  child: Container(
-                    width: 250,
-                    alignment: Alignment.center,
-                    child: TextField(
-                      style: GoogleFonts.montserrat(fontSize: 15),
-                      decoration: InputDecoration(
-                          labelText: 'Phone no',
-                          labelStyle: GoogleFonts.montserrat(fontSize: 12)),
-                      keyboardType: TextInputType.phone,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 30.0, top: 30.0),
-                  child: Container(
-                    width: 250,
-                    child: TextField(
-                      style: GoogleFonts.montserrat(fontSize: 15),
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          labelText: 'Password',
-                          labelStyle: GoogleFonts.montserrat(fontSize: 12),),
-                      keyboardType: TextInputType.visiblePassword,
-                    ),
-                  ),
-                ),
-                Container(
-                    width: 200,
-                    padding: EdgeInsets.only(left: 30, top: 50),
-                    child: OutlinedButton.icon(
-                      onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));},
-                      icon: Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: Colors.black,
+                  FormCard(),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          SizedBox(
+                            width: 12.0,
+                          ),
+                          GestureDetector(
+                            onTap: _radio,
+                            child: radioButton(_isSelected),
+                          ),
+                          SizedBox(
+                            width: 8.0,
+                          ),
+                          Text("Remember me",
+                              style: TextStyle(
+                                  fontSize: 15,))
+                        ],
                       ),
-                      label: Text(
-                        "LOGIN",
-                        style: GoogleFonts.montserrat(
-                            fontSize: 15, color: Colors.black),
-                      ),
-                    )),
-              ],
+                      InkWell(
+                        child: Container(
+                          width: 100,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                                Color.fromARGB(500, 59, 5, 120),
+                                Color.fromARGB(250, 157, 133, 244),
+                              ]),
+                              borderRadius: BorderRadius.circular(6.0),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Color(0xFF6078ea).withOpacity(.3),
+                                    offset: Offset(0.0, 8.0),
+                                    blurRadius: 8.0)
+                              ]),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => Home()),
+                                );
+                              },
+                              child: Center(
+                                child: Text("SIGN IN",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        letterSpacing: 1.0)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
-          )
-        ]),
+          ),
+        ],
+      ),
     );
   }
 }

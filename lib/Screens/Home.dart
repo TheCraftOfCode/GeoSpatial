@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geo_spatial/Constants/Globals.dart' as Globals;
 import 'package:geo_spatial/Screens/IndividualDataCollection.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -38,7 +37,7 @@ class _FavoriteWidgetState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CardWidget('Individual data', 'Individual data entry for everyone in home', 'assets/svg/female.svg', IndividualDataCollection(),
-                  Color(0xFFF700FF), Color(0xFF2B2BFF)),
+                  Color(0xFFF700FF), Color(0xff3D2C8D)),
               CardWidget('Community Details', 'Data entry for communities', 'assets/svg/house.svg', IndividualDataCollection(),
                   Color(0xFF2E2FFF), Color(0xFF4FD586)),
               CardWidget('View saved data', 'View all data saved in local storage', 'assets/svg/storage_image.svg', IndividualDataCollection(),
@@ -122,7 +121,7 @@ class CardWidget extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.all(8),
+                      padding: EdgeInsets.only(top: 8.0,bottom: 8.0,right: 8.0),
                       child: SvgPicture.asset('assets/svg/right-icon-arrow.svg',
                           color: Colors.white),
                     ),
