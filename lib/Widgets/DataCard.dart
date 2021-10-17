@@ -55,11 +55,10 @@ class DataCard extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.only(
-                          top: 20, bottom: 20, left: 10, right: 10),
+                      padding: EdgeInsets.only(left: 10, right: 10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text(heading,
                               style: GoogleFonts.montserrat(
