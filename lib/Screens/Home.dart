@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geo_spatial/Constants/Globals.dart' as Globals;
 import 'package:geo_spatial/Screens/IndividualDataCollection.dart';
 import 'package:google_fonts/google_fonts.dart';
 
