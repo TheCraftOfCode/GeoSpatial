@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
 class FormCard extends StatelessWidget {
+  FormCard(this._usernameController, this._passwordController, this._nameError, this._passwordError);
+
+  final TextEditingController _usernameController;
+  final TextEditingController _passwordController;
+  final _nameError;
+  final _passwordError;
+
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -33,8 +40,10 @@ class FormCard extends StatelessWidget {
               height: 20,
             ),
             TextField(
+              controller: _usernameController,
               decoration: InputDecoration(
                   labelText: "Username",
+                  errorText: _nameError,
                   labelStyle:
                       TextStyle(color: Colors.deepPurpleAccent, fontSize: 14.0),
                   focusedBorder: OutlineInputBorder(
@@ -46,9 +55,11 @@ class FormCard extends StatelessWidget {
               height: 20,
             ),
             TextField(
+              controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                   labelText: "Password",
+                  errorText: _passwordError,
                   labelStyle:
                       TextStyle(color: Colors.deepPurpleAccent, fontSize: 14.0),
                   focusedBorder: OutlineInputBorder(

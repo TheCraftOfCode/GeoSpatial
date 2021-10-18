@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:geo_spatial/Screens/IndividualDataCollection.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:geo_spatial/Screens/Login.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -9,6 +12,8 @@ class Home extends StatefulWidget {
   @override
   _HomeWidgetState createState() => _HomeWidgetState();
 }
+
+final storage = FlutterSecureStorage();
 
 class _HomeWidgetState extends State<Home> {
   String userName = '';
@@ -24,13 +29,29 @@ class _HomeWidgetState extends State<Home> {
               style: GoogleFonts.montserrat(fontSize: 20, color: Colors.black),
             ),
             backgroundColor: Colors.transparent,
+            actions: [
+              IconButton(
+                splashRadius: 20,
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.black,
+                ),
+                onPressed: () async {
+                  await storage.delete(key: 'jwt');
+                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                      Login()), (Route<dynamic> route) => false);
+                },
+              )
+            ],
             leading: IconButton(
               splashRadius: 20,
               icon: Icon(
                 Icons.settings,
                 color: Colors.black,
               ),
-              onPressed: () {},
+              onPressed: () {
+
+              },
             )),
         body: SafeArea(
           child: Column(
