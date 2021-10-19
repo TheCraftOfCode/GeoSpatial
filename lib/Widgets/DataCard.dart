@@ -42,7 +42,8 @@ class DataCard extends StatelessWidget {
               highlightColor: Color(0x3CFFFFFF),
               borderRadius: BorderRadius.circular(20),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => route));
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => route));
               },
               child: Row(
                 children: [
@@ -73,7 +74,8 @@ class DataCard extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.only(top: 8.0,bottom: 8.0,right: 8.0),
+                      padding:
+                          EdgeInsets.only(top: 8.0, bottom: 8.0, right: 8.0),
                       child: SvgPicture.asset('assets/svg/right-icon-arrow.svg',
                           color: Colors.white),
                     ),

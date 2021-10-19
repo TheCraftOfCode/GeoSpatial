@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FormCard extends StatelessWidget {
-  FormCard(this._usernameController, this._passwordController, this._nameError, this._passwordError);
+  FormCard(this._usernameController, this._passwordController, this._nameError,
+      this._passwordError);
 
   final TextEditingController _usernameController;
   final TextEditingController _passwordController;

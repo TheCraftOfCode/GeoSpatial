@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:geo_spatial/Constants/NetworkConfig.dart';
 import 'package:geo_spatial/Widgets/FormCard.dart';
 import 'package:geo_spatial/Screens/Home.dart';
 import 'package:http/http.dart' as http;
 
 final storage = FlutterSecureStorage();
-
 
 class Login extends StatefulWidget {
   @override
@@ -14,7 +14,6 @@ class Login extends StatefulWidget {
 }
 
 class _MyAppState extends State<Login> {
-
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -44,20 +43,14 @@ class _MyAppState extends State<Login> {
       return '';
   }
 
-  Future<http.Response> _makeLoginRequest(String username, String password) async {
-    String url = '192.168.29.156:3000';
-    var body = json.encode({
-      "username": username,
-      "password": password
-    });
+  Future<http.Response> _makeLoginRequest(
+      String username, String password) async {
+    String url = NETWORK_ADDRESS;
+    var body = json.encode({"username": username, "password": password});
 
-    var res = await http.post(
-        Uri.http(url, '/api/login'),
-        headers: {"Content-Type": "application/json"},
-        body: body
-    );
+    var res = await http.post(Uri.http(url, '/api/login'),
+        headers: {"Content-Type": "application/json"}, body: body);
     return res;
-
   }
 
   _login() async {
@@ -84,19 +77,17 @@ class _MyAppState extends State<Login> {
 
     if (_nameError == null && _passwordError == null) {
       http.Response loginResponse = await _makeLoginRequest(username, password);
-      if(loginResponse.statusCode != 200){
+      if (loginResponse.statusCode != 200) {
         setState(() {
           _nameError = loginResponse.body;
           _passwordError = loginResponse.body;
         });
-      }
-
-      else{
+      } else {
         storage.write(key: "jwt", value: loginResponse.body);
-        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-            Home()), (Route<dynamic> route) => false);
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => Home()),
+            (Route<dynamic> route) => false);
       }
-
     }
   }
 

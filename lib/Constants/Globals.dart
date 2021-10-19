@@ -17,5 +17,6 @@ ThemeData theme = ThemeData(
         borderRadius: BorderRadius.all(Radius.circular(20))),
   ),
   backgroundColor: Color(0xffF7F3E9),
-  hintColor: Color(0xff5EAAA8), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Color(0xffF05945)),
+  hintColor: Color(0xff5EAAA8),
+  colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Color(0xffF05945)),
 );

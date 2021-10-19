@@ -32,10 +32,12 @@ class MyApp extends StatelessWidget {
     return FutureBuilder(
         future: jwtToken,
         builder: (context, data) {
-
-          if(!data.hasData) return Login();
-          else if(data.hasData && data.data == '') return Login();
-          else return Home();
-    });
+          if (!data.hasData)
+            return Login();
+          else if (data.hasData && data.data == '')
+            return Login();
+          else
+            return Home();
+        });
   }
 }
