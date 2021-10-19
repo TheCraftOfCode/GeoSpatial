@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:geo_spatial/Widgets/FormCard.dart';
 import 'package:geo_spatial/Screens/Home.dart';
+import 'package:geo_spatial/Widgets/FormCard.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -89,7 +89,8 @@ class _MyAppState extends State<Login> {
                           ),
                           Text("Remember me",
                               style: TextStyle(
-                                  fontSize: 15,))
+                                fontSize: 15,
+                              ))
                         ],
                       ),
                       InkWell(
@@ -114,7 +115,8 @@ class _MyAppState extends State<Login> {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => Home()),
+                                  MaterialPageRoute(
+                                      builder: (context) => Home()),
                                 );
                               },
                               child: Center(
