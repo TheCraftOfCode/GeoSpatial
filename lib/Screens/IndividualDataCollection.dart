@@ -29,44 +29,35 @@ class _IndividualDataCollectionState extends State<IndividualDataCollection> {
             )
           ],
         ),
-        body: Stack(fit: StackFit.expand, children: <Widget>[
-          Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 0.0),
-                child: Image.asset("assets/image_03.png"),
-              ),
-              Expanded(
-                child: Container(),
-              ),
-              Expanded(
-                child: Image.asset("assets/image_02.png"),
-              ),
-            ],
-          ),
+        body:
           SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(left: 28.0, right: 28.0),
-              child: Column(
-                children: <Widget>[
-                  DataCard(
-                      'Add new person',
-                      'Enter details of a new family member',
-                      'assets/svg/female.svg',
-                      FamilyMemberAdd(),
-                      Color(0xFFF700FF),
-                      Color(0xff3D2C8D)),
-                  DataCard(
-                      'Edit existing person',
-                      'Edit details of an existing family member',
-                      'assets/svg/female.svg',
-                      FamilyMemberEdit(),
-                      Color(0xFF2E2FFF),
-                      Color(0xFF4FD586)),
-                ],
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height*0.85,
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    DataCard(
+                        'Add new person',
+                        'Enter details of a new family member',
+                        'assets/svg/female.svg',
+                        FamilyMemberAdd(),
+                        Color(0xFFF700FF),
+                        Color(0xff3D2C8D)),
+                    DataCard(
+                        'Edit existing person',
+                        'Edit details of an existing family member',
+                        'assets/svg/female.svg',
+                        FamilyMemberEdit(),
+                        Color(0xFF2E2FFF),
+                        Color(0xFF4FD586)),
+                  ],
+                ),
               ),
             ),
           )
-        ]));
+        );
   }
 }

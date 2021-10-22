@@ -14,35 +14,63 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter the name';
-                      }
-                      return null;
-                    },
-                  ),
-                  OutlinedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate() == true) {
-                          print('Form submitted successfully');
-                          //TODO: Add logic to store locally and to lazy upload to database
-                        }
-                      },
-                      child: Text('Submit'))
-                ],
-              ),
-          ),
-          Datepicker(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          'Add family member',
+          style: TextStyle(color: Colors.black),
+        ),
+        actions: [
+          Icon(
+            Icons.arrow_back_ios_sharp,
+          )
         ],
       ),
-    ));
+        body: SafeArea(
+          child: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20.0,top: 80,right: 20.0),
+        child: Column(
+            children: <Widget>[
+              Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "Name",
+                            labelStyle:
+                            TextStyle(color: Colors.deepPurpleAccent, fontSize: 14.0),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0)),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0))),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the name';
+                          }
+                          return null;
+                        },
+                      ),
+                      Datepicker(),
+                      OutlinedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate() == true) {
+                              print('Form submitted successfully');
+                              //TODO: Add logic to store locally and to lazy upload to database
+                            }
+                          },
+                          child: Text('Submit'))
+                    ],
+                  ),
+              ),
+
+            ],
+        ),
+      ),
+    ),
+        ));
   }
 }
