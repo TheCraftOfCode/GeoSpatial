@@ -19,7 +19,7 @@ final storage = FlutterSecureStorage();
  */
 
 class LoadValidPageWidget extends StatelessWidget{
-  LoadValidPageWidget(this.DefaultPage, this.TargetPage);
+  LoadValidPageWidget(this.DefaultPage, this.TargetPage, {Key? key}): super(key: key);
 
   final Widget DefaultPage;
   final Widget TargetPage;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
 import 'package:geo_spatial/Screens/IndividualDataCollection.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -67,7 +68,7 @@ class _HomeWidgetState extends State<Home> {
                 'Community Details',
                 'Data entry for communities',
                 'assets/svg/house.svg',
-                IndividualDataCollection(),
+                CommunityDataCollection(),
                 Color(0xFF2E2FFF),
                 Color(0xFF4FD586)),
             DataCard(
