@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppBarBackButton extends StatelessWidget implements PreferredSizeWidget {
   const AppBarBackButton(this.title);
@@ -36,7 +37,7 @@ class AppBarBackButton extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       title: Text(
         title,
-        style: TextStyle(color: Colors.black),
+        style: GoogleFonts.montserrat(fontSize: 20, color: Colors.black),
       ),
     );
   }
