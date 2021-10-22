@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geo_spatial/Widgets/Datepicker.dart';
 
 class FamilyMemberAdd extends StatefulWidget {
   const FamilyMemberAdd({Key? key}) : super(key: key);
@@ -37,7 +38,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       },
                       child: Text('Submit'))
                 ],
-              ))
+              ),
+          ),
+          Datepicker(),
         ],
       ),
     ));
