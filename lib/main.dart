@@ -19,14 +19,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  Future<String> get jwtToken async {
-    var jwt = await storage.read(key: "jwt");
-    print('jwt' + jwt.toString());
-
-    if (jwt == null) return "";
-    return jwt;
-  }
-
   @override
   Widget build(BuildContext context) {
     //TODO: Replace with LoadValidPageWidget
