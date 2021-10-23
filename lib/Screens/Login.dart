@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:geo_spatial/Constants/NetworkConfig.dart';
+import 'package:geo_spatial/Constants/Constants.dart';
 import 'package:geo_spatial/Widgets/FormCard.dart';
 import 'package:geo_spatial/Screens/Home.dart';
 import 'package:http/http.dart' as http;

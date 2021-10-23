@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:geo_spatial/Constants/Constants.dart';
 
 final storage = FlutterSecureStorage();
 
@@ -25,8 +26,8 @@ class LoadValidPageWidget extends StatelessWidget{
   final Widget TargetPage;
 
   Future<String> get jwtToken async {
-    var jwt = await storage.read(key: "jwt");
-    print('jwt' + jwt.toString());
+    var jwt = await storage.read(key: JWT_STORAGE_KEY);
+    print(JWT_STORAGE_KEY + jwt.toString());
 
     if (jwt == null) return "";
     return jwt;
