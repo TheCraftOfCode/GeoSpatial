@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geo_spatial/Widgets/Datepicker.dart';
+import 'package:geo_spatial/Widgets/DatePicker.dart';
 
 class FamilyMemberAdd extends StatefulWidget {
   const FamilyMemberAdd({Key? key}) : super(key: key);
@@ -54,7 +54,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           return null;
                         },
                       ),
-                      Datepicker(),
+                      DatePicker(),
                       OutlinedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate() == true) {

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class Datepicker extends StatefulWidget {
-  const Datepicker({Key? key}) : super(key: key);
+class DatePicker extends StatefulWidget {
+  const DatePicker({Key? key}) : super(key: key);
 
   @override
-  _Datepickerstate createState() => _Datepickerstate();
+  _DatePickerState createState() => _DatePickerState();
 }
 
-class _Datepickerstate extends State<Datepicker> {
+class _DatePickerState extends State<DatePicker> {
 
   DateTime date = DateTime.now();
 

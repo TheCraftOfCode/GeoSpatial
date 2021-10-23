@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
+import 'package:geo_spatial/Widgets/PageViewContentBox.dart';
 import 'package:geo_spatial/Widgets/StepCounterWidget.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -23,6 +24,16 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
     });
   }
 
+  _navigatePageLeft() {
+    controller.previousPage(
+        duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+  }
+
+  _navigatePageRight() {
+    controller.nextPage(
+        duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,53 +53,34 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
               controller: controller,
               children: [
                 Center(
-                  child: FloatingActionButton.extended(
-                    onPressed: () {
-                      _determinePosition().then((val) {
-                        print(val);
-                      }).catchError((error, stackTrace) {
-                        print("outer: $error");
-                      });
-                    },
-                    label: Text('Get location'),
-                    heroTag: "Get location",
-                  ),
+                    child: PageViewContentBox(
+                        FloatingActionButton.extended(
+                          onPressed: () {
+                            _determinePosition().then((val) {
+                              print(val);
+                            }).catchError((error, stackTrace) {
+                              print("outer: $error");
+                            });
+                          },
+                          label: Text('Get location'),
+                          heroTag: "Get location",
+                        ),
+                        null,
+                        _navigatePageRight)),
+                Center(
+                  child: PageViewContentBox(Text('Second Page'),
+                      _navigatePageLeft, _navigatePageRight),
                 ),
                 Center(
-                  child: Text('Second Page'),
+                  child: PageViewContentBox(Text('Third Page'),
+                      _navigatePageLeft, _navigatePageRight),
                 ),
                 Center(
-                  child: Text('Third Page'),
-                ),
-                Center(
-                  child: Text('Submission'),
-                )
+                    child: PageViewContentBox(
+                        Text('Submission'), _navigatePageLeft, null))
               ],
             ),
           )),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              FloatingActionButton(
-                child: Icon(Icons.arrow_left),
-                heroTag: "Left button",
-                onPressed: () {
-                  controller.previousPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeIn);
-                },
-              ),
-              FloatingActionButton(
-                  child: Icon(Icons.arrow_right),
-                  heroTag: "Right button",
-                  onPressed: () {
-                    controller.nextPage(
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.easeIn);
-                  })
-            ],
-          )
         ],
       ),
     );
