@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 ///Card to hold content of DataCollecting PageView, has left and right buttons
-///Pass method to control viewpage to respective method parameter
+///Pass method to control viewpage to respective method parameters (left and right)
 ///Pass null to hide button
 
 class PageViewContentBox extends StatelessWidget {
