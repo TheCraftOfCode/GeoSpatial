@@ -43,7 +43,7 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          StepCounterWidget(3, count),
+          StepCounterWidget(3, count, [false, false, false]),
           Expanded(
               child: Container(
             child: PageView(
