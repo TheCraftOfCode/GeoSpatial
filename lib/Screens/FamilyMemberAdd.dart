@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DatePicker.dart';
 
 class FamilyMemberAdd extends StatefulWidget {
@@ -14,20 +15,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          'Add family member',
-          style: TextStyle(color: Colors.black),
-        ),
-        actions: [
-          Icon(
-            Icons.arrow_back_ios_sharp,
-          )
-        ],
-      ),
+      appBar: AppBarBackButton('Add Family Member'),
         body: SafeArea(
           child: SingleChildScrollView(
       child: Padding(

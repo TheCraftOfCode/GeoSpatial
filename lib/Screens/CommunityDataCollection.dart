@@ -26,12 +26,12 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
 
   _navigatePageLeft() {
     controller.previousPage(
-        duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+        duration: Duration(milliseconds: 200), curve: Curves.easeIn);
   }
 
   _navigatePageRight() {
     controller.nextPage(
-        duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+        duration: Duration(milliseconds: 200), curve: Curves.easeIn);
   }
 
   @override
