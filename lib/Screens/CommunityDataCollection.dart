@@ -64,20 +64,16 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
                           },
                           label: Text('Get location'),
                           heroTag: "Get location",
-                        ),
-                        null,
-                        _navigatePageRight)),
+                        ),)),
                 Center(
-                  child: PageViewContentBox(Text('Second Page'),
-                      _navigatePageLeft, _navigatePageRight),
+                  child: PageViewContentBox(Text('Second Page')),
                 ),
                 Center(
-                  child: PageViewContentBox(Text('Third Page'),
-                      _navigatePageLeft, _navigatePageRight),
+                  child: PageViewContentBox(Text('Third Page')),
                 ),
                 Center(
                     child: PageViewContentBox(
-                        Text('Submission'), _navigatePageLeft, null))
+                        Text('Submission')))
               ],
             ),
           )),

@@ -8,13 +8,10 @@ import 'package:flutter/widgets.dart';
 
 class PageViewContentBox extends StatelessWidget {
   const PageViewContentBox(
-      this.centerWidget, this.leftClickParam, this.rightClickParam,
-      {Key? key})
-      : super(key: key);
+      this.centerWidget,
+      {Key? key}) : super(key: key);
 
   final Widget centerWidget;
-  final leftClickParam;
-  final rightClickParam;
 
   @override
   Widget build(BuildContext context) {
@@ -41,36 +38,6 @@ class PageViewContentBox extends StatelessWidget {
                   child: Center(
                 child: centerWidget,
               )),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Visibility(
-                      maintainSize: true,
-                      maintainAnimation: true,
-                      maintainState: true,
-                      visible: leftClickParam != null,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(250, 157, 133, 244)),
-                          onPressed: (){
-                            leftClickParam();
-                          },
-                          child: Icon(Icons.arrow_left))),
-                  Visibility(
-                      maintainSize: true,
-                      maintainAnimation: true,
-                      maintainState: true,
-                      visible: rightClickParam != null,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(250, 157, 133, 244)),
-                          onPressed: (){
-                            rightClickParam();
-                          },
-                          child: Icon(Icons.arrow_right)))
-                ],
-              )
             ],
           ),
         ),
