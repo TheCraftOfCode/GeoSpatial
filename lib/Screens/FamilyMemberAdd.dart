@@ -30,7 +30,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
       appBar: AppBarBackButton('Add Family Member'),
       body: Column(
         children: [
-          StepCounterWidget(5, count),
+          StepCounterWidget(5, count, []),
           Expanded(
               child: Container(
             child: PageView(
