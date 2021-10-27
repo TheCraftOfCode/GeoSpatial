@@ -46,7 +46,17 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   PageViewContentBox(Text('Page Check'), null,null),
                 ],
               ),
-            ))
+            )),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0,bottom: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  OutlinedButton.icon(onPressed: (){}, label: Text('Cancel'),icon: Icon(Icons.cancel_outlined),),
+                  OutlinedButton.icon(onPressed: (){}, icon: Icon(Icons.arrow_forward_outlined), label: Text('Submit')),
+                ],
+              ),
+            )
           ],
         )
     );
