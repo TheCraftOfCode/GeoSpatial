@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:geo_spatial/Screens/FamilyAddScreens/PageOne.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/PageViewContentBox.dart';
 import 'package:geo_spatial/Widgets/StepCounterWidget.dart';
+
 
 class FamilyMemberAdd extends StatefulWidget {
   const FamilyMemberAdd({Key? key}) : super(key: key);
@@ -11,7 +13,7 @@ class FamilyMemberAdd extends StatefulWidget {
 }
 
 class _FamilyMemberAddState extends State<FamilyMemberAdd> {
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   int count = 0;
   final PageController _controller = PageController(initialPage: 0);
@@ -38,7 +40,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               scrollDirection: Axis.horizontal,
               controller: _controller,
               children: [
-                PageViewContentBox(pageOne),
+                PageViewContentBox(PageOne(formKey)),
                 PageViewContentBox(Text('Page 2')),
                 PageViewContentBox(Text('Page 3')),
                 PageViewContentBox(Text('Page 4')),
@@ -77,9 +79,5 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
     );
   }
 
-  final pageOne = Column(
-      children: [
-        Text('Text',textAlign: TextAlign.center,),
-      ],
-  );
 }
+

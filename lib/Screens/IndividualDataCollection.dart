@@ -36,7 +36,7 @@ class _IndividualDataCollectionState extends State<IndividualDataCollection> {
                   DataCard(
                       'Edit existing person',
                       'Edit details of an existing family member',
-                      'assets/svg/female.svg',
+                      'assets/svg/male.svg',
                       FamilyMemberEdit(),
                       Color(0xFF2E2FFF),
                       Color(0xFF4FD586)),

@@ -12,6 +12,8 @@ class _DatePickerState extends State<DatePicker> {
 
   DateTime date = DateTime.now();
 
+  var textFieldController = TextEditingController();
+
   String getText() {
     if (date == null) {
       return 'Pick date';
@@ -24,12 +26,15 @@ class _DatePickerState extends State<DatePicker> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Container(
-      child: OutlinedButton(
-        child: Text(getText()),
-        onPressed: () {
+      child: TextField(
+        controller: textFieldController,
+        onTap: () {
           pickDate(context);
         },
+
       ),
     );
   }
@@ -46,5 +51,6 @@ class _DatePickerState extends State<DatePicker> {
     if (newDate == null) return;
 
     setState(() => date = newDate);
+    textFieldController.text = getText();
   }
 }
