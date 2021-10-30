@@ -9,10 +9,6 @@ class PageOne extends StatefulWidget {
 
   final _formKey;
 
-  bool checkValidationState(){
-    return _formKey.currentState!.validate();
-  }
-
   @override
   _PageOneState createState() => _PageOneState();
 }
@@ -34,7 +30,7 @@ class _PageOneState extends State<PageOne> {
                 return 'Enter a valid name';
 
               else{
-                return 'Great';
+                return null;
               }
             },
             autovalidateMode: AutovalidateMode.always,

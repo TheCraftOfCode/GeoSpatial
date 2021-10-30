@@ -14,14 +14,20 @@ class FamilyMemberAdd extends StatefulWidget {
 
 class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   final formKey = GlobalKey<FormState>();
+  final List<GlobalObjectKey<FormState>> formKeyList = List.generate(10, (index) => GlobalObjectKey<FormState>(index));
 
   int count = 0;
   final PageController _controller = PageController(initialPage: 0);
+  var errorArray = [false,false,false,false,false,false];
 
   _onPageViewChange(int page) {
+    if(page<count){
+      return;
+    }
     print(page);
     setState(() {
       count = page;
+      errorArray[page-1] = !formKeyList[page].currentState!.validate();
     });
   }
 
@@ -32,7 +38,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
       appBar: AppBarBackButton('Add Family Member'),
       body: Column(
         children: [
-          StepCounterWidget(5, count, []),
+          StepCounterWidget(5, count, errorArray),
           Expanded(
               child: Container(
             child: PageView(
@@ -40,12 +46,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               scrollDirection: Axis.horizontal,
               controller: _controller,
               children: [
-                PageViewContentBox(PageOne(formKey)),
-                PageViewContentBox(Text('Page 2')),
-                PageViewContentBox(Text('Page 3')),
-                PageViewContentBox(Text('Page 4')),
-                PageViewContentBox(Text('Page 5')),
-                PageViewContentBox(Text('Page Check')),
+                PageViewContentBox(PageOne(formKeyList[1])),
+                PageViewContentBox(PageOne(formKeyList[2])),
+                PageViewContentBox(PageOne(formKeyList[3])),
+                PageViewContentBox(PageOne(formKeyList[4])),
+                PageViewContentBox(PageOne(formKeyList[5])),
+                PageViewContentBox(PageOne(formKeyList[6])),
               ],
             ),
           )),
