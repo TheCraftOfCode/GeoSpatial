@@ -4,7 +4,6 @@ import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/PageViewContentBox.dart';
 import 'package:geo_spatial/Widgets/StepCounterWidget.dart';
 
-
 class FamilyMemberAdd extends StatefulWidget {
   const FamilyMemberAdd({Key? key}) : super(key: key);
 
@@ -14,20 +13,22 @@ class FamilyMemberAdd extends StatefulWidget {
 
 class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   final formKey = GlobalKey<FormState>();
-  final List<GlobalObjectKey<FormState>> formKeyList = List.generate(10, (index) => GlobalObjectKey<FormState>(index));
+  final List<GlobalObjectKey<FormState>> formKeyList =
+      List.generate(6, (index) => GlobalObjectKey<FormState>(index));
 
   int count = 0;
   final PageController _controller = PageController(initialPage: 0);
-  var errorArray = [false,false,false,false,false,false];
+  var errorArray = [false, false, false, false, false, false];
 
   _onPageViewChange(int page) {
-    if(page<count){
-      return;
-    }
     print(page);
+    for (int i = 0; i < page; i++) {
+      setState(() {
+        errorArray[i] = !formKeyList[i].currentState!.validate();
+      });
+    }
     setState(() {
       count = page;
-      errorArray[page-1] = !formKeyList[page].currentState!.validate();
     });
   }
 
@@ -38,7 +39,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
       appBar: AppBarBackButton('Add Family Member'),
       body: Column(
         children: [
-          StepCounterWidget(5, count, errorArray),
+          StepCounterWidget(6, count, errorArray),
           Expanded(
               child: Container(
             child: PageView(
@@ -46,12 +47,13 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               scrollDirection: Axis.horizontal,
               controller: _controller,
               children: [
+                PageViewContentBox(PageOne(formKeyList[0])),
                 PageViewContentBox(PageOne(formKeyList[1])),
                 PageViewContentBox(PageOne(formKeyList[2])),
                 PageViewContentBox(PageOne(formKeyList[3])),
                 PageViewContentBox(PageOne(formKeyList[4])),
                 PageViewContentBox(PageOne(formKeyList[5])),
-                PageViewContentBox(PageOne(formKeyList[6])),
+                Center(child: PageViewContentBox(Text('Submission')))
               ],
             ),
           )),
@@ -62,18 +64,32 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               children: [
                 OutlinedButton.icon(
                   onPressed: () {},
-                  label: Text('Cancel',style: TextStyle(color: Colors.red,fontSize: 20),),
-                  icon: Icon(Icons.cancel_outlined,size: 40,color: Colors.red,),
+                  label: Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.red, fontSize: 20),
+                  ),
+                  icon: Icon(
+                    Icons.cancel_outlined,
+                    size: 40,
+                    color: Colors.red,
+                  ),
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.white,
                   ),
                 ),
                 OutlinedButton.icon(
                   onPressed: () {},
-                  icon: Icon(Icons.arrow_forward_outlined,size: 40,color: Colors.green,),
-                  label: Text('Submit',style: TextStyle(color: Colors.green,fontSize: 20),),
+                  icon: Icon(
+                    Icons.arrow_forward_outlined,
+                    size: 40,
+                    color: Colors.green,
+                  ),
+                  label: Text(
+                    'Submit',
+                    style: TextStyle(color: Colors.green, fontSize: 20),
+                  ),
                   style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.white,
+                    backgroundColor: Colors.white,
                     //shape:,
                   ),
                 ),
@@ -84,6 +100,4 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
       ),
     );
   }
-
 }
-
