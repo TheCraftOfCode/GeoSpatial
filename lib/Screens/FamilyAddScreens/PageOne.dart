@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:geo_spatial/Widgets/DatePicker.dart';
 
 
@@ -13,7 +14,7 @@ class PageOne extends StatefulWidget {
   _PageOneState createState() => _PageOneState();
 }
 
-class _PageOneState extends State<PageOne> {
+class _PageOneState extends State<PageOne> with AutomaticKeepAliveClientMixin{
   @override
   Widget build(BuildContext context){
     return Column(
@@ -42,7 +43,9 @@ class _PageOneState extends State<PageOne> {
       ],
     );
   }
-  
+
+  @override
+  bool get wantKeepAlive => true;
 
 }
 
