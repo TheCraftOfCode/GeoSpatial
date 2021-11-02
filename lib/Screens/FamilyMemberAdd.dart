@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:geo_spatial/Screens/FamilyAddScreens/PageOne.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
+import 'package:geo_spatial/Widgets/DatePicker.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
-import 'package:geo_spatial/Widgets/PageViewContentBox.dart';
-import 'package:geo_spatial/Widgets/StepCounterWidget.dart';
+
 
 class FamilyMemberAdd extends StatefulWidget {
   const FamilyMemberAdd({Key? key}) : super(key: key);
@@ -16,7 +15,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
 
   _onSubmit(bool isValid) {
     print(isValid.toString());
-  }
+}
 
   int count = 0;
   final PageController controller = PageController(initialPage: 0);
@@ -36,8 +35,27 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('Hey'),
-                Text('Testing column widget')
+                TextFormField(
+                  decoration: InputDecoration(),
+                  validator: (value){
+                    if(value==""){
+                      return "Please enter a name";}
+                      else
+                        return null;
+                    },
+                    autovalidateMode: AutovalidateMode.always,
+                ),
+                DatePicker(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text('Gender: '),
+                    ElevatedButton(onPressed: (){},
+                        child: Text('Male')),
+                    ElevatedButton(onPressed: (){},
+                        child: Text('Female')),
+                  ],
+                )
               ],
             ),
             TextFormField(

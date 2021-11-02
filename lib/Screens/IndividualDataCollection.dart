@@ -5,7 +5,7 @@ import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
 
 class IndividualDataCollection extends StatefulWidget {
-  const IndividualDataCollection({Key? key}) : super(key: key);
+ IndividualDataCollection({Key? key}) : super(key: key);
 
   @override
   _IndividualDataCollectionState createState() =>
