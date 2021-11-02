@@ -94,5 +94,6 @@ Future<Position> _determinePosition() async {
   }
 
   return await Geolocator.getCurrentPosition();
+  //You can set accuracy to high ig, that returns like 6 decimal points. Plenty enough to plot on maps
 }
 

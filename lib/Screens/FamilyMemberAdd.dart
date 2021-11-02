@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Screens/FamilyAddScreens/PageOne.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
+import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/PageViewContentBox.dart';
 import 'package:geo_spatial/Widgets/StepCounterWidget.dart';
 
@@ -12,92 +13,44 @@ class FamilyMemberAdd extends StatefulWidget {
 }
 
 class _FamilyMemberAddState extends State<FamilyMemberAdd> {
-  final formKey = GlobalKey<FormState>();
-  final List<GlobalObjectKey<FormState>> formKeyList =
-      List.generate(6, (index) => GlobalObjectKey<FormState>(index));
+
+  _onSubmit(bool isValid) {
+    print(isValid.toString());
+  }
 
   int count = 0;
-  final PageController _controller = PageController(initialPage: 0);
-  var errorArray = [false, false, false, false, false, false];
+  final PageController controller = PageController(initialPage: 0);
 
-  _onPageViewChange(int page) {
-    print(page);
-    for (int i = 0; i < page; i++) {
-      setState(() {
-        errorArray[i] = !formKeyList[i].currentState!.validate();
-      });
-    }
-    setState(() {
-      count = page;
-    });
-  }
+  final List<GlobalObjectKey<FormState>> formKeyList =
+  List.generate(3, (index) => GlobalObjectKey<FormState>(index));
+  final error = [false, false, false];
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffEAE7FA),
       appBar: AppBarBackButton('Add Family Member'),
-      body: Column(
-        children: [
-          StepCounterWidget(6, count, errorArray),
-          Expanded(
-              child: Container(
-            child: PageView(
-              onPageChanged: _onPageViewChange,
-              scrollDirection: Axis.horizontal,
-              controller: _controller,
+      body: FormPageView([
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                PageViewContentBox(PageOne(formKeyList[0])),
-                PageViewContentBox(PageOne(formKeyList[1])),
-                PageViewContentBox(PageOne(formKeyList[2])),
-                PageViewContentBox(PageOne(formKeyList[3])),
-                PageViewContentBox(PageOne(formKeyList[4])),
-                PageViewContentBox(PageOne(formKeyList[5])),
-                Center(child: PageViewContentBox(Text('Submission')))
+                Text('Hey'),
+                Text('Testing column widget')
               ],
             ),
-          )),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                OutlinedButton.icon(
-                  onPressed: () {},
-                  label: Text(
-                    'Cancel',
-                    style: TextStyle(color: Colors.red, fontSize: 20),
-                  ),
-                  icon: Icon(
-                    Icons.cancel_outlined,
-                    size: 40,
-                    color: Colors.red,
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                  ),
-                ),
-                OutlinedButton.icon(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.arrow_forward_outlined,
-                    size: 40,
-                    color: Colors.green,
-                  ),
-                  label: Text(
-                    'Submit',
-                    style: TextStyle(color: Colors.green, fontSize: 20),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    //shape:,
-                  ),
-                ),
-              ],
+            TextFormField(
+              decoration: InputDecoration(),
+              validator: (str) {
+                if (str == '')
+                  return 'Enter field lmao';
+                else
+                  return null;
+              },
             ),
-          )
-        ],
-      ),
-    );
+            Text('Haha Hi')
+          ], _onSubmit),
+      );
   }
 }
