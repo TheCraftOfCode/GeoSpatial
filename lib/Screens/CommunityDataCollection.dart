@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
+import 'package:geo_spatial/Widgets/LocationWidget.dart';
 import 'package:geolocator/geolocator.dart';
 
 class CommunityDataCollection extends StatefulWidget {
@@ -20,19 +21,11 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
       List.generate(3, (index) => GlobalObjectKey<FormState>(index));
   final error = [false, false, false];
 
-  // _navigatePageLeft() {
-  //   controller.previousPage(
-  //       duration: Duration(milliseconds: 200), curve: Curves.easeIn);
-  // }
-  //
-  // _navigatePageRight() {
-  //   controller.nextPage(
-  //       duration: Duration(milliseconds: 200), curve: Curves.easeIn);
-  // }
-
   _onSubmit(bool isValid) {
     print(isValid.toString());
+
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +33,30 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
       backgroundColor: Color(0xffEAE7FA),
       appBar: AppBarBackButton('Community Data'),
       body: FormPageView([
-        Text('Hey'),
+        LocationWidgetField(
+            context: context,
+            onSaved: (data) {
+              print(data);
+            },
+            autoValidateMode: AutovalidateMode.disabled),
+        LocationWidgetField(
+            context: context,
+            onSaved: (data) {
+              print(data);
+            },
+            autoValidateMode: AutovalidateMode.disabled),
+        LocationWidgetField(
+            context: context,
+            onSaved: (data) {
+              print(data);
+            },
+            autoValidateMode: AutovalidateMode.disabled),
+        LocationWidgetField(
+            context: context,
+            onSaved: (data) {
+              print(data);
+            },
+            autoValidateMode: AutovalidateMode.disabled),
         TextFormField(
           decoration: InputDecoration(),
           validator: (str) {
@@ -55,45 +71,3 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
     );
   }
 }
-
-/**
- * Method to get fine location  when requested
- * Type future, requires then and catchError
- *
- * @param:
- * none
- *
- * @returns:
- * Future.error, in case of exceptions
- * Position, in case of success
- *
- * Cannot modularise method into separate class
- */
-
-Future<Position> _determinePosition() async {
-  bool serviceEnabled;
-  LocationPermission permission;
-
-  serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  if (!serviceEnabled) {
-    return Future.error(
-        'Location services are disabled, try enabling location in your device');
-  }
-
-  permission = await Geolocator.checkPermission();
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      return Future.error('Location permissions are denied');
-    }
-  }
-
-  if (permission == LocationPermission.deniedForever) {
-    return Future.error(
-        'Location permissions are permanently denied, permission cannot be requested.');
-  }
-
-  return await Geolocator.getCurrentPosition();
-  //You can set accuracy to high ig, that returns like 6 decimal points. Plenty enough to plot on maps
-}
-

@@ -40,7 +40,8 @@ class _FormPageViewState extends State<FormPageView> {
 
     widgetList = List.generate(
         widgetLength,
-        (index) => PageViewContentBox(FormKeepAlive(
+            (index) =>
+            PageViewContentBox(FormKeepAlive(
               widget.pageWidgetList[index],
               formKeyList[index],
             )));
@@ -56,7 +57,12 @@ class _FormPageViewState extends State<FormPageView> {
         onPressed: () {
           bool isValid = true;
           for (int i = 0; i < widgetLength; i++) {
-            isValid &= formKeyList[i].currentState!.validate();
+            var isDataValid = formKeyList[i].currentState!.validate();
+            isValid &= isDataValid;
+
+            if (isDataValid) {
+              formKeyList[i].currentState!.save();
+            }
           }
 
           widget.onSubmit(isValid);
@@ -66,7 +72,11 @@ class _FormPageViewState extends State<FormPageView> {
   _onPageViewChange(int page) {
     for (int i = 0; i < page; i++) {
       setState(() {
-        formErrorTile[i] = !formKeyList[i].currentState!.validate();
+        var isValid = formKeyList[i].currentState!.validate();
+        if (isValid) {
+          formKeyList[i].currentState!.save();
+        }
+        formErrorTile[i] = !isValid;
       });
     }
     setState(() {
@@ -83,13 +93,13 @@ class _FormPageViewState extends State<FormPageView> {
         StepCounterWidget(widgetLength, count, formErrorTile),
         Expanded(
             child: Container(
-          child: PageView(
-            onPageChanged: _onPageViewChange,
-            scrollDirection: Axis.horizontal,
-            controller: controller,
-            children: widgetList,
-          ),
-        )),
+              child: PageView(
+                onPageChanged: _onPageViewChange,
+                scrollDirection: Axis.horizontal,
+                controller: controller,
+                children: widgetList,
+              ),
+            )),
       ],
     );
   }
@@ -115,7 +125,8 @@ class _FormKeepAliveState extends State<FormKeepAlive>
         child: widget.childWidget,
         key: widget._formKey,
         onChanged: () {
-          widget._formKey.currentState!.validate();
+          if (widget._formKey.currentState!.validate())
+            widget._formKey.currentState!.save();
         });
   }
 
