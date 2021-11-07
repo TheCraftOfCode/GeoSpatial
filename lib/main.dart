@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 final storage = FlutterSecureStorage();
 
 void main() {
-
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);

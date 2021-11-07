@@ -40,8 +40,7 @@ class _FormPageViewState extends State<FormPageView> {
 
     widgetList = List.generate(
         widgetLength,
-            (index) =>
-            PageViewContentBox(FormKeepAlive(
+        (index) => PageViewContentBox(FormKeepAlive(
               widget.pageWidgetList[index],
               formKeyList[index],
             )));
@@ -93,13 +92,13 @@ class _FormPageViewState extends State<FormPageView> {
         StepCounterWidget(widgetLength, count, formErrorTile),
         Expanded(
             child: Container(
-              child: PageView(
-                onPageChanged: _onPageViewChange,
-                scrollDirection: Axis.horizontal,
-                controller: controller,
-                children: widgetList,
-              ),
-            )),
+          child: PageView(
+            onPageChanged: _onPageViewChange,
+            scrollDirection: Axis.horizontal,
+            controller: controller,
+            children: widgetList,
+          ),
+        )),
       ],
     );
   }

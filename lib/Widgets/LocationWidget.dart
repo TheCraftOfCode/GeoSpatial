@@ -34,10 +34,12 @@ class LocationWidgetField extends FormField<Position> {
                           borderRadius: BorderRadius.all(Radius.circular(4)),
                           border: state.hasError
                               ? Border.all(width: 1, color: Colors.red)
-                              : null,
+                              : Border.all(
+                                  width: 1,
+                                  color: Color.fromARGB(255, 194, 194, 194)),
                           color: state.hasError
                               ? Color.fromARGB(255, 255, 216, 216)
-                              : Colors.white70,
+                              : Color.fromARGB(255, 238, 238, 238),
                         ),
                         width: double.infinity,
                         child: Padding(
@@ -51,7 +53,7 @@ class LocationWidgetField extends FormField<Position> {
                                   )
                                 : Text(state.value != null
                                     ? state.value.toString()
-                                    : ""),
+                                    : "Please fetch your location"),
                           ),
                         ),
                       ),
@@ -103,6 +105,7 @@ Future<Position> _determinePosition() async {
         'Location permissions are permanently denied, permission cannot be requested.');
   }
 
-  return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+  return await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.best);
   //You can set accuracy to high ig, that returns like 6 decimal points. Plenty enough to plot on maps
 }

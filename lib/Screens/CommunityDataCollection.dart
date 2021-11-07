@@ -23,9 +23,7 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
 
   _onSubmit(bool isValid) {
     print(isValid.toString());
-
   }
-
 
   @override
   Widget build(BuildContext context) {
