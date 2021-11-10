@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /**
  * Form Widget to get current location with validation
@@ -11,6 +12,7 @@ class LocationWidgetField extends FormField<Position> {
       {FormFieldSetter<Position>? onSaved,
       FormFieldValidator<Position>? validator,
       required BuildContext context,
+      required String title,
       AutovalidateMode autoValidateMode = AutovalidateMode.disabled})
       : super(
             onSaved: onSaved,
@@ -29,6 +31,12 @@ class LocationWidgetField extends FormField<Position> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 30),
+                        child: Text(title,
+                            style: GoogleFonts.montserrat(
+                                fontSize: 25, color: Colors.black)),
+                      ),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(4)),
@@ -51,9 +59,11 @@ class LocationWidgetField extends FormField<Position> {
                                     style: TextStyle(
                                         color: Colors.red, fontSize: 10),
                                   )
-                                : Text(state.value != null
-                                    ? state.value.toString()
-                                    : "Please fetch your location"),
+                                : Text(
+                                    state.value != null
+                                        ? state.value.toString()
+                                        : "Please fetch your location",
+                                    style: TextStyle(fontSize: 12)),
                           ),
                         ),
                       ),
@@ -87,6 +97,26 @@ Future<Position> _determinePosition(context) async {
   LocationPermission permission;
   BuildContext? progressContext;
 
+  serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
+  if (!serviceEnabled) {
+    return Future.error(
+        'Location services are disabled, try enabling location in your device');
+  }
+
+  permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied) {
+      return Future.error('Location permissions are denied');
+    }
+  }
+
+  if (permission == LocationPermission.deniedForever) {
+    return Future.error(
+        'Location permissions are permanently denied, permission cannot be requested.');
+  }
+
   showDialog(
     context: context,
     barrierDismissible: false,
@@ -111,30 +141,6 @@ Future<Position> _determinePosition(context) async {
           onWillPop: () async => false);
     },
   );
-
-  serviceEnabled = await Geolocator.isLocationServiceEnabled();
-
-  if (!serviceEnabled) {
-    Navigator.of(progressContext!, rootNavigator: true).pop();
-    return Future.error(
-        'Location services are disabled, try enabling location in your device');
-  }
-
-  permission = await Geolocator.checkPermission();
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      Navigator.of(progressContext!, rootNavigator: true).pop();
-
-      return Future.error('Location permissions are denied');
-    }
-  }
-
-  if (permission == LocationPermission.deniedForever) {
-    Navigator.of(progressContext!, rootNavigator: true).pop();
-    return Future.error(
-        'Location permissions are permanently denied, permission cannot be requested.');
-  }
 
   var location = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.best);

@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class PageViewContentBox extends StatelessWidget {
-  const PageViewContentBox(
-      this.centerWidget,
-      {Key? key}) : super(key: key);
+  const PageViewContentBox(this.centerWidget, {Key? key}) : super(key: key);
 
   final Widget centerWidget;
 
@@ -26,15 +24,8 @@ class PageViewContentBox extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsets.all(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                  child: Center(
-                child: centerWidget,
-              )),
-            ],
+          child: Center(
+            child: centerWidget,
           ),
         ),
       ),
