@@ -89,7 +89,7 @@ class _FormPageViewState extends State<FormPageView> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        StepCounterWidget(widgetLength, count, formErrorTile),
+        StepCounterWidget(widgetLength, count, formErrorTile, controller),
         Expanded(
             child: Container(
           child: PageView(
