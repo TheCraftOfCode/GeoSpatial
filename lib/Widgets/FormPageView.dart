@@ -27,19 +27,19 @@ class _FormPageViewState extends State<FormPageView> {
   void initState() {
     super.initState();
 
-    widgetLength = widget.pageWidgetList.length;
+    widgetLength = widget.pageWidgetList.length + 1;
     print(widgetLength);
-    formErrorTile = List.generate(widgetLength, (index) => false);
+    formErrorTile = List.generate(widgetLength - 1, (index) => false);
 
     print(formErrorTile);
 
     formKeyList = List.generate(
-        widgetLength, (index) => GlobalObjectKey<FormState>(index));
+        widgetLength - 1, (index) => GlobalObjectKey<FormState>(index));
 
     print(formKeyList);
 
     widgetList = List.generate(
-        widgetLength,
+        widgetLength - 1,
         (index) => PageViewContentBox(FormKeepAlive(
               widget.pageWidgetList[index],
               formKeyList[index],
@@ -55,7 +55,7 @@ class _FormPageViewState extends State<FormPageView> {
                     side: BorderSide(color: Colors.red)))),
         onPressed: () {
           bool isValid = true;
-          for (int i = 0; i < widgetLength; i++) {
+          for (int i = 0; i < widgetLength - 1; i++) {
             var isDataValid = formKeyList[i].currentState!.validate();
             isValid &= isDataValid;
 

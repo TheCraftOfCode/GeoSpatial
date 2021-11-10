@@ -61,7 +61,7 @@ class LocationWidgetField extends FormField<Position> {
                         padding: EdgeInsets.only(top: 10, bottom: 5),
                         child: ElevatedButton(
                           onPressed: () async {
-                            _determinePosition().then((value) {
+                            _determinePosition(context).then((value) {
                               state.didChange(value);
                             }).catchError((onError, stackTrace) {
                               print("inner: $onError");
@@ -82,12 +82,40 @@ class LocationWidgetField extends FormField<Position> {
             });
 }
 
-Future<Position> _determinePosition() async {
+Future<Position> _determinePosition(context) async {
   bool serviceEnabled;
   LocationPermission permission;
+  BuildContext? progressContext;
+
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      progressContext = context;
+      return WillPopScope(
+          child: Dialog(
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: new Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: CircularProgressIndicator(),
+                  ),
+                  new Text("Fetching Location"),
+                ],
+              ),
+            ),
+          ),
+          onWillPop: () async => false);
+    },
+  );
 
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
   if (!serviceEnabled) {
+    Navigator.of(progressContext!, rootNavigator: true).pop();
     return Future.error(
         'Location services are disabled, try enabling location in your device');
   }
@@ -96,16 +124,21 @@ Future<Position> _determinePosition() async {
   if (permission == LocationPermission.denied) {
     permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
+      Navigator.of(progressContext!, rootNavigator: true).pop();
+
       return Future.error('Location permissions are denied');
     }
   }
 
   if (permission == LocationPermission.deniedForever) {
+    Navigator.of(progressContext!, rootNavigator: true).pop();
     return Future.error(
         'Location permissions are permanently denied, permission cannot be requested.');
   }
 
-  return await Geolocator.getCurrentPosition(
+  var location = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.best);
-  //You can set accuracy to high ig, that returns like 6 decimal points. Plenty enough to plot on maps
+
+  Navigator.of(progressContext!, rootNavigator: true).pop();
+  return location;
 }

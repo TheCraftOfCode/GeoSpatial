@@ -33,7 +33,13 @@ class _StepCounterWidgetState extends State<StepCounterWidget> {
     List<Widget> checkBoxWidgetList = [];
 
     for (int i = 0; i < widget.totalSteps; i++) {
-      if (i < widget.currentStep) {
+      if (i == widget.totalSteps - 1) {
+        if (i == widget.currentStep) {
+          checkBoxWidgetList.add(CheckBox(5, widget.controller, i));
+        } else {
+          checkBoxWidgetList.add(CheckBox(4, widget.controller, i));
+        }
+      } else if (i < widget.currentStep) {
         try {
           widget.errorArray[i]
               ? checkBoxWidgetList.add(CheckBox(0, widget.controller, i))
@@ -88,11 +94,21 @@ class CheckBox extends StatelessWidget {
       backgroundColor = Color.fromARGB(250, 182, 170, 255);
       border =
           Border.all(width: 2.5, color: Color.fromARGB(250, 157, 133, 244));
-    } else {
+    } else if (iconType == 3) {
       icon = Icons.remove;
       iconColor = Color.fromARGB(255, 0, 0, 0);
       backgroundColor = Color.fromARGB(250, 213, 201, 255);
       border = Border.all(width: 0, color: backgroundColor);
+    } else if (iconType == 4) {
+      icon = Icons.upload_rounded;
+      iconColor = Color.fromARGB(255, 255, 255, 255);
+      backgroundColor = Color.fromARGB(250, 182, 170, 255);
+      border = Border.all(width: 0, color: backgroundColor);
+    } else {
+      icon = Icons.upload_rounded;
+      iconColor = Color.fromARGB(255, 255, 255, 255);
+      backgroundColor = Color.fromARGB(250, 126, 94, 255);
+      border = Border.all(width: 2, color: backgroundColor);
     }
     return Expanded(
         child: Container(
@@ -104,7 +120,11 @@ class CheckBox extends StatelessWidget {
         color: backgroundColor,
         child: InkWell(
           onTap: () {
-            controller.jumpToPage(tilePosition);
+            controller.animateToPage(
+              tilePosition,
+              curve: Curves.ease,
+              duration: Duration(milliseconds: 650),
+            );
           },
           child: Padding(
             padding: EdgeInsets.only(top: 5, bottom: 5),

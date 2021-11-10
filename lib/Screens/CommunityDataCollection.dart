@@ -19,7 +19,6 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
 
   final List<GlobalObjectKey<FormState>> formKeyList =
       List.generate(3, (index) => GlobalObjectKey<FormState>(index));
-  final error = [false, false, false];
 
   _onSubmit(bool isValid) {
     print(isValid.toString());
