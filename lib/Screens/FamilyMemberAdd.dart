@@ -32,7 +32,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
       appBar: AppBarBackButton('Add Family Member'),
       body: FormPageView([
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextFormField(
@@ -55,7 +55,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     ElevatedButton(onPressed: (){},
                         child: Text('Female')),
                   ],
-                )
+                ),
+
               ],
             ),
             TextFormField(
