@@ -24,7 +24,7 @@ class DropDownFormField extends FormField<dynamic> {
             autovalidateMode: autoValidateMode,
             builder: (FormFieldState<dynamic> state) {
               return Padding(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
