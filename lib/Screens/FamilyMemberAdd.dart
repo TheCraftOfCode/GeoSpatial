@@ -84,24 +84,55 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               validator: (value) {
                 if (value == "") {
                   return "Please enter a value";
-                } else if(value!.length!=10){
+                } else if (value!.length != 10) {
                   return "Enter a valid number";
-                }
-                else
+                } else
                   return null;
               },
               autovalidateMode: AutovalidateMode.always,
             ),
           ],
         ),
-        TextFormField(
-          decoration: InputDecoration(),
-          validator: (str) {
-            if (str == '')
-              return 'Enter field lmao';
-            else
-              return null;
-          },
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TextFormField(
+              validator: (value) {
+                if (value == "") {
+                  return "Please enter a value";
+                } else if (value!.length != 10) {
+                  return "Enter a valid Aadhaar";
+                } else
+                  return null;
+              },
+              autovalidateMode: AutovalidateMode.always,
+            ),
+            DropDownFormField(
+              //TODO: Replace with a checkbox dialogue
+              list: [
+                'Widower',
+                'Divorcee',
+                'Differently abled'
+              ],
+              hint: "Select applicable",
+              title: "Vulnerabilities",
+              subTitle: "Vulnerabilities",
+              errorField: "Please choose a vulnerability",
+            ),
+            DropDownFormField(
+              list: [
+                'Clerical support worker',
+                'Services and sales worker',
+                'Skilled agricultural, forestry and fishery worker',
+                'Unemployed'
+              ],
+              hint: "Select applicable",
+              title: "Occupation",
+              subTitle: "Occupation",
+              errorField: "Please choose an occupation",
+            ),
+          ],
         ),
         Text('Haha Hi')
       ], _onSubmit),
