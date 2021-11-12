@@ -56,7 +56,6 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
             list: widget._publicResourceList,
             title: "Choose type of resource to tag",
             hint: "Select resource type",
-            subTitle: "Resource",
             errorField: "Please choose a resource to tag"),
         LocationWidgetField(
             title: "Record location at top left part of the facility",

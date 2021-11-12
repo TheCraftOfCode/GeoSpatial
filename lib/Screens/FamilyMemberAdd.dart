@@ -75,7 +75,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               ],
               hint: "Select the highest",
               title: "Educational qualification",
-              subTitle: "Education",
               errorField: "Please choose a qualification",
             ),
             TextFormField(
@@ -94,7 +93,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
           ],
         ),
         Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TextFormField(
@@ -117,7 +116,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               ],
               hint: "Select applicable",
               title: "Vulnerabilities",
-              subTitle: "Vulnerabilities",
               errorField: "Please choose a vulnerability",
             ),
             DropDownFormField(
@@ -129,7 +127,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               ],
               hint: "Select applicable",
               title: "Occupation",
-              subTitle: "Occupation",
               errorField: "Please choose an occupation",
             ),
           ],

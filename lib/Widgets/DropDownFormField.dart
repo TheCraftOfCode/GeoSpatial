@@ -9,7 +9,6 @@ class DropDownFormField extends FormField<dynamic> {
       required list,
       required title,
       required hint,
-      required subTitle,
       errorField,
       AutovalidateMode autoValidateMode = AutovalidateMode.disabled})
       : super(
@@ -30,7 +29,7 @@ class DropDownFormField extends FormField<dynamic> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: 30),
+                      padding: EdgeInsets.only(bottom: 20),
                       child: Text(title,
                           style: GoogleFonts.montserrat(
                               fontSize: 25, color: Colors.black)),
@@ -38,40 +37,39 @@ class DropDownFormField extends FormField<dynamic> {
                     Card(
                       elevation: 2,
                       margin: EdgeInsets.only(bottom: 4),
-                      child: ListTile(
-                        title: Text(
-                          subTitle,
-                          style: GoogleFonts.montserrat(color: Colors.black),
-                        ),
-                        contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        trailing: DropdownButtonHideUnderline(
-                          child: DropdownButton<dynamic>(
-                            value: state.value,
-                            isExpanded: false,
-                            items: list.map<DropdownMenuItem>((value) {
-                              return DropdownMenuItem(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              state.didChange(newValue);
-                            },
-                            hint: Container(
-                              width: 150, //and here
-                              child: Text(
-                                hint,
-                                style: TextStyle(
-                                    color: state.hasError
-                                        ? Colors.red
-                                        : Colors.grey),
-                                textAlign: TextAlign.end,
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<dynamic>(
+                          value: state.value,
+                          isExpanded: true,
+                          items: list.map<DropdownMenuItem>((value) {
+                            return DropdownMenuItem(
+                              value: value,
+                              child: Container(
+                                child: Text(
+                                  value,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                padding: EdgeInsets.all(8),
                               ),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            state.didChange(newValue);
+                          },
+                          hint: Container(
+                            padding: EdgeInsets.all(8),
+                            child: Text(
+                              hint,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: state.hasError
+                                      ? Colors.red
+                                      : Colors.grey),
+                              textAlign: TextAlign.end,
                             ),
-                            style: TextStyle(
-                                color: Colors.black,
-                                decorationColor: Colors.red),
                           ),
+                          style: TextStyle(
+                              color: Colors.black, decorationColor: Colors.red),
                         ),
                       ),
                     ),

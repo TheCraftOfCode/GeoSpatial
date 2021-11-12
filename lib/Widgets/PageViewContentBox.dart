@@ -24,8 +24,17 @@ class PageViewContentBox extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsets.all(12),
-          child: Center(
-            child: centerWidget,
+          child: LayoutBuilder(
+            builder:
+                (BuildContext context, BoxConstraints viewportConstraints) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints:
+                      BoxConstraints(minHeight: viewportConstraints.maxHeight),
+                  child: centerWidget,
+                ),
+              );
+            },
           ),
         ),
       ),
