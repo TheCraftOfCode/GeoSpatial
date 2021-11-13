@@ -137,12 +137,11 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           child: Column(
                             children: [
                               OptionsWidget(
-                                options: [["Yes","yes"],["No","no"]],
+                                options: [["Yes",true],["No",false]],
                                 title: "Daily wage worker?",
                                 onSaved: (val) {
-                                  String value = val;
-                                  dailyWageWorker = value.toLowerCase() as bool;
-                                  print(dailyWageWorker);
+                                  //dailyWageWorker = value.toLowerCase() as bool;
+                                  print(val.toString());
                                 },
                               ),
                             ],
