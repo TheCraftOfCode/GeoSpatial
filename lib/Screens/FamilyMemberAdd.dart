@@ -5,6 +5,7 @@ import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DatePicker.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
+import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
 
 class FamilyMemberAdd extends StatefulWidget {
   const FamilyMemberAdd({Key? key}) : super(key: key);
@@ -17,6 +18,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   _onSubmit(bool isValid) {
     print(isValid.toString());
   }
+
+  bool dailyWageWorker = false;
 
   int count = 0;
   final PageController controller = PageController(initialPage: 0);
@@ -99,7 +102,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
             TextFormField(
               validator: (value) {
                 if (value == "") {
-                  return "Please enter a value";
+                  return "Enter 12 digit Aadhaar";
                 } else if (value!.length != 10) {
                   return "Enter a valid Aadhaar";
                 } else
@@ -129,7 +132,37 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               title: "Occupation",
               errorField: "Please choose an occupation",
             ),
+            Container(
+              child: Column(
+                children: [
+                  Text("Are you a daily wage worker?"),
+                  OptionsWidget(options: ["Yes","No"],
+                  onSaved: (val){
+                    String value = val;
+                    dailyWageWorker = value.toLowerCase() as bool;
+                    print(dailyWageWorker);
+                  },
+                  //TODO: Add a function that returns final value back to this widget
+                    ),
+                ],
+              ),
+            ),
+            //TODO: Add work timings
+            Container(
+              child: Column(
+                children: [
+                  Text('Eligible and receiving old age pension'),
+                  OptionsWidget(options: ["Eligible","Eligible, receiving","Not eligible"]),
+                ],
+              ),
+            ),
           ],
+        ),
+        Column(
+          children:[
+            Text('Hi!')
+          ]
+
         ),
         Text('Haha Hi')
       ], _onSubmit),
