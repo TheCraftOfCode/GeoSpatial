@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geo_spatial/Widgets/StepCounterWidget.dart';
+
 import 'PageViewContentBox.dart';
 
 class FormPageView extends StatefulWidget {
@@ -92,15 +93,18 @@ class _FormPageViewState extends State<FormPageView> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         StepCounterWidget(widgetLength, count, formErrorTile, controller),
-        Expanded(
-            child: Container(
-          child: PageView(
-            onPageChanged: _onPageViewChange,
-            scrollDirection: Axis.horizontal,
-            controller: controller,
-            children: widgetList,
+        SingleChildScrollView(
+          physics: ClampingScrollPhysics(),
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.82,
+            child: PageView(
+              onPageChanged: _onPageViewChange,
+              scrollDirection: Axis.horizontal,
+              controller: controller,
+              children: widgetList,
+            ),
           ),
-        )),
+        ),
       ],
     );
   }

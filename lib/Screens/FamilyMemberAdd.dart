@@ -31,141 +31,146 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xffEAE7FA),
       appBar: AppBarBackButton('Add Family Member'),
-      body: FormPageView([
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TextFormField(
-              decoration: InputDecoration(),
-              validator: (value) {
-                if (value == "") {
-                  return "Please enter a name";
-                } else
-                  return null;
-              },
-              autovalidateMode: AutovalidateMode.always,
-            ),
-            DatePicker(),
-            GenderPickerWithImage(
-              verticalAlignedText: false,
-              selectedGender: Gender.Male,
-              selectedGenderTextStyle: TextStyle(
-                  color: Color(0xFF8b32a8), fontWeight: FontWeight.bold),
-              unSelectedGenderTextStyle:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.normal),
-              onChanged: (Gender? gender) {
-                print(gender);
-              },
-              equallyAligned: true,
-              animationDuration: Duration(milliseconds: 300),
-              isCircular: true,
-              // default : true,
-              opacityOfGradient: 0.4,
-              padding: const EdgeInsets.all(3),
-              size: 70, //default : 40
-            ),
-            DropDownFormField(
-              list: [
-                'None',
-                'Elementary',
-                'Secondary',
-                'Higher Secondary',
-                'Bachelor\'s',
-                'Master\'s'
-              ],
-              hint: "Select the highest",
-              title: "Educational qualification",
-              errorField: "Please choose a qualification",
-            ),
-            TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(),
-              validator: (value) {
-                if (value == "") {
-                  return "Please enter a value";
-                } else if (value!.length != 10) {
-                  return "Enter a valid number";
-                } else
-                  return null;
-              },
-              autovalidateMode: AutovalidateMode.always,
-            ),
-          ],
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TextFormField(
-              validator: (value) {
-                if (value == "") {
-                  return "Enter 12 digit Aadhaar";
-                } else if (value!.length != 10) {
-                  return "Enter a valid Aadhaar";
-                } else
-                  return null;
-              },
-              autovalidateMode: AutovalidateMode.always,
-            ),
-            DropDownFormField(
-              //TODO: Replace with a checkbox dialogue
-              list: [
-                'Widower',
-                'Divorcee',
-                'Differently abled'
-              ],
-              hint: "Select applicable",
-              title: "Vulnerabilities",
-              errorField: "Please choose a vulnerability",
-            ),
-            DropDownFormField(
-              list: [
-                'Clerical support worker',
-                'Services and sales worker',
-                'Skilled agricultural, forestry and fishery worker',
-                'Unemployed'
-              ],
-              hint: "Select applicable",
-              title: "Occupation",
-              errorField: "Please choose an occupation",
-            ),
-            Container(
-              child: Column(
-                children: [
-                  Text("Are you a daily wage worker?"),
-                  OptionsWidget(options: ["Yes","No"],
-                  onSaved: (val){
-                    String value = val;
-                    dailyWageWorker = value.toLowerCase() as bool;
-                    print(dailyWageWorker);
-                  },
-                  //TODO: Add a function that returns final value back to this widget
+      body:SizedBox(
+        height: MediaQuery.of(context).size.height-MediaQuery.of(context).viewInsets.bottom*1.4,
+        child: SingleChildScrollView(
+          physics: ClampingScrollPhysics(),
+          child: FormPageView([
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        TextFormField(
+                          decoration: InputDecoration(),
+                          validator: (value) {
+                            if (value == "") {
+                              return "Please enter a name";
+                            } else
+                              return null;
+                          },
+                          autovalidateMode: AutovalidateMode.always,
+                        ),
+                        DatePicker(),
+                        GenderPickerWithImage(
+                          verticalAlignedText: false,
+                          selectedGender: Gender.Male,
+                          selectedGenderTextStyle: TextStyle(
+                              color: Color(0xFF8b32a8), fontWeight: FontWeight.bold),
+                          unSelectedGenderTextStyle:
+                              TextStyle(color: Colors.black, fontWeight: FontWeight.normal),
+                          onChanged: (Gender? gender) {
+                            print(gender);
+                          },
+                          equallyAligned: true,
+                          animationDuration: Duration(milliseconds: 300),
+                          isCircular: true,
+                          // default : true,
+                          opacityOfGradient: 0.4,
+                          padding: const EdgeInsets.all(3),
+                          size: 70, //default : 40
+                        ),
+                        DropDownFormField(
+                          list: [
+                            'None',
+                            'Elementary',
+                            'Secondary',
+                            'Higher Secondary',
+                            'Bachelor\'s',
+                            'Master\'s'
+                          ],
+                          hint: "Select the highest",
+                          title: "Educational qualification",
+                          errorField: "Please choose a qualification",
+                        ),
+                        TextFormField(
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(),
+                          validator: (value) {
+                            if (value == "") {
+                              return "Please enter a value";
+                            } else if (value!.length != 10) {
+                              return "Enter a valid number";
+                            } else
+                              return null;
+                          },
+                          autovalidateMode: AutovalidateMode.always,
+                        ),
+                      ],
                     ),
-                ],
-              ),
-            ),
-            //TODO: Add work timings
-            Container(
-              child: Column(
-                children: [
-                  Text('Eligible and receiving old age pension'),
-                  OptionsWidget(options: ["Eligible","Eligible, receiving","Not eligible"]),
-                ],
-              ),
-            ),
-          ],
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        TextFormField(
+                          validator: (value) {
+                            if (value == "") {
+                              return "Enter 12 digit Aadhaar";
+                            } else if (value!.length != 12) {
+                              return "Enter a valid Aadhaar";
+                            } else
+                              return null;
+                          },
+                          autovalidateMode: AutovalidateMode.always,
+                        ),
+                        DropDownFormField(
+                          //TODO: Replace with a CheckBoxListTile
+                          list: ['Widower', 'Divorcee', 'Differently abled'],
+                          hint: "Select applicable",
+                          title: "Vulnerabilities",
+                          errorField: "Please choose a vulnerability",
+                        ),
+                        DropDownFormField(
+                          list: [
+                            'Clerical support worker',
+                            'Services and sales worker',
+                            'Skilled agricultural, forestry and fishery worker',
+                            'Unemployed'
+                          ],
+                          hint: "Select applicable",
+                          title: "Occupation",
+                          errorField: "Please choose an occupation",
+                        ),
+                        Container(
+                          child: Column(
+                            children: [
+                              OptionsWidget(
+                                options: [["Yes","yes"],["No","no"]],
+                                title: "Daily wage worker?",
+                                onSaved: (val) {
+                                  String value = val;
+                                  dailyWageWorker = value.toLowerCase() as bool;
+                                  print(dailyWageWorker);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        //TODO: Add work timings
+                        Container(
+                          child: Column(
+                            children: [
+                              OptionsWidget(
+                                options: [
+                                  ["Eligible","eligible"],
+                                  ["Eligible, receiving","eligible_receiving"],
+                                  ["Not eligible","not_eligible"]
+                                ],
+                                title: 'Old age pension',
+                              ),
+                            ],
+                          ),
+                        ),
+                        TextFormField(),
+                      ],
+                    ),
+                    Column(children: [Text('Hi!')]),
+                    Text('Haha Hi')
+                  ], _onSubmit),
         ),
-        Column(
-          children:[
-            Text('Hi!')
-          ]
-
-        ),
-        Text('Haha Hi')
-      ], _onSubmit),
-    );
+      ),
+        );
   }
 }

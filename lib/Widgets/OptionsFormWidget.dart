@@ -13,6 +13,7 @@ class OptionsWidget extends FormField<dynamic> {
       {FormFieldSetter<dynamic>? onSaved,
       FormFieldValidator<dynamic>? validator,
       required List<dynamic> options,
+        required String title,
       bool setDefaultValue = false,
       AutovalidateMode autoValidateMode = AutovalidateMode.disabled})
       : super(
@@ -29,6 +30,7 @@ class OptionsWidget extends FormField<dynamic> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Text(title,style: TextStyle(fontSize: 15),),
                   Wrap(
                       children: options
                           .map((e) => new OptionButton(

@@ -28,6 +28,7 @@ class PageViewContentBox extends StatelessWidget {
             builder:
                 (BuildContext context, BoxConstraints viewportConstraints) {
               return SingleChildScrollView(
+                physics: ClampingScrollPhysics(),
                 child: ConstrainedBox(
                   constraints:
                       BoxConstraints(minHeight: viewportConstraints.maxHeight),
