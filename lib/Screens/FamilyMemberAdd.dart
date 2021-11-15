@@ -230,11 +230,13 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 ),
                 TextFormField(
                   //TODO: Replace with a custom widget
-                  decoration: InputDecoration(label: Text('Communicable Diseases')),
+                  decoration:
+                      InputDecoration(label: Text('Communicable Diseases')),
                 ),
                 TextFormField(
                   //TODO? Replace with a custom widget
-                  decoration: InputDecoration(label: Text('Non Communicable Diseases')),
+                  decoration:
+                      InputDecoration(label: Text('Non Communicable Diseases')),
                 ),
                 OptionsWidget(
                   options: [
@@ -259,7 +261,27 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 ),
                 //TODO: Display next widget only if the previous widget is true
                 //TODO: Find out list of Anganwadi services, list em in a checkerbox dialog
-
+                //TODO: Add a checkbox dialog for PHC services utilised
+                //TODO: Add a checkbox dialog for private heath clinic facilities used
+                TextFormField(
+                  decoration: InputDecoration(label: Text('Why private?')),
+                ),
+                OptionsWidget(options: [
+                  ['Yes', 'yes'],
+                  ['No', 'no']
+                ], title: "Do you use any tobacco based products?"),
+                OptionsWidget(options: [
+                  ['Yes', 'yes'],
+                  ['No', 'no']
+                ], title: "Do you consume alcohol?"),
+                OptionsWidget(options: [
+                  ['Yes', 'yes'],
+                  ['No', 'no']
+                ], title: "Do you have Aarogya Setu installed?"),
+                OptionsWidget(options: [
+                  ['Yes', 'yes'],
+                  ['No', 'no']
+                ], title: "Do you have the Vizhithiru app installed?"),
               ],
             )
           ], _onSubmit),
