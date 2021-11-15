@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class DatePicker extends StatefulWidget {
-  const DatePicker({Key? key}) : super(key: key);
+
+
+  DatePicker(this.title);
+
+  String title;
 
   @override
   _DatePickerState createState() => _DatePickerState();
@@ -10,12 +14,17 @@ class DatePicker extends StatefulWidget {
 
 class _DatePickerState extends State<DatePicker> {
 
+  @override
+  void initState(){
+    super.initState();
+  }
+
   DateTime date = DateTime.now();
 
   var textFieldController = TextEditingController();
 
   String getText() {
-    if (date == null) {
+    if (date == "") {
       return 'Pick date';
     }
 
@@ -30,6 +39,9 @@ class _DatePickerState extends State<DatePicker> {
 
     return Container(
       child: TextField(
+        decoration: InputDecoration(
+          label: Text(widget.title),
+        ),
         controller: textFieldController,
         onTap: () {
           pickDate(context);

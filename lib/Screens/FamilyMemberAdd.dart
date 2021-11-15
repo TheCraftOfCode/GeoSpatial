@@ -35,7 +35,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
       backgroundColor: Color(0xffEAE7FA),
       appBar: AppBarBackButton('Add Family Member'),
       body:SizedBox(
-        height: MediaQuery.of(context).size.height-MediaQuery.of(context).viewInsets.bottom*1.4,
+        height: MediaQuery.of(context).size.height-MediaQuery.of(context).viewInsets.bottom*1.1,
         child: SingleChildScrollView(
           physics: ClampingScrollPhysics(),
           child: FormPageView([
@@ -44,7 +44,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         TextFormField(
-                          decoration: InputDecoration(),
+                          decoration: InputDecoration(
+                            label: Text("Name"),
+                          ),
                           validator: (value) {
                             if (value == "") {
                               return "Please enter a name";
@@ -53,7 +55,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           },
                           autovalidateMode: AutovalidateMode.always,
                         ),
-                        DatePicker(),
+                        DatePicker("Date of Birth"),
                         GenderPickerWithImage(
                           verticalAlignedText: false,
                           selectedGender: Gender.Male,
@@ -87,7 +89,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         ),
                         TextFormField(
                           keyboardType: TextInputType.number,
-                          decoration: InputDecoration(),
+                          decoration: InputDecoration(
+                            label: Text("Phone Number: "),
+                          ),
                           validator: (value) {
                             if (value == "") {
                               return "Please enter a value";
@@ -148,24 +152,24 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           ),
                         ),
                         //TODO: Add work timings
-                        Container(
-                          child: Column(
-                            children: [
-                              OptionsWidget(
-                                options: [
-                                  ["Eligible","eligible"],
-                                  ["Eligible, receiving","eligible_receiving"],
-                                  ["Not eligible","not_eligible"]
-                                ],
-                                title: 'Old age pension',
-                              ),
-                            ],
-                          ),
-                        ),
-                        TextFormField(),
                       ],
                     ),
-                    Column(children: [Text('Hi!')]),
+                    Column(children: [
+                      Container(
+                        child: Column(
+                          children: [
+                            OptionsWidget(
+                              options: [
+                                ["Eligible","eligible"],
+                                ["Eligible, receiving","eligible_receiving"],
+                                ["Not eligible","not_eligible"]
+                              ],
+                              title: 'Old age pension',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
                     Text('Haha Hi')
                   ], _onSubmit),
         ),
