@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
+import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
 import 'package:geo_spatial/Screens/IndividualDataCollection.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -61,7 +62,7 @@ class _HomeWidgetState extends State<Home> {
                 'Individual data',
                 'Individual data entry for everyone in home',
                 'assets/svg/female.svg',
-                IndividualDataCollection(),
+                FamilyHomeScreen(),
                 Color(0xFFF700FF),
                 Color(0xff3D2C8D)),
             DataCard(

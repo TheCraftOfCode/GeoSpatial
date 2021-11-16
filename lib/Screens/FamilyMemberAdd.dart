@@ -257,10 +257,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     ["Yes", "yes"],
                     ["No", "no"],
                   ],
-                  title: 'Using anything?',
+                  title: 'Using any Anganwadi services?',
                 ),
                 //TODO: Display next widget only if the previous widget is true
                 //TODO: Find out list of Anganwadi services, list em in a checkerbox dialog
+              ],
+            ),
+            Column(
+              children: [
                 //TODO: Add a checkbox dialog for PHC services utilised
                 //TODO: Add a checkbox dialog for private heath clinic facilities used
                 TextFormField(
