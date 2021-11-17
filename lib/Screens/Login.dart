@@ -1,9 +1,11 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Constants/Constants.dart';
-import 'package:geo_spatial/Widgets/FormCard.dart';
 import 'package:geo_spatial/Screens/Home.dart';
+import 'package:geo_spatial/Widgets/FormCard.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 final storage = FlutterSecureStorage();
@@ -20,6 +22,11 @@ class _MyAppState extends State<Login> {
   var _nameError = null;
   var _passwordError = null;
   bool _isSelected = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   void _radio() {
     setState(() {
@@ -97,13 +104,13 @@ class _MyAppState extends State<Login> {
         padding: EdgeInsets.all(2.0),
         decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(width: 2.0, color: Colors.black)),
+            border: Border.all(width: 2.0, color: Colors.white)),
         child: isSelected
             ? Container(
                 width: double.infinity,
                 height: double.infinity,
                 decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.white),
               )
             : Container(),
       );
@@ -113,101 +120,86 @@ class _MyAppState extends State<Login> {
         child: Container(
           width: 120,
           height: 1.0,
-          color: Colors.black26.withOpacity(.2),
+          color: Colors.white70.withOpacity(.2),
         ),
       );
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      backgroundColor: Color(0xffEAE7FA),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.black,
       body: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: 0.0),
-                child: Image.asset("assets/image_01.png"),
-              ),
-              Expanded(
-                child: Container(),
-              ),
-              Expanded(child: Image.asset("assets/image_02.png"))
-            ],
-          ),
-          SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 60.0),
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 230,
-                  ),
-                  FormCard(_usernameController, _passwordController, _nameError,
-                      _passwordError),
-                  SizedBox(height: 25),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 12.0,
-                          ),
-                          GestureDetector(
-                            onTap: _radio,
-                            child: radioButton(_isSelected),
-                          ),
-                          SizedBox(
-                            width: 8.0,
-                          ),
-                          Text("Remember me",
-                              style: TextStyle(
-                                fontSize: 15,
-                              ))
-                        ],
-                      ),
-                      InkWell(
-                        child: Container(
-                          width: 100,
-                          height: 50,
-                          decoration: BoxDecoration(
+          fit: StackFit.expand,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.6),
+              child: Image(image: AssetImage("assets/image_01.png"),),
+            ),
+            SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.25,
+                    ),
+                    FormCard(_usernameController, _passwordController,
+                        _nameError, _passwordError),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 12.0,
+                            ),
+                            GestureDetector(
+                              onTap: _radio,
+                              child: radioButton(_isSelected),
+                            ),
+                            SizedBox(
+                              width: 8.0,
+                            ),
+                            Text("Remember me",
+                                style: GoogleFonts.poppins(
+                                    color: Colors.white, fontSize: 14.0))
+                          ],
+                        ),
+                        InkWell(
+                          child: Container(
+                            width: 100,
+                            height: 45,
+                            decoration: BoxDecoration(
                               gradient: LinearGradient(colors: [
-                                Color.fromARGB(500, 59, 5, 120),
-                                Color.fromARGB(250, 157, 133, 244),
+                                Color(0xff37786a),
+                                Color(0xff00fdcd),
                               ]),
-                              borderRadius: BorderRadius.circular(6.0),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xFF6078ea).withOpacity(.3),
-                                    offset: Offset(0.0, 8.0),
-                                    blurRadius: 8.0)
-                              ]),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: _login,
-                              child: Center(
-                                child: Text("SIGN IN",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        letterSpacing: 1.0)),
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: _login,
+                                child: Center(
+                                  child: Text("SIGN IN",
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          letterSpacing: 1.0)),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
   }
 }
