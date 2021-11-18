@@ -27,6 +27,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //TODO: Replace with LoadValidPageWidget
-    return Login();
+    return Home();
   }
 }
