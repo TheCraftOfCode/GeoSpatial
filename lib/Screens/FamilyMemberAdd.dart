@@ -3,6 +3,7 @@ import 'package:gender_picker/gender_picker.dart';
 import 'package:gender_picker/source/enums.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DatePicker.dart';
+import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
@@ -56,7 +57,15 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
-                DatePicker("Date of Birth"),
+                DatePickerWidget(
+                  context: context,
+                  title: "Date of Birth",
+                  hint: "Choose a date",
+                  autoValidateMode: AutovalidateMode.always,
+                  onSaved: (data){
+                    print(data);
+                  },
+                ),
                 GenderPickerWithImage(
                   verticalAlignedText: false,
                   selectedGender: Gender.Male,
