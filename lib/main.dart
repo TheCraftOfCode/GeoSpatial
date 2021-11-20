@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geo_spatial/Screens/Background.dart';
 import 'package:geo_spatial/Screens/Login.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Screens/Home.dart';

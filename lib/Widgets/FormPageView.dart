@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Widgets/StepCounterWidget.dart';
 
 import 'PageViewContentBox.dart';
@@ -88,24 +89,26 @@ class _FormPageViewState extends State<FormPageView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        StepCounterWidget(widgetLength, count, formErrorTile, controller),
-        SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
-          child: Container(
-            height: MediaQuery.of(context).size.height * 0.82,
-            child: PageView(
-              onPageChanged: _onPageViewChange,
-              scrollDirection: Axis.horizontal,
-              controller: controller,
-              children: widgetList,
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          StepCounterWidget(widgetLength, count, formErrorTile, controller),
+          SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.82,
+              child: PageView(
+                onPageChanged: _onPageViewChange,
+                scrollDirection: Axis.horizontal,
+                controller: controller,
+                children: widgetList,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

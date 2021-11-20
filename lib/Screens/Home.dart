@@ -6,6 +6,7 @@ import 'package:geo_spatial/Widgets/DataCard.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Screens/Login.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -22,12 +23,12 @@ class _HomeWidgetState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffEAE7FA),
+      backgroundColor: colors.darkScaffoldColor,
       appBar: AppBar(
           elevation: 0,
           title: Text(
             'Hello, ' + userName + '!',
-            style: GoogleFonts.montserrat(fontSize: 20, color: Colors.black),
+            style: GoogleFonts.montserrat(fontSize: 20, color: colors.darkPrimaryTextColor),
           ),
           backgroundColor: Colors.transparent,
           actions: [
@@ -35,7 +36,7 @@ class _HomeWidgetState extends State<Home> {
               splashRadius: 20,
               icon: Icon(
                 Icons.person,
-                color: Colors.black,
+                color: colors.darkAccentColor,
               ),
               onPressed: () async {
                 await storage.delete(key: 'jwt');
@@ -49,7 +50,7 @@ class _HomeWidgetState extends State<Home> {
             splashRadius: 20,
             icon: Icon(
               Icons.settings,
-              color: Colors.black,
+              color: colors.darkAccentColor,
             ),
             onPressed: () {},
           )),
@@ -63,22 +64,22 @@ class _HomeWidgetState extends State<Home> {
                 'Individual data entry for everyone in home',
                 'assets/svg/female.svg',
                 FamilyHomeScreen(),
-                Color(0xFFF700FF),
-                Color(0xff3D2C8D)),
+                colors.darkSecondAccentColor,
+            colors.darkSecondAccentColor),
             DataCard(
                 'Community Details',
                 'Data entry for communities',
                 'assets/svg/house.svg',
                 CommunityDataCollection(),
-                Color(0xFF2E2FFF),
-                Color(0xFF4FD586)),
+                colors.darkSecondAccentColor,
+                colors.darkSecondAccentColor),
             DataCard(
                 'View saved data',
                 'View all data saved in local storage',
                 'assets/svg/storage_image.svg',
                 IndividualDataCollection(),
-                Color(0xFFFFA200),
-                Color(0xFFBA0000)),
+                colors.darkSecondAccentColor,
+                colors.darkSecondAccentColor),
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gender_picker/gender_picker.dart';
 import 'package:gender_picker/source/enums.dart';
+import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DatePicker.dart';
 import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
@@ -33,7 +34,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xffEAE7FA),
+      backgroundColor: Colors.white,
       appBar: AppBarBackButton('Add Family Member'),
       body: SizedBox(
         height: MediaQuery.of(context).size.height -

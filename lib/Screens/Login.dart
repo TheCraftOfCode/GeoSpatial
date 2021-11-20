@@ -104,13 +104,13 @@ class _MyAppState extends State<Login> {
         padding: EdgeInsets.all(2.0),
         decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(width: 2.0, color: Colors.white)),
+            border: Border.all(width: 2.0, color: Color(0xffe29662))),
         child: isSelected
             ? Container(
                 width: double.infinity,
                 height: double.infinity,
                 decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                    BoxDecoration(shape: BoxShape.circle, color: Color(0xffe29662)),
               )
             : Container(),
       );
@@ -128,13 +128,13 @@ class _MyAppState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff19100F),
       body: Stack(
           fit: StackFit.expand,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.6),
-              child: Image(image: AssetImage("assets/image_01.png"),),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.62),
+              child: Image(image: AssetImage("assets/Illustration.png"),),
             ),
             SingleChildScrollView(
               child: Padding(
@@ -142,10 +142,13 @@ class _MyAppState extends State<Login> {
                 child: Column(
                   children: <Widget>[
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.25,
+                      height: MediaQuery.of(context).size.height * 0.23,
                     ),
                     FormCard(_usernameController, _passwordController,
                         _nameError, _passwordError),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -163,7 +166,7 @@ class _MyAppState extends State<Login> {
                             ),
                             Text("Remember me",
                                 style: GoogleFonts.poppins(
-                                    color: Colors.white, fontSize: 14.0))
+                                    color: Color(0xffE9AA4C), fontSize: 14.0))
                           ],
                         ),
                         InkWell(
@@ -172,19 +175,22 @@ class _MyAppState extends State<Login> {
                             height: 45,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(colors: [
-                                Color(0xff37786a),
-                                Color(0xff00fdcd),
+                                Color(0xffe29662),
+                                Color(0xffefc1a9),
                               ]),
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             child: Material(
                               color: Colors.transparent,
                               child: InkWell(
-                                onTap: _login,
+                                onTap: (){ Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => Home()),
+                                );},
                                 child: Center(
                                   child: Text("SIGN IN",
                                       style: GoogleFonts.poppins(
-                                          color: Colors.black,
+                                          color: Colors.white,
                                           fontSize: 18,
                                           letterSpacing: 1.0)),
                                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 class DataCard extends StatelessWidget {
   DataCard(this.heading, this.subHeading, this.imageUrl, this.route,
@@ -63,10 +64,10 @@ class DataCard extends StatelessWidget {
                         children: [
                           Text(heading,
                               style: GoogleFonts.montserrat(
-                                  fontSize: 25, color: Colors.white)),
+                                  fontSize: 25, color: colors.lightPrimaryTextColor)),
                           Text(subHeading,
                               style: GoogleFonts.montserrat(
-                                  fontSize: 15, color: Color(0xFFDCDCDC)))
+                                  fontSize: 15, color: colors.lightPrimaryTextColor))
                         ],
                       ),
                     ),
@@ -77,7 +78,7 @@ class DataCard extends StatelessWidget {
                       padding:
                           EdgeInsets.only(top: 8.0, bottom: 8.0, right: 8.0),
                       child: SvgPicture.asset('assets/svg/right-icon-arrow.svg',
-                          color: Colors.white),
+                          color: colors.lightPrimaryTextColor),
                     ),
                     flex: 1,
                   ),

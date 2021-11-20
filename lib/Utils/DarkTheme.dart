@@ -19,7 +19,7 @@ class darkTheme{
               side: BorderSide(color: Color(0xff43282C),width: 2,style: BorderStyle.solid),
               padding: EdgeInsets.all(10),
             )
-        )
+        ),
     );
   }
 }
