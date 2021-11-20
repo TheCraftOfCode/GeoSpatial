@@ -128,7 +128,7 @@ class _MyAppState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xff19100F),
+      backgroundColor: Color(0xff333034),
       body: Stack(
           fit: StackFit.expand,
           children: <Widget>[

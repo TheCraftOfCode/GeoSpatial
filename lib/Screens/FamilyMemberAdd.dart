@@ -8,6 +8,7 @@ import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 class FamilyMemberAdd extends StatefulWidget {
   const FamilyMemberAdd({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: colors.darkScaffoldColor,
       appBar: AppBarBackButton('Add Family Member'),
       body: SizedBox(
         height: MediaQuery.of(context).size.height -

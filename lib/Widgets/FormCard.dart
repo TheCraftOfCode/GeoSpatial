@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:geo_spatial/Utils/DarkTheme.dart';
+
 
 class FormCard extends StatelessWidget {
   FormCard(this._usernameController, this._passwordController, this._nameError,
@@ -23,7 +23,7 @@ class FormCard extends StatelessWidget {
           children: <Widget>[
             Text("Login",
                 style: GoogleFonts.poppins(fontWeight: FontWeight.w200,
-                    fontSize: 40, color: Color(0xffE9AA4C))),
+                    fontSize: 40, color: Color(0xffF5A06D))),
             SizedBox(
               height: 10,
             ),
@@ -33,23 +33,23 @@ class FormCard extends StatelessWidget {
                   hintText: "Enter username here",
                   hintStyle: GoogleFonts.poppins(color: Color(0xffcec7c3)),
                   label: Text("Username",
-                      style: GoogleFonts.poppins(color: Color(0xffE9AA4C))),
+                      style: GoogleFonts.poppins(color: Color(0xffF5A06D))),
                   enabledBorder: UnderlineInputBorder(
                       borderSide: const BorderSide(
-                          color: Color(0xffE9AA4C), width: 1.0)),
+                          color: Color(0xffF5A06D), width: 1.0)),
                   focusedBorder: UnderlineInputBorder(
                       borderSide: const BorderSide(
-                          color: Color(0xffE9AA4C), width: 1.0)),
+                          color: Color(0xffF5A06D), width: 1.0)),
                   border: UnderlineInputBorder(
                     borderSide: const BorderSide(
-                        color: Color(0xffE9AA4C), width: 1.0
+                        color: Color(0xffF5A06D), width: 1.0
                     ),
                   ),
                   floatingLabelStyle:
-                      GoogleFonts.poppins(color: Color(0xffE9AA4C)),
+                      GoogleFonts.poppins(color: Color(0xffF5A06D)),
                   errorText: _nameError,
                   labelStyle: GoogleFonts.poppins(fontSize: 14)),
-              cursorColor: Color(0xffE9AA4C),
+              cursorColor: Color(0xffF5A06D),
             ),
             SizedBox(
               height: 20,
@@ -60,22 +60,22 @@ class FormCard extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: "Enter password here",
                   hintStyle: GoogleFonts.poppins(color: Color(0xffcec7c3)),
-                  focusColor: Color(0xffE9AA4C),
+                  focusColor: Color(0xffF5A06D),
                   enabledBorder: UnderlineInputBorder(
                       borderSide: const BorderSide(
-                          color: Color(0xffE9AA4C), width: 1.0)),
+                          color: Color(0xffF5A06D), width: 1.0)),
                   focusedBorder: UnderlineInputBorder(
                       borderSide: const BorderSide(
-                          color: Color(0xffE9AA4C), width: 1.0)),
+                          color: Color(0xffF5A06D), width: 1.0)),
                   border: UnderlineInputBorder(
                     borderSide: const BorderSide(
-                      color: Color(0xffE9AA4C), width: 1.0
+                      color: Color(0xffF5A06D), width: 1.0
                     ),
                   ),
                   label: Text("Password",
-                      style: GoogleFonts.poppins(color: Color(0xffE9AA4C))),
+                      style: GoogleFonts.poppins(color: Color(0xffF5A06D))),
                   floatingLabelStyle:
-                      GoogleFonts.poppins(color: Color(0xffE9AA4C)),
+                      GoogleFonts.poppins(color: Color(0xffF5A06D)),
                   errorText: _passwordError,
                   labelStyle: GoogleFonts.poppins(fontSize: 14.0),
                 )),

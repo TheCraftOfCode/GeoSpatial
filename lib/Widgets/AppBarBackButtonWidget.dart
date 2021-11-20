@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:geo_spatial/Utils/Colors.dart'as colors;
 
 class AppBarBackButton extends StatelessWidget implements PreferredSizeWidget {
   const AppBarBackButton(this.title);
@@ -28,7 +29,7 @@ class AppBarBackButton extends StatelessWidget implements PreferredSizeWidget {
           splashRadius: 20,
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
+            color: colors.darkAccentColor,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -37,7 +38,7 @@ class AppBarBackButton extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       title: Text(
         title,
-        style: GoogleFonts.montserrat(fontSize: 20, color: Colors.black),
+        style: GoogleFonts.montserrat(fontSize: 20, color: colors.darkPrimaryTextColor),
       ),
     );
   }

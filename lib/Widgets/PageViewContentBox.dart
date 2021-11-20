@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:geo_spatial/Utils/DarkTheme.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 class PageViewContentBox extends StatelessWidget {
   const PageViewContentBox(this.centerWidget, {Key? key}) : super(key: key);
@@ -14,8 +14,8 @@ class PageViewContentBox extends StatelessWidget {
       padding: EdgeInsets.all(12),
       child: Container(
         decoration: BoxDecoration(
-          color: darkTheme.DarkTheme.scaffoldBackgroundColor,
-          borderRadius: BorderRadius.circular(0),
+          color: colors.darkSecondAccentColor,
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
               color: Color(0xBC252426),
@@ -26,8 +26,8 @@ class PageViewContentBox extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(12),
           child: centerWidget,
-          ),
         ),
-      );
+      ),
+    );
   }
 }
