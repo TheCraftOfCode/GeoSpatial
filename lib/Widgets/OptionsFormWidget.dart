@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 
 /**
@@ -30,7 +32,7 @@ class OptionsWidget extends FormField<dynamic> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(title,style: TextStyle(fontSize: 15),),
+                  Text(title,style: GoogleFonts.poppins(fontSize: 15.0,color: colors.lightPrimaryTextColor   ),),
                   Wrap(
                       children: options
                           .map((e) => new OptionButton(
@@ -77,13 +79,13 @@ class OptionButton extends StatelessWidget {
       child: ElevatedButton(
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(isSelected
-                  ? Colors.blue
+                  ? Colors.greenAccent
                   : isError
-                      ? Color.fromARGB(255, 255, 185, 185)
-                      : Colors.grey),
+                      ? Color(0xffF1D8B8)
+                      : Color(0xfff6a1a1)),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                       side: isError
                           ? BorderSide(color: Colors.red)
                           : BorderSide.none))),
@@ -91,10 +93,9 @@ class OptionButton extends StatelessWidget {
             state.didChange(optionKey);
           },
           child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(5),
             child: Text(text),
           )),
     );
   }
 }
-

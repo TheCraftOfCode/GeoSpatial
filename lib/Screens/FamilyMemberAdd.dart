@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gender_picker/gender_picker.dart';
 import 'package:gender_picker/source/enums.dart';
-import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
-import 'package:geo_spatial/Widgets/DatePicker.dart';
 import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:google_fonts/google_fonts.dart';
 
 class FamilyMemberAdd extends StatefulWidget {
   const FamilyMemberAdd({Key? key}) : super(key: key);
@@ -49,7 +48,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               children: [
                 TextFormField(
                   decoration: InputDecoration(
-                    label: Text("Name"),
+                    label: Text("Name",style: GoogleFonts.poppins(color: Colors.black87),),
                   ),
                   validator: (value) {
                     if (value == "") {
@@ -72,9 +71,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   verticalAlignedText: false,
                   selectedGender: Gender.Male,
                   selectedGenderTextStyle: TextStyle(
-                      color: Color(0xFF8b32a8), fontWeight: FontWeight.bold),
+                      color: colors.darkScaffoldColor, fontWeight: FontWeight.bold),
                   unSelectedGenderTextStyle: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.normal),
+                      color: colors.lightPrimaryTextColor, fontWeight: FontWeight.normal),
                   onChanged: (Gender? gender) {
                     print(gender);
                   },
@@ -82,7 +81,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   animationDuration: Duration(milliseconds: 300),
                   isCircular: true,
                   // default : true,
-                  opacityOfGradient: 0.4,
+                  opacityOfGradient: 0.7,
                   padding: const EdgeInsets.all(3),
                   size: 70, //default : 40
                 ),

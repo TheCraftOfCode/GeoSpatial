@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 class darkTheme{
   static ThemeData get DarkTheme{
@@ -20,6 +21,13 @@ class darkTheme{
               padding: EdgeInsets.all(10),
             )
         ),
+      inputDecorationTheme: InputDecorationTheme(
+        contentPadding: EdgeInsets.all(10),
+        labelStyle: GoogleFonts.poppins(),
+        floatingLabelStyle: GoogleFonts.poppins(color: colors.darkScaffoldColor),
+        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: colors.darkAccentColor)),
+        hintStyle: GoogleFonts.poppins(),
+      ),
     );
   }
 }

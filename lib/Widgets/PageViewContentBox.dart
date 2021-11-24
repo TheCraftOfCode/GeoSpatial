@@ -11,7 +11,7 @@ class PageViewContentBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(12),
+      padding: EdgeInsets.all(20),
       child: Container(
         decoration: BoxDecoration(
           color: colors.darkSecondAccentColor,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 /**
  * Widget for steps count in registration pages
@@ -76,44 +77,35 @@ class CheckBox extends StatelessWidget {
     IconData icon;
     Color iconColor;
     Color backgroundColor;
-    Border border;
 
     if (iconType == 0) {
       icon = Icons.close;
       backgroundColor = Color.fromARGB(255, 255, 167, 167);
       iconColor = Colors.red;
-      border = Border.all(width: 1.5, color: Colors.red);
     } else if (iconType == 1) {
       icon = Icons.check;
       iconColor = Colors.white;
-      backgroundColor = Color.fromARGB(250, 157, 133, 244);
-      border = Border.all(width: 0, color: backgroundColor);
+      backgroundColor = Color(0xff7bde27);
     } else if (iconType == 2) {
       icon = Icons.remove;
       iconColor = Color.fromARGB(255, 255, 255, 255);
-      backgroundColor = Color.fromARGB(250, 182, 170, 255);
-      border =
-          Border.all(width: 2.5, color: Color.fromARGB(250, 157, 133, 244));
+      backgroundColor = colors.darkAccentColor;
     } else if (iconType == 3) {
       icon = Icons.remove;
       iconColor = Color.fromARGB(255, 0, 0, 0);
-      backgroundColor = Color.fromARGB(250, 213, 201, 255);
-      border = Border.all(width: 0, color: backgroundColor);
+      backgroundColor = colors.darkSecondAccentColor;
     } else if (iconType == 4) {
       icon = Icons.upload_rounded;
       iconColor = Color.fromARGB(255, 255, 255, 255);
-      backgroundColor = Color.fromARGB(250, 182, 170, 255);
-      border = Border.all(width: 0, color: backgroundColor);
+      backgroundColor = colors.darkSecondAccentColor;
     } else {
       icon = Icons.upload_rounded;
       iconColor = Color.fromARGB(255, 255, 255, 255);
-      backgroundColor = Color.fromARGB(250, 126, 94, 255);
-      border = Border.all(width: 2, color: backgroundColor);
+      backgroundColor = colors.darkSecondAccentColor;
     }
     return Expanded(
         child: Container(
       decoration: BoxDecoration(
-        border: border,
       ),
       margin: EdgeInsets.only(left: 3.0, right: 3.0),
       child: Material(

@@ -35,7 +35,7 @@ class DropDownFormField extends FormField<dynamic> {
                               fontSize: 25, color: Colors.black)),
                     ),
                     Card(
-                      elevation: 2,
+                      elevation: 10,
                       margin: EdgeInsets.only(bottom: 4),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<dynamic>(

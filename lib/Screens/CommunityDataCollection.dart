@@ -4,6 +4,7 @@ import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/LocationWidget.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 class CommunityDataCollection extends StatefulWidget {
   CommunityDataCollection({Key? key}) : super(key: key);
@@ -49,7 +50,7 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffEAE7FA),
+      backgroundColor: colors.darkScaffoldColor,
       appBar: AppBarBackButton('Community Data'),
       body: FormPageView([
         DropDownFormField(
