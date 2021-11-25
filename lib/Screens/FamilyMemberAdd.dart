@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gender_picker/gender_picker.dart';
 import 'package:gender_picker/source/enums.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
-import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:textfield_tags/textfield_tags.dart';
 
 class FamilyMemberAdd extends StatefulWidget {
   const FamilyMemberAdd({Key? key}) : super(key: key);
@@ -49,11 +50,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 TextFormField(
                   decoration: InputDecoration(
                     //isDense: true,
-                    label: Text("Name",style: GoogleFonts.poppins(color: colors.darkHintColor),),
+                    label: Text(
+                      "Name",
+                      style: GoogleFonts.poppins(color: colors.darkHintColor),
+                    ),
                     hintText: "Please enter name",
                     hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
                     contentPadding: EdgeInsets.all(0.0),
-                    ),
+                  ),
                   validator: (value) {
                     if (value == "") {
                       return "Please enter a name";
@@ -67,7 +71,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   title: "Date of Birth",
                   hint: "Choose a date",
                   autoValidateMode: AutovalidateMode.always,
-                  onSaved: (data){
+                  onSaved: (data) {
                     print(data);
                   },
                 ),
@@ -75,9 +79,11 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   verticalAlignedText: false,
                   selectedGender: Gender.Male,
                   selectedGenderTextStyle: TextStyle(
-                      color: colors.darkScaffoldColor, fontWeight: FontWeight.bold),
+                      color: colors.darkScaffoldColor,
+                      fontWeight: FontWeight.bold),
                   unSelectedGenderTextStyle: TextStyle(
-                      color: colors.lightPrimaryTextColor, fontWeight: FontWeight.normal),
+                      color: colors.lightPrimaryTextColor,
+                      fontWeight: FontWeight.normal),
                   onChanged: (Gender? gender) {
                     print(gender);
                   },
@@ -105,7 +111,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    label: Text("Phone Number",style: GoogleFonts.poppins(color: colors.darkHintColor),),
+                    label: Text(
+                      "Phone Number",
+                      style: GoogleFonts.poppins(color: colors.darkHintColor),
+                    ),
                     hintText: "Please enter 10 digit phone",
                     hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
                     contentPadding: EdgeInsets.all(0.0),
@@ -128,7 +137,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               children: [
                 TextFormField(
                   decoration: InputDecoration(
-                    label: Text("Aadhaar Number",style: GoogleFonts.poppins(color: colors.darkHintColor),),
+                    label: Text(
+                      "Aadhaar Number",
+                      style: GoogleFonts.poppins(color: colors.darkHintColor),
+                    ),
                     hintText: "Please enter 12 digit Aadhaar",
                     hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
                     contentPadding: EdgeInsets.all(0.0),
@@ -193,7 +205,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                    label: Text("Income/Day",style: GoogleFonts.poppins(color: colors.darkHintColor),),
+                    label: Text(
+                      "Income/Day",
+                      style: GoogleFonts.poppins(color: colors.darkHintColor),
+                    ),
                     hintText: "Please enter income per day",
                     hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
                     contentPadding: EdgeInsets.all(0.0),
@@ -210,7 +225,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               //TODO: Add work timings
               TextFormField(
                 decoration: InputDecoration(
-                  label: Text("Income/Month",style: GoogleFonts.poppins(color: colors.darkHintColor),),
+                  label: Text(
+                    "Income/Month",
+                    style: GoogleFonts.poppins(color: colors.darkHintColor),
+                  ),
                   hintText: "Please enter income per month",
                   hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
                   contentPadding: EdgeInsets.all(0.0),
@@ -224,13 +242,13 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: OptionsWidget(
-                        options: [
-                          ["Eligible", "eligible"],
-                          ["Eligible, receiving", "eligible_receiving"],
-                          ["Not eligible", "not_eligible"]
-                        ],
-                        title: 'Old age pension',
-                      ),
+                  options: [
+                    ["Eligible", "eligible"],
+                    ["Eligible, receiving", "eligible_receiving"],
+                    ["Not eligible", "not_eligible"]
+                  ],
+                  title: 'Old age pension',
+                ),
               ),
               OptionsWidget(
                 options: [
@@ -249,9 +267,51 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   title: 'Marital Status',
                 ),
               ),
-              TextFormField(
-                //TODO: Replace with a custom widget
-                decoration: InputDecoration(label: Text('Special Skills')),
+              TextFieldTags(
+                //initialTags: ["better", "lovely"],
+                textSeparators: [" ", ".", ","],
+                tagsStyler: TagsStyler(
+                  showHashtag: false,
+                  tagMargin: const EdgeInsets.only(right: 4.0),
+                  tagCancelIcon:
+                      Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                  tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
+                  tagPadding: EdgeInsets.only(
+                      top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
+                  tagDecoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Colors.grey.shade300,
+                    ),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20.0),
+                    ),
+                  ),
+                  tagTextStyle: TextStyle(
+                      fontWeight: FontWeight.normal, color: Colors.black),
+                ),
+                textFieldStyler: TextFieldStyler(
+                  hintText: "Tags",
+                  isDense: false,
+                  textFieldBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black, width: 1.0),
+                  ),
+                ),
+                onDelete: (tag) {
+                  //remove value from list
+                },
+                onTag: (tag) {
+                  //create a list and store value to list
+                },
+                validator: (String tag) {
+                  if (tag.length > 15) {
+                    return "hey that is too much";
+                  } else if (tag.isEmpty) {
+                    return "enter something";
+                  }
+
+                  return null;
+                },
               ),
             ]),
             Column(
