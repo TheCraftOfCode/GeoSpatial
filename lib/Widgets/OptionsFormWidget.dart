@@ -32,7 +32,7 @@ class OptionsWidget extends FormField<dynamic> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(title,style: GoogleFonts.poppins(fontSize: 15.0,color: colors.lightPrimaryTextColor   ),),
+                  Text(title,style: GoogleFonts.poppins(fontSize: 15.0,color: colors.lightPrimaryTextColor),),
                   Wrap(
                       children: options
                           .map((e) => new OptionButton(
@@ -75,7 +75,7 @@ class OptionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(5),
+      padding: EdgeInsets.only(left: 5,right: 5,top: 10),
       child: ElevatedButton(
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(isSelected

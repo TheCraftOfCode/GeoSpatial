@@ -48,8 +48,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               children: [
                 TextFormField(
                   decoration: InputDecoration(
-                    label: Text("Name",style: GoogleFonts.poppins(color: Colors.black87),),
-                  ),
+                    //isDense: true,
+                    label: Text("Name",style: GoogleFonts.poppins(color: colors.darkHintColor),),
+                    hintText: "Please enter name",
+                    hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
+                    contentPadding: EdgeInsets.all(0.0),
+                    ),
                   validator: (value) {
                     if (value == "") {
                       return "Please enter a name";
@@ -81,7 +85,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   animationDuration: Duration(milliseconds: 300),
                   isCircular: true,
                   // default : true,
-                  opacityOfGradient: 0.7,
+                  opacityOfGradient: 0.3,
                   padding: const EdgeInsets.all(3),
                   size: 70, //default : 40
                 ),
@@ -101,7 +105,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    label: Text("Phone Number: "),
+                    label: Text("Phone Number",style: GoogleFonts.poppins(color: colors.darkHintColor),),
+                    hintText: "Please enter 10 digit phone",
+                    hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
+                    contentPadding: EdgeInsets.all(0.0),
                   ),
                   validator: (value) {
                     if (value == "") {
@@ -121,7 +128,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               children: [
                 TextFormField(
                   decoration: InputDecoration(
-                    label: Text('Aadhaar Number'),
+                    label: Text("Aadhaar Number",style: GoogleFonts.poppins(color: colors.darkHintColor),),
+                    hintText: "Please enter 12 digit Aadhaar",
+                    hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
+                    contentPadding: EdgeInsets.all(0.0),
                   ),
                   validator: (value) {
                     if (value == "") {
@@ -138,7 +148,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   list: [
                     'Widower',
                     'Divorcee',
-                    'Differently abled',
+                    'Differently Abled',
                     'Pregnant Woman',
                     'Lactating Mother',
                     'Elderly (>60 years)',
@@ -182,7 +192,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   },
                 ),
                 TextFormField(
-                  decoration: InputDecoration(label: Text('Income/day')),
+                  decoration: InputDecoration(
+                    label: Text("Income/Day",style: GoogleFonts.poppins(color: colors.darkHintColor),),
+                    hintText: "Please enter income per day",
+                    hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
+                    contentPadding: EdgeInsets.all(0.0),
+                  ),
                   validator: (value) {
                     if (value == "") {
                       return "Enter Income/Day";
@@ -194,24 +209,28 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
             Column(children: [
               //TODO: Add work timings
               TextFormField(
-                decoration: InputDecoration(label: Text('Income/month')),
+                decoration: InputDecoration(
+                  label: Text("Income/Month",style: GoogleFonts.poppins(color: colors.darkHintColor),),
+                  hintText: "Please enter income per month",
+                  hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
+                  contentPadding: EdgeInsets.all(0.0),
+                ),
                 validator: (value) {
                   if (value == "") {
-                    return "Enter Income/Day";
+                    return "Enter Income/Month";
                   }
                 },
               ),
-              Column(
-                children: [
-                  OptionsWidget(
-                    options: [
-                      ["Eligible", "eligible"],
-                      ["Eligible, receiving", "eligible_receiving"],
-                      ["Not eligible", "not_eligible"]
-                    ],
-                    title: 'Old age pension',
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: OptionsWidget(
+                        options: [
+                          ["Eligible", "eligible"],
+                          ["Eligible, receiving", "eligible_receiving"],
+                          ["Not eligible", "not_eligible"]
+                        ],
+                        title: 'Old age pension',
+                      ),
               ),
               OptionsWidget(
                 options: [
@@ -220,12 +239,15 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 ],
                 title: 'Doing/Did business',
               ),
-              OptionsWidget(
-                options: [
-                  ["Married", "married"],
-                  ["Unmarried", "unmarried"],
-                ],
-                title: 'Marital Status',
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: OptionsWidget(
+                  options: [
+                    ["Married", "married"],
+                    ["Unmarried", "unmarried"],
+                  ],
+                  title: 'Marital Status',
+                ),
               ),
               TextFormField(
                 //TODO: Replace with a custom widget
@@ -238,22 +260,31 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   //TODO: Replace with a custom widget
                   decoration: InputDecoration(label: Text('Frequent ailments')),
                 ),
+                SizedBox(
+                  height: 20,
+                ),
                 TextFormField(
                   //TODO: Replace with a custom widget
                   decoration:
                       InputDecoration(label: Text('Communicable Diseases')),
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 TextFormField(
                   //TODO? Replace with a custom widget
                   decoration:
                       InputDecoration(label: Text('Non Communicable Diseases')),
                 ),
-                OptionsWidget(
-                  options: [
-                    ["Yes", "yes"],
-                    ["No", "no"],
-                  ],
-                  title: 'Surgeries',
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: OptionsWidget(
+                    options: [
+                      ["Yes", "yes"],
+                      ["No", "no"],
+                    ],
+                    title: 'Surgeries',
+                  ),
                 ),
                 OptionsWidget(
                   options: [
@@ -262,12 +293,15 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   ],
                   title: 'Aware about Anganwadi services?',
                 ),
-                OptionsWidget(
-                  options: [
-                    ["Yes", "yes"],
-                    ["No", "no"],
-                  ],
-                  title: 'Using any Anganwadi services?',
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: OptionsWidget(
+                    options: [
+                      ["Yes", "yes"],
+                      ["No", "no"],
+                    ],
+                    title: 'Using any Anganwadi services?',
+                  ),
                 ),
                 //TODO: Display next widget only if the previous widget is true
                 //TODO: Find out list of Anganwadi services, list em in a checkerbox dialog
