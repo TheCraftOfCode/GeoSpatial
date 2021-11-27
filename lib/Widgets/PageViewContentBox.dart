@@ -14,7 +14,7 @@ class PageViewContentBox extends StatelessWidget {
       padding: EdgeInsets.all(20),
       child: Container(
         decoration: BoxDecoration(
-          color: colors.darkSecondAccentColor,
+          color: colors.darkSecondBackgroundColor,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(

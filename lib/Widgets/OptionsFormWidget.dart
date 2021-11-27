@@ -47,7 +47,7 @@ class OptionsWidget extends FormField<dynamic> {
                     child: state.hasError
                         ? Text(
                             state.errorText ?? "error",
-                            style: TextStyle(color: Colors.red, fontSize: 10),
+                            style: GoogleFonts.poppins(color: Colors.red, fontSize: 10),
                           )
                         : Container(),
                   )

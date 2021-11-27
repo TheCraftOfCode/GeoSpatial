@@ -6,3 +6,4 @@ var darkPrimaryTextColor = Colors.white;
 var darkSecondAccentColor = Color(0xffFADDB6);
 var lightPrimaryTextColor = Colors.black;
 var darkHintColor = Colors.black87;
+var darkSecondBackgroundColor = Color(0xff38363b);

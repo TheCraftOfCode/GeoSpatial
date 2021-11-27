@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 class DropDownFormField extends FormField<dynamic> {
   DropDownFormField(
@@ -32,19 +33,22 @@ class DropDownFormField extends FormField<dynamic> {
                       padding: EdgeInsets.only(bottom: 20),
                       child: Text(title,
                           style: GoogleFonts.montserrat(
-                              fontSize: 25, color: Colors.black)),
+                              fontSize: 25, color: colors.darkPrimaryTextColor)),
                     ),
                     Card(
+                      color: colors.darkScaffoldColor,
                       elevation: 10,
                       margin: EdgeInsets.only(bottom: 4),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<dynamic>(
+                          dropdownColor: colors.darkScaffoldColor,
                           value: state.value,
                           isExpanded: true,
                           items: list.map<DropdownMenuItem>((value) {
                             return DropdownMenuItem(
                               value: value,
                               child: Container(
+                                color: colors.darkScaffoldColor,
                                 child: Text(
                                   value,
                                   overflow: TextOverflow.ellipsis,
@@ -57,19 +61,20 @@ class DropDownFormField extends FormField<dynamic> {
                             state.didChange(newValue);
                           },
                           hint: Container(
+                            color: colors.darkScaffoldColor,
                             padding: EdgeInsets.all(8),
                             child: Text(
                               hint,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                   color: state.hasError
                                       ? Colors.red
                                       : Colors.grey),
                               textAlign: TextAlign.end,
                             ),
                           ),
-                          style: TextStyle(
-                              color: Colors.black, decorationColor: Colors.red),
+                          style: GoogleFonts.poppins(
+                              color: colors.darkPrimaryTextColor, decorationColor: Colors.red),
                         ),
                       ),
                     ),
@@ -78,7 +83,7 @@ class DropDownFormField extends FormField<dynamic> {
                             padding: EdgeInsets.all(10),
                             child: Text(
                               state.errorText ?? "error",
-                              style: TextStyle(color: Colors.red, fontSize: 10),
+                              style: GoogleFonts.poppins(color: Colors.red, fontSize: 10),
                             ),
                           )
                         : Container()

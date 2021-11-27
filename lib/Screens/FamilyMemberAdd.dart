@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gender_picker/gender_picker.dart';
 import 'package:gender_picker/source/enums.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
@@ -48,14 +49,15 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextFormField(
+                  style: darkTheme.DarkTheme.textTheme.bodyText2,
                   decoration: InputDecoration(
                     //isDense: true,
                     label: Text(
                       "Name",
-                      style: GoogleFonts.poppins(color: colors.darkHintColor),
+                      style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                     ),
                     hintText: "Please enter name",
-                    hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
+                    hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                     contentPadding: EdgeInsets.all(0.0),
                   ),
                   validator: (value) {
@@ -109,14 +111,15 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   errorField: "Please choose a qualification",
                 ),
                 TextFormField(
+                  style: darkTheme.DarkTheme.textTheme.bodyText2,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     label: Text(
                       "Phone Number",
-                      style: GoogleFonts.poppins(color: colors.darkHintColor),
+                      style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                     ),
                     hintText: "Please enter 10 digit phone",
-                    hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
+                    hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                     contentPadding: EdgeInsets.all(0.0),
                   ),
                   validator: (value) {
@@ -136,13 +139,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextFormField(
+                  style: darkTheme.DarkTheme.textTheme.bodyText2,
                   decoration: InputDecoration(
                     label: Text(
                       "Aadhaar Number",
-                      style: GoogleFonts.poppins(color: colors.darkHintColor),
+                      style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                     ),
                     hintText: "Please enter 12 digit Aadhaar",
-                    hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
+                    hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                     contentPadding: EdgeInsets.all(0.0),
                   ),
                   validator: (value) {
@@ -204,13 +208,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   },
                 ),
                 TextFormField(
+                  style: darkTheme.DarkTheme.textTheme.bodyText2,
                   decoration: InputDecoration(
                     label: Text(
                       "Income/Day",
-                      style: GoogleFonts.poppins(color: colors.darkHintColor),
+                      style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                     ),
                     hintText: "Please enter income per day",
-                    hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
+                    hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                     contentPadding: EdgeInsets.all(0.0),
                   ),
                   validator: (value) {
@@ -224,13 +229,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
             Column(children: [
               //TODO: Add work timings
               TextFormField(
+                style: darkTheme.DarkTheme.textTheme.bodyText2,
                 decoration: InputDecoration(
                   label: Text(
                     "Income/Month",
-                    style: GoogleFonts.poppins(color: colors.darkHintColor),
+                    style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                   ),
                   hintText: "Please enter income per month",
-                  hintStyle: GoogleFonts.poppins(color: colors.darkHintColor),
+                  hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                   contentPadding: EdgeInsets.all(0.0),
                 ),
                 validator: (value) {
@@ -291,8 +297,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       fontWeight: FontWeight.normal, color: Colors.black),
                 ),
                 textFieldStyler: TextFieldStyler(
-                  hintText: "Tags",
-                  isDense: false,
+                  hintText: "Special Skills",
+                  isDense: true,
                   textFieldBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.black, width: 1.0),
                   ),
@@ -304,12 +310,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   //create a list and store value to list
                 },
                 validator: (String tag) {
-                  if (tag.length > 15) {
-                    return "hey that is too much";
-                  } else if (tag.isEmpty) {
+                  if (tag.isEmpty) {
                     return "enter something";
                   }
-
                   return null;
                 },
               ),
