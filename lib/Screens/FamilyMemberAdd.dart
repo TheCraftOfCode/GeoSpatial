@@ -81,10 +81,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   verticalAlignedText: false,
                   selectedGender: Gender.Male,
                   selectedGenderTextStyle: TextStyle(
-                      color: colors.darkScaffoldColor,
+                      color: colors.darkAccentColor,
                       fontWeight: FontWeight.bold),
                   unSelectedGenderTextStyle: TextStyle(
-                      color: colors.lightPrimaryTextColor,
+                      color: colors.darkPrimaryTextColor,
                       fontWeight: FontWeight.normal),
                   onChanged: (Gender? gender) {
                     print(gender);
@@ -276,6 +276,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               TextFieldTags(
                 //initialTags: ["better", "lovely"],
                 textSeparators: [" ", ".", ","],
+                scrollableTagsPadding: EdgeInsets.all(10),
                 tagsStyler: TagsStyler(
                   showHashtag: false,
                   tagMargin: const EdgeInsets.only(right: 4.0),
@@ -311,7 +312,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 },
                 validator: (String tag) {
                   if (tag.isEmpty) {
-                    return "enter something";
+                    return "Enter a value";
                   }
                   return null;
                 },
@@ -319,25 +320,143 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
             ]),
             Column(
               children: [
-                TextFormField(
-                  //TODO: Replace with a custom widget
-                  decoration: InputDecoration(label: Text('Frequent ailments')),
+                TextFieldTags(
+                  //initialTags: ["better", "lovely"],
+                  textSeparators: [" ", ".", ","],
+                  scrollableTagsPadding: EdgeInsets.all(10),
+                  tagsStyler: TagsStyler(
+                    showHashtag: false,
+                    tagMargin: const EdgeInsets.only(right: 4.0),
+                    tagCancelIcon:
+                    Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                    tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
+                    tagPadding: EdgeInsets.only(
+                        top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
+                    tagDecoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.grey.shade300,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(20.0),
+                      ),
+                    ),
+                    tagTextStyle: TextStyle(
+                        fontWeight: FontWeight.normal, color: Colors.black),
+                  ),
+                  textFieldStyler: TextFieldStyler(
+                    hintText: "Frequent Ailments",
+                    isDense: true,
+                    textFieldBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 1.0),
+                    ),
+                  ),
+                  onDelete: (tag) {
+                    //remove value from list
+                  },
+                  onTag: (tag) {
+                    //create a list and store value to list
+                  },
+                  validator: (String tag) {
+                    if (tag.isEmpty) {
+                      return "Enter a value";
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                TextFormField(
-                  //TODO: Replace with a custom widget
-                  decoration:
-                      InputDecoration(label: Text('Communicable Diseases')),
+                TextFieldTags(
+                  //initialTags: ["better", "lovely"],
+                  textSeparators: [" ", ".", ","],
+                  scrollableTagsPadding: EdgeInsets.all(10),
+                  tagsStyler: TagsStyler(
+                    showHashtag: false,
+                    tagMargin: const EdgeInsets.only(right: 4.0),
+                    tagCancelIcon:
+                    Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                    tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
+                    tagPadding: EdgeInsets.only(
+                        top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
+                    tagDecoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.grey.shade300,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(20.0),
+                      ),
+                    ),
+                    tagTextStyle: TextStyle(
+                        fontWeight: FontWeight.normal, color: Colors.black),
+                  ),
+                  textFieldStyler: TextFieldStyler(
+                    hintText: "Communicable diseases",
+                    isDense: true,
+                    textFieldBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 1.0),
+                    ),
+                  ),
+                  onDelete: (tag) {
+                    //remove value from list
+                  },
+                  onTag: (tag) {
+                    //create a list and store value to list
+                  },
+                  validator: (String tag) {
+                    if (tag.isEmpty) {
+                      return "Enter a value";
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                TextFormField(
-                  //TODO? Replace with a custom widget
-                  decoration:
-                      InputDecoration(label: Text('Non Communicable Diseases')),
+                TextFieldTags(
+                  //initialTags: ["better", "lovely"],
+                  textSeparators: [" ", ".", ","],
+                  scrollableTagsPadding: EdgeInsets.all(10),
+                  tagsStyler: TagsStyler(
+                    showHashtag: false,
+                    tagMargin: const EdgeInsets.only(right: 4.0),
+                    tagCancelIcon:
+                    Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                    tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
+                    tagPadding: EdgeInsets.only(
+                        top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
+                    tagDecoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.grey.shade300,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(20.0),
+                      ),
+                    ),
+                    tagTextStyle: TextStyle(
+                        fontWeight: FontWeight.normal, color: Colors.black),
+                  ),
+                  textFieldStyler: TextFieldStyler(
+                    hintText: "Non communicable diseases",
+                    isDense: true,
+                    textFieldBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 1.0),
+                    ),
+                  ),
+                  onDelete: (tag) {
+                    //remove value from list
+                  },
+                  onTag: (tag) {
+                    //create a list and store value to list
+                  },
+                  validator: (String tag) {
+                    if (tag.isEmpty) {
+                      return "Enter a value";
+                    }
+                    return null;
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -356,6 +475,13 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   ],
                   title: 'Aware about Anganwadi services?',
                 ),
+
+                //TODO: Display next widget only if the previous widget is true
+                //TODO: Find out list of Anganwadi services, list em in a checkerbox dialog
+              ],
+            ),
+            Column(
+              children: [
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: OptionsWidget(
@@ -366,12 +492,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     title: 'Using any Anganwadi services?',
                   ),
                 ),
-                //TODO: Display next widget only if the previous widget is true
-                //TODO: Find out list of Anganwadi services, list em in a checkerbox dialog
-              ],
-            ),
-            Column(
-              children: [
                 //TODO: Add a checkbox dialog for PHC services utilised
                 //TODO: Add a checkbox dialog for private heath clinic facilities used
                 TextFormField(
