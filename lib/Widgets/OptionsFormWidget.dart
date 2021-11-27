@@ -32,7 +32,7 @@ class OptionsWidget extends FormField<dynamic> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(title,style: GoogleFonts.poppins(fontSize: 15.0,color: colors.lightPrimaryTextColor),),
+                  Text(title,style: GoogleFonts.poppins(fontSize: 15.0,color: colors.darkPrimaryTextColor),),
                   Wrap(
                       children: options
                           .map((e) => new OptionButton(

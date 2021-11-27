@@ -33,7 +33,7 @@ class DropDownFormField extends FormField<dynamic> {
                       padding: EdgeInsets.only(bottom: 20),
                       child: Text(title,
                           style: GoogleFonts.montserrat(
-                              fontSize: 25, color: colors.darkPrimaryTextColor)),
+                              fontSize: 15, color: colors.darkPrimaryTextColor)),
                     ),
                     Card(
                       color: colors.darkScaffoldColor,

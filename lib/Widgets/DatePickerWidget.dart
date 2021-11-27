@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 class DatePickerWidget extends FormField<DateTime> {
   DatePickerWidget(
@@ -42,9 +43,10 @@ class DatePickerWidget extends FormField<DateTime> {
                     padding: EdgeInsets.only(bottom: 8),
                     child: Text(title ?? 'Choose date',
                         style: GoogleFonts.montserrat(
-                            fontSize: 20, color: Colors.black)),
+                            fontSize: 20, color: Colors.white)),
                   ),
                   Card(
+                    color: colors.darkScaffoldColor,
                     elevation: 6,
                     margin: EdgeInsets.only(bottom: 4),
                     child: InkWell(
