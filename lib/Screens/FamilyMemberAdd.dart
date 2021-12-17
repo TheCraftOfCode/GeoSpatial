@@ -300,10 +300,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 textFieldStyler: TextFieldStyler(
                   hintText: "Special Skills",
                   isDense: true,
+                  textStyle: GoogleFonts.poppins(color: Colors.white),
                   textFieldBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.black, width: 1.0),
                   ),
                 ),
+
                 onDelete: (tag) {
                   //remove value from list
                 },
@@ -347,6 +349,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   textFieldStyler: TextFieldStyler(
                     hintText: "Frequent Ailments",
                     isDense: true,
+                    textStyle: GoogleFonts.poppins(color: Colors.white),
                     textFieldBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.black, width: 1.0),
                     ),
@@ -394,6 +397,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   textFieldStyler: TextFieldStyler(
                     hintText: "Communicable diseases",
                     isDense: true,
+                    textStyle: GoogleFonts.poppins(color: Colors.white),
                     textFieldBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.black, width: 1.0),
                     ),
@@ -441,6 +445,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   textFieldStyler: TextFieldStyler(
                     hintText: "Non communicable diseases",
                     isDense: true,
+                    textStyle: GoogleFonts.poppins(color: Colors.white),
                     textFieldBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.black, width: 1.0),
                     ),
