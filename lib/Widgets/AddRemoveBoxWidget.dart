@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 
 /**
@@ -27,58 +28,66 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
   Widget build(BuildContext context) {
 
     return
-      Card(
-        child: SingleChildScrollView(
-          child: Padding(
+      Container(
+        height: MediaQuery.of(context).size.height*0.70,
+        color: colors.darkScaffoldColor,
+        child: Padding(
             padding: EdgeInsets.all(10),
-            child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Add New User Information",
-                    style: GoogleFonts.montserrat(
-                        fontSize: 18, color: Colors.black)),
-                  IconButton(onPressed: (){
-                    setState(() {
-                      listOfElements.add(new IndividualUserData());
-                    });
-                  }, icon: Icon(
-                    Icons.add
-                  ))
-                ],
-              ),
-              ListView.builder(
-                    itemCount: listOfElements.length,
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Card(
-                        child: ListTile(
-                          onTap: (){
-                            var obj = listOfElements[index]; //Modify this object
-                          }, //Pass a function which is called onSaved in the next page and add data to the class object
-                          leading: Icon(Icons.person),
-                          title: Text("User ${index + 1}"),
-                          trailing: IconButton(
-                            color: Colors.red,
-                            icon: Icon(Icons.close),
-                            onPressed: () {
-                              setState(() {
-                                listOfElements.removeAt(index);
-                              });
-                            },
-                          ),
-                        ),
-                      );
-                    }),
-            ],
+            child: Container(
+              color: colors.darkScaffoldColor,
+              height: MediaQuery.of(context).size.height*0.46,
+              child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Add New User Information",
+                      style: GoogleFonts.poppins(
+                          fontSize: 18, color: colors.darkSecondAccentColor)),
+                    IconButton(onPressed: (){
+                      setState(() {
+                        listOfElements.add(new IndividualUserData());
+                      });
+                    }, icon: Icon(
+                      Icons.add,
+                      color: colors.darkAccentColor,
+                    ))
+                  ],
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height*0.60,
+                  child: ListView.builder(
+                          itemCount: listOfElements.length,
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Card(
+                              color: colors.darkSecondAccentColor,
+                              child: ListTile(
+                                onTap: (){
+                                  var obj = listOfElements[index]; //Modify this object
+                                }, //Pass a function which is called onSaved in the next page and add data to the class object
+                                leading: Icon(Icons.person),
+                                title: Text("User ${index + 1}"),
+                                trailing: IconButton(
+                                  color: Colors.red,
+                                  icon: Icon(Icons.close),
+                                  onPressed: () {
+                                    setState(() {
+                                      listOfElements.removeAt(index);
+                                    });
+                                  },
+                                ),
+                              ),
+                            );
+                          }),
+                  ),
+              ],
     ),
+            ),
           ),
-        ),
       );
   }
 }

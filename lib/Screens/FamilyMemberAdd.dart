@@ -81,7 +81,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   verticalAlignedText: false,
                   selectedGender: Gender.Male,
                   selectedGenderTextStyle: TextStyle(
-                      color: colors.darkAccentColor,
+                      color: Colors.greenAccent,
                       fontWeight: FontWeight.bold),
                   unSelectedGenderTextStyle: TextStyle(
                       color: colors.darkPrimaryTextColor,
