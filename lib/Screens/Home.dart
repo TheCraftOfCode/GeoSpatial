@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:geo_spatial/Model/CommunityDataModel.dart';
 import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
 import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Screens/Login.dart';
@@ -71,7 +73,8 @@ class _HomeWidgetState extends State<Home> {
                 'Community Details',
                 'Data entry for communities',
                 'assets/svg/house.svg',
-                CommunityDataCollection(),
+                CommunityDataCollection(modelData: CommunityDataModel(resourceType: "Bakeries", locationBottomLeft:
+                new Position(latitude: 1.2, longitude: 2.4, accuracy: 32, heading: 21, speedAccuracy: 32, altitude: 23, speed: 32, timestamp: null ))),
                 Color(0xfff54b64),
                 Color(0xfff78361)),
             DataCard(

@@ -11,6 +11,7 @@ class LocationWidgetField extends FormField<Position> {
   LocationWidgetField(
       {FormFieldSetter<Position>? onSaved,
       FormFieldValidator<Position>? validator,
+      Position? defaultValue,
       required BuildContext context,
       required String title,
       AutovalidateMode autoValidateMode = AutovalidateMode.disabled})
@@ -21,7 +22,7 @@ class LocationWidgetField extends FormField<Position> {
                   if (data == null) return "Location field empty";
                   return null;
                 },
-            initialValue: null,
+            initialValue: defaultValue,
             autovalidateMode: autoValidateMode,
             builder: (FormFieldState<Position> state) {
               return Padding(

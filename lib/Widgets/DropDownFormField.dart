@@ -10,6 +10,7 @@ class DropDownFormField extends FormField<dynamic> {
       required list,
       required title,
       required hint,
+      String? defaultValue,
       errorField,
       AutovalidateMode autoValidateMode = AutovalidateMode.disabled})
       : super(
@@ -20,7 +21,7 @@ class DropDownFormField extends FormField<dynamic> {
                     return errorField ?? "Please select a value";
                   return null;
                 },
-            initialValue: null,
+            initialValue: defaultValue,
             autovalidateMode: autoValidateMode,
             builder: (FormFieldState<dynamic> state) {
               return Padding(
@@ -33,7 +34,8 @@ class DropDownFormField extends FormField<dynamic> {
                       padding: EdgeInsets.only(bottom: 8),
                       child: Text(title,
                           style: GoogleFonts.montserrat(
-                              fontSize: 15, color: colors.darkPrimaryTextColor)),
+                              fontSize: 15,
+                              color: colors.darkPrimaryTextColor)),
                     ),
                     Card(
                       color: colors.darkScaffoldColor,
@@ -74,7 +76,8 @@ class DropDownFormField extends FormField<dynamic> {
                             ),
                           ),
                           style: GoogleFonts.poppins(
-                              color: colors.darkPrimaryTextColor, decorationColor: Colors.red),
+                              color: colors.darkPrimaryTextColor,
+                              decorationColor: Colors.red),
                         ),
                       ),
                     ),
@@ -83,7 +86,8 @@ class DropDownFormField extends FormField<dynamic> {
                             padding: EdgeInsets.all(10),
                             child: Text(
                               state.errorText ?? "error",
-                              style: GoogleFonts.poppins(color: Colors.red, fontSize: 10),
+                              style: GoogleFonts.poppins(
+                                  color: Colors.red, fontSize: 10),
                             ),
                           )
                         : Container()
