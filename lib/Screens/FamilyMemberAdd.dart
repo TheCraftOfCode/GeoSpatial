@@ -415,12 +415,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         ),
                       ),
                       tagTextStyle: TextStyle(
-                          fontWeight: FontWeight.normal, color: Colors.black),
+                          fontWeight: FontWeight.normal, color: colors.darkAccentColor),
                     ),
                     textFieldStyler: TextFieldStyler(
                       hintText: "Communicable diseases",
                       isDense: true,
-                      textStyle: GoogleFonts.poppins(color: Colors.white),
+                      textStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                       textFieldBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.black, width: 1.0),
                       ),
@@ -457,7 +457,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       tagPadding: EdgeInsets.only(
                           top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
                       tagDecoration: BoxDecoration(
-                        color: Colors.white,
+                        color: colors.darkScaffoldColor,
                         border: Border.all(
                           color: Colors.grey.shade300,
                         ),
@@ -466,12 +466,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         ),
                       ),
                       tagTextStyle: TextStyle(
-                          fontWeight: FontWeight.normal, color: Colors.black),
+                          fontWeight: FontWeight.normal, color: colors.darkAccentColor),
                     ),
                     textFieldStyler: TextFieldStyler(
                       hintText: "Non communicable diseases",
                       isDense: true,
-                      textStyle: GoogleFonts.poppins(color: Colors.white),
+                      textStyle: GoogleFonts.poppins(color: colors.darkSecondAccentColor),
                       textFieldBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.black, width: 1.0),
                       ),
