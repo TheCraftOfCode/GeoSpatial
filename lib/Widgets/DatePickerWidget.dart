@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 
 class DatePickerWidget extends FormField<DateTime> {
   DatePickerWidget(
@@ -24,12 +25,13 @@ class DatePickerWidget extends FormField<DateTime> {
             builder: (FormFieldState<DateTime> state) {
               Future pickDate(BuildContext context) async {
                 final initialDate = state.value ?? DateTime.now();
-                final newDate = await showDatePicker(
+                final newDate = await showRoundedDatePicker(
                   context: context,
                   initialDate: initialDate,
                   firstDate: DateTime(1900),
                   lastDate: DateTime.now(),
                   initialDatePickerMode: DatePickerMode.year,
+                  borderRadius: 16
                 );
 
                 if (newDate != null) state.didChange(newDate);

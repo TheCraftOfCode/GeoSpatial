@@ -29,8 +29,8 @@ class OptionsWidget extends FormField<dynamic> {
             autovalidateMode: autoValidateMode,
             builder: (FormFieldState<dynamic> state) {
               return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(title,style: GoogleFonts.poppins(fontSize: 15.0,color: colors.darkPrimaryTextColor),),
                   Wrap(
@@ -82,10 +82,10 @@ class OptionButton extends StatelessWidget {
                   ? Colors.greenAccent
                   : isError
                       ? Color(0xffF1D8B8)
-                      : Color(0xfff6a1a1)),
+                      : Color(0xffE25963)),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
                       side: isError
                           ? BorderSide(color: Colors.red)
                           : BorderSide.none))),

@@ -3,7 +3,7 @@ import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
-import 'package:geo_spatial/Utils/DarkTheme.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 class FamilyDetails extends StatefulWidget {
   const FamilyDetails({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
+        backgroundColor: colors.darkScaffoldColor,
         appBar: AppBarBackButton('Family Details'),
         body: SizedBox(
             height: MediaQuery.of(context).size.height -

@@ -37,6 +37,7 @@ dependencies:
   table_calendar:
   gender_picker: ^1.1.0
   flutter_keyboard_visibility: ^5.1.0
+  flutter_rounded_date_picker:
   textfield_tags:
 
 dev_dependencies:

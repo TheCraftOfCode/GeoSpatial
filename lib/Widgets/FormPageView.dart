@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:geo_spatial/Utils/DarkTheme.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/StepCounterWidget.dart';
 
 import 'PageViewContentBox.dart';
@@ -90,6 +90,7 @@ class _FormPageViewState extends State<FormPageView> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: colors.darkScaffoldColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,

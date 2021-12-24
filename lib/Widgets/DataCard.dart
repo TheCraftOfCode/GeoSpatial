@@ -24,8 +24,8 @@ class DataCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
               colors: [startingColor, endingColor],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
             ),
             boxShadow: [
               BoxShadow(
@@ -64,10 +64,10 @@ class DataCard extends StatelessWidget {
                         children: [
                           Text(heading,
                               style: GoogleFonts.montserrat(
-                                  fontSize: 25, color: colors.lightPrimaryTextColor)),
+                                  fontSize: 25, color: colors.darkPrimaryTextColor)),
                           Text(subHeading,
                               style: GoogleFonts.montserrat(
-                                  fontSize: 15, color: colors.lightPrimaryTextColor))
+                                  fontSize: 15, color: colors.darkPrimaryTextColor))
                         ],
                       ),
                     ),
@@ -78,7 +78,7 @@ class DataCard extends StatelessWidget {
                       padding:
                           EdgeInsets.only(top: 8.0, bottom: 8.0, right: 8.0),
                       child: SvgPicture.asset('assets/svg/right-icon-arrow.svg',
-                          color: colors.lightPrimaryTextColor),
+                          color: colors.darkPrimaryTextColor),
                     ),
                     flex: 1,
                   ),

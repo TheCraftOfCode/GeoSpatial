@@ -46,7 +46,7 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                   children: [
                     Text("Add New User Information",
                       style: GoogleFonts.poppins(
-                          fontSize: 18, color: colors.darkSecondAccentColor)),
+                          fontSize: 18, color: colors.darkAccentColor)),
                     IconButton(onPressed: (){
                       setState(() {
                         listOfElements.add(new IndividualUserData());
@@ -57,6 +57,7 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                     ))
                   ],
                 ),
+                SizedBox(height: 15,),
                 Container(
                   height: MediaQuery.of(context).size.height*0.60,
                   child: ListView.builder(
@@ -64,15 +65,15 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
                             return Card(
-                              color: colors.darkSecondAccentColor,
+                              color: colors.darkAccentColor,
                               child: ListTile(
                                 onTap: (){
                                   var obj = listOfElements[index]; //Modify this object
                                 }, //Pass a function which is called onSaved in the next page and add data to the class object
                                 leading: Icon(Icons.person),
-                                title: Text("User ${index + 1}"),
+                                title: Text("User ${index + 1}",style: GoogleFonts.poppins(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),),
                                 trailing: IconButton(
-                                  color: Colors.red,
+                                  color: colors.darkSecondAccentColor,
                                   icon: Icon(Icons.close),
                                   onPressed: () {
                                     setState(() {

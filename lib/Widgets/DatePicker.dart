@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 
 class DatePicker extends StatefulWidget {
 
@@ -53,11 +54,12 @@ class _DatePickerState extends State<DatePicker> {
 
   Future pickDate(BuildContext context) async {
     final initialDate = DateTime.now();
-    final newDate = await showDatePicker(
+    final newDate = await showRoundedDatePicker(
       context: context, initialDate: initialDate,
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
       initialDatePickerMode: DatePickerMode.year,
+      borderRadius: 16
     );
 
     if (newDate == null) return;
