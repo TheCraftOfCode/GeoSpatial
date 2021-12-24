@@ -24,14 +24,16 @@ class DatePickerWidget extends FormField<DateTime> {
             autovalidateMode: autoValidateMode,
             builder: (FormFieldState<DateTime> state) {
               Future pickDate(BuildContext context) async {
-                final initialDate = state.value ?? DateTime.now();
-                final newDate = await showRoundedDatePicker(
-                  context: context,
-                  initialDate: initialDate,
-                  firstDate: DateTime(1900),
-                  lastDate: DateTime.now(),
-                  initialDatePickerMode: DatePickerMode.year,
-                  borderRadius: 16
+
+                final newDate = await CupertinoRoundedDatePicker.show(
+                  context,
+                  background: colors.darkSecondBackgroundColor,
+                  textColor: colors.darkAccentColor,
+                  minimumYear: 1900,
+                  maximumDate: DateTime.now(),
+                  maximumYear: DateTime.now().year,
+                  initialDatePickerMode: CupertinoDatePickerMode.date,
+                  borderRadius: 16,
                 );
 
                 if (newDate != null) state.didChange(newDate);
@@ -45,7 +47,7 @@ class DatePickerWidget extends FormField<DateTime> {
                     padding: EdgeInsets.only(bottom: 8),
                     child: Text(title ?? 'Choose date',
                         style: GoogleFonts.montserrat(
-                            fontSize: 20, color: Colors.white)),
+                            fontSize: 15, color: Colors.white)),
                   ),
                   Card(
                     color: colors.darkScaffoldColor,

@@ -30,7 +30,7 @@ class DropDownFormField extends FormField<dynamic> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: 20),
+                      padding: EdgeInsets.only(bottom: 8),
                       child: Text(title,
                           style: GoogleFonts.montserrat(
                               fontSize: 15, color: colors.darkPrimaryTextColor)),
