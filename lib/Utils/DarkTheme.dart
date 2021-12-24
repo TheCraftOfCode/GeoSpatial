@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
-import 'package:textfield_tags/textfield_tags.dart';
 
 class darkTheme{
   static ThemeData get DarkTheme{
     return ThemeData(
       fontFamily: 'Poppins',
         primaryColor: Colors.white,
-        scaffoldBackgroundColor: Color(0xff1B0000),
+        scaffoldBackgroundColor: colors.darkScaffoldColor,
         textTheme: TextTheme(
             headline1: GoogleFonts.poppins(color: Colors.white, fontSize: 40,fontWeight: FontWeight.w200),
             bodyText1: GoogleFonts.poppins(color: Colors.white,fontSize: 15,fontWeight: FontWeight.w100),
@@ -24,7 +23,7 @@ class darkTheme{
             )
         ),
       inputDecorationTheme: InputDecorationTheme(
-        contentPadding: EdgeInsets.all(10),
+        contentPadding: EdgeInsets.only(left:10,right:10),
         labelStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
         floatingLabelStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
         focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: colors.darkAccentColor)),

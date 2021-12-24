@@ -49,25 +49,28 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                TextFormField(
-                  style: darkTheme.DarkTheme.textTheme.bodyText2,
-                  decoration: InputDecoration(
-                    //isDense: true,
-                    label: Text(
-                      "Name",
-                      style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: TextFormField(
+                    style: darkTheme.DarkTheme.textTheme.bodyText2,
+                    decoration: InputDecoration(
+                      //isDense: true,
+                      label: Text(
+                        "Name",
+                        style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                      ),
+                      hintText: "Please enter name",
+                      hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                      contentPadding: EdgeInsets.all(0.0),
                     ),
-                    hintText: "Please enter name",
-                    hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-                    contentPadding: EdgeInsets.all(0.0),
+                    validator: (value) {
+                      if (value == "") {
+                        return "Please enter a name";
+                      } else
+                        return null;
+                    },
+                    autovalidateMode: AutovalidateMode.always,
                   ),
-                  validator: (value) {
-                    if (value == "") {
-                      return "Please enter a name";
-                    } else
-                      return null;
-                  },
-                  autovalidateMode: AutovalidateMode.always,
                 ),
                 DatePickerWidget(
                   context: context,
@@ -111,27 +114,30 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   title: "Educational qualification",
                   errorField: "Please choose a qualification",
                 ),
-                TextFormField(
-                  style: darkTheme.DarkTheme.textTheme.bodyText2,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    label: Text(
-                      "Phone Number",
-                      style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: TextFormField(
+                    style: darkTheme.DarkTheme.textTheme.bodyText2,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      label: Text(
+                        "Phone Number",
+                        style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                      ),
+                      hintText: "Please enter 10 digit phone",
+                      hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                      contentPadding: EdgeInsets.all(0.0),
                     ),
-                    hintText: "Please enter 10 digit phone",
-                    hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-                    contentPadding: EdgeInsets.all(0.0),
+                    validator: (value) {
+                      if (value == "") {
+                        return "Please enter a value";
+                      } else if (value!.length != 10) {
+                        return "Enter a valid number";
+                      } else
+                        return null;
+                    },
+                    autovalidateMode: AutovalidateMode.always,
                   ),
-                  validator: (value) {
-                    if (value == "") {
-                      return "Please enter a value";
-                    } else if (value!.length != 10) {
-                      return "Enter a valid number";
-                    } else
-                      return null;
-                  },
-                  autovalidateMode: AutovalidateMode.always,
                 ),
               ],
             ),
@@ -139,26 +145,29 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                TextFormField(
-                  style: darkTheme.DarkTheme.textTheme.bodyText2,
-                  decoration: InputDecoration(
-                    label: Text(
-                      "Aadhaar Number",
-                      style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: TextFormField(
+                    style: darkTheme.DarkTheme.textTheme.bodyText2,
+                    decoration: InputDecoration(
+                      label: Text(
+                        "Aadhaar Number",
+                        style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                      ),
+                      hintText: "Please enter 12 digit Aadhaar",
+                      hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                      contentPadding: EdgeInsets.all(0.0),
                     ),
-                    hintText: "Please enter 12 digit Aadhaar",
-                    hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-                    contentPadding: EdgeInsets.all(0.0),
+                    validator: (value) {
+                      if (value == "") {
+                        return "Enter 12 digit Aadhaar";
+                      } else if (value!.length != 12) {
+                        return "Enter a valid Aadhaar";
+                      } else
+                        return null;
+                    },
+                    autovalidateMode: AutovalidateMode.always,
                   ),
-                  validator: (value) {
-                    if (value == "") {
-                      return "Enter 12 digit Aadhaar";
-                    } else if (value!.length != 12) {
-                      return "Enter a valid Aadhaar";
-                    } else
-                      return null;
-                  },
-                  autovalidateMode: AutovalidateMode.always,
                 ),
                 DropDownFormField(
                   //TODO: Replace with a CheckBoxListTile
@@ -208,43 +217,49 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     print(val.toString());
                   },
                 ),
-                TextFormField(
-                  style: darkTheme.DarkTheme.textTheme.bodyText2,
-                  decoration: InputDecoration(
-                    label: Text(
-                      "Income/Day",
-                      style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: TextFormField(
+                    style: darkTheme.DarkTheme.textTheme.bodyText2,
+                    decoration: InputDecoration(
+                      label: Text(
+                        "Income/Day",
+                        style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                      ),
+                      hintText: "Please enter income per day",
+                      hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                      contentPadding: EdgeInsets.all(0.0),
                     ),
-                    hintText: "Please enter income per day",
-                    hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-                    contentPadding: EdgeInsets.all(0.0),
+                    validator: (value) {
+                      if (value == "") {
+                        return "Enter Income/Day";
+                      }
+                    },
                   ),
-                  validator: (value) {
-                    if (value == "") {
-                      return "Enter Income/Day";
-                    }
-                  },
                 )
               ],
             ),
             Column(children: [
               //TODO: Add work timings
-              TextFormField(
-                style: darkTheme.DarkTheme.textTheme.bodyText2,
-                decoration: InputDecoration(
-                  label: Text(
-                    "Income/Month",
-                    style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                child: TextFormField(
+                  style: darkTheme.DarkTheme.textTheme.bodyText2,
+                  decoration: InputDecoration(
+                    label: Text(
+                      "Income/Month",
+                      style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                    ),
+                    hintText: "Please enter income per month",
+                    hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                    contentPadding: EdgeInsets.all(0.0),
                   ),
-                  hintText: "Please enter income per month",
-                  hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-                  contentPadding: EdgeInsets.all(0.0),
+                  validator: (value) {
+                    if (value == "") {
+                      return "Enter Income/Month";
+                    }
+                  },
                 ),
-                validator: (value) {
-                  if (value == "") {
-                    return "Enter Income/Month";
-                  }
-                },
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -274,195 +289,207 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   title: 'Marital Status',
                 ),
               ),
-              TextFieldTags(
-                //initialTags: ["better", "lovely"],
-                textSeparators: [" ", ".", ","],
-                scrollableTagsPadding: EdgeInsets.all(10),
-                tagsStyler: TagsStyler(
-                  showHashtag: false,
-                  tagMargin: const EdgeInsets.only(right: 4.0),
-                  tagCancelIcon:
-                      Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                  tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
-                  tagPadding: EdgeInsets.only(
-                      top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
-                  tagDecoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                      color: Colors.grey.shade300,
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                child: TextFieldTags(
+                  //initialTags: ["better", "lovely"],
+                  textSeparators: [" ", ".", ","],
+                  scrollableTagsPadding: EdgeInsets.all(10),
+                  tagsStyler: TagsStyler(
+                    showHashtag: false,
+                    tagMargin: const EdgeInsets.only(right: 4.0),
+                    tagCancelIcon:
+                        Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                    tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
+                    tagPadding: EdgeInsets.only(
+                        top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
+                    tagDecoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.grey.shade300,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(20.0),
+                      ),
                     ),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(20.0),
+                    tagTextStyle: TextStyle(
+                        fontWeight: FontWeight.normal, color: Colors.black),
+                  ),
+                  textFieldStyler: TextFieldStyler(
+                    hintText: "Special Skills",
+                    isDense: true,
+                    textStyle: GoogleFonts.poppins(color: Colors.white),
+                    textFieldBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 1.0),
                     ),
                   ),
-                  tagTextStyle: TextStyle(
-                      fontWeight: FontWeight.normal, color: Colors.black),
-                ),
-                textFieldStyler: TextFieldStyler(
-                  hintText: "Special Skills",
-                  isDense: true,
-                  textStyle: GoogleFonts.poppins(color: Colors.white),
-                  textFieldBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black, width: 1.0),
-                  ),
-                ),
 
-                onDelete: (tag) {
-                  //remove value from list
-                },
-                onTag: (tag) {
-                  //create a list and store value to list
-                },
-                validator: (String tag) {
-                  if (tag.isEmpty) {
-                    return "Enter a value";
-                  }
-                  return null;
-                },
+                  onDelete: (tag) {
+                    //remove value from list
+                  },
+                  onTag: (tag) {
+                    //create a list and store value to list
+                  },
+                  validator: (String tag) {
+                    if (tag.isEmpty) {
+                      return "Enter a value";
+                    }
+                    return null;
+                  },
+                ),
               ),
             ]),
             Column(
               children: [
-                TextFieldTags(
-                  //initialTags: ["better", "lovely"],
-                  textSeparators: [" ", ".", ","],
-                  scrollableTagsPadding: EdgeInsets.all(10),
-                  tagsStyler: TagsStyler(
-                    showHashtag: false,
-                    tagMargin: const EdgeInsets.only(right: 4.0),
-                    tagCancelIcon:
-                    Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                    tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
-                    tagPadding: EdgeInsets.only(
-                        top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
-                    tagDecoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.grey.shade300,
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: TextFieldTags(
+                    //initialTags: ["better", "lovely"],
+                    textSeparators: [" ", ".", ","],
+                    scrollableTagsPadding: EdgeInsets.all(10),
+                    tagsStyler: TagsStyler(
+                      showHashtag: false,
+                      tagMargin: const EdgeInsets.only(right: 4.0),
+                      tagCancelIcon:
+                      Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                      tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
+                      tagPadding: EdgeInsets.only(
+                          top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
+                      tagDecoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.grey.shade300,
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(20.0),
+                        ),
                       ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20.0),
+                      tagTextStyle: TextStyle(
+                          fontWeight: FontWeight.normal, color: Colors.black),
+                    ),
+                    textFieldStyler: TextFieldStyler(
+                      hintText: "Frequent Ailments",
+                      isDense: true,
+                      textStyle: GoogleFonts.poppins(color: Colors.white),
+                      textFieldBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 1.0),
                       ),
                     ),
-                    tagTextStyle: TextStyle(
-                        fontWeight: FontWeight.normal, color: Colors.black),
+                    onDelete: (tag) {
+                      //remove value from list
+                    },
+                    onTag: (tag) {
+                      //create a list and store value to list
+                    },
+                    validator: (String tag) {
+                      if (tag.isEmpty) {
+                        return "Enter a value";
+                      }
+                      return null;
+                    },
                   ),
-                  textFieldStyler: TextFieldStyler(
-                    hintText: "Frequent Ailments",
-                    isDense: true,
-                    textStyle: GoogleFonts.poppins(color: Colors.white),
-                    textFieldBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 1.0),
-                    ),
-                  ),
-                  onDelete: (tag) {
-                    //remove value from list
-                  },
-                  onTag: (tag) {
-                    //create a list and store value to list
-                  },
-                  validator: (String tag) {
-                    if (tag.isEmpty) {
-                      return "Enter a value";
-                    }
-                    return null;
-                  },
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                TextFieldTags(
-                  //initialTags: ["better", "lovely"],
-                  textSeparators: [" ", ".", ","],
-                  scrollableTagsPadding: EdgeInsets.all(10),
-                  tagsStyler: TagsStyler(
-                    showHashtag: false,
-                    tagMargin: const EdgeInsets.only(right: 4.0),
-                    tagCancelIcon:
-                    Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                    tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
-                    tagPadding: EdgeInsets.only(
-                        top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
-                    tagDecoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.grey.shade300,
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: TextFieldTags(
+                    //initialTags: ["better", "lovely"],
+                    textSeparators: [" ", ".", ","],
+                    scrollableTagsPadding: EdgeInsets.all(10),
+                    tagsStyler: TagsStyler(
+                      showHashtag: false,
+                      tagMargin: const EdgeInsets.only(right: 4.0),
+                      tagCancelIcon:
+                      Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                      tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
+                      tagPadding: EdgeInsets.only(
+                          top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
+                      tagDecoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.grey.shade300,
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(20.0),
+                        ),
                       ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20.0),
+                      tagTextStyle: TextStyle(
+                          fontWeight: FontWeight.normal, color: Colors.black),
+                    ),
+                    textFieldStyler: TextFieldStyler(
+                      hintText: "Communicable diseases",
+                      isDense: true,
+                      textStyle: GoogleFonts.poppins(color: Colors.white),
+                      textFieldBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 1.0),
                       ),
                     ),
-                    tagTextStyle: TextStyle(
-                        fontWeight: FontWeight.normal, color: Colors.black),
+                    onDelete: (tag) {
+                      //remove value from list
+                    },
+                    onTag: (tag) {
+                      //create a list and store value to list
+                    },
+                    validator: (String tag) {
+                      if (tag.isEmpty) {
+                        return "Enter a value";
+                      }
+                      return null;
+                    },
                   ),
-                  textFieldStyler: TextFieldStyler(
-                    hintText: "Communicable diseases",
-                    isDense: true,
-                    textStyle: GoogleFonts.poppins(color: Colors.white),
-                    textFieldBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 1.0),
-                    ),
-                  ),
-                  onDelete: (tag) {
-                    //remove value from list
-                  },
-                  onTag: (tag) {
-                    //create a list and store value to list
-                  },
-                  validator: (String tag) {
-                    if (tag.isEmpty) {
-                      return "Enter a value";
-                    }
-                    return null;
-                  },
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                TextFieldTags(
-                  //initialTags: ["better", "lovely"],
-                  textSeparators: [" ", ".", ","],
-                  scrollableTagsPadding: EdgeInsets.all(10),
-                  tagsStyler: TagsStyler(
-                    showHashtag: false,
-                    tagMargin: const EdgeInsets.only(right: 4.0),
-                    tagCancelIcon:
-                    Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                    tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
-                    tagPadding: EdgeInsets.only(
-                        top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
-                    tagDecoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.grey.shade300,
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: TextFieldTags(
+                    //initialTags: ["better", "lovely"],
+                    textSeparators: [" ", ".", ","],
+                    scrollableTagsPadding: EdgeInsets.all(10),
+                    tagsStyler: TagsStyler(
+                      showHashtag: false,
+                      tagMargin: const EdgeInsets.only(right: 4.0),
+                      tagCancelIcon:
+                      Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                      tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
+                      tagPadding: EdgeInsets.only(
+                          top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
+                      tagDecoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.grey.shade300,
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(20.0),
+                        ),
                       ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20.0),
+                      tagTextStyle: TextStyle(
+                          fontWeight: FontWeight.normal, color: Colors.black),
+                    ),
+                    textFieldStyler: TextFieldStyler(
+                      hintText: "Non communicable diseases",
+                      isDense: true,
+                      textStyle: GoogleFonts.poppins(color: Colors.white),
+                      textFieldBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 1.0),
                       ),
                     ),
-                    tagTextStyle: TextStyle(
-                        fontWeight: FontWeight.normal, color: Colors.black),
+                    onDelete: (tag) {
+                      //remove value from list
+                    },
+                    onTag: (tag) {
+                      //create a list and store value to list
+                    },
+                    validator: (String tag) {
+                      if (tag.isEmpty) {
+                        return "Enter a value";
+                      }
+                      return null;
+                    },
                   ),
-                  textFieldStyler: TextFieldStyler(
-                    hintText: "Non communicable diseases",
-                    isDense: true,
-                    textStyle: GoogleFonts.poppins(color: Colors.white),
-                    textFieldBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 1.0),
-                    ),
-                  ),
-                  onDelete: (tag) {
-                    //remove value from list
-                  },
-                  onTag: (tag) {
-                    //create a list and store value to list
-                  },
-                  validator: (String tag) {
-                    if (tag.isEmpty) {
-                      return "Enter a value";
-                    }
-                    return null;
-                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -500,8 +527,11 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 ),
                 //TODO: Add a checkbox dialog for PHC services utilised
                 //TODO: Add a checkbox dialog for private heath clinic facilities used
-                TextFormField(
-                  decoration: InputDecoration(label: Text('Why private?')),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(label: Text('Why private?')),
+                  ),
                 ),
                 OptionsWidget(options: [
                   ['Yes', 'yes'],

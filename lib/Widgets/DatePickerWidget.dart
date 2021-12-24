@@ -34,65 +34,71 @@ class DatePickerWidget extends FormField<DateTime> {
                   maximumYear: DateTime.now().year,
                   initialDatePickerMode: CupertinoDatePickerMode.date,
                   borderRadius: 16,
+                  onDateTimeChanged: (date){
+
+                  }
                 );
 
                 if (newDate != null) state.didChange(newDate);
               }
 
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 8),
-                    child: Text(title ?? 'Choose date',
-                        style: GoogleFonts.montserrat(
-                            fontSize: 15, color: Colors.white)),
-                  ),
-                  Card(
-                    color: colors.darkScaffoldColor,
-                    elevation: 6,
-                    margin: EdgeInsets.only(bottom: 4),
-                    child: InkWell(
-                      onTap: () {
-                        pickDate(context);
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            left: 8, right: 8, top: 15, bottom: 15),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(right: 20, left: 10),
-                              child: Icon(Icons.calendar_today),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                  state.value == null
-                                      ? hint
-                                      : '${state.value!.day} / ${state.value!.month} / ${state.value!.year}',
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: 17,
-                                      color: state.hasError
-                                          ? Colors.red
-                                          : Colors.grey)),
-                            )
-                          ],
+              return Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 8),
+                      child: Text(title ?? 'Choose date',
+                          style: GoogleFonts.montserrat(
+                              fontSize: 15, color: Colors.white)),
+                    ),
+                    Card(
+                      color: colors.darkScaffoldColor,
+                      elevation: 6,
+                      margin: EdgeInsets.only(bottom: 4),
+                      child: InkWell(
+                        onTap: () {
+                          pickDate(context);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: 8, right: 8, top: 15, bottom: 15),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(right: 20, left: 10),
+                                child: Icon(Icons.calendar_today),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                    state.value == null
+                                        ? hint
+                                        : '${state.value!.day} / ${state.value!.month} / ${state.value!.year}',
+                                    style: GoogleFonts.montserrat(
+                                        fontSize: 15,
+                                        color: state.hasError
+                                            ? Colors.red
+                                            : Colors.grey)),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  state.hasError
-                      ? Container(
-                          padding: EdgeInsets.all(7),
-                          child: Text(
-                            state.errorText ?? "error",
-                            style: TextStyle(color: Colors.red, fontSize: 10),
-                          ),
-                        )
-                      : Container()
-                ],
+                    state.hasError
+                        ? Container(
+                            padding: EdgeInsets.all(7),
+                            child: Text(
+                              state.errorText ?? "error",
+                              style: TextStyle(color: Colors.red, fontSize: 10),
+                            ),
+                          )
+                        : Container()
+                  ],
+                ),
               );
             });
 }
