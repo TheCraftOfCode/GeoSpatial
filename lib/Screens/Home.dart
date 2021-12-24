@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
 import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
-import 'package:geo_spatial/Screens/IndividualDataCollection.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -74,12 +73,20 @@ class _HomeWidgetState extends State<Home> {
                 Color(0xfff54b64),
                 Color(0xfff78361)),
             DataCard(
+                'Edit Existing Record',
+                'Edit information of an existing person',
+                'assets/svg/male.svg',
+                CommunityDataCollection(),
+                Color(0xfff54b64),
+                Color(0xfff78361)),
+            DataCard(
                 'View saved data',
                 'View all data saved in local storage',
                 'assets/svg/storage_image.svg',
-                IndividualDataCollection(),
+                CommunityDataCollection(),
                 Color(0xfff54b64),
                 Color(0xfff78361)),
+
           ],
         ),
       ),

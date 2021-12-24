@@ -17,9 +17,9 @@ class FamilyHomeScreen extends StatelessWidget {
           child: Column(
             children: [
               AddRemoveBoxWidget(),
-              TextButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => FamilyMemberAdd()));
-              }, child: Text('Add Member')),
+              // TextButton(onPressed: (){
+              //   Navigator.push(context, MaterialPageRoute(builder: (context) => FamilyMemberAdd()));
+              // }, child: Text('Add Member')),
               DataCard("\nCollect Common Details","","",FamilyDetails(),Color(0xfff54b64),
                   Color(0xfff78361))
               ,
