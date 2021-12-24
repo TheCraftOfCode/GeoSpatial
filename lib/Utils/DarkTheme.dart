@@ -18,7 +18,6 @@ class darkTheme{
               primary: Color(0xffE9C9CC),
               elevation: 10.0,
               onPrimary: Color(0xff43282C),
-              side: BorderSide(color: Color(0xff43282C),width: 2,style: BorderStyle.solid),
               padding: EdgeInsets.all(10),
             )
         ),

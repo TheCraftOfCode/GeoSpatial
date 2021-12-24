@@ -29,11 +29,12 @@ class OptionsWidget extends FormField<dynamic> {
             autovalidateMode: autoValidateMode,
             builder: (FormFieldState<dynamic> state) {
               return Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(title,style: GoogleFonts.poppins(fontSize: 15.0,color: colors.darkPrimaryTextColor),),
                   Wrap(
+                      alignment: WrapAlignment.center,
                       children: options
                           .map((e) => new OptionButton(
                               text: e[0],
@@ -75,27 +76,24 @@ class OptionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 5,right: 5,top: 10),
+      padding: EdgeInsets.only(left: 3, right: 3, top: 1, bottom: 1),
       child: ElevatedButton(
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(isSelected
                   ? Colors.greenAccent
                   : isError
-                      ? Color(0xffF1D8B8)
-                      : Color(0xffE25963)),
+                      ? Color(0xffE25963)
+                      : Color(0xffF1D8B8)),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
                       side: isError
                           ? BorderSide(color: Colors.red)
                           : BorderSide.none))),
           onPressed: () {
             state.didChange(optionKey);
           },
-          child: Padding(
-            padding: EdgeInsets.all(5),
-            child: Text(text),
-          )),
+          child: Text(text)),
     );
   }
 }

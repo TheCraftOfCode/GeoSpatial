@@ -109,6 +109,7 @@ class CheckBox extends StatelessWidget {
       ),
       margin: EdgeInsets.only(left: 3.0, right: 3.0),
       child: Material(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
         color: backgroundColor,
         child: InkWell(
           onTap: () {
