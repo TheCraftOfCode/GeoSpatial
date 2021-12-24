@@ -9,6 +9,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Screens/Login.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
+import 'EditExistingRecordsPage.dart';
 import 'SavedData.dart';
 
 class Home extends StatefulWidget {
@@ -81,7 +82,7 @@ class _HomeWidgetState extends State<Home> {
                 'Edit Existing Record',
                 'Edit information of an existing person',
                 'assets/svg/male.svg',
-                CommunityDataCollection(),
+                EditRecordsScreen(),
                 Color(0xfff54b64),
                 Color(0xfff78361)),
             DataCard(
