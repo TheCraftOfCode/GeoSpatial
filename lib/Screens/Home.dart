@@ -7,6 +7,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Screens/Login.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
+import 'SavedData.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -83,7 +85,7 @@ class _HomeWidgetState extends State<Home> {
                 'View saved data',
                 'View all data saved in local storage',
                 'assets/svg/storage_image.svg',
-                CommunityDataCollection(),
+                SavedDataPage(),
                 Color(0xfff54b64),
                 Color(0xfff78361)),
 

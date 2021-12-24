@@ -31,6 +31,12 @@ class CommunityDataCollection extends StatefulWidget {
     'Food processing units'
   ];
 
+  final List<String> _villageCodeName = [
+    'Temple',
+    'Church',
+    'Mosque',
+  ];
+
   @override
   _CommunityDataCollectionState createState() =>
       _CommunityDataCollectionState();
@@ -44,6 +50,7 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
       List.generate(3, (index) => GlobalObjectKey<FormState>(index));
 
   _onSubmit(bool isValid) {
+    print("All data valid");
     print(isValid.toString());
   }
 
@@ -55,6 +62,9 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
       body: FormPageView([
         DropDownFormField(
             list: widget._publicResourceList,
+            onSaved: (data){
+              print(data);
+            },
             title: "Choose type of resource to tag",
             hint: "Select resource type",
             errorField: "Please choose a resource to tag"),
@@ -86,15 +96,14 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
               print(data);
             },
             autoValidateMode: AutovalidateMode.disabled),
-        TextFormField(
-          decoration: InputDecoration(),
-          validator: (str) {
-            if (str == '')
-              return 'Enter field lmao';
-            else
-              return null;
-          },
-        ),
+        DropDownFormField(
+            list: widget._villageCodeName,
+            onSaved: (data) {
+              print(data);
+            },
+            title: "Choose Village Code",
+            hint: "Select Village Code",
+            errorField: "Please choose a village code"),
       ], _onSubmit),
     );
   }

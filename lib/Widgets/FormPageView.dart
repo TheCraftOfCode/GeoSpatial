@@ -47,28 +47,31 @@ class _FormPageViewState extends State<FormPageView> {
               formKeyList[index],
             )));
     widgetList.add(PageViewContentBox(Center(
-      child: ElevatedButton(
-          child: Text("Submit", style: TextStyle(fontSize: 14)),
-          style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero,
-                      side: BorderSide(color: Colors.red)))),
-          onPressed: () {
-            bool isValid = true;
-            for (int i = 0; i < widgetLength - 1; i++) {
-              var isDataValid = formKeyList[i].currentState!.validate();
-              isValid &= isDataValid;
+      child: SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+            child: Text("Submit", style: TextStyle(fontSize: 14)),
+            style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        side: BorderSide(color: Colors.red)))),
+            onPressed: () {
+              bool isValid = true;
+              for (int i = 0; i < widgetLength - 1; i++) {
+                var isDataValid = formKeyList[i].currentState!.validate();
+                isValid &= isDataValid;
 
-              if (isDataValid) {
-                formKeyList[i].currentState!.save();
+                if (isDataValid) {
+                  formKeyList[i].currentState!.save();
+                }
               }
-            }
 
-            widget.onSubmit(isValid);
-          }),
+              widget.onSubmit(isValid);
+            }),
+      ),
     )));
   }
 
