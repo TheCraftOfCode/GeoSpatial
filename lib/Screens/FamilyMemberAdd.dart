@@ -4,7 +4,6 @@ import 'package:gender_picker/source/enums.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
-import 'package:geo_spatial/Widgets/DatePicker.dart';
 import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
@@ -57,10 +56,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       //isDense: true,
                       label: Text(
                         "Name",
-                        style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                        style: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                       ),
                       hintText: "Please enter name",
-                      hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                      hintStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                       contentPadding: EdgeInsets.all(0.0),
                     ),
                     validator: (value) {
@@ -101,19 +100,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   padding: const EdgeInsets.all(3),
                   size: 70, //default : 40
                 ),
-                DropDownFormField(
-                  list: [
-                    'None',
-                    'Elementary',
-                    'Secondary',
-                    'Higher Secondary',
-                    'Bachelor\'s',
-                    'Master\'s'
-                  ],
-                  hint: "Select the highest",
-                  title: "Educational qualification",
-                  errorField: "Please choose a qualification",
-                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: TextFormField(
@@ -122,10 +108,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     decoration: InputDecoration(
                       label: Text(
                         "Phone Number",
-                        style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                        style: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                       ),
                       hintText: "Please enter 10 digit phone",
-                      hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                      hintStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                       contentPadding: EdgeInsets.all(0.0),
                     ),
                     validator: (value) {
@@ -138,6 +124,19 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     },
                     autovalidateMode: AutovalidateMode.always,
                   ),
+                ),
+                DropDownFormField(
+                  list: [
+                    'None',
+                    'Elementary',
+                    'Secondary',
+                    'Higher Secondary',
+                    'Bachelor\'s',
+                    'Master\'s'
+                  ],
+                  hint: "Select the highest",
+                  title: "Educational qualification",
+                  errorField: "Please choose a qualification",
                 ),
               ],
             ),
@@ -152,10 +151,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     decoration: InputDecoration(
                       label: Text(
                         "Aadhaar Number",
-                        style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                        style: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                       ),
                       hintText: "Please enter 12 digit Aadhaar",
-                      hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                      hintStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                       contentPadding: EdgeInsets.all(0.0),
                     ),
                     validator: (value) {
@@ -224,10 +223,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     decoration: InputDecoration(
                       label: Text(
                         "Income/Day",
-                        style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                        style: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                       ),
                       hintText: "Please enter income per day",
-                      hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                      hintStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                       contentPadding: EdgeInsets.all(0.0),
                     ),
                     validator: (value) {
@@ -248,10 +247,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   decoration: InputDecoration(
                     label: Text(
                       "Income/Month",
-                      style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                      style: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                     ),
                     hintText: "Please enter income per month",
-                    hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                    hintStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                     contentPadding: EdgeInsets.all(0.0),
                   ),
                   validator: (value) {
@@ -288,61 +287,61 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   ],
                   title: 'Marital Status',
                 ),
+              ),]
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                child: TextFieldTags(
-                  //initialTags: ["better", "lovely"],
-                  textSeparators: [" ", ".", ","],
-                  scrollableTagsPadding: EdgeInsets.all(10),
-                  tagsStyler: TagsStyler(
-                    showHashtag: false,
-                    tagMargin: const EdgeInsets.only(right: 4.0),
-                    tagCancelIcon:
-                        Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                    tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
-                    tagPadding: EdgeInsets.only(
-                        top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
-                    tagDecoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.grey.shade300,
-                      ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20.0),
-                      ),
-                    ),
-                    tagTextStyle: TextStyle(
-                        fontWeight: FontWeight.normal, color: Colors.black),
-                  ),
-                  textFieldStyler: TextFieldStyler(
-                    hintText: "Special Skills",
-                    isDense: true,
-                    textStyle: GoogleFonts.poppins(color: Colors.white),
-                    textFieldBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 1.0),
-                    ),
-                  ),
-
-                  onDelete: (tag) {
-                    //remove value from list
-                  },
-                  onTag: (tag) {
-                    //create a list and store value to list
-                  },
-                  validator: (String tag) {
-                    if (tag.isEmpty) {
-                      return "Enter a value";
-                    }
-                    return null;
-                  },
-                ),
-              ),
-            ]),
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0,top: 30),
+                  child: TextFieldTags(
+                    //initialTags: ["better", "lovely"],
+                    textSeparators: [" ", ".", ","],
+                    scrollableTagsPadding: EdgeInsets.all(10),
+                    tagsStyler: TagsStyler(
+                      showHashtag: false,
+                      tagMargin: const EdgeInsets.only(right: 4.0),
+                      tagCancelIcon:
+                      Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                      tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
+                      tagPadding: EdgeInsets.only(
+                          top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
+                      tagDecoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.grey.shade300,
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(20.0),
+                        ),
+                      ),
+                      tagTextStyle: TextStyle(
+                          fontWeight: FontWeight.normal, color: Colors.black),
+                    ),
+                    textFieldStyler: TextFieldStyler(
+                      hintText: "Special Skills",
+                      isDense: true,
+                      textStyle: GoogleFonts.poppins(color: Colors.white),
+                      textFieldBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 1.0),
+                      ),
+                    ),
+
+                    onDelete: (tag) {
+                      //remove value from list
+                    },
+                    onTag: (tag) {
+                      //create a list and store value to list
+                    },
+                    validator: (String tag) {
+                      if (tag.isEmpty) {
+                        return "Enter a value";
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0,top: 30),
                   child: TextFieldTags(
                     //initialTags: ["better", "lovely"],
                     textSeparators: [" ", ".", ","],
@@ -393,7 +392,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0,top: 30),
                   child: TextFieldTags(
                     //initialTags: ["better", "lovely"],
                     textSeparators: [" ", ".", ","],
@@ -444,7 +443,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0,top: 30),
                   child: TextFieldTags(
                     //initialTags: ["better", "lovely"],
                     textSeparators: [" ", ".", ","],
@@ -501,13 +500,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     title: 'Surgeries',
                   ),
                 ),
-                OptionsWidget(
-                  options: [
-                    ["Yes", "yes"],
-                    ["No", "no"],
-                  ],
-                  title: 'Aware about Anganwadi services?',
-                ),
+
 
                 //TODO: Display next widget only if the previous widget is true
                 //TODO: Find out list of Anganwadi services, list em in a checkerbox dialog
@@ -515,6 +508,13 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
             ),
             Column(
               children: [
+                OptionsWidget(
+                  options: [
+                    ["Yes", "yes"],
+                    ["No", "no"],
+                  ],
+                  title: 'Aware about Anganwadi services?',
+                ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: OptionsWidget(
@@ -528,7 +528,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 //TODO: Add a checkbox dialog for PHC services utilised
                 //TODO: Add a checkbox dialog for private heath clinic facilities used
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0,bottom: 20.0),
                   child: TextFormField(
                     decoration: InputDecoration(label: Text('Why private?')),
                   ),
@@ -537,6 +537,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   ['Yes', 'yes'],
                   ['No', 'no']
                 ], title: "Do you use any tobacco based products?"),
+              ],
+            ),
+            Column(
+              children: [
                 OptionsWidget(options: [
                   ['Yes', 'yes'],
                   ['No', 'no']

@@ -28,31 +28,34 @@ class OptionsWidget extends FormField<dynamic> {
             initialValue: setDefaultValue ? options[0][1] : null,
             autovalidateMode: autoValidateMode,
             builder: (FormFieldState<dynamic> state) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(title,style: GoogleFonts.poppins(fontSize: 15.0,color: colors.darkPrimaryTextColor),),
-                  Wrap(
-                      alignment: WrapAlignment.center,
-                      children: options
-                          .map((e) => new OptionButton(
-                              text: e[0],
-                              optionKey: e[1],
-                              state: state,
-                              isError: state.hasError,
-                              isSelected: state.value == e[1]))
-                          .toList()),
-                  Padding(
-                    padding: EdgeInsets.all(5),
-                    child: state.hasError
-                        ? Text(
-                            state.errorText ?? "error",
-                            style: GoogleFonts.poppins(color: Colors.red, fontSize: 10),
-                          )
-                        : Container(),
-                  )
-                ],
+              return Padding(
+                padding: const EdgeInsets.only(top: 40.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(title,style: GoogleFonts.poppins(fontSize: 15.0,color: colors.darkPrimaryTextColor),),
+                    Wrap(
+                        alignment: WrapAlignment.center,
+                        children: options
+                            .map((e) => new OptionButton(
+                                text: e[0],
+                                optionKey: e[1],
+                                state: state,
+                                isError: state.hasError,
+                                isSelected: state.value == e[1]))
+                            .toList()),
+                    Padding(
+                      padding: EdgeInsets.all(5),
+                      child: state.hasError
+                          ? Text(
+                              state.errorText ?? "error",
+                              style: GoogleFonts.poppins(color: Colors.red, fontSize: 10),
+                            )
+                          : Container(),
+                    )
+                  ],
+                ),
               );
             });
 }
@@ -82,8 +85,8 @@ class OptionButton extends StatelessWidget {
               backgroundColor: MaterialStateProperty.all<Color>(isSelected
                   ? Colors.greenAccent
                   : isError
-                      ? Color(0xffE25963)
-                      : Color(0xffF1D8B8)),
+                      ? colors.darkScaffoldColor
+                      : colors.errorColor),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(50)),
@@ -93,7 +96,7 @@ class OptionButton extends StatelessWidget {
           onPressed: () {
             state.didChange(optionKey);
           },
-          child: Text(text)),
+          child: Text(text,style: GoogleFonts.poppins(color: Colors.white70),)),
     );
   }
 }
