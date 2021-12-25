@@ -523,9 +523,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   ),
                 ),
 
-                //TODO: Display next widget only if the previous widget is true
-                //TODO: Find out list of Anganwadi services, list em in a checkerbox dialog
-              ],
+
+    ],
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -547,8 +546,150 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     title: 'Using any Anganwadi services?',
                   ),
                 ),
-                //TODO: Add a checkbox dialog for PHC services utilised
-                //TODO: Add a checkbox dialog for private heath clinic facilities used
+                TextFieldTags(
+                  //initialTags: ["better", "lovely"],
+                  textSeparators: [" ", ".", ","],
+                  scrollableTagsPadding: EdgeInsets.all(10),
+                  tagsStyler: TagsStyler(
+                    showHashtag: false,
+                    tagMargin: const EdgeInsets.only(right: 4.0),
+                    tagCancelIcon:
+                    Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                    tagCancelIconPadding:
+                    EdgeInsets.only(left: 4.0, top: 2.0),
+                    tagPadding: EdgeInsets.only(
+                        top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
+                    tagDecoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.grey.shade300,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(20.0),
+                      ),
+                    ),
+                    tagTextStyle: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        color: colors.darkAccentColor),
+                  ),
+                  textFieldStyler: TextFieldStyler(
+                    hintText: "Anganwadi Services used",
+                    isDense: true,
+                    textStyle: GoogleFonts.poppins(
+                        color: colors.darkSecondaryTextColor),
+                    textFieldBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 1.0),
+                    ),
+                  ),
+                  onDelete: (tag) {
+                    //remove value from list
+                  },
+                  onTag: (tag) {
+                    //create a list and store value to list
+                  },
+                  validator: (String tag) {
+                    if (tag.isEmpty) {
+                      return "Enter a value";
+                    }
+                    return null;
+                  },
+                ),
+                TextFieldTags(
+                  //initialTags: ["better", "lovely"],
+                  textSeparators: [" ", ".", ","],
+                  scrollableTagsPadding: EdgeInsets.all(10),
+                  tagsStyler: TagsStyler(
+                    showHashtag: false,
+                    tagMargin: const EdgeInsets.only(right: 4.0),
+                    tagCancelIcon:
+                    Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                    tagCancelIconPadding:
+                    EdgeInsets.only(left: 4.0, top: 2.0),
+                    tagPadding: EdgeInsets.only(
+                        top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
+                    tagDecoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.grey.shade300,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(20.0),
+                      ),
+                    ),
+                    tagTextStyle: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        color: colors.darkAccentColor),
+                  ),
+                  textFieldStyler: TextFieldStyler(
+                    hintText: "PHC Services used",
+                    isDense: true,
+                    textStyle: GoogleFonts.poppins(
+                        color: colors.darkSecondaryTextColor),
+                    textFieldBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 1.0),
+                    ),
+                  ),
+                  onDelete: (tag) {
+                    //remove value from list
+                  },
+                  onTag: (tag) {
+                    //create a list and store value to list
+                  },
+                  validator: (String tag) {
+                    if (tag.isEmpty) {
+                      return "Enter a value";
+                    }
+                    return null;
+                  },
+                ),
+                TextFieldTags(
+                  //initialTags: ["better", "lovely"],
+                  textSeparators: [" ", ".", ","],
+                  scrollableTagsPadding: EdgeInsets.all(10),
+                  tagsStyler: TagsStyler(
+                    showHashtag: false,
+                    tagMargin: const EdgeInsets.only(right: 4.0),
+                    tagCancelIcon:
+                    Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                    tagCancelIconPadding:
+                    EdgeInsets.only(left: 4.0, top: 2.0),
+                    tagPadding: EdgeInsets.only(
+                        top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
+                    tagDecoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.grey.shade300,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(20.0),
+                      ),
+                    ),
+                    tagTextStyle: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        color: colors.darkAccentColor),
+                  ),
+                  textFieldStyler: TextFieldStyler(
+                    hintText: "Private Clinic services used",
+                    isDense: true,
+                    textStyle: GoogleFonts.poppins(
+                        color: colors.darkSecondaryTextColor),
+                    textFieldBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 1.0),
+                    ),
+                  ),
+                  onDelete: (tag) {
+                    //remove value from list
+                  },
+                  onTag: (tag) {
+                    //create a list and store value to list
+                  },
+                  validator: (String tag) {
+                    if (tag.isEmpty) {
+                      return "Enter a value";
+                    }
+                    return null;
+                  },
+                ),
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 10.0, right: 10.0, bottom: 20.0),

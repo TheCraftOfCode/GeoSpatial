@@ -23,10 +23,22 @@ class darkTheme{
             )
         ),
       inputDecorationTheme: InputDecorationTheme(
-        contentPadding: EdgeInsets.only(left:10,right:10),
+        filled: true,
+        enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: colors.darkAccentColor, width: 1.0)),
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: colors.darkAccentColor, width: 1.0)),
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(
+              color: colors.darkAccentColor, width: 1.0
+          ),
+        ),
+        contentPadding: EdgeInsets.all(20.0),
+        fillColor: colors.darkScaffoldColor,
         labelStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
         floatingLabelStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: colors.darkAccentColor)),
         hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
       ),
 
