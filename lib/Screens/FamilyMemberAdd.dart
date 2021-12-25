@@ -62,7 +62,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       hintText: "Please enter name",
                       hintStyle: GoogleFonts.poppins(
                           color: colors.darkSecondaryTextColor),
-                      contentPadding: EdgeInsets.all(0.0),
+                      contentPadding: EdgeInsets.all(7.0),
                     ),
                     validator: (value) {
                       if (value == "") {
@@ -115,7 +115,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       hintText: "Please enter 10 digit phone",
                       hintStyle: GoogleFonts.poppins(
                           color: colors.darkSecondaryTextColor),
-                      contentPadding: EdgeInsets.all(0.0),
+                      contentPadding: EdgeInsets.all(7.0),
                     ),
                     validator: (value) {
                       if (value == "") {
@@ -160,7 +160,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       hintText: "Please enter 12 digit Aadhaar",
                       hintStyle: GoogleFonts.poppins(
                           color: colors.darkSecondaryTextColor),
-                      contentPadding: EdgeInsets.all(0.0),
+                      contentPadding: EdgeInsets.all(7.0),
                     ),
                     validator: (value) {
                       if (value == "") {
@@ -234,7 +234,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       hintText: "Please enter income per day",
                       hintStyle: GoogleFonts.poppins(
                           color: colors.darkSecondaryTextColor),
-                      contentPadding: EdgeInsets.all(0.0),
+                      contentPadding: EdgeInsets.all(7.0),
                     ),
                     validator: (value) {
                       if (value == "") {
@@ -260,7 +260,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     hintText: "Please enter income per month",
                     hintStyle: GoogleFonts.poppins(
                         color: colors.darkSecondaryTextColor),
-                    contentPadding: EdgeInsets.all(0.0),
+                    contentPadding: EdgeInsets.all(7.0),
                   ),
                   validator: (value) {
                     if (value == "") {
@@ -522,9 +522,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     title: 'Surgeries',
                   ),
                 ),
-
-
-    ],
+              ],
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -554,9 +552,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     showHashtag: false,
                     tagMargin: const EdgeInsets.only(right: 4.0),
                     tagCancelIcon:
-                    Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                    tagCancelIconPadding:
-                    EdgeInsets.only(left: 4.0, top: 2.0),
+                        Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                    tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
                     tagPadding: EdgeInsets.only(
                         top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
                     tagDecoration: BoxDecoration(
@@ -602,9 +599,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     showHashtag: false,
                     tagMargin: const EdgeInsets.only(right: 4.0),
                     tagCancelIcon:
-                    Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                    tagCancelIconPadding:
-                    EdgeInsets.only(left: 4.0, top: 2.0),
+                        Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                    tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
                     tagPadding: EdgeInsets.only(
                         top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
                     tagDecoration: BoxDecoration(
@@ -650,9 +646,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     showHashtag: false,
                     tagMargin: const EdgeInsets.only(right: 4.0),
                     tagCancelIcon:
-                    Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                    tagCancelIconPadding:
-                    EdgeInsets.only(left: 4.0, top: 2.0),
+                        Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                    tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
                     tagPadding: EdgeInsets.only(
                         top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
                     tagDecoration: BoxDecoration(
@@ -690,22 +685,32 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     return null;
                   },
                 ),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
                 Padding(
-                  padding: const EdgeInsets.only(
-                      left: 10.0, right: 10.0, bottom: 20.0),
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: TextFormField(
-                    decoration: InputDecoration(label: Text('Why private?')),
+                    style: darkTheme.DarkTheme.textTheme.bodyText2,
+                    decoration: InputDecoration(
+                      label: Text(
+                        "Why private?",
+                        style: GoogleFonts.poppins(
+                            color: colors.darkSecondaryTextColor),
+                      ),
+                      hintText: "Please enter reason",
+                      hintStyle: GoogleFonts.poppins(
+                          color: colors.darkSecondaryTextColor),
+                      contentPadding: EdgeInsets.all(7.0),
+                    ),
                   ),
                 ),
                 OptionsWidget(options: [
                   ['Yes', 'yes'],
                   ['No', 'no']
                 ], title: "Do you use any tobacco based products?"),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
                 OptionsWidget(options: [
                   ['Yes', 'yes'],
                   ['No', 'no']

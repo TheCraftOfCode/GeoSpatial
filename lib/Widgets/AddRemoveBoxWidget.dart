@@ -25,13 +25,13 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: MediaQuery.of(context).size.height * 0.45,
       color: colors.darkScaffoldColor,
       child: Padding(
         padding: EdgeInsets.all(10),
         child: Container(
           color: colors.darkScaffoldColor,
-          height: MediaQuery.of(context).size.height * 0.3,
+          height: MediaQuery.of(context).size.height * 0.45,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -59,7 +59,7 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                 height: 15,
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.2,
+                height: MediaQuery.of(context).size.height * 0.35,
                 child: listOfElements.isEmpty
                     ? Center(child: Text('No Members Added'))
                     : ListView.builder(
@@ -67,7 +67,7 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           return Card(
-                            color: colors.darkAccentColor,
+                            color: colors.darkSecondBackgroundColor,
                             child: ListTile(
                               onTap: () {
                                 var obj =
