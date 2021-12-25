@@ -3,13 +3,15 @@ import 'package:gender_picker/gender_picker.dart';
 import 'package:gender_picker/source/enums.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/DarkTheme.dart';
+import 'package:geo_spatial/Utils/tag_model.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
+import 'package:geo_spatial/Widgets/TagTextWidget.dart';
+import 'package:geo_spatial/Widgets/TextTagsWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:textfield_tags/textfield_tags.dart';
 
 class FamilyMemberAdd extends StatefulWidget {
   const FamilyMemberAdd({Key? key}) : super(key: key);
@@ -48,6 +50,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                TagTextWidget(label: "Enter something", hint: "Enter something please", onSaved: (data){
+                  for(var i in data!){
+                    print(i);
+                  }
+
+                } ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: TextFormField(
@@ -344,12 +352,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     onTag: (tag) {
                       //create a list and store value to list
                     },
-                    validator: (String tag) {
-                      if (tag.isEmpty) {
-                        return "Enter a value";
-                      }
-                      return null;
-                    },
+
+                    onList: (List<String> list) {},
                   ),
                 ),
                 Padding(
@@ -394,12 +398,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     onTag: (tag) {
                       //create a list and store value to list
                     },
-                    validator: (String tag) {
-                      if (tag.isEmpty) {
-                        return "Enter a value";
-                      }
-                      return null;
-                    },
+                    onList: (List<String> list) {},
                   ),
                 ),
                 SizedBox(
@@ -439,9 +438,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       isDense: true,
                       textStyle: GoogleFonts.poppins(
                           color: colors.darkSecondaryTextColor),
-                      textFieldBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1.0),
-                      ),
                     ),
                     onDelete: (tag) {
                       //remove value from list
@@ -449,12 +445,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     onTag: (tag) {
                       //create a list and store value to list
                     },
-                    validator: (String tag) {
-                      if (tag.isEmpty) {
-                        return "Enter a value";
-                      }
-                      return null;
-                    },
+
+                    onList: (List<String> list) {},
                   ),
                 ),
                 SizedBox(
@@ -501,15 +493,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     onDelete: (tag) {
                       //remove value from list
                     },
-                    onTag: (tag) {
+                    onTag: (tag) {},
                       //create a list and store value to list
-                    },
-                    validator: (String tag) {
-                      if (tag.isEmpty) {
-                        return "Enter a value";
-                      }
-                      return null;
-                    },
+                    onList: (List<String> list) {},
                   ),
                 ),
                 Padding(
@@ -584,12 +570,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   onTag: (tag) {
                     //create a list and store value to list
                   },
-                  validator: (String tag) {
-                    if (tag.isEmpty) {
-                      return "Enter a value";
-                    }
-                    return null;
-                  },
+
+                  onList: (List<String> list) {},
                 ),
                 TextFieldTags(
                   //initialTags: ["better", "lovely"],
@@ -631,12 +613,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   onTag: (tag) {
                     //create a list and store value to list
                   },
-                  validator: (String tag) {
-                    if (tag.isEmpty) {
-                      return "Enter a value";
-                    }
-                    return null;
-                  },
+                  onList: (List<String> list) {},
                 ),
                 TextFieldTags(
                   //initialTags: ["better", "lovely"],
@@ -678,11 +655,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   onTag: (tag) {
                     //create a list and store value to list
                   },
-                  validator: (String tag) {
-                    if (tag.isEmpty) {
-                      return "Enter a value";
+
+                  onList: (List<String> list) {
+                    print("TAGS: ");
+                    for(var i in list){
+                      print(i);
                     }
-                    return null;
                   },
                 ),
               ],

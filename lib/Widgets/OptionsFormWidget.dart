@@ -17,7 +17,7 @@ class OptionsWidget extends FormField<dynamic> {
       required List<dynamic> options,
         required String title,
       bool setDefaultValue = false,
-      AutovalidateMode autoValidateMode = AutovalidateMode.disabled})
+      AutovalidateMode autoValidateMode = AutovalidateMode.onUserInteraction})
       : super(
             onSaved: onSaved,
             validator: validator ??

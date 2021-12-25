@@ -24,18 +24,18 @@ class darkTheme{
         ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        enabledBorder: UnderlineInputBorder(
+        enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: colors.darkAccentColor, width: 1.0)),
-        focusedBorder: UnderlineInputBorder(
+                color: colors.darkScaffoldColor, width: 1.0)),
+        focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: colors.darkAccentColor, width: 1.0)),
-        border: UnderlineInputBorder(
+                color: colors.darkPrimaryTextColor, width: 1.0)),
+        border: OutlineInputBorder(
           borderSide: BorderSide(
               color: colors.darkAccentColor, width: 1.0
           ),
         ),
-        contentPadding: EdgeInsets.all(20.0),
+        contentPadding: EdgeInsets.all(7.0),
         fillColor: colors.darkScaffoldColor,
         labelStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
         floatingLabelStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
