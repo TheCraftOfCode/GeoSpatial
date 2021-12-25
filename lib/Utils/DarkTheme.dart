@@ -16,7 +16,7 @@ class darkTheme{
             button: GoogleFonts.poppins(color: Color(0xff43282C))),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-              primary: Color(0xffE9C9CC),
+              primary: Color(0xffc1c1c1),
               elevation: 10.0,
               onPrimary: Color(0xff43282C),
               padding: EdgeInsets.all(10),

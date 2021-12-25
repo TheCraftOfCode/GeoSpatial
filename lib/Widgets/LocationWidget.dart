@@ -36,7 +36,7 @@ class LocationWidgetField extends FormField<Position> {
                         padding: EdgeInsets.only(bottom: 30),
                         child: Text(title,
                             style: GoogleFonts.montserrat(
-                                fontSize: 25, color: Colors.black)),
+                                fontSize: 25, color: Colors.white)),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -64,7 +64,8 @@ class LocationWidgetField extends FormField<Position> {
                                     state.value != null
                                         ? state.value.toString()
                                         : "Please fetch your location",
-                                    style: TextStyle(fontSize: 12)),
+                                    style: TextStyle(
+                                        fontSize: 12, color: Colors.black)),
                           ),
                         ),
                       ),
@@ -134,7 +135,10 @@ Future<Position> _determinePosition(context) async {
                     padding: EdgeInsets.only(right: 20),
                     child: CircularProgressIndicator(),
                   ),
-                  new Text("Fetching Location"),
+                  new Text(
+                    "Fetching Location",
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ],
               ),
             ),

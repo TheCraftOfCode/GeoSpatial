@@ -25,7 +25,11 @@ class PageViewContentBox extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsets.all(12),
-          child: centerWidget,
+          child: CustomScrollView(
+            slivers: [
+              SliverFillRemaining(hasScrollBody: false, child: centerWidget),
+            ],
+          ),
         ),
       ),
     );

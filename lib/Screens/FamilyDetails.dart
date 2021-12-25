@@ -36,6 +36,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                 physics: ClampingScrollPhysics(),
                 child: FormPageView([
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       OptionsWidget(options: [
                         ['Yes', 'yes'],
@@ -61,6 +62,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                     ],
                   ),
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       DropDownFormField(
                         list: ['1', '2', '3', '4', '5', 'More'],
@@ -84,6 +86,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                     ],
                   ),
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       //TODO: Add brands of four wheelers
                       OptionsWidget(options: [
@@ -127,6 +130,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                     ],
                   ),
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       TextFormField(
                         decoration: InputDecoration(

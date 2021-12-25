@@ -40,12 +40,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
       appBar: AppBarBackButton('Add Family Member'),
       body: SizedBox(
         height: MediaQuery.of(context).size.height -
-            MediaQuery.of(context).viewInsets.bottom * 1.1,
+            MediaQuery.of(context).viewInsets.bottom * 1.3,
         child: SingleChildScrollView(
           physics: ClampingScrollPhysics(),
           child: FormPageView([
             Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
@@ -56,10 +56,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       //isDense: true,
                       label: Text(
                         "Name",
-                        style: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
+                        style: GoogleFonts.poppins(
+                            color: colors.darkSecondaryTextColor),
                       ),
                       hintText: "Please enter name",
-                      hintStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
+                      hintStyle: GoogleFonts.poppins(
+                          color: colors.darkSecondaryTextColor),
                       contentPadding: EdgeInsets.all(0.0),
                     ),
                     validator: (value) {
@@ -84,8 +86,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   verticalAlignedText: false,
                   selectedGender: Gender.Male,
                   selectedGenderTextStyle: TextStyle(
-                      color: Colors.greenAccent,
-                      fontWeight: FontWeight.bold),
+                      color: Colors.greenAccent, fontWeight: FontWeight.bold),
                   unSelectedGenderTextStyle: TextStyle(
                       color: colors.darkPrimaryTextColor,
                       fontWeight: FontWeight.normal),
@@ -108,10 +109,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     decoration: InputDecoration(
                       label: Text(
                         "Phone Number",
-                        style: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
+                        style: GoogleFonts.poppins(
+                            color: colors.darkSecondaryTextColor),
                       ),
                       hintText: "Please enter 10 digit phone",
-                      hintStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
+                      hintStyle: GoogleFonts.poppins(
+                          color: colors.darkSecondaryTextColor),
                       contentPadding: EdgeInsets.all(0.0),
                     ),
                     validator: (value) {
@@ -151,10 +154,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     decoration: InputDecoration(
                       label: Text(
                         "Aadhaar Number",
-                        style: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
+                        style: GoogleFonts.poppins(
+                            color: colors.darkSecondaryTextColor),
                       ),
                       hintText: "Please enter 12 digit Aadhaar",
-                      hintStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
+                      hintStyle: GoogleFonts.poppins(
+                          color: colors.darkSecondaryTextColor),
                       contentPadding: EdgeInsets.all(0.0),
                     ),
                     validator: (value) {
@@ -223,10 +228,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     decoration: InputDecoration(
                       label: Text(
                         "Income/Day",
-                        style: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
+                        style: GoogleFonts.poppins(
+                            color: colors.darkSecondaryTextColor),
                       ),
                       hintText: "Please enter income per day",
-                      hintStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
+                      hintStyle: GoogleFonts.poppins(
+                          color: colors.darkSecondaryTextColor),
                       contentPadding: EdgeInsets.all(0.0),
                     ),
                     validator: (value) {
@@ -238,7 +245,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 )
               ],
             ),
-            Column(children: [
+            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
               //TODO: Add work timings
               Padding(
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0),
@@ -247,10 +254,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   decoration: InputDecoration(
                     label: Text(
                       "Income/Month",
-                      style: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
+                      style: GoogleFonts.poppins(
+                          color: colors.darkSecondaryTextColor),
                     ),
                     hintText: "Please enter income per month",
-                    hintStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
+                    hintStyle: GoogleFonts.poppins(
+                        color: colors.darkSecondaryTextColor),
                     contentPadding: EdgeInsets.all(0.0),
                   ),
                   validator: (value) {
@@ -287,12 +296,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   ],
                   title: 'Marital Status',
                 ),
-              ),]
               ),
+            ]),
             Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0,top: 30),
+                  padding:
+                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
                   child: TextFieldTags(
                     //initialTags: ["better", "lovely"],
                     textSeparators: [" ", ".", ","],
@@ -301,8 +312,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       showHashtag: false,
                       tagMargin: const EdgeInsets.only(right: 4.0),
                       tagCancelIcon:
-                      Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                      tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
+                          Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                      tagCancelIconPadding:
+                          EdgeInsets.only(left: 4.0, top: 2.0),
                       tagPadding: EdgeInsets.only(
                           top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
                       tagDecoration: BoxDecoration(
@@ -341,7 +353,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0,top: 30),
+                  padding:
+                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
                   child: TextFieldTags(
                     //initialTags: ["better", "lovely"],
                     textSeparators: [" ", ".", ","],
@@ -350,8 +363,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       showHashtag: false,
                       tagMargin: const EdgeInsets.only(right: 4.0),
                       tagCancelIcon:
-                      Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                      tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
+                          Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                      tagCancelIconPadding:
+                          EdgeInsets.only(left: 4.0, top: 2.0),
                       tagPadding: EdgeInsets.only(
                           top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
                       tagDecoration: BoxDecoration(
@@ -392,7 +406,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0,top: 30),
+                  padding:
+                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
                   child: TextFieldTags(
                     //initialTags: ["better", "lovely"],
                     textSeparators: [" ", ".", ","],
@@ -401,8 +416,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       showHashtag: false,
                       tagMargin: const EdgeInsets.only(right: 4.0),
                       tagCancelIcon:
-                      Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                      tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
+                          Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                      tagCancelIconPadding:
+                          EdgeInsets.only(left: 4.0, top: 2.0),
                       tagPadding: EdgeInsets.only(
                           top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
                       tagDecoration: BoxDecoration(
@@ -415,12 +431,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         ),
                       ),
                       tagTextStyle: TextStyle(
-                          fontWeight: FontWeight.normal, color: colors.darkAccentColor),
+                          fontWeight: FontWeight.normal,
+                          color: colors.darkAccentColor),
                     ),
                     textFieldStyler: TextFieldStyler(
                       hintText: "Communicable diseases",
                       isDense: true,
-                      textStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
+                      textStyle: GoogleFonts.poppins(
+                          color: colors.darkSecondaryTextColor),
                       textFieldBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.black, width: 1.0),
                       ),
@@ -443,7 +461,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0,top: 30),
+                  padding:
+                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
                   child: TextFieldTags(
                     //initialTags: ["better", "lovely"],
                     textSeparators: [" ", ".", ","],
@@ -452,8 +471,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       showHashtag: false,
                       tagMargin: const EdgeInsets.only(right: 4.0),
                       tagCancelIcon:
-                      Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                      tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
+                          Icon(Icons.cancel, size: 15.0, color: Colors.black),
+                      tagCancelIconPadding:
+                          EdgeInsets.only(left: 4.0, top: 2.0),
                       tagPadding: EdgeInsets.only(
                           top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
                       tagDecoration: BoxDecoration(
@@ -466,12 +486,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         ),
                       ),
                       tagTextStyle: TextStyle(
-                          fontWeight: FontWeight.normal, color: colors.darkAccentColor),
+                          fontWeight: FontWeight.normal,
+                          color: colors.darkAccentColor),
                     ),
                     textFieldStyler: TextFieldStyler(
                       hintText: "Non communicable diseases",
                       isDense: true,
-                      textStyle: GoogleFonts.poppins(color: colors.darkSecondAccentColor),
+                      textStyle: GoogleFonts.poppins(
+                          color: colors.darkSecondAccentColor),
                       textFieldBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.black, width: 1.0),
                       ),
@@ -501,12 +523,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   ),
                 ),
 
-
                 //TODO: Display next widget only if the previous widget is true
                 //TODO: Find out list of Anganwadi services, list em in a checkerbox dialog
               ],
             ),
             Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 OptionsWidget(
                   options: [
@@ -528,7 +550,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 //TODO: Add a checkbox dialog for PHC services utilised
                 //TODO: Add a checkbox dialog for private heath clinic facilities used
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0,bottom: 20.0),
+                  padding: const EdgeInsets.only(
+                      left: 10.0, right: 10.0, bottom: 20.0),
                   child: TextFormField(
                     decoration: InputDecoration(label: Text('Why private?')),
                   ),
@@ -540,6 +563,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               ],
             ),
             Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 OptionsWidget(options: [
                   ['Yes', 'yes'],

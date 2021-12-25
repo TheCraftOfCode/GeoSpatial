@@ -7,26 +7,59 @@ import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
 
 class FamilyHomeScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarBackButton('Individual Data'),
       backgroundColor: colors.darkScaffoldColor,
-        body: SafeArea(
-          child: Column(
-            children: [
-              AddRemoveBoxWidget(),
-              // TextButton(onPressed: (){
-              //   Navigator.push(context, MaterialPageRoute(builder: (context) => FamilyMemberAdd()));
-              // }, child: Text('Add Member')),
-              DataCard("\nCollect Common Details","","",FamilyDetails(),Color(0xfff54b64),
-                  Color(0xfff78361))
-              ,
-            ],
-          ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            AddRemoveBoxWidget(),
+            DataCard("\nCollect Common Details", "", "assets/svg/house.svg",
+                FamilyDetails(), Color(0xfff54b64), Color(0xfff78361)),
+            Padding(
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                    child: Text("Submit", style: TextStyle(fontSize: 14)),
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.red),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    side: BorderSide(color: Colors.red)))),
+                    onPressed: () {}),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 10),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                    child: Text("Save",
+                        style: TextStyle(fontSize: 14, color: Colors.black)),
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    side: BorderSide(color: Colors.white)))),
+                    onPressed: () {}),
+              ),
+            )
+          ],
         ),
+      ),
     );
   }
 }
-

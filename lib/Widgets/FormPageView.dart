@@ -99,16 +99,13 @@ class _FormPageViewState extends State<FormPageView> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           StepCounterWidget(widgetLength, count, formErrorTile, controller),
-          SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.82,
-              child: PageView(
-                onPageChanged: _onPageViewChange,
-                scrollDirection: Axis.horizontal,
-                controller: controller,
-                children: widgetList,
-              ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.86,
+            child: PageView(
+              onPageChanged: _onPageViewChange,
+              scrollDirection: Axis.horizontal,
+              controller: controller,
+              children: widgetList,
             ),
           ),
         ],
