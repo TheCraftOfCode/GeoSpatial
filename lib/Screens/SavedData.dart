@@ -15,8 +15,8 @@ class SavedDataPage extends StatelessWidget {
         appBar: AppBar(
           bottom: TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.person)),
-              Tab(icon: Icon(Icons.people)),
+              Tab(icon: Icon(Icons.person,color: colors.darkPrimaryTextColor,)),
+              Tab(icon: Icon(Icons.people,color: colors.darkPrimaryTextColor,)),
             ],
           ),
           backgroundColor: Colors.transparent,

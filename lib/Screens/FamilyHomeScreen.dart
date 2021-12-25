@@ -18,8 +18,10 @@ class FamilyHomeScreen extends StatelessWidget {
             AddRemoveBoxWidget(),
             DataCard("\nCollect Common Details", "", "assets/svg/house.svg",
                 FamilyDetails(), Color(0xfff54b64), Color(0xfff78361)),
+            DataCard("Record GPS Data", "Make sure GPS is enabled", "assets/svg/map.svg",
+                FamilyDetails(), Color(0xfff54b64), Color(0xfff78361)),
             Padding(
-              padding: EdgeInsets.only(bottom: 10.0,left: 10.0,right: 10.0),
+              padding: EdgeInsets.only(bottom: 10.0,left: 10.0,right: 10.0,top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

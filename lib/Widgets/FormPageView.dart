@@ -49,15 +49,16 @@ class _FormPageViewState extends State<FormPageView> {
     widgetList.add(PageViewContentBox(Center(
       child: SizedBox(
         width: double.infinity,
+        height: 70,
         child: ElevatedButton(
             child: Text("Submit", style: TextStyle(fontSize: 14)),
             style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                backgroundColor: MaterialStateProperty.all<Color>(colors.darkScaffoldColor),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(color: Colors.red)))),
+                        side: BorderSide(color: colors.darkScaffoldColor)))),
             onPressed: () {
               bool isValid = true;
               for (int i = 0; i < widgetLength - 1; i++) {
@@ -68,7 +69,6 @@ class _FormPageViewState extends State<FormPageView> {
                   formKeyList[i].currentState!.save();
                 }
               }
-
               widget.onSubmit(isValid);
             }),
       ),
@@ -100,7 +100,7 @@ class _FormPageViewState extends State<FormPageView> {
         children: [
           StepCounterWidget(widgetLength, count, formErrorTile, controller),
           Container(
-            height: MediaQuery.of(context).size.height * 0.86,
+            height: MediaQuery.of(context).size.height * 0.85,
             child: PageView(
               onPageChanged: _onPageViewChange,
               scrollDirection: Axis.horizontal,
@@ -133,10 +133,7 @@ class _FormKeepAliveState extends State<FormKeepAlive>
     return Form(
         child: widget.childWidget,
         key: widget._formKey,
-        onChanged: () {
-          if (widget._formKey.currentState!.validate())
-            widget._formKey.currentState!.save();
-        });
+        );
   }
 
   @override
