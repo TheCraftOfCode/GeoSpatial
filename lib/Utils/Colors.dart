@@ -8,4 +8,4 @@ var darkSecondAccentColor = Color(0xff4E596F);
 var lightPrimaryTextColor = Colors.black;
 var darkHintColor = Colors.black87;
 var darkSecondBackgroundColor = Color(0xff34384c);
-var errorColor = Color(0xfffa5a5a);    //modify later
+var errorColor = Color.fromARGB(255, 255, 167, 167);    //modify later

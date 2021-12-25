@@ -83,10 +83,10 @@ class OptionButton extends StatelessWidget {
       child: ElevatedButton(
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(isSelected
-                  ? Colors.greenAccent
+                  ? Color.fromRGBO(148, 182, 111, 1.0)
                   : isError
-                      ? colors.darkScaffoldColor
-                      : colors.errorColor),
+                      ? colors.errorColor
+                      : colors.darkScaffoldColor),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(50)),
@@ -96,7 +96,7 @@ class OptionButton extends StatelessWidget {
           onPressed: () {
             state.didChange(optionKey);
           },
-          child: Text(text,style: GoogleFonts.poppins(color: Colors.white70),)),
+          child: Text(text,style: GoogleFonts.poppins(color: Colors.white),)),
     );
   }
 }

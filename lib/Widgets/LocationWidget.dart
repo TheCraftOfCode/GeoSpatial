@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 /**
  * Form Widget to get current location with validation
@@ -47,7 +48,7 @@ class LocationWidgetField extends FormField<Position> {
                                   width: 1,
                                   color: Color.fromARGB(255, 194, 194, 194)),
                           color: state.hasError
-                              ? Color.fromARGB(255, 255, 216, 216)
+                              ? colors.errorColor
                               : Color.fromARGB(255, 238, 238, 238),
                         ),
                         width: double.infinity,
