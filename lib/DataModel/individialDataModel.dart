@@ -1,11 +1,12 @@
 import 'dart:convert';
 
-Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+IndividualData IndividualDataFromJson(String str) =>
+    IndividualData.fromJson(json.decode(str));
 
-String welcomeToJson(Welcome data) => json.encode(data.toJson());
+String IndividualDataToJson(IndividualData data) => json.encode(data.toJson());
 
-class Welcome {
-  Welcome({
+class IndividualData {
+  IndividualData({
     required this.id,
     required this.personalInfoCollection,
     required this.geoJson,
@@ -19,7 +20,7 @@ class Welcome {
   FamilyCommonData familyCommonData;
   String v;
 
-  factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+  factory IndividualData.fromJson(Map<String, dynamic> json) => IndividualData(
         id: Id.fromJson(json["_id"]),
         personalInfoCollection: List<PersonalInfoCollection>.from(
             json["PersonalInfoCollection"]
