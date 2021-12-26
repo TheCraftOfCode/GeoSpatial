@@ -78,14 +78,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       } else
                         return null;
                     },
-                    autovalidateMode: AutovalidateMode.always,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                 ),
                 DatePickerWidget(
                   context: context,
                   title: "Date of Birth",
                   hint: "Choose a date",
-                  autoValidateMode: AutovalidateMode.always,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                   onSaved: (data) {
                     print(data);
                   },
@@ -133,7 +133,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       } else
                         return null;
                     },
-                    autovalidateMode: AutovalidateMode.always,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                 ),
                 DropDownFormField(
@@ -178,7 +178,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       } else
                         return null;
                     },
-                    autovalidateMode: AutovalidateMode.always,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                 ),
                 DropDownFormField(
