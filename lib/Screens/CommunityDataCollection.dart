@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:geo_spatial/Model/CommunityDataModel.dart';
 import 'package:geo_spatial/Utils/StoreInstance.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
@@ -7,8 +6,7 @@ import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/LocationWidget.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
-import 'package:geo_spatial/objectbox.g.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CommunityDataCollection extends StatefulWidget {
   CommunityDataCollection({Key? key, CommunityDataModel? this.modelData})
@@ -50,11 +48,6 @@ class CommunityDataCollection extends StatefulWidget {
 
 class _CommunityDataCollectionState extends State<CommunityDataCollection> {
   int count = 0;
-  final PageController controller = PageController(initialPage: 0);
-
-  final List<GlobalObjectKey<FormState>> formKeyList =
-      List.generate(3, (index) => GlobalObjectKey<FormState>(index));
-
   late CommunityDataModel modelData;
   var store;
 
@@ -75,7 +68,18 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
         print(modelData.locationTopLeft);
         print(modelData.resourceType);
 
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Upload successful"),
+        ));
+
+        Navigator.pop(context);
+
         //TODO: Send data to server from here
+      }
+      else{
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Please fill all fields!", style: TextStyle(color: Colors.red),),
+        ));
       }
     }
 
@@ -83,7 +87,28 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
       print("CLICKED");
       store = await StoreInstance.getInstance();
       final box = store.box<CommunityDataModel>();
-      print("Entering data at id ${await box.putAsync(modelData)}");
+      int id = await box.putAsync(modelData);
+      print("Entering data at id ${id}");
+
+      AlertDialog alertDialog = AlertDialog(
+        title: Text(
+          'Record Saved',
+          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+        ),
+        content: Text('The Record has been saved with record ID ${id}',
+            style: GoogleFonts.poppins()),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true).pop('dialog');
+            },
+            child: Text('Ok'),
+          )
+        ],
+      );
+
+      showDialog(
+          context: context, builder: (BuildContext context) => alertDialog);
     }
 
     return Scaffold(
@@ -149,9 +174,11 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
               errorField: "Please choose a village code"),
         ],
         _onSubmit,
-        submitMessage: "Submit record to server or Save record locally for later editing",
+        submitMessage:
+            "Submit record to server or Save record locally for later editing",
         saveData: _onSave,
-        note: "Note: Saving existing records will over write the record and not create new one",
+        note:
+            "Note: Saving existing records will over-write the record and not create new one",
       ),
     );
   }

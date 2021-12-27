@@ -84,9 +84,9 @@ class _FormPageViewState extends State<FormPageView> {
                     for (int i = 0; i < widgetLength - 1; i++) {
                       var isDataValid = formKeyList[i].currentState!.validate();
                       isValid &= isDataValid;
+                      formKeyList[i].currentState!.save();
 
                       if (isDataValid) {
-                        formKeyList[i].currentState!.save();
                       }
                     }
                     widget.onSubmit(isValid);
@@ -139,8 +139,8 @@ class _FormPageViewState extends State<FormPageView> {
     for (int i = 0; i < page; i++) {
       setState(() {
         var isValid = formKeyList[i].currentState!.validate();
+        formKeyList[i].currentState!.save();
         if (isValid) {
-          formKeyList[i].currentState!.save();
         }
         formErrorTile[i] = !isValid;
       });

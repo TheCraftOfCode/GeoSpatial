@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gender_picker/gender_picker.dart';
 import 'package:gender_picker/source/enums.dart';
+import 'package:geo_spatial/Model/FamilyMembersCommomDataModel.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Utils/tag_model.dart';
@@ -14,7 +15,9 @@ import 'package:geo_spatial/Widgets/TextTagsWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FamilyMemberAdd extends StatefulWidget {
-  const FamilyMemberAdd({Key? key}) : super(key: key);
+  const FamilyMemberAdd({Key? key, this.modelData, this.indexOfFamilyMember}) : super(key: key);
+  final modelData;
+  final indexOfFamilyMember;
 
   @override
   _FamilyMemberAddState createState() => _FamilyMemberAddState();
@@ -26,13 +29,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   }
 
   bool dailyWageWorker = false;
-
   int count = 0;
-  final PageController controller = PageController(initialPage: 0);
-
-  final List<GlobalObjectKey<FormState>> formKeyList =
-      List.generate(3, (index) => GlobalObjectKey<FormState>(index));
-  final error = [false, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +56,16 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: TextFormField(
+                    onSaved: (String? data){
+                      /*
+                      print("SAVE");
+                      List<FamilyMemberIndividualDataModel> list = widget.modelData.familyMembersData;
+                      FamilyMemberIndividualDataModel familyClass = list.elementAt(widget.indexOfFamilyMember);
+                      familyClass.userName = data;
+
+                       */
+                      //print("NAME: ${widget.modelData.familyMembersData[widget.indexOfFamilyMember].userName}");
+                    },
                     style: darkTheme.DarkTheme.textTheme.bodyText2,
                     decoration: InputDecoration(
                       //isDense: true,

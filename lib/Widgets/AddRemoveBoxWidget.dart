@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geo_spatial/Model/FamilyMembersCommomDataModel.dart';
 import 'package:geo_spatial/Screens/FamilyMemberAdd.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
@@ -13,25 +13,31 @@ import 'package:geo_spatial/Utils/Colors.dart' as colors;
 class IndividualUserData {}
 
 class AddRemoveBoxWidget extends StatefulWidget {
-  const AddRemoveBoxWidget({Key? key}) : super(key: key);
+  const AddRemoveBoxWidget({Key? key, this.modelData}) : super(key: key);
+  final modelData;
 
   @override
   _AddRemoveBoxWidgetState createState() => _AddRemoveBoxWidgetState();
 }
 
 class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
-  var listOfElements = [];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.45,
+      height: MediaQuery
+          .of(context)
+          .size
+          .height * 0.45,
       color: colors.darkScaffoldColor,
       child: Padding(
         padding: EdgeInsets.all(10),
         child: Container(
           color: colors.darkScaffoldColor,
-          height: MediaQuery.of(context).size.height * 0.45,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height * 0.45,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -46,7 +52,8 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                   IconButton(
                       onPressed: () {
                         setState(() {
-                          listOfElements.add(new IndividualUserData());
+                          widget.modelData.familyMembersData.add(
+                              FamilyMemberIndividualDataModel());
                         });
                       },
                       icon: Icon(
@@ -59,46 +66,50 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                 height: 15,
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.35,
-                child: listOfElements.isEmpty
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height * 0.35,
+                child: widget.modelData.familyMembersData.isEmpty
                     ? Center(child: Text('No Members Added'))
                     : ListView.builder(
-                        itemCount: listOfElements.length,
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Card(
-                            color: colors.darkSecondBackgroundColor,
-                            child: ListTile(
-                              onTap: () {
-                                var obj =
-                                    listOfElements[index]; //Modify this object
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            FamilyMemberAdd()));
-                              },
-                              //Pass a function which is called onSaved in the next page and add data to the class object
-                              leading: Icon(Icons.person),
-                              title: Text(
-                                "User ${index + 1}",
-                                style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 20),
-                              ),
-                              trailing: IconButton(
-                                color: colors.darkSecondAccentColor,
-                                icon: Icon(Icons.close),
-                                onPressed: () {
-                                  setState(() {
-                                    listOfElements.removeAt(index);
-                                  });
-                                },
-                              ),
-                            ),
-                          );
-                        }),
+                    itemCount: widget.modelData.familyMembersData.length,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                        color: colors.darkSecondBackgroundColor,
+                        child: ListTile(
+                          onTap: () {
+                            Navigator
+                                .of(context)
+                                .push(
+                                MaterialPageRoute(builder: (context) =>
+                                    FamilyMemberAdd(
+                                      indexOfFamilyMember: index,
+                                      modelData: widget.modelData)));
+                            },
+                          //Pass a function which is called onSaved in the next page and add data to the class object
+                          leading: Icon(Icons.person),
+                          title: Text(
+                            "User ${index + 1}",
+                            style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20),
+                          ),
+                          trailing: IconButton(
+                            color: colors.darkSecondAccentColor,
+                            icon: Icon(Icons.close),
+                            onPressed: () {
+                              setState(() {
+                                widget.modelData.familyMembersData.removeAt(
+                                    index);
+                              });
+                            },
+                          ),
+                        ),
+                      );
+                    }),
               ),
             ],
           ),

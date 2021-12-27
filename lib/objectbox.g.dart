@@ -10,6 +10,7 @@ import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'Model/CommunityDataModel.dart';
+import 'Model/FamilyMembersCommomDataModel.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -62,6 +63,81 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(2, 1860532570098563020),
+      name: 'FamilyMembersCommonDataModel',
+      lastPropertyId: const IdUid(8, 4682325687318046173),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 3824533233190172585),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(4, 681931444274282409),
+            name: 'savedTime',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 6877689796308970604),
+            name: 'dbLocationTopLeft',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 6532623860122744430),
+            name: 'dbLocationTopRight',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 5378615026726072333),
+            name: 'dbLocationBottomLeft',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 4682325687318046173),
+            name: 'dbLocationBottomRight',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[
+        ModelBacklink(
+            name: 'familyMembersData',
+            srcEntity: 'FamilyMemberIndividualDataModel',
+            srcField: '')
+      ]),
+  ModelEntity(
+      id: const IdUid(3, 2384522976899313648),
+      name: 'FamilyMemberIndividualDataModel',
+      lastPropertyId: const IdUid(6, 635977564128467162),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 5992078344277508825),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(3, 2398616950182668401),
+            name: 'savedTime',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 2435262721668243080),
+            name: 'familyMembersCommonId',
+            type: 11,
+            flags: 520,
+            indexId: const IdUid(2, 3780641643474411567),
+            relationTarget: 'FamilyMembersCommonDataModel'),
+        ModelProperty(
+            id: const IdUid(6, 635977564128467162),
+            name: 'userName',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -85,14 +161,19 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 8881235461456447261),
-      lastIndexId: const IdUid(0, 0),
-      lastRelationId: const IdUid(0, 0),
+      lastEntityId: const IdUid(3, 2384522976899313648),
+      lastIndexId: const IdUid(2, 3780641643474411567),
+      lastRelationId: const IdUid(1, 7533083279143375120),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
-      retiredIndexUids: const [],
-      retiredPropertyUids: const [],
-      retiredRelationUids: const [],
+      retiredIndexUids: const [8834613087270691234],
+      retiredPropertyUids: const [
+        1796312536826265865,
+        4138361640658468836,
+        4718953437214788922,
+        8052215135369744546
+      ],
+      retiredRelationUids: const [7533083279143375120],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
       version: 1);
@@ -163,7 +244,121 @@ ModelDefinition getObjectBoxModel() {
                 .vTableGetNullable(buffer, rootOffset, 18);
 
           return object;
-        })
+        }),
+    FamilyMembersCommonDataModel:
+        EntityDefinition<FamilyMembersCommonDataModel>(
+            model: _entities[1],
+            toOneRelations: (FamilyMembersCommonDataModel object) => [],
+            toManyRelations: (FamilyMembersCommonDataModel object) => {
+                  RelInfo<FamilyMemberIndividualDataModel>.toOneBacklink(
+                          5,
+                          object.id,
+                          (FamilyMemberIndividualDataModel srcObject) =>
+                              srcObject.familyMembersCommon):
+                      object.familyMembersData
+                },
+            getId: (FamilyMembersCommonDataModel object) => object.id,
+            setId: (FamilyMembersCommonDataModel object, int id) {
+              object.id = id;
+            },
+            objectToFB: (FamilyMembersCommonDataModel object, fb.Builder fbb) {
+              final savedTimeOffset = object.savedTime == null
+                  ? null
+                  : fbb.writeString(object.savedTime!);
+              final dbLocationTopLeftOffset = object.dbLocationTopLeft == null
+                  ? null
+                  : fbb.writeString(object.dbLocationTopLeft!);
+              final dbLocationTopRightOffset = object.dbLocationTopRight == null
+                  ? null
+                  : fbb.writeString(object.dbLocationTopRight!);
+              final dbLocationBottomLeftOffset =
+                  object.dbLocationBottomLeft == null
+                      ? null
+                      : fbb.writeString(object.dbLocationBottomLeft!);
+              final dbLocationBottomRightOffset =
+                  object.dbLocationBottomRight == null
+                      ? null
+                      : fbb.writeString(object.dbLocationBottomRight!);
+              fbb.startTable(9);
+              fbb.addInt64(0, object.id);
+              fbb.addOffset(3, savedTimeOffset);
+              fbb.addOffset(4, dbLocationTopLeftOffset);
+              fbb.addOffset(5, dbLocationTopRightOffset);
+              fbb.addOffset(6, dbLocationBottomLeftOffset);
+              fbb.addOffset(7, dbLocationBottomRightOffset);
+              fbb.finish(fbb.endTable());
+              return object.id;
+            },
+            objectFromFB: (Store store, ByteData fbData) {
+              final buffer = fb.BufferContext(fbData);
+              final rootOffset = buffer.derefObject(0);
+
+              final object = FamilyMembersCommonDataModel()
+                ..id =
+                    const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
+                ..savedTime = const fb.StringReader()
+                    .vTableGetNullable(buffer, rootOffset, 10)
+                ..dbLocationTopLeft = const fb.StringReader()
+                    .vTableGetNullable(buffer, rootOffset, 12)
+                ..dbLocationTopRight = const fb.StringReader()
+                    .vTableGetNullable(buffer, rootOffset, 14)
+                ..dbLocationBottomLeft = const fb.StringReader()
+                    .vTableGetNullable(buffer, rootOffset, 16)
+                ..dbLocationBottomRight = const fb.StringReader()
+                    .vTableGetNullable(buffer, rootOffset, 18);
+              InternalToManyAccess.setRelInfo(
+                  object.familyMembersData,
+                  store,
+                  RelInfo<FamilyMemberIndividualDataModel>.toOneBacklink(
+                      5,
+                      object.id,
+                      (FamilyMemberIndividualDataModel srcObject) =>
+                          srcObject.familyMembersCommon),
+                  store.box<FamilyMembersCommonDataModel>());
+              return object;
+            }),
+    FamilyMemberIndividualDataModel:
+        EntityDefinition<FamilyMemberIndividualDataModel>(
+            model: _entities[2],
+            toOneRelations: (FamilyMemberIndividualDataModel object) =>
+                [object.familyMembersCommon],
+            toManyRelations: (FamilyMemberIndividualDataModel object) => {},
+            getId: (FamilyMemberIndividualDataModel object) => object.id,
+            setId: (FamilyMemberIndividualDataModel object, int id) {
+              object.id = id;
+            },
+            objectToFB:
+                (FamilyMemberIndividualDataModel object, fb.Builder fbb) {
+              final savedTimeOffset = object.savedTime == null
+                  ? null
+                  : fbb.writeString(object.savedTime!);
+              final userNameOffset = object.userName == null
+                  ? null
+                  : fbb.writeString(object.userName!);
+              fbb.startTable(7);
+              fbb.addInt64(0, object.id);
+              fbb.addOffset(2, savedTimeOffset);
+              fbb.addInt64(4, object.familyMembersCommon.targetId);
+              fbb.addOffset(5, userNameOffset);
+              fbb.finish(fbb.endTable());
+              return object.id;
+            },
+            objectFromFB: (Store store, ByteData fbData) {
+              final buffer = fb.BufferContext(fbData);
+              final rootOffset = buffer.derefObject(0);
+
+              final object = FamilyMemberIndividualDataModel(
+                  userName: const fb.StringReader()
+                      .vTableGetNullable(buffer, rootOffset, 14))
+                ..id =
+                    const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
+                ..savedTime = const fb.StringReader()
+                    .vTableGetNullable(buffer, rootOffset, 8);
+              object.familyMembersCommon.targetId =
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
+              object.familyMembersCommon.attach(store);
+              return object;
+            })
   };
 
   return ModelDefinition(model, bindings);
@@ -202,4 +397,55 @@ class CommunityDataModel_ {
   /// see [CommunityDataModel.savedTime]
   static final savedTime =
       QueryStringProperty<CommunityDataModel>(_entities[0].properties[7]);
+}
+
+/// [FamilyMembersCommonDataModel] entity fields to define ObjectBox queries.
+class FamilyMembersCommonDataModel_ {
+  /// see [FamilyMembersCommonDataModel.id]
+  static final id = QueryIntegerProperty<FamilyMembersCommonDataModel>(
+      _entities[1].properties[0]);
+
+  /// see [FamilyMembersCommonDataModel.savedTime]
+  static final savedTime = QueryStringProperty<FamilyMembersCommonDataModel>(
+      _entities[1].properties[1]);
+
+  /// see [FamilyMembersCommonDataModel.dbLocationTopLeft]
+  static final dbLocationTopLeft =
+      QueryStringProperty<FamilyMembersCommonDataModel>(
+          _entities[1].properties[2]);
+
+  /// see [FamilyMembersCommonDataModel.dbLocationTopRight]
+  static final dbLocationTopRight =
+      QueryStringProperty<FamilyMembersCommonDataModel>(
+          _entities[1].properties[3]);
+
+  /// see [FamilyMembersCommonDataModel.dbLocationBottomLeft]
+  static final dbLocationBottomLeft =
+      QueryStringProperty<FamilyMembersCommonDataModel>(
+          _entities[1].properties[4]);
+
+  /// see [FamilyMembersCommonDataModel.dbLocationBottomRight]
+  static final dbLocationBottomRight =
+      QueryStringProperty<FamilyMembersCommonDataModel>(
+          _entities[1].properties[5]);
+}
+
+/// [FamilyMemberIndividualDataModel] entity fields to define ObjectBox queries.
+class FamilyMemberIndividualDataModel_ {
+  /// see [FamilyMemberIndividualDataModel.id]
+  static final id = QueryIntegerProperty<FamilyMemberIndividualDataModel>(
+      _entities[2].properties[0]);
+
+  /// see [FamilyMemberIndividualDataModel.savedTime]
+  static final savedTime = QueryStringProperty<FamilyMemberIndividualDataModel>(
+      _entities[2].properties[1]);
+
+  /// see [FamilyMemberIndividualDataModel.familyMembersCommon]
+  static final familyMembersCommon = QueryRelationToOne<
+      FamilyMemberIndividualDataModel,
+      FamilyMembersCommonDataModel>(_entities[2].properties[2]);
+
+  /// see [FamilyMemberIndividualDataModel.userName]
+  static final userName = QueryStringProperty<FamilyMemberIndividualDataModel>(
+      _entities[2].properties[3]);
 }
