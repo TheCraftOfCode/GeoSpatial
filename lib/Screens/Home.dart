@@ -32,7 +32,8 @@ class _HomeWidgetState extends State<Home> {
           elevation: 0,
           title: Text(
             'Hello, ' + userName + '!',
-            style: GoogleFonts.montserrat(fontSize: 20, color: colors.darkPrimaryTextColor),
+            style: GoogleFonts.montserrat(
+                fontSize: 20, color: colors.darkPrimaryTextColor),
           ),
           backgroundColor: Colors.transparent,
           actions: [
@@ -69,13 +70,52 @@ class _HomeWidgetState extends State<Home> {
                 'assets/svg/female.svg',
                 FamilyHomeScreen(),
                 Color(0xfff54b64),
-            Color(0xfff78361)),
+                Color(0xfff78361)),
             DataCard(
                 'Community Details',
                 'Data entry for communities',
                 'assets/svg/house.svg',
-                CommunityDataCollection(modelData: CommunityDataModel(resourceType: "Bakeries", locationBottomLeft:
-                new Position(latitude: 1.2, longitude: 2.4, accuracy: 32, heading: 21, speedAccuracy: 32, altitude: 23, speed: 32, timestamp: null ))),
+                CommunityDataCollection(
+                  /*
+                    modelData: new CommunityDataModel(
+                        resourceType: "Bakeries",
+                        locationBottomLeft: new Position(
+                            latitude: 1.2,
+                            longitude: 2.4,
+                            accuracy: 32,
+                            heading: 21,
+                            speedAccuracy: 32,
+                            altitude: 23,
+                            speed: 32,
+                            timestamp: null),
+                    locationBottomRight: new Position(
+                        latitude: 1.2,
+                        longitude: 2.4,
+                        accuracy: 32,
+                        heading: 21,
+                        speedAccuracy: 32,
+                        altitude: 23,
+                        speed: 32,
+                        timestamp: null),
+                    locationTopRight: new Position(
+                        latitude: 1.2,
+                        longitude: 2.4,
+                        accuracy: 32,
+                        heading: 21,
+                        speedAccuracy: 32,
+                        altitude: 23,
+                        speed: 32,
+                        timestamp: null),
+                    locationTopLeft: new Position(
+                        latitude: 1.2,
+                        longitude: 2.4,
+                        accuracy: 32,
+                        heading: 21,
+                        speedAccuracy: 32,
+                        altitude: 23,
+                        speed: 32,
+                        timestamp: null),
+                    villageCode: "Temple")*/),
                 Color(0xfff54b64),
                 Color(0xfff78361)),
             DataCard(
@@ -92,7 +132,6 @@ class _HomeWidgetState extends State<Home> {
                 SavedDataPage(),
                 Color(0xfff54b64),
                 Color(0xfff78361)),
-
           ],
         ),
       ),

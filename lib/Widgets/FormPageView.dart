@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/StepCounterWidget.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'PageViewContentBox.dart';
 
 class FormPageView extends StatefulWidget {
-  const FormPageView(this.pageWidgetList, this.onSubmit, {Key? key})
+  const FormPageView(this.pageWidgetList, this.onSubmit,
+      {Key? key, this.saveData, this.submitMessage, this.note})
       : super(key: key);
 
   final List<Widget> pageWidgetList;
   final Function(bool) onSubmit;
+  final saveData;
+  final submitMessage;
+  final note;
 
   @override
   _FormPageViewState createState() => _FormPageViewState();
@@ -47,30 +52,85 @@ class _FormPageViewState extends State<FormPageView> {
               formKeyList[index],
             )));
     widgetList.add(PageViewContentBox(Center(
-      child: SizedBox(
-        width: double.infinity,
-        height: 70,
-        child: ElevatedButton(
-            child: Text("Submit", style: TextStyle(fontSize: 14)),
-            style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                backgroundColor: MaterialStateProperty.all<Color>(colors.darkScaffoldColor),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(color: colors.darkScaffoldColor)))),
-            onPressed: () {
-              bool isValid = true;
-              for (int i = 0; i < widgetLength - 1; i++) {
-                var isDataValid = formKeyList[i].currentState!.validate();
-                isValid &= isDataValid;
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            widget.submitMessage ?? "",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.poppins(
+                color: Colors.white, fontWeight: FontWeight.w400, fontSize: 25),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 10),
+            child: SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                  child: Text("Submit", style: TextStyle(fontSize: 14)),
+                  style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          colors.darkScaffoldColor),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              side: BorderSide(
+                                  color: colors.darkScaffoldColor)))),
+                  onPressed: () {
+                    bool isValid = true;
+                    for (int i = 0; i < widgetLength - 1; i++) {
+                      var isDataValid = formKeyList[i].currentState!.validate();
+                      isValid &= isDataValid;
 
-                if (isDataValid) {
-                  formKeyList[i].currentState!.save();
-                }
-              }
-              widget.onSubmit(isValid);
-            }),
+                      if (isDataValid) {
+                        formKeyList[i].currentState!.save();
+                      }
+                    }
+                    widget.onSubmit(isValid);
+                  }),
+            ),
+          ),
+          widget.saveData != null
+              ? Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                        child: Text("Save Data",
+                            style:
+                                TextStyle(fontSize: 14, color: Colors.black)),
+                        style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    side: BorderSide(color: Colors.white)))),
+                        onPressed: () {
+                          widget.saveData();
+                        }),
+                  ),
+                )
+              : Container(),
+          Padding(
+            padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+            child: Text(
+              widget.note ?? "",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                  color: Colors.white38,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 13),
+            ),
+          )
+        ],
       ),
     )));
   }
@@ -131,9 +191,9 @@ class _FormKeepAliveState extends State<FormKeepAlive>
   Widget build(BuildContext context) {
     super.build(context);
     return Form(
-        child: widget.childWidget,
-        key: widget._formKey,
-        );
+      child: widget.childWidget,
+      key: widget._formKey,
+    );
   }
 
   @override

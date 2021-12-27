@@ -1,0 +1,67 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:8881235461456447261",
+      "lastPropertyId": "8:2203659096246358776",
+      "name": "CommunityDataModel",
+      "properties": [
+        {
+          "id": "1:8191075196018249341",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8796057529052012615",
+          "name": "resourceType",
+          "type": 9
+        },
+        {
+          "id": "3:3649664257574360958",
+          "name": "villageCode",
+          "type": 9
+        },
+        {
+          "id": "4:6797539933900877027",
+          "name": "dbLocationTopLeft",
+          "type": 9
+        },
+        {
+          "id": "5:8489064245075560644",
+          "name": "dbLocationTopRight",
+          "type": 9
+        },
+        {
+          "id": "6:4981340637280440404",
+          "name": "dbLocationBottomLeft",
+          "type": 9
+        },
+        {
+          "id": "7:8742277346966043541",
+          "name": "dbLocationBottomRight",
+          "type": 9
+        },
+        {
+          "id": "8:2203659096246358776",
+          "name": "savedTime",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:8881235461456447261",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

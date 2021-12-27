@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geo_spatial/Model/CommunityDataModel.dart';
+import 'package:geo_spatial/Utils/StoreInstance.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/LocationWidget.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:geo_spatial/objectbox.g.dart';
+import 'package:geolocator/geolocator.dart';
 
 class CommunityDataCollection extends StatefulWidget {
-  CommunityDataCollection({Key? key, CommunityDataModel? this.modelData}) : super(key: key);
+  CommunityDataCollection({Key? key, CommunityDataModel? this.modelData})
+      : super(key: key);
 
   final modelData;
   final List<String> _publicResourceList = [
@@ -51,17 +55,18 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
   final List<GlobalObjectKey<FormState>> formKeyList =
       List.generate(3, (index) => GlobalObjectKey<FormState>(index));
 
-
+  late CommunityDataModel modelData;
+  var store;
 
   @override
   Widget build(BuildContext context) {
-    CommunityDataModel modelData = widget.modelData ?? CommunityDataModel();
+    modelData = widget.modelData ?? new CommunityDataModel();
 
-    _onSubmit(bool isValid) {
+    _onSubmit(bool isValid) async {
       print("All data valid");
       print(isValid.toString());
 
-      if(isValid){
+      if (isValid) {
         print("Valid!");
         print(modelData.villageCode);
         print(modelData.locationBottomRight);
@@ -74,71 +79,85 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
       }
     }
 
+    _onSave() async {
+      print("CLICKED");
+      store = await StoreInstance.getInstance();
+      final box = store.box<CommunityDataModel>();
+      print("Entering data at id ${await box.putAsync(modelData)}");
+    }
+
     return Scaffold(
       backgroundColor: colors.darkScaffoldColor,
       appBar: AppBarBackButton('Community Data'),
-      body: FormPageView([
-        DropDownFormField(
-          defaultValue: modelData.resourceType,
-            list: widget._publicResourceList,
-            onSaved: (data){
-              print(data);
-              modelData.resourceType = data;
-            },
-            title: "Choose type of resource to tag",
-            hint: "Select resource type",
-            errorField: "Please choose a resource to tag"),
-        LocationWidgetField(
-            title: "Record location at top left part of the facility",
-            defaultValue: modelData.locationTopLeft,
-            context: context,
-            onSaved: (data) {
-              print(data);
-              modelData.locationTopLeft = data;
-            },
-            autoValidateMode: AutovalidateMode.disabled),
-        LocationWidgetField(
-            title: "Record location at top right part of the facility",
-            defaultValue: modelData.locationTopRight,
-            context: context,
-            onSaved: (data) {
-              print(data);
-              modelData.locationTopRight = data;
-
-            },
-            autoValidateMode: AutovalidateMode.disabled),
-        LocationWidgetField(
-            title: "Record location at bottom left part of the facility",
-            defaultValue: modelData.locationBottomLeft,
-            context: context,
-            onSaved: (data) {
-              print(data);
-              modelData.locationBottomLeft = data;
-
-            },
-            autoValidateMode: AutovalidateMode.disabled),
-        LocationWidgetField(
-            title: "Record location at bottom right part of the facility",
-            defaultValue: modelData.locationBottomRight,
-            context: context,
-            onSaved: (data) {
-              print(data);
-              modelData.locationBottomRight = data;
-
-            },
-            autoValidateMode: AutovalidateMode.disabled),
-        DropDownFormField(
-            defaultValue: modelData.villageCode,
-            list: widget._villageCodeName,
-            onSaved: (data) {
-              print(data);
-              modelData.villageCode = data;
-
-            },
-            title: "Choose Village Code",
-            hint: "Select Village Code",
-            errorField: "Please choose a village code"),
-      ], _onSubmit),
+      body: FormPageView(
+        [
+          DropDownFormField(
+              defaultValue: modelData.resourceType,
+              list: widget._publicResourceList,
+              onSaved: (data) {
+                print(data);
+                modelData.resourceType = data;
+              },
+              title: "Choose type of resource to tag",
+              hint: "Select resource type",
+              errorField: "Please choose a resource to tag"),
+          LocationWidgetField(
+              title: "Record location at top left part of the facility",
+              defaultValue: modelData.locationTopLeft,
+              context: context,
+              onSaved: (data) {
+                print(data);
+                modelData.locationTopLeft = data;
+              },
+              autoValidateMode: AutovalidateMode.disabled),
+          LocationWidgetField(
+              title: "Record location at top right part of the facility",
+              defaultValue: modelData.locationTopRight,
+              context: context,
+              onSaved: (data) {
+                print(data);
+                modelData.locationTopRight = data;
+              },
+              autoValidateMode: AutovalidateMode.disabled),
+          LocationWidgetField(
+              title: "Record location at bottom left part of the facility",
+              defaultValue: modelData.locationBottomLeft,
+              context: context,
+              onSaved: (data) {
+                print(data);
+                modelData.locationBottomLeft = data;
+              },
+              autoValidateMode: AutovalidateMode.disabled),
+          LocationWidgetField(
+              title: "Record location at bottom right part of the facility",
+              defaultValue: modelData.locationBottomRight,
+              context: context,
+              onSaved: (data) {
+                print(data);
+                modelData.locationBottomRight = data;
+              },
+              autoValidateMode: AutovalidateMode.disabled),
+          DropDownFormField(
+              defaultValue: modelData.villageCode,
+              list: widget._villageCodeName,
+              onSaved: (data) {
+                print(data);
+                modelData.villageCode = data;
+              },
+              title: "Choose Village Code",
+              hint: "Select Village Code",
+              errorField: "Please choose a village code"),
+        ],
+        _onSubmit,
+        submitMessage: "Submit record to server or Save record locally for later editing",
+        saveData: _onSave,
+        note: "Note: Saving existing records will over write the record and not create new one",
+      ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
