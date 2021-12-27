@@ -8,7 +8,6 @@ class FamilyMemberIndividualDataModel {
   int id = 0;
   String? userName;
   String? savedTime = DateFormat('kk:mm:ss, EEE d MMM').format(DateTime.now());
-  final familyMembersCommon = ToOne<FamilyMembersCommonDataModel>();
 
   FamilyMemberIndividualDataModel({this.userName});
 }
@@ -20,10 +19,11 @@ class FamilyMembersCommonDataModel {
   Position? locationTopRight;
   Position? locationBottomLeft;
   Position? locationBottomRight;
+
+  @Property(type: PropertyType.byteVector)
+  List<int>? keys;
   String? savedTime = DateFormat('kk:mm:ss, EEE d MMM').format(DateTime.now());
 
-  @Backlink()
-  final familyMembersData = ToMany<FamilyMemberIndividualDataModel>();
 
   String? get dbLocationTopLeft {
     if (locationTopLeft == null) {
@@ -135,6 +135,7 @@ class FamilyMembersCommonDataModel {
   }
 
   FamilyMembersCommonDataModel({
+    this.keys,
     this.locationBottomLeft,
     this.locationBottomRight,
     this.locationTopLeft,

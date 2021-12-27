@@ -4,6 +4,7 @@ import 'package:gender_picker/source/enums.dart';
 import 'package:geo_spatial/Model/FamilyMembersCommomDataModel.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/DarkTheme.dart';
+import 'package:geo_spatial/Utils/StoreInstance.dart';
 import 'package:geo_spatial/Utils/tag_model.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
@@ -14,10 +15,11 @@ import 'package:geo_spatial/Widgets/TagTextWidget.dart';
 import 'package:geo_spatial/Widgets/TextTagsWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../objectbox.g.dart';
+
 class FamilyMemberAdd extends StatefulWidget {
-  const FamilyMemberAdd({Key? key, this.modelData, this.indexOfFamilyMember}) : super(key: key);
-  final modelData;
-  final indexOfFamilyMember;
+  const FamilyMemberAdd({Key? key,  this.familyMemberIndividualDataModel}) : super(key: key);
+  final FamilyMemberIndividualDataModel? familyMemberIndividualDataModel;
 
   @override
   _FamilyMemberAddState createState() => _FamilyMemberAddState();
@@ -56,15 +58,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: TextFormField(
-                    onSaved: (String? data){
-                      /*
-                      print("SAVE");
-                      List<FamilyMemberIndividualDataModel> list = widget.modelData.familyMembersData;
-                      FamilyMemberIndividualDataModel familyClass = list.elementAt(widget.indexOfFamilyMember);
-                      familyClass.userName = data;
+                    initialValue: widget.familyMemberIndividualDataModel?.userName,
+                    onSaved: (String? data) async {
+                      widget.familyMemberIndividualDataModel?.userName = data;
+                      var store = await StoreInstance.getInstance();
+                      Box box = store
+                          .box<FamilyMemberIndividualDataModel>();
+                      box.put(widget.familyMemberIndividualDataModel);
 
-                       */
-                      //print("NAME: ${widget.modelData.familyMembersData[widget.indexOfFamilyMember].userName}");
                     },
                     style: darkTheme.DarkTheme.textTheme.bodyText2,
                     decoration: InputDecoration(

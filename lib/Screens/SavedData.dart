@@ -158,14 +158,6 @@ class _FamilySavedListWidgetState extends State<FamilySavedListWidget> {
     var store = await StoreInstance.getInstance();
     final box = store.box<FamilyMembersCommonDataModel>();
     List? list = await box.getAll();
-
-    for (FamilyMembersCommonDataModel i in list) {
-      print("LIST");
-      for (FamilyMemberIndividualDataModel j in i.familyMembersData) {
-        print("LIST IN");
-        print(j.userName);
-      }
-    }
     return await list;
   }
 

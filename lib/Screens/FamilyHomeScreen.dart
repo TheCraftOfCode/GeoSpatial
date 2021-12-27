@@ -7,6 +7,7 @@ import 'package:geo_spatial/Widgets/AddRemoveBoxWidget.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
 
+import '../objectbox.g.dart';
 import 'CollectLocationWidget.dart';
 
 class FamilyHomeScreen extends StatefulWidget {
@@ -17,9 +18,10 @@ class FamilyHomeScreen extends StatefulWidget {
   final modelData;
 }
 
+FamilyMembersCommonDataModel? modelData;
+
 class _FamilyHomeScreenState extends State<FamilyHomeScreen>
     with AutomaticKeepAliveClientMixin {
-  static FamilyMembersCommonDataModel? modelData;
   var store;
 
   @override
@@ -27,7 +29,8 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen>
     super.build(context);
 
     if (modelData == null)
-      modelData = widget.modelData ?? new FamilyMembersCommonDataModel();
+      modelData =
+          widget.modelData ?? new FamilyMembersCommonDataModel(keys: []);
 
     return Scaffold(
       appBar: AppBarBackButton('Individual Data'),
@@ -95,12 +98,8 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen>
                                       side: BorderSide(color: Colors.white)))),
                           onPressed: () async {
                             store = await StoreInstance.getInstance();
-                            final box =
-                                store.box<FamilyMembersCommonDataModel>();
+                            Box box = store.box<FamilyMembersCommonDataModel>();
                             int id = await box.put(modelData);
-                            print("NAME: ${modelData?.familyMembersData[0].userName}");
-
-                            print("Entering data at id ${id}");
                           }),
                     ),
                   )
