@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 /**
  * Form Widget to get current location with validation
@@ -33,40 +33,42 @@ class LocationWidgetField extends FormField<Position> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Image(image: AssetImage("assets/location.png"),),
                       Padding(
-                        padding: EdgeInsets.only(bottom: 30),
-                        child: Text(title,
-                            style: GoogleFonts.montserrat(
-                                fontSize: 25, color: Colors.white)),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          border: state.hasError
-                              ? Border.all(width: 1, color: Colors.red)
-                              : Border.all(
-                                  width: 1,
-                                  color: Color.fromARGB(255, 194, 194, 194)),
-                          color: state.hasError
-                              ? colors.errorColor
-                              : Color.fromARGB(255, 238, 238, 238),
+                        padding: EdgeInsets.only(bottom: 30,top: 30),
+                        child: Center(
+                          child: Text(title,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 25, color: Colors.white)),
                         ),
-                        width: double.infinity,
+                      ),
+                      Card(
+                        elevation: 0,
+                        color: colors.darkSecondBackgroundColor,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              color: state.hasError
+                                  ? colors.errorColor
+                                  : colors.darkSecondBackgroundColor),
+                        ),
                         child: Padding(
                           padding: EdgeInsets.all(15),
                           child: Center(
                             child: state.hasError
                                 ? Text(
                                     state.errorText ?? "error",
-                                    style: TextStyle(
-                                        color: Colors.red, fontSize: 10),
+                                    style: GoogleFonts.poppins(
+                                        color: colors.errorColor, fontSize: 10),
                                   )
                                 : Text(
                                     state.value != null
                                         ? state.value.toString()
                                         : "Please fetch your location",
-                                    style: TextStyle(
-                                        fontSize: 12, color: Colors.black)),
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        color: colors.darkPrimaryTextColor)),
                           ),
                         ),
                       ),
@@ -85,9 +87,15 @@ class LocationWidgetField extends FormField<Position> {
                               ));
                             });
                           },
-                          child: Text('Get location'),
+                          child: Text(
+                            'Get location',
+                            style: GoogleFonts.poppins(
+                                color: colors.lightPrimaryTextColor),
+                          ),
                           style: ElevatedButton.styleFrom(
-                              minimumSize: Size(double.infinity, 50)),
+                              minimumSize: Size(double.infinity, 50),
+                              primary: colors.darkPrimaryTextColor,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
                         ),
                       ),
                     ],
