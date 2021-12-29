@@ -65,9 +65,21 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Add New User Information",
+                  TextButton(onPressed: () async {
+                    var store = await StoreInstance.getInstance();
+                    Box box = store.box<FamilyMemberIndividualDataModel>();
+                    var object = new FamilyMemberIndividualDataModel();
+
+                    int id = await box.put(object);
+
+                    setState(() {
+                      listOfObjects.add(object);
+                      widget.modelData.keys?.add(id);
+                    });
+                  },
+                  child: Text("Add New User Information",
                       style: GoogleFonts.poppins(
-                          fontSize: 18, color: colors.darkAccentColor)),
+                          fontSize: 18, color: colors.darkAccentColor)),),
                   IconButton(
                       onPressed: () async {
                         var store = await StoreInstance.getInstance();

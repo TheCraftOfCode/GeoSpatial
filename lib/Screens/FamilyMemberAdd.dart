@@ -49,12 +49,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                TagTextWidget(label: "Enter something", hint: "Enter something please", onSaved: (data){
-                  for(var i in data!){
-                    print(i);
-                  }
-
-                } ),
+                TagTextWidget(
+                    label: "Enter something",
+                    hint: "Enter something please",
+                    onSaved: (data) {
+                      for (var i in data!) {
+                        print(i);
+                      }
+                    }),
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: TextFormField(
@@ -320,94 +322,26 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 Padding(
                   padding:
                       const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
-                  child: TextFieldTags(
-                    //initialTags: ["better", "lovely"],
-                    textSeparators: [" ", ".", ","],
-                    scrollableTagsPadding: EdgeInsets.all(10),
-                    tagsStyler: TagsStyler(
-                      showHashtag: false,
-                      tagMargin: const EdgeInsets.only(right: 4.0),
-                      tagCancelIcon:
-                          Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                      tagCancelIconPadding:
-                          EdgeInsets.only(left: 4.0, top: 2.0),
-                      tagPadding: EdgeInsets.only(
-                          top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
-                      tagDecoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.grey.shade300,
-                        ),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(20.0),
-                        ),
-                      ),
-                      tagTextStyle: TextStyle(
-                          fontWeight: FontWeight.normal, color: Colors.black),
-                    ),
-                    textFieldStyler: TextFieldStyler(
-                      hintText: "Special Skills",
-                      isDense: true,
-                      textStyle: GoogleFonts.poppins(color: Colors.white),
-                      textFieldBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1.0),
-                      ),
-                    ),
-
-                    onDelete: (tag) {
-                      //remove value from list
-                    },
-                    onTag: (tag) {
-                      //create a list and store value to list
-                    },
-
-                    onList: (List<String> list) {},
-                  ),
+                  child: TagTextWidget(
+                      label: "Frequent ailments",
+                      hint: "Enter ailments here",
+                      onSaved: (data) {
+                        for (var i in data!) {
+                          print(i);
+                        }
+                      }),
                 ),
                 Padding(
                   padding:
                       const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
-                  child: TextFieldTags(
-                    //initialTags: ["better", "lovely"],
-                    textSeparators: [" ", ".", ","],
-                    scrollableTagsPadding: EdgeInsets.all(10),
-                    tagsStyler: TagsStyler(
-                      showHashtag: false,
-                      tagMargin: const EdgeInsets.only(right: 4.0),
-                      tagCancelIcon:
-                          Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                      tagCancelIconPadding:
-                          EdgeInsets.only(left: 4.0, top: 2.0),
-                      tagPadding: EdgeInsets.only(
-                          top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
-                      tagDecoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.grey.shade300,
-                        ),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(20.0),
-                        ),
-                      ),
-                      tagTextStyle: TextStyle(
-                          fontWeight: FontWeight.normal, color: Colors.black),
-                    ),
-                    textFieldStyler: TextFieldStyler(
-                      hintText: "Frequent Ailments",
-                      isDense: true,
-                      textStyle: GoogleFonts.poppins(color: Colors.white),
-                      textFieldBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1.0),
-                      ),
-                    ),
-                    onDelete: (tag) {
-                      //remove value from list
-                    },
-                    onTag: (tag) {
-                      //create a list and store value to list
-                    },
-                    onList: (List<String> list) {},
-                  ),
+                  child: TagTextWidget(
+                      label: "Special Skills",
+                      hint: "Enter skills here",
+                      onSaved: (data) {
+                        for (var i in data!) {
+                          print(i);
+                        }
+                      }),
                 ),
                 SizedBox(
                   height: 20,
@@ -415,47 +349,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 Padding(
                   padding:
                       const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
-                  child: TextFieldTags(
-                    //initialTags: ["better", "lovely"],
-                    textSeparators: [" ", ".", ","],
-                    scrollableTagsPadding: EdgeInsets.all(10),
-                    tagsStyler: TagsStyler(
-                      showHashtag: false,
-                      tagMargin: const EdgeInsets.only(right: 4.0),
-                      tagCancelIcon:
-                          Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                      tagCancelIconPadding:
-                          EdgeInsets.only(left: 4.0, top: 2.0),
-                      tagPadding: EdgeInsets.only(
-                          top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
-                      tagDecoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.grey.shade300,
-                        ),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(20.0),
-                        ),
-                      ),
-                      tagTextStyle: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          color: colors.darkAccentColor),
-                    ),
-                    textFieldStyler: TextFieldStyler(
-                      hintText: "Communicable diseases",
-                      isDense: true,
-                      textStyle: GoogleFonts.poppins(
-                          color: colors.darkSecondaryTextColor),
-                    ),
-                    onDelete: (tag) {
-                      //remove value from list
-                    },
-                    onTag: (tag) {
-                      //create a list and store value to list
-                    },
-
-                    onList: (List<String> list) {},
-                  ),
+                  child: TagTextWidget(
+                      label: "Communicable Diseases",
+                      hint: "Enter diseases here",
+                      onSaved: (data) {
+                        for (var i in data!) {
+                          print(i);
+                        }
+                      }),
                 ),
                 SizedBox(
                   height: 20,
@@ -463,48 +364,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 Padding(
                   padding:
                       const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
-                  child: TextFieldTags(
-                    //initialTags: ["better", "lovely"],
-                    textSeparators: [" ", ".", ","],
-                    scrollableTagsPadding: EdgeInsets.all(10),
-                    tagsStyler: TagsStyler(
-                      showHashtag: false,
-                      tagMargin: const EdgeInsets.only(right: 4.0),
-                      tagCancelIcon:
-                          Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                      tagCancelIconPadding:
-                          EdgeInsets.only(left: 4.0, top: 2.0),
-                      tagPadding: EdgeInsets.only(
-                          top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
-                      tagDecoration: BoxDecoration(
-                        color: colors.darkScaffoldColor,
-                        border: Border.all(
-                          color: Colors.grey.shade300,
-                        ),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(20.0),
-                        ),
-                      ),
-                      tagTextStyle: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          color: colors.darkAccentColor),
-                    ),
-                    textFieldStyler: TextFieldStyler(
-                      hintText: "Non communicable diseases",
-                      isDense: true,
-                      textStyle: GoogleFonts.poppins(
-                          color: colors.darkSecondAccentColor),
-                      textFieldBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1.0),
-                      ),
-                    ),
-                    onDelete: (tag) {
-                      //remove value from list
-                    },
-                    onTag: (tag) {},
-                      //create a list and store value to list
-                    onList: (List<String> list) {},
-                  ),
+                  child: TagTextWidget(
+                      label: "Non-communicable diseases",
+                      hint: "Enter diseases here",
+                      onSaved: (data) {
+                        for (var i in data!) {
+                          print(i);
+                        }
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -538,139 +405,30 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     title: 'Using any Anganwadi services?',
                   ),
                 ),
-                TextFieldTags(
-                  //initialTags: ["better", "lovely"],
-                  textSeparators: [" ", ".", ","],
-                  scrollableTagsPadding: EdgeInsets.all(10),
-                  tagsStyler: TagsStyler(
-                    showHashtag: false,
-                    tagMargin: const EdgeInsets.only(right: 4.0),
-                    tagCancelIcon:
-                        Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                    tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
-                    tagPadding: EdgeInsets.only(
-                        top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
-                    tagDecoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.grey.shade300,
-                      ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20.0),
-                      ),
-                    ),
-                    tagTextStyle: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        color: colors.darkAccentColor),
-                  ),
-                  textFieldStyler: TextFieldStyler(
-                    hintText: "Anganwadi Services used",
-                    isDense: true,
-                    textStyle: GoogleFonts.poppins(
-                        color: colors.darkSecondaryTextColor),
-                    textFieldBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 1.0),
-                    ),
-                  ),
-                  onDelete: (tag) {
-                    //remove value from list
-                  },
-                  onTag: (tag) {
-                    //create a list and store value to list
-                  },
-
-                  onList: (List<String> list) {},
-                ),
-                TextFieldTags(
-                  //initialTags: ["better", "lovely"],
-                  textSeparators: [" ", ".", ","],
-                  scrollableTagsPadding: EdgeInsets.all(10),
-                  tagsStyler: TagsStyler(
-                    showHashtag: false,
-                    tagMargin: const EdgeInsets.only(right: 4.0),
-                    tagCancelIcon:
-                        Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                    tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
-                    tagPadding: EdgeInsets.only(
-                        top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
-                    tagDecoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.grey.shade300,
-                      ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20.0),
-                      ),
-                    ),
-                    tagTextStyle: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        color: colors.darkAccentColor),
-                  ),
-                  textFieldStyler: TextFieldStyler(
-                    hintText: "PHC Services used",
-                    isDense: true,
-                    textStyle: GoogleFonts.poppins(
-                        color: colors.darkSecondaryTextColor),
-                    textFieldBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 1.0),
-                    ),
-                  ),
-                  onDelete: (tag) {
-                    //remove value from list
-                  },
-                  onTag: (tag) {
-                    //create a list and store value to list
-                  },
-                  onList: (List<String> list) {},
-                ),
-                TextFieldTags(
-                  //initialTags: ["better", "lovely"],
-                  textSeparators: [" ", ".", ","],
-                  scrollableTagsPadding: EdgeInsets.all(10),
-                  tagsStyler: TagsStyler(
-                    showHashtag: false,
-                    tagMargin: const EdgeInsets.only(right: 4.0),
-                    tagCancelIcon:
-                        Icon(Icons.cancel, size: 15.0, color: Colors.black),
-                    tagCancelIconPadding: EdgeInsets.only(left: 4.0, top: 2.0),
-                    tagPadding: EdgeInsets.only(
-                        top: 2.0, bottom: 4.0, left: 8.0, right: 4.0),
-                    tagDecoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.grey.shade300,
-                      ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20.0),
-                      ),
-                    ),
-                    tagTextStyle: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        color: colors.darkAccentColor),
-                  ),
-                  textFieldStyler: TextFieldStyler(
-                    hintText: "Private Clinic services used",
-                    isDense: true,
-                    textStyle: GoogleFonts.poppins(
-                        color: colors.darkSecondaryTextColor),
-                    textFieldBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 1.0),
-                    ),
-                  ),
-                  onDelete: (tag) {
-                    //remove value from list
-                  },
-                  onTag: (tag) {
-                    //create a list and store value to list
-                  },
-
-                  onList: (List<String> list) {
-                    print("TAGS: ");
-                    for(var i in list){
-                      print(i);
-                    }
-                  },
-                ),
+                TagTextWidget(
+                    label: "Anganwadi services utilised",
+                    hint: "Enter services here",
+                    onSaved: (data) {
+                      for (var i in data!) {
+                        print(i);
+                      }
+                    }),
+                TagTextWidget(
+                    label: "PHC services utilised",
+                    hint: "Enter services here",
+                    onSaved: (data) {
+                      for (var i in data!) {
+                        print(i);
+                      }
+                    }),
+                TagTextWidget(
+                    label: "Private Clinic services utilised",
+                    hint: "Enter services here",
+                    onSaved: (data) {
+                      for (var i in data!) {
+                        print(i);
+                      }
+                    }),
               ],
             ),
             Column(
