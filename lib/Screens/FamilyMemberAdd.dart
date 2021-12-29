@@ -6,6 +6,7 @@ import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Utils/StoreInstance.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
+import 'package:geo_spatial/Widgets/CheckBoxAlertDialog.dart';
 import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
@@ -16,7 +17,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../objectbox.g.dart';
 
 class FamilyMemberAdd extends StatefulWidget {
-  const FamilyMemberAdd({Key? key,  this.familyMemberIndividualDataModel}) : super(key: key);
+  const FamilyMemberAdd({Key? key, this.familyMemberIndividualDataModel})
+      : super(key: key);
   final FamilyMemberIndividualDataModel? familyMemberIndividualDataModel;
 
   @override
@@ -30,6 +32,33 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
 
   bool dailyWageWorker = false;
   int count = 0;
+
+  var vulnerabilities = <String,bool>{
+    'Widower':false,
+    'Divorcee': false,
+    'Differently Abled': false,
+    'Pregnant Woman': false,
+    'Lactating Mother': false,
+    'Elderly (>60 years)': false,
+    'Widower': false,
+    'Differently Abled': false,
+    'Children below 2 years': false,
+    'Others': false,
+    'None': false
+  };
+
+  var occupations = <String,bool>{
+    'Clerical support worker': false,
+    'Services and sales worker': false,
+    'Agricultural, forestry, fishery worker': false,
+    'Unemployed': false,
+    'Professional': false,
+    'Technician and associate professionals': false,
+    'Craft and related trades workers': false,
+    'Plant/Machine Operators and Assemblers': false,
+    'Elementary occupations': false,
+    'Armed Forces occupations' : false
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -50,14 +79,13 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: TextFormField(
-                    initialValue: widget.familyMemberIndividualDataModel?.userName,
+                    initialValue:
+                        widget.familyMemberIndividualDataModel?.userName,
                     onSaved: (String? data) async {
                       widget.familyMemberIndividualDataModel?.userName = data;
                       var store = await StoreInstance.getInstance();
-                      Box box = store
-                          .box<FamilyMemberIndividualDataModel>();
+                      Box box = store.box<FamilyMemberIndividualDataModel>();
                       box.put(widget.familyMemberIndividualDataModel);
-
                     },
                     style: darkTheme.DarkTheme.textTheme.bodyText2,
                     decoration: InputDecoration(
@@ -181,42 +209,29 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                 ),
-                DropDownFormField(
-                  //TODO: Replace with a CheckBoxListTile
-                  list: [
-                    'Widower',
-                    'Divorcee',
-                    'Differently Abled',
-                    'Pregnant Woman',
-                    'Lactating Mother',
-                    'Elderly (>60 years)',
-                    'Widower',
-                    'Differently Abled',
-                    'Children below 2 years',
-                    'Others',
-                    'None'
-                  ],
-                  hint: "Select applicable",
-                  title: "Vulnerabilities",
+                CheckBoxAlertDialog(
+                  title: 'Vulnerabilities',
+                  hint: 'Please choose a vulnerability',
+                  dataMap: vulnerabilities,
+                  singleOption: false,
+                  context: context,
+                  onSaved: (map) {
+                    print(map);
+                  },
                   errorField: "Please choose a vulnerability",
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                 ),
-                DropDownFormField(
-                  //TODO: Replace with a CheckBoxListTile
-                  list: [
-                    'Clerical support worker',
-                    'Services and sales worker',
-                    'Agricultural, forestry, fishery worker',
-                    'Unemployed',
-                    'Professional',
-                    'Technician and associate professionals',
-                    'Craft and related trades workers',
-                    'Plant/Machine Operators and Assemblers',
-                    'Elementary occupations',
-                    'Armed Forces occupations'
-                  ],
-                  hint: "Select applicable",
-                  title: "Occupation",
+                CheckBoxAlertDialog(
+                  title: 'Occupation',
+                  hint: 'Select applicable',
+                  dataMap: occupations,
+                  singleOption: false,
+                  context: context,
+                  onSaved: (map) {
+                    print(map);
+                  },
                   errorField: "Please choose an occupation",
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 OptionsWidget(
                   options: [
@@ -305,6 +320,18 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   title: 'Marital Status',
                 ),
               ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 10.0, right: 10.0, top: 20),
+                child: TagTextWidget(
+                    label: "Special Skills",
+                    hint: "Enter skills here",
+                    onSaved: (data) {
+                      for (var i in data!) {
+                        print(i);
+                      }
+                    }),
+              ),
             ]),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -315,18 +342,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   child: TagTextWidget(
                       label: "Frequent ailments",
                       hint: "Enter ailments here",
-                      onSaved: (data) {
-                        for (var i in data!) {
-                          print(i);
-                        }
-                      }),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
-                  child: TagTextWidget(
-                      label: "Special Skills",
-                      hint: "Enter skills here",
                       onSaved: (data) {
                         for (var i in data!) {
                           print(i);
