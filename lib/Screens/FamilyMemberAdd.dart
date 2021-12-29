@@ -49,14 +49,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                TagTextWidget(
-                    label: "Enter something",
-                    hint: "Enter something please",
-                    onSaved: (data) {
-                      for (var i in data!) {
-                        print(i);
-                      }
-                    }),
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: TextFormField(

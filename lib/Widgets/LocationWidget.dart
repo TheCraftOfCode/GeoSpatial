@@ -66,6 +66,7 @@ class LocationWidgetField extends FormField<Position> {
                                     state.value != null
                                         ? state.value.toString()
                                         : "Please fetch your location",
+                                    textAlign: TextAlign.center,
                                     style: GoogleFonts.poppins(
                                         fontSize: 12,
                                         color: colors.darkPrimaryTextColor)),
