@@ -134,7 +134,7 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
                 print(data);
                 modelData.locationTopLeft = data;
               },
-              autoValidateMode: AutovalidateMode.disabled),
+              ),
           LocationWidgetField(
               title: "Record location at top right part of the facility",
               defaultValue: modelData.locationTopRight,
@@ -143,7 +143,7 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
                 print(data);
                 modelData.locationTopRight = data;
               },
-              autoValidateMode: AutovalidateMode.disabled),
+              ),
           LocationWidgetField(
               title: "Record location at bottom left part of the facility",
               defaultValue: modelData.locationBottomLeft,
@@ -152,7 +152,7 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
                 print(data);
                 modelData.locationBottomLeft = data;
               },
-              autoValidateMode: AutovalidateMode.disabled),
+              ),
           LocationWidgetField(
               title: "Record location at bottom right part of the facility",
               defaultValue: modelData.locationBottomRight,
@@ -161,7 +161,7 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
                 print(data);
                 modelData.locationBottomRight = data;
               },
-              autoValidateMode: AutovalidateMode.disabled),
+              ),
           DropDownFormField(
               defaultValue: modelData.villageCode,
               list: widget._villageCodeName,

@@ -38,41 +38,41 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
         body: FormPageView(
           [
             LocationWidgetField(
-                title: "Record location at top left part of the facility",
-                context: context,
-                defaultValue: widget.modelData.locationTopLeft,
-                onSaved: (data) {
-                  print(data);
-                  widget.modelData.locationTopLeft = data;
-                },
-                autoValidateMode: AutovalidateMode.disabled),
+              title: "Record location at top left part of the facility",
+              context: context,
+              defaultValue: widget.modelData.locationTopLeft,
+              onSaved: (data) {
+                print(data);
+                widget.modelData.locationTopLeft = data;
+              },
+            ),
             LocationWidgetField(
-                title: "Record location at top right part of the facility",
-                context: context,
-                defaultValue: widget.modelData.locationTopRight,
-                onSaved: (data) {
-                  print(data);
-                  widget.modelData.locationTopRight = data;
-                },
-                autoValidateMode: AutovalidateMode.disabled),
+              title: "Record location at top right part of the facility",
+              context: context,
+              defaultValue: widget.modelData.locationTopRight,
+              onSaved: (data) {
+                print(data);
+                widget.modelData.locationTopRight = data;
+              },
+            ),
             LocationWidgetField(
-                title: "Record location at bottom left part of the facility",
-                context: context,
-                defaultValue: widget.modelData.locationBottomLeft,
-                onSaved: (data) {
-                  print(data);
-                  widget.modelData.locationBottomLeft = data;
-                },
-                autoValidateMode: AutovalidateMode.disabled),
+              title: "Record location at bottom left part of the facility",
+              context: context,
+              defaultValue: widget.modelData.locationBottomLeft,
+              onSaved: (data) {
+                print(data);
+                widget.modelData.locationBottomLeft = data;
+              },
+            ),
             LocationWidgetField(
-                title: "Record location at bottom right part of the facility",
-                context: context,
-                defaultValue: widget.modelData.locationBottomRight,
-                onSaved: (data) {
-                  print(data);
-                  widget.modelData.locationBottomRight = data;
-                },
-                autoValidateMode: AutovalidateMode.disabled),
+              title: "Record location at bottom right part of the facility",
+              context: context,
+              defaultValue: widget.modelData.locationBottomRight,
+              onSaved: (data) {
+                print(data);
+                widget.modelData.locationBottomRight = data;
+              },
+            ),
           ],
           _onSubmit,
           submitMessage:

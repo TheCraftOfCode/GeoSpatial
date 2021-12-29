@@ -15,7 +15,7 @@ class LocationWidgetField extends FormField<Position> {
       Position? defaultValue,
       required BuildContext context,
       required String title,
-      AutovalidateMode autoValidateMode = AutovalidateMode.onUserInteraction})
+      AutovalidateMode autoValidateMode = AutovalidateMode.always})
       : super(
             onSaved: onSaved,
             validator: validator ??
