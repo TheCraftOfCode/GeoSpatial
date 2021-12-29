@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
@@ -12,6 +13,7 @@ class TagTextWidget extends FormField<List<String>> {
       required hint,
       emptyListMessage,
       errorField,
+      search = const [],
       AutovalidateMode autoValidateMode = AutovalidateMode.onUserInteraction})
       : super(
             onSaved: onSaved,
@@ -35,29 +37,53 @@ class TagTextWidget extends FormField<List<String>> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(bottom: 10),
-                      child: TextField(
-                        controller: _contentEditingController,
-                        onSubmitted: (string) {
-                          if (!string.isEmpty) {
-                            _contentEditingController.clear();
-                            List<String>? list = state.value;
-                            list?.add(string);
-                            state.didChange(list);
-                          }
+                      child: TypeAheadField(
+                        hideOnEmpty: true,
+                        hideSuggestionsOnKeyboardHide: false,
+                        getImmediateSuggestions: true,
+                        textFieldConfiguration: TextFieldConfiguration(
+                            style: TextStyle(color: Colors.white),
+                            controller: _contentEditingController,
+                            onSubmitted: (string) {
+                              if (!string.isEmpty) {
+                                print(string);
+                                _contentEditingController.clear();
+                                List<String>? list = state.value;
+                                list?.add(string);
+                                state.didChange(list);
+                              }
+                            },
+                            decoration: InputDecoration(
+                              errorText:
+                                  state.hasError ? state.errorText : null,
+                              label: Text(
+                                label,
+                                style: GoogleFonts.poppins(
+                                    color: colors.darkSecondaryTextColor),
+                              ),
+                              hintText: hint,
+                              hintStyle: GoogleFonts.poppins(
+                                  color: colors.darkSecondaryTextColor),
+                              contentPadding: EdgeInsets.all(7.0),
+                            )),
+                        suggestionsCallback: (pattern) async {
+                          return search.where((element) => element
+                              .toString()
+                              .toLowerCase()
+                              .contains(pattern.toLowerCase()));
                         },
-                        style: GoogleFonts.poppins(color: Colors.white),
-                        decoration: InputDecoration(
-                          errorText: state.hasError ? state.errorText : null,
-                          label: Text(
-                            label,
-                            style: GoogleFonts.poppins(
-                                color: colors.darkSecondaryTextColor),
-                          ),
-                          hintText: hint,
-                          hintStyle: GoogleFonts.poppins(
-                              color: colors.darkSecondaryTextColor),
-                          contentPadding: EdgeInsets.all(7.0),
-                        ),
+                        itemBuilder: (context, suggestion) {
+                          return ListTile(
+                            title: Text(suggestion.toString(),
+                                style: GoogleFonts.poppins(fontSize: 15)),
+                          );
+                        },
+                        onSuggestionSelected: (suggestion) {
+                          print(suggestion);
+                          List<String>? list = state.value;
+                          list?.add(suggestion.toString());
+                          state.didChange(list);
+                        },
                       ),
                     ),
                     Container(
