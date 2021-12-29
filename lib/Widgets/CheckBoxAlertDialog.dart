@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 /**
  * Implementation:
@@ -54,7 +55,7 @@ class CheckBoxAlertDialog extends FormField<Map> {
                 if (state.hasError) {
                   return Text(
                     hint,
-                    style: TextStyle(color: Colors.red),
+                    style: GoogleFonts.poppins(color: colors.errorColor),
                     textAlign: TextAlign.end,
                   );
                 } else {
@@ -70,13 +71,13 @@ class CheckBoxAlertDialog extends FormField<Map> {
                     }
                     return Text(
                       displayValue,
-                      style: TextStyle(color: Colors.black),
+                      style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                       textAlign: TextAlign.end,
                     );
                   } else {
                     return Text(
                       hint,
-                      style: TextStyle(color: Colors.grey),
+                      style: GoogleFonts.poppins(color: Colors.grey),
                       textAlign: TextAlign.end,
                     );
                   }
@@ -93,18 +94,19 @@ class CheckBoxAlertDialog extends FormField<Map> {
                       padding: EdgeInsets.only(bottom: 20),
                       child: Text(title,
                           style: GoogleFonts.montserrat(
-                              fontSize: 25, color: Colors.black)),
+                              fontSize: 15, color: colors.darkPrimaryTextColor)),
                     ),
                     Card(
-                      elevation: 2,
-                      margin: EdgeInsets.only(bottom: 4),
+                      color: colors.darkScaffoldColor,
+                      elevation: 5,
+                      margin: EdgeInsets.only(top: 3,bottom: 3),
                       child: InkWell(
                         onTap: () {
                           _showMyDialog(context, title, state, singleOption);
                         },
                         child: Padding(
                           padding: EdgeInsets.only(
-                              left: 8, right: 8, top: 15, bottom: 15),
+                              left: 10, right: 10, top: 12, bottom: 12),
                           child: Row(
                             children: [
                               Expanded(
@@ -116,7 +118,7 @@ class CheckBoxAlertDialog extends FormField<Map> {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 5),
-                                child: Icon(Icons.arrow_right),
+                                child: Icon(Icons.arrow_right,color: colors.darkPrimaryTextColor,),
                               )
                             ],
                           ),
@@ -128,7 +130,7 @@ class CheckBoxAlertDialog extends FormField<Map> {
                             padding: EdgeInsets.all(10),
                             child: Text(
                               state.errorText ?? "error",
-                              style: TextStyle(color: Colors.red, fontSize: 10),
+                              style: TextStyle(color: colors.errorColor, fontSize: 10),
                             ),
                           )
                         : Container()
@@ -175,7 +177,9 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
 
     dataList!.forEach((k, v) => {
           dialogList.add(CheckboxListTile(
-            title: Text(k),
+            checkColor: colors.darkPrimaryTextColor,
+            activeColor: colors.darkAccentColor,
+            title: Text(k,style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),),
             value: widget.state.value[k],
             onChanged: (value) {
               Map newPair = widget.state.value;
@@ -200,7 +204,8 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
         });
 
     return AlertDialog(
-      title: Text(widget.dialogTitle),
+      backgroundColor: colors.darkSecondBackgroundColor,
+      title: Text(widget.dialogTitle,style: GoogleFonts.poppins(color: colors.darkAccentColor),),
       content: SingleChildScrollView(
         child: Column(
           children: dialogList,
@@ -208,7 +213,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
       ),
       actions: <Widget>[
         TextButton(
-          child: const Text('Ok'),
+          child: Text('Choose',style: GoogleFonts.poppins(color: colors.darkAccentColor),),
           onPressed: () {
             Navigator.of(context).pop();
           },
