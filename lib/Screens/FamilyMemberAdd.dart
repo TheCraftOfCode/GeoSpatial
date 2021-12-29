@@ -68,7 +68,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
       appBar: AppBarBackButton('Add Family Member'),
       body: SizedBox(
         height: MediaQuery.of(context).size.height -
-            MediaQuery.of(context).viewInsets.bottom * 1.3,
+            MediaQuery.of(context).viewInsets.bottom * 1.45,
         child: SingleChildScrollView(
           physics: ClampingScrollPhysics(),
           child: FormPageView([
