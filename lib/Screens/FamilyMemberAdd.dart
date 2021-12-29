@@ -5,14 +5,12 @@ import 'package:geo_spatial/Model/FamilyMembersCommomDataModel.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Utils/StoreInstance.dart';
-import 'package:geo_spatial/Utils/tag_model.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
 import 'package:geo_spatial/Widgets/TagTextWidget.dart';
-import 'package:geo_spatial/Widgets/TextTagsWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../objectbox.g.dart';
