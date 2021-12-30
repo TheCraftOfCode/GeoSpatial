@@ -184,13 +184,17 @@ class AlertDialogWidget extends StatefulWidget {
 class _AlertDialogWidgetState extends State<AlertDialogWidget> {
   TextEditingController _controller = TextEditingController();
 
-  _addNewData(value) {
+  _addNewData(String value) {
     Map dataList = widget.state.value;
-    if (!dataList.containsKey(value)) {
-      dataList[value] = false;
+    value = value.trim();
+    if (value.isNotEmpty) {
+      if (!dataList.containsKey(value)) {
+        dataList[value] = false;
+      }
+      widget.state.didChange(dataList);
+      _controller.clear();
+      setState(() {});
     }
-    widget.state.didChange(dataList);
-    setState(() {});
   }
 
   @override
@@ -200,23 +204,28 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
           ? TextFormField(
               style: TextStyle(color: Colors.white60),
               onFieldSubmitted: (submit) {
-                _controller.clear();
                 _addNewData(submit);
               },
               controller: _controller,
               decoration: InputDecoration(
+                  // fillColor: Colors.blue,
                   hintText: "Add a new field",
                   label: Text("Add New Field"),
-                  suffixIcon: IconButton(
-                      onPressed: () {
-                        var text = _controller.text;
-                        _controller.clear();
-                        if (text.isNotEmpty) _addNewData(text);
-                      },
-                      icon: Icon(
-                        Icons.add,
-                        color: colors.darkAccentColor,
-                      ))),
+                  suffixIcon: Material(
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(4.0),
+                        topRight: Radius.circular(4.0)),
+                    child: IconButton(
+                        splashRadius: 17,
+                        onPressed: () {
+                          var text = _controller.text;
+                          _addNewData(text);
+                        },
+                        icon: Icon(
+                          Icons.add,
+                          color: colors.darkAccentColor,
+                        )),
+                  )),
             )
           : Container()
     ];
