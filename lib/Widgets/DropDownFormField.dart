@@ -72,14 +72,14 @@ class DropDownFormField extends FormField<dynamic> {
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.poppins(
                                     color: state.hasError
-                                        ? Colors.red
+                                        ? colors.errorColor
                                         : Colors.grey),
                                 textAlign: TextAlign.end,
                               ),
                             ),
                             style: GoogleFonts.poppins(
                                 color: colors.darkPrimaryTextColor,
-                                decorationColor: Colors.red),
+                                decorationColor: colors.errorColor),
                           ),
                         ),
                       ),
@@ -90,7 +90,7 @@ class DropDownFormField extends FormField<dynamic> {
                             child: Text(
                               state.errorText ?? "error",
                               style: GoogleFonts.poppins(
-                                  color: Colors.red, fontSize: 10),
+                                  color: colors.errorColor, fontSize: 10),
                             ),
                           )
                         : Container()

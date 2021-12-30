@@ -13,6 +13,7 @@ class TagTextWidget extends FormField<List<String>> {
       required hint,
       emptyListMessage,
       errorField,
+      autofillHints,
       search = const [],
       AutovalidateMode autoValidateMode = AutovalidateMode.onUserInteraction})
       : super(
