@@ -42,42 +42,45 @@ class DropDownFormField extends FormField<dynamic> {
                       elevation: 10,
                       margin: EdgeInsets.only(bottom: 4),
                       child: DropdownButtonHideUnderline(
-                        child: DropdownButton<dynamic>(
-                          dropdownColor: colors.darkScaffoldColor,
-                          value: state.value,
-                          isExpanded: true,
-                          items: list.map<DropdownMenuItem>((value) {
-                            return DropdownMenuItem(
-                              value: value,
-                              child: Container(
-                                color: colors.darkScaffoldColor,
-                                child: Text(
-                                  value,
-                                  overflow: TextOverflow.ellipsis,
+                        child: ButtonTheme(
+                          alignedDropdown: true,
+                          child: DropdownButton<dynamic>(
+                            dropdownColor: colors.darkScaffoldColor,
+                            value: state.value,
+                            isExpanded: true,
+                            items: list.map<DropdownMenuItem>((value) {
+                              return DropdownMenuItem(
+                                value: value,
+                                child: Container(
+                                  color: colors.darkScaffoldColor,
+                                  child: Text(
+                                    value,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  padding: EdgeInsets.only(left: 8),
                                 ),
-                                padding: EdgeInsets.all(8),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              state.didChange(newValue);
+                            },
+                            hint: Container(
+                              color: colors.darkScaffoldColor,
+                              padding: EdgeInsets.all(8),
+                              child: Text(
+                                hint,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.poppins(
+                                    color: state.hasError
+                                        ? Colors.red
+                                        : Colors.grey),
+                                textAlign: TextAlign.end,
                               ),
-                            );
-                          }).toList(),
-                          onChanged: (newValue) {
-                            state.didChange(newValue);
-                          },
-                          hint: Container(
-                            color: colors.darkScaffoldColor,
-                            padding: EdgeInsets.all(8),
-                            child: Text(
-                              hint,
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.poppins(
-                                  color: state.hasError
-                                      ? Colors.red
-                                      : Colors.grey),
-                              textAlign: TextAlign.end,
                             ),
+                            style: GoogleFonts.poppins(
+                                color: colors.darkPrimaryTextColor,
+                                decorationColor: Colors.red),
                           ),
-                          style: GoogleFonts.poppins(
-                              color: colors.darkPrimaryTextColor,
-                              decorationColor: Colors.red),
                         ),
                       ),
                     ),
