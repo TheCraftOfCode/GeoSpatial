@@ -106,7 +106,7 @@ class CheckBoxAlertDialog extends FormField<Map> {
                         },
                         child: Padding(
                           padding: EdgeInsets.only(
-                              left: 10, right: 10, top: 12, bottom: 12),
+                              left: 20, right: 10, top: 12, bottom: 12),
                           child: Row(
                             children: [
                               Expanded(
@@ -118,7 +118,7 @@ class CheckBoxAlertDialog extends FormField<Map> {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 5),
-                                child: Icon(Icons.arrow_right,color: colors.darkPrimaryTextColor,),
+                                child: Icon(Icons.arrow_right,color: colors.darkSecondaryTextColor,),
                               )
                             ],
                           ),

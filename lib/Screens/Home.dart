@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:geo_spatial/Model/CommunityDataModel.dart';
 import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
 import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
 import 'package:geo_spatial/Widgets/NavigationDrawer.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Screens/Login.dart';
