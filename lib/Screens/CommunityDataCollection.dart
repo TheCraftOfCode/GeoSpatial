@@ -35,6 +35,8 @@ class CommunityDataCollection extends StatefulWidget {
     'Food processing units'
   ];
 
+  //TODO: Replace with list of village codes
+
   final List<String> _villageCodeName = [
     'Temple',
     'Church',
@@ -78,7 +80,7 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
       }
       else{
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Please fill all fields!", style: TextStyle(color: Colors.red),),
+          content: Text("Please fill all fields!", style: TextStyle(color: colors.errorColor),),
         ));
       }
     }

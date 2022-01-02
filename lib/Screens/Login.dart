@@ -1,12 +1,13 @@
 import 'dart:convert';
-
+import 'package:geo_spatial/Utils/colors.dart' as colors;
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Constants/Constants.dart';
 import 'package:geo_spatial/Screens/Home.dart';
-import 'package:geo_spatial/Widgets/FormCard.dart';
+import 'package:geo_spatial/Widgets/LoginFormCard.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:geo_spatial/Utils/Globals.dart' as globals;
 
 final storage = FlutterSecureStorage();
 
@@ -104,13 +105,13 @@ class _MyAppState extends State<Login> {
         padding: EdgeInsets.all(2.0),
         decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(width: 2.0, color: Color(0xffe29662))),
+            border: Border.all(width: 2.0, color: colors.darkAccentColor)),
         child: isSelected
             ? Container(
                 width: double.infinity,
                 height: double.infinity,
                 decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Color(0xffe29662)),
+                    BoxDecoration(shape: BoxShape.circle, color: colors.darkAccentColor),
               )
             : Container(),
       );
@@ -128,13 +129,14 @@ class _MyAppState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xff333034),
+      backgroundColor: colors.darkScaffoldColor,
       body: Stack(
           fit: StackFit.expand,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.62),
-              child: Image(image: AssetImage("assets/Illustration.png"),),
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage("assets/Illustration.png"),fit: BoxFit.cover)
+              ),
             ),
             SingleChildScrollView(
               child: Padding(
@@ -142,7 +144,7 @@ class _MyAppState extends State<Login> {
                 child: Column(
                   children: <Widget>[
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.23,
+                      height: MediaQuery.of(context).size.height * 0.48,
                     ),
                     FormCard(_usernameController, _passwordController,
                         _nameError, _passwordError),
@@ -166,7 +168,7 @@ class _MyAppState extends State<Login> {
                             ),
                             Text("Remember me",
                                 style: GoogleFonts.poppins(
-                                    color: Color(0xffE9AA4C), fontSize: 14.0))
+                                    color: colors.darkAccentColor, fontSize: 14.0))
                           ],
                         ),
                         InkWell(
@@ -175,8 +177,8 @@ class _MyAppState extends State<Login> {
                             height: 45,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(colors: [
-                                Color(0xffe29662),
-                                Color(0xffefc1a9),
+                                Color(0xfff54b64),
+                                Color(0xfff78361),
                               ]),
                               borderRadius: BorderRadius.circular(30.0),
                             ),

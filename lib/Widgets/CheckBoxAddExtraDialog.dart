@@ -110,7 +110,7 @@ class CheckBoxAddExtraAlertDialog extends FormField<Map> {
                         },
                         child: Padding(
                           padding: EdgeInsets.only(
-                              left: 10, right: 10, top: 12, bottom: 12),
+                              left: 20, right: 10, top: 12, bottom: 12),
                           child: Row(
                             children: [
                               Expanded(
