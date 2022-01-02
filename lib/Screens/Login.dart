@@ -1,13 +1,13 @@
 import 'dart:convert';
-import 'package:geo_spatial/Utils/colors.dart' as colors;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Constants/Constants.dart';
 import 'package:geo_spatial/Screens/Home.dart';
+import 'package:geo_spatial/Utils/colors.dart' as colors;
 import 'package:geo_spatial/Widgets/LoginFormCard.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:geo_spatial/Utils/Globals.dart' as globals;
 
 final storage = FlutterSecureStorage();
 
@@ -110,8 +110,8 @@ class _MyAppState extends State<Login> {
             ? Container(
                 width: double.infinity,
                 height: double.infinity,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: colors.darkAccentColor),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: colors.darkAccentColor),
               )
             : Container(),
       );
@@ -131,83 +131,105 @@ class _MyAppState extends State<Login> {
       resizeToAvoidBottomInset: false,
       backgroundColor: colors.darkScaffoldColor,
       body: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage("assets/Illustration.png"),fit: BoxFit.cover)
-              ),
-            ),
-            SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.48,
-                    ),
-                    FormCard(_usernameController, _passwordController,
-                        _nameError, _passwordError),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 12.0,
-                            ),
-                            GestureDetector(
-                              onTap: _radio,
-                              child: radioButton(_isSelected),
-                            ),
-                            SizedBox(
-                              width: 8.0,
-                            ),
-                            Text("Remember me",
-                                style: GoogleFonts.poppins(
-                                    color: colors.darkAccentColor, fontSize: 14.0))
-                          ],
-                        ),
-                        InkWell(
-                          child: Container(
-                            width: 100,
-                            height: 45,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                Color(0xfff54b64),
-                                Color(0xfff78361),
-                              ]),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                onTap: (){ Navigator.push(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/Illustration.png"),
+                    fit: BoxFit.cover)),
+          ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.only(left: 20.0, right: 20.0),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.48,
+                  ),
+                  FormCard(_usernameController, _passwordController, _nameError,
+                      _passwordError),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          SizedBox(
+                            width: 12.0,
+                          ),
+                          GestureDetector(
+                            onTap: _radio,
+                            child: radioButton(_isSelected),
+                          ),
+                          SizedBox(
+                            width: 8.0,
+                          ),
+                          Text("Remember me",
+                              style: GoogleFonts.poppins(
+                                  color: colors.darkAccentColor,
+                                  fontSize: 14.0))
+                        ],
+                      ),
+                      InkWell(
+                        child: Container(
+                          width: 100,
+                          height: 45,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              Color(0xfff54b64),
+                              Color(0xfff78361),
+                            ]),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => Home()),
-                                );},
-                                child: Center(
-                                  child: Text("SIGN IN",
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          letterSpacing: 1.0)),
-                                ),
+                                  MaterialPageRoute(
+                                      builder: (context) => Home()),
+                                );
+                              },
+                              child: Center(
+                                child: Text("SIGN IN",
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        letterSpacing: 1.0)),
                               ),
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.04,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * 0.125,
+                        bottom: 30),
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.fingerprint_rounded,
+                          size: 80,
+                          color: colors.darkAccentColor,
+                        ),
+                    splashColor: colors.darkSecondAccentColor,
+                    enableFeedback: true,),
+                  )
+                ],
               ),
             ),
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
   }
 }
