@@ -6,6 +6,7 @@ import 'package:geo_spatial/Utils/StoreInstance.dart';
 import 'package:geo_spatial/Widgets/AddRemoveBoxWidget.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
+import 'package:geo_spatial/Widgets/NavigationDrawer.dart';
 
 import '../objectbox.g.dart';
 import 'CollectLocationWidget.dart';

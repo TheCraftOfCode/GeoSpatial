@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
+import 'package:geo_spatial/Widgets/CheckBoxAddExtraDialog.dart';
 import 'package:geo_spatial/Widgets/CheckBoxAlertDialog.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
-import 'package:geo_spatial/Widgets/TagTextWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FamilyDetails extends StatefulWidget {
@@ -64,6 +64,21 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     'no': false,
   };
 
+  var local_food = {
+    'yes': false,
+    'no': false,
+  };
+
+  var trees_owned = {
+    'yes': false,
+    'no': false,
+  };
+
+  var garden_plants = {
+    'yes': false,
+    'no': false,
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,10 +120,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       OptionsWidget(options: [
                         ['Yes', 'yes'],
                         ['No', 'no']
-                      ], title: "Is running water available?"),
-                      OptionsWidget(options: [
-                        ['Yes', 'yes'],
-                        ['No', 'no']
                       ], title: "If not toilet, community toilet?"),
                       OptionsWidget(options: [
                         ['Clean', 'clean'],
@@ -119,6 +130,10 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      OptionsWidget(options: [
+                        ['Yes', 'yes'],
+                        ['No', 'no']
+                      ], title: "Is running water available?"),
                       DropDownFormField(
                         list: ['1', '2', '3', '4', '5', 'More'],
                         hint: "Select the highest",
@@ -171,18 +186,21 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         ['No', 'no']
                       ], title: "Do you own cattle?"),
                       Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                        padding: const EdgeInsets.only(
+                            left: 10.0, right: 10.0, top: 20.0),
                         child: TextFormField(
                           decoration: InputDecoration(
                               hintStyle: GoogleFonts.poppins(
                                   color: colors.darkSecondaryTextColor),
                               contentPadding: EdgeInsets.all(7.0),
                               hintText: "Enter income in Rupees",
-                              label: Text('Income from cattle',style: GoogleFonts.poppins(
-                                  color: colors.darkSecondaryTextColor),)),
+                              label: Text(
+                                'Income from cattle',
+                                style: GoogleFonts.poppins(
+                                    color: colors.darkSecondaryTextColor),
+                              )),
                           autovalidateMode: AutovalidateMode.always,
                           keyboardType: TextInputType.number,
-
                         ),
                       ),
                       OptionsWidget(
@@ -199,22 +217,43 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         ],
                         title: "Do you preserve seeds?",
                       ),
-                      Padding(
-                        padding:
-                        const EdgeInsets.only(left: 10.0, right: 10.0, top: 20),
-                        child: TagTextWidget(
-                            label: "Seeds Preserved",
-                            hint: "Enter seed names here",
-                            autoValidateMode: AutovalidateMode.onUserInteraction,
-                            autofillHints: ['This','is','a','test'],
-                            onSaved: (data) {
-                              for (var i in data!) {
-                                print(i);
-                              }
-                            }),
-                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
                       //TODO: Display if answer to previous question is yes
-                      //TODO: Add autosuggest text widget for seeds preserved
+                      CheckBoxAddExtraAlertDialog(
+                        title: 'Seeds Preserved',
+                        hint: 'Choose preserved seeds',
+                        dataMap: seeds_preserved,
+                        singleOption: false,
+                        context: context,
+                        onSaved: (map) {
+                          print(map);
+                        },
+                      ),
+                      CheckBoxAddExtraAlertDialog(
+                        title: 'Trees owned',
+                        hint: 'Choose trees owned',
+                        dataMap: trees_owned,
+                        singleOption: false,
+                        context: context,
+                        onSaved: (map) {
+                          print(map);
+                        },
+                      ),
+                      CheckBoxAddExtraAlertDialog(
+                        title: 'Choose resource',
+                        hint: 'Choose your resource',
+                        dataMap: local_food,
+                        singleOption: false,
+                        context: context,
+                        onSaved: (map) {
+                          print(map);
+                        },
+                      ),
+
                       //TODO: Add autosuggest text widget for locally consumed food
                       //TODO: Add autosuggest text widget for trees owned
                       OptionsWidget(
@@ -224,64 +263,91 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         ],
                         title: "Do you have a kitchen garden?",
                       ),
-                      //TODO: Add autosuggest text widget for kitchen garden crops
                     ],
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            label: Text(
-                              "First Line",
-                              style: GoogleFonts.poppins(
-                                  color: colors.darkSecondaryTextColor),
-                            ),
-                            hintText: "Please enter first line",
-                            hintStyle: GoogleFonts.poppins(
-                                color: colors.darkSecondaryTextColor),
-                            contentPadding: EdgeInsets.all(7.0),
-                          ),
-                          validator: (value) {
-                            if (value == "") {
-                              return "Enter First Line";
-                            }
-                          },
-                        ),
+                      CheckBoxAddExtraAlertDialog(
+                        title: 'Kitchen Garden plants',
+                        hint: 'Choose garden plants',
+                        dataMap: garden_plants,
+                        singleOption: false,
+                        context: context,
+                        onSaved: (map) {
+                          print(map);
+                        },
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            label: Text(
-                              "Second Line",
-                              style: GoogleFonts.poppins(
-                                  color: colors.darkSecondaryTextColor),
-                            ),
-                            hintText: "Please enter second line",
-                            hintStyle: GoogleFonts.poppins(
-                                color: colors.darkSecondaryTextColor),
-                            contentPadding: EdgeInsets.all(7.0),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            label: Text(
-                              "City",
-                              style: GoogleFonts.poppins(
-                                  color: colors.darkSecondaryTextColor),
-                            ),
-                            hintText: "Please enter city",
-                            hintStyle: GoogleFonts.poppins(
-                                color: colors.darkSecondaryTextColor),
-                            contentPadding: EdgeInsets.all(7.0),
-                          ),
-                        ),
+                      //TODO: Add autosuggest text widget for kitchen garden crops
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 15.0),
+                                  child: Text(
+                                    "Address",
+                                    style: GoogleFonts.montserrat(
+                                        fontSize: 15.0,
+                                        color: colors.darkPrimaryTextColor),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 70.0),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    label: Text(
+                                      "First Line",
+                                      style: GoogleFonts.poppins(
+                                          color: colors.darkSecondaryTextColor),
+                                    ),
+                                    hintText: "Please enter first line",
+                                    hintStyle: GoogleFonts.poppins(
+                                        color: colors.darkSecondaryTextColor),
+                                    contentPadding: EdgeInsets.all(7.0),
+                                  ),
+                                  validator: (value) {
+                                    if (value == "") {
+                                      return "Enter First Line";
+                                    }
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 70.0),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    label: Text(
+                                      "Second Line",
+                                      style: GoogleFonts.poppins(
+                                          color: colors.darkSecondaryTextColor),
+                                    ),
+                                    hintText: "Please enter second line",
+                                    hintStyle: GoogleFonts.poppins(
+                                        color: colors.darkSecondaryTextColor),
+                                    contentPadding: EdgeInsets.all(7.0),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 70.0),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    label: Text(
+                                      "City",
+                                      style: GoogleFonts.poppins(
+                                          color: colors.darkSecondaryTextColor),
+                                    ),
+                                    hintText: "Please enter city",
+                                    hintStyle: GoogleFonts.poppins(
+                                        color: colors.darkSecondaryTextColor),
+                                    contentPadding: EdgeInsets.all(7.0),
+                                  ),
+                                ),
+                              ),
+                            ],
                       ),
                     ],
                   )

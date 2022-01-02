@@ -10,7 +10,7 @@ import 'package:geo_spatial/Utils/Colors.dart' as colors;
     'no': false,
     };
 
- * CheckBoxAlertExtraDialog(
+ * CheckBoxAddExtraAlertDialog(
     title: 'Choose resource',
     hint: 'Choose your resource',
     dataMap: values,

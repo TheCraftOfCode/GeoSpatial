@@ -3,6 +3,7 @@ import 'package:geo_spatial/Model/CommunityDataModel.dart';
 import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
 import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
+import 'package:geo_spatial/Widgets/NavigationDrawer.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -27,6 +28,7 @@ class _HomeWidgetState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavigationDrawer(),
       backgroundColor: colors.darkScaffoldColor,
       appBar: AppBar(
           elevation: 0,
@@ -51,19 +53,12 @@ class _HomeWidgetState extends State<Home> {
               },
             )
           ],
-          leading: IconButton(
-            splashRadius: 20,
-            icon: Icon(
-              Icons.settings,
-              color: colors.darkAccentColor,
-            ),
-            onPressed: () {},
-          )),
+          ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children:[
             DataCard(
                 'Individual data',
                 'Individual data entry for everyone in home',
