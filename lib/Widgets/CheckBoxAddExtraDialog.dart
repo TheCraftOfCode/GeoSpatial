@@ -56,7 +56,7 @@ class CheckBoxAddExtraAlertDialog extends FormField<Map> {
                 if (state.hasError) {
                   return Text(
                     hint,
-                    style: GoogleFonts.poppins(color: Colors.red),
+                    style: GoogleFonts.poppins(color: colors.errorColor),
                     textAlign: TextAlign.end,
                   );
                 } else {
@@ -124,7 +124,7 @@ class CheckBoxAddExtraAlertDialog extends FormField<Map> {
                                 padding: EdgeInsets.only(left: 5),
                                 child: Icon(
                                   Icons.arrow_right,
-                                  color: colors.darkPrimaryTextColor,
+                                  color: colors.darkSecondaryTextColor,
                                 ),
                               )
                             ],
@@ -138,7 +138,7 @@ class CheckBoxAddExtraAlertDialog extends FormField<Map> {
                             child: Text(
                               state.errorText ?? "error",
                               style: TextStyle(
-                                  color: Colors.red, fontSize: 10),
+                                  color: colors.errorColor, fontSize: 10),
                             ),
                           )
                         : Container()
