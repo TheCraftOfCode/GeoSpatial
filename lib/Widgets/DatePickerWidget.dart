@@ -74,7 +74,7 @@ class DatePickerWidget extends FormField<DateTime> {
                                     style: GoogleFonts.montserrat(
                                         fontSize: 15,
                                         color: state.hasError
-                                            ? Colors.red
+                                            ? colors.errorColor
                                             : Colors.grey)),
                               )
                             ],
@@ -87,7 +87,7 @@ class DatePickerWidget extends FormField<DateTime> {
                             padding: EdgeInsets.all(7),
                             child: Text(
                               state.errorText ?? "error",
-                              style: TextStyle(color: Colors.red, fontSize: 10),
+                              style: TextStyle(color: colors.errorColor, fontSize: 10),
                             ),
                           )
                         : Container()

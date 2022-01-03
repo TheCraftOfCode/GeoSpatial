@@ -35,11 +35,15 @@ class darkTheme{
               color: colors.darkAccentColor, width: 1.0
           ),
         ),
+        errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: colors.errorColor, width: 1.0)),
         contentPadding: EdgeInsets.all(7.0),
         fillColor: colors.darkScaffoldColor,
         labelStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
         floatingLabelStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
         hintStyle: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+        errorStyle: GoogleFonts.poppins(color: colors.errorColor)
       ),
 
     );
