@@ -7,7 +7,6 @@ import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Utils/StoreInstance.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/CheckBoxAddExtraDialog.dart';
-import 'package:geo_spatial/Widgets/CheckBoxAlertDialog.dart';
 import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
@@ -34,8 +33,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   bool dailyWageWorker = false;
   int count = 0;
 
-  var vulnerabilities = <String,bool>{
-    'Widower':false,
+  var vulnerabilities = <String, bool>{
+    'Widower': false,
     'Divorcee': false,
     'Differently Abled': false,
     'Pregnant Woman': false,
@@ -48,7 +47,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
     'None': false
   };
 
-  var occupations = <String,bool>{
+  var occupations = <String, bool>{
     'Clerical support worker': false,
     'Services and sales worker': false,
     'Agricultural, forestry, fishery worker': false,
@@ -57,7 +56,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
     'Craft and related trades workers': false,
     'Plant/Machine Operators and Assemblers': false,
     'Elementary occupations': false,
-    'Armed Forces occupations' : false,
+    'Armed Forces occupations': false,
     'Unemployed': false,
   };
 
@@ -156,7 +155,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     ),
                     validator: (value) {
                       if (value == "") {
-                        return "Please enter a value";
+                        return "Please enter a value / 0 if no phone";
                       } else if (value!.length != 10) {
                         return "Enter a valid number";
                       } else
@@ -187,6 +186,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
                     style: darkTheme.DarkTheme.textTheme.bodyText2,
                     decoration: InputDecoration(
                       label: Text(
@@ -201,7 +201,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     ),
                     validator: (value) {
                       if (value == "") {
-                        return "Enter 12 digit Aadhaar";
+                        return "Enter 12 digit Aadhaar / 0 if absent";
                       } else if (value!.length != 12) {
                         return "Enter a valid Aadhaar";
                       } else
@@ -219,7 +219,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   onSaved: (map) {
                     print(map);
                   },
-                  errorField: "Please choose a vulnerability",
+                  errorField: "Please choose a vulnerability / None",
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 CheckBoxAddExtraAlertDialog(
@@ -231,10 +231,11 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   onSaved: (map) {
                     print(map);
                   },
-                  errorField: "Please choose an occupation",
+                  errorField: "Please choose an occupation / None",
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 OptionsWidget(
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                   options: [
                     ["Yes", true],
                     ["No", false]
@@ -248,6 +249,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     style: darkTheme.DarkTheme.textTheme.bodyText2,
                     decoration: InputDecoration(
                       label: Text(
@@ -262,7 +265,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     ),
                     validator: (value) {
                       if (value == "") {
-                        return "Enter Income/Day";
+                        return "Enter Income/Day / 0";
                       }
                     },
                   ),
@@ -274,6 +277,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               Padding(
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                 child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   style: darkTheme.DarkTheme.textTheme.bodyText2,
                   decoration: InputDecoration(
                     label: Text(
@@ -288,7 +293,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   ),
                   validator: (value) {
                     if (value == "") {
-                      return "Enter Income/Month";
+                      return "Enter Income/Month / 0";
                     }
                   },
                 ),
@@ -296,6 +301,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: OptionsWidget(
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                   options: [
                     ["Eligible", "eligible"],
                     ["Eligible, receiving", "eligible_receiving"],
@@ -305,6 +311,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 ),
               ),
               OptionsWidget(
+                autoValidateMode: AutovalidateMode.onUserInteraction,
                 options: [
                   ["Yes", "yes"],
                   ["No", "no"],
@@ -314,6 +321,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: OptionsWidget(
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                   options: [
                     ["Married", "married"],
                     ["Unmarried", "unmarried"],
@@ -325,13 +333,20 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 padding:
                     const EdgeInsets.only(left: 10.0, right: 10.0, top: 20),
                 child: TagTextWidget(
-                    label: "Special Skills",
-                    hint: "Enter skills here",
-                    onSaved: (data) {
-                      for (var i in data!) {
-                        print(i);
-                      }
-                    }),
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  label: "Special Skills",
+                  hint: "Enter skills here",
+                  onSaved: (data) {
+                    for (var i in data!) {
+                      print(i);
+                    }
+                  },
+                  validator: (value) {
+                    if (value == "") {
+                      return "Enter a value / NA";
+                    }
+                  },
+                ),
               ),
             ]),
             Column(
@@ -341,26 +356,17 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   padding:
                       const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
                   child: TagTextWidget(
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
                       label: "Frequent ailments",
                       hint: "Enter ailments here",
                       onSaved: (data) {
                         for (var i in data!) {
                           print(i);
                         }
-                      }),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
-                  child: TagTextWidget(
-                      label: "Communicable Diseases",
-                      hint: "Enter diseases here",
-                      onSaved: (data) {
-                        for (var i in data!) {
-                          print(i);
+                      },
+                      validator: (value) {
+                        if (value == "") {
+                          return "Enter a value / NA";
                         }
                       }),
                 ),
@@ -371,11 +377,38 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   padding:
                       const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
                   child: TagTextWidget(
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                      label: "Communicable Diseases",
+                      hint: "Enter diseases here",
+                      onSaved: (data) {
+                        for (var i in data!) {
+                          print(i);
+                        }
+                      },
+                      validator: (value) {
+                        if (value == "") {
+                          return "Enter a value / NA";
+                        }
+                      }),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
+                  child: TagTextWidget(
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
                       label: "Non-communicable diseases",
                       hint: "Enter diseases here",
                       onSaved: (data) {
                         for (var i in data!) {
                           print(i);
+                        }
+                      },
+                      validator: (value) {
+                        if (value == "") {
+                          return "Enter a value / NA";
                         }
                       }),
                 ),
@@ -412,27 +445,45 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   ),
                 ),
                 TagTextWidget(
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                     label: "Anganwadi services utilised",
                     hint: "Enter services here",
                     onSaved: (data) {
                       for (var i in data!) {
                         print(i);
                       }
+                    },
+                    validator: (value) {
+                      if (value == "") {
+                        return "Enter a value / NA";
+                      }
                     }),
                 TagTextWidget(
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                     label: "PHC services utilised",
                     hint: "Enter services here",
                     onSaved: (data) {
                       for (var i in data!) {
                         print(i);
                       }
+                    },
+                    validator: (value) {
+                      if (value == "") {
+                        return "Enter a value / NA";
+                      }
                     }),
                 TagTextWidget(
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                     label: "Private Clinic services utilised",
                     hint: "Enter services here",
                     onSaved: (data) {
                       for (var i in data!) {
                         print(i);
+                      }
+                    },
+                    validator: (value) {
+                      if (value == "") {
+                        return "Enter a value / NA";
                       }
                     }),
               ],
@@ -443,6 +494,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     style: darkTheme.DarkTheme.textTheme.bodyText2,
                     decoration: InputDecoration(
                       label: Text(
@@ -455,6 +507,11 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           color: colors.darkSecondaryTextColor),
                       contentPadding: EdgeInsets.all(7.0),
                     ),
+                      validator: (value) {
+                        if (value == "") {
+                          return "Enter a value / NA";
+                        }
+                      }
                   ),
                 ),
                 OptionsWidget(options: [
