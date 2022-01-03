@@ -6,6 +6,7 @@ import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Utils/StoreInstance.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
+import 'package:geo_spatial/Widgets/CheckBoxAddExtraDialog.dart';
 import 'package:geo_spatial/Widgets/CheckBoxAlertDialog.dart';
 import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
@@ -51,13 +52,13 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
     'Clerical support worker': false,
     'Services and sales worker': false,
     'Agricultural, forestry, fishery worker': false,
-    'Unemployed': false,
     'Professional': false,
     'Technician and associate professionals': false,
     'Craft and related trades workers': false,
     'Plant/Machine Operators and Assemblers': false,
     'Elementary occupations': false,
-    'Armed Forces occupations' : false
+    'Armed Forces occupations' : false,
+    'Unemployed': false,
   };
 
   @override
@@ -209,7 +210,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                 ),
-                CheckBoxAlertDialog(
+                CheckBoxAddExtraAlertDialog(
                   title: 'Vulnerabilities',
                   hint: 'Please choose a vulnerability',
                   dataMap: vulnerabilities,
@@ -221,7 +222,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   errorField: "Please choose a vulnerability",
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                 ),
-                CheckBoxAlertDialog(
+                CheckBoxAddExtraAlertDialog(
                   title: 'Occupation',
                   hint: 'Select applicable',
                   dataMap: occupations,
