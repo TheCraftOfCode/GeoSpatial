@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geo_spatial/Screens/Login.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/Globals.dart' as globals;
 import 'package:google_fonts/google_fonts.dart';
@@ -40,10 +41,27 @@ class NavigationDrawer extends StatelessWidget {
             ),
             buildMenuItem(text: 'Home', icon: Icons.home, onTap: () {}),
             buildMenuItem(text: 'Profile', icon: Icons.person, onTap: () {}),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.6,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Container(
+                height: 1,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.grey),
+                  ),
+                ),
+              ),
             ),
-            buildMenuItem(text: 'Sign Out', icon: Icons.logout, onTap: () {}),
+            buildMenuItem(
+              text: 'Sign Out',
+              icon: Icons.logout,
+              onTap: () async {
+                await storage.delete(key: 'jwt');
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => Login()),
+                    (Route<dynamic> route) => false);
+              },
+            ),
           ],
         ),
       ),

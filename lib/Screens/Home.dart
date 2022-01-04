@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
 import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
+import 'package:geo_spatial/Screens/VillageSelection.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
 import 'package:geo_spatial/Widgets/NavigationDrawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Screens/Login.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:geo_spatial/Utils/Globals.dart' as globals;
 
 import 'EditExistingRecordsPage.dart';
 import 'SavedData.dart';
@@ -21,7 +23,6 @@ class Home extends StatefulWidget {
 final storage = FlutterSecureStorage();
 
 class _HomeWidgetState extends State<Home> {
-  String userName = '';
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +30,11 @@ class _HomeWidgetState extends State<Home> {
       drawer: NavigationDrawer(),
       backgroundColor: colors.darkScaffoldColor,
       appBar: AppBar(
-          elevation: 0,
+          elevation: 40,
           title: Text(
-            'Hello, ' + userName + '!',
+            'Hello, ' + globals.Name + '!',
             style: GoogleFonts.montserrat(
-                fontSize: 20, color: colors.darkPrimaryTextColor),
+                fontSize: 18, color: colors.darkPrimaryTextColor),
           ),
           backgroundColor: Colors.transparent,
           actions: [
@@ -62,6 +63,7 @@ class _HomeWidgetState extends State<Home> {
                 'Individual data entry for everyone in home',
                 'assets/svg/female.svg',
                 FamilyHomeScreen(),
+                //VillageSelectionScreen(),
                 Color(0xfff54b64),
                 Color(0xfff78361)),
             DataCard(
