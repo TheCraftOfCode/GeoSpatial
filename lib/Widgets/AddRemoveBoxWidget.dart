@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geo_spatial/Model/FamilyMembersCommomDataModel.dart';
+import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
 import 'package:geo_spatial/Screens/FamilyMemberAdd.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;

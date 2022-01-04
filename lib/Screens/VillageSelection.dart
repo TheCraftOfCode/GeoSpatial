@@ -70,6 +70,8 @@ class _VillageSelectionScreenState extends State<VillageSelectionScreen> {
                               }),
                         ),
                       ),
+                      if(widget.isGenerated)
+                        Card(),
                     ],
                   ),
                 ),
