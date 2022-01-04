@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:google_fonts/google_fonts.dart';
 
 class DatePickerWidget extends FormField<DateTime> {
   DatePickerWidget(
@@ -63,7 +63,10 @@ class DatePickerWidget extends FormField<DateTime> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(right: 20, left: 10),
-                                child: Icon(Icons.calendar_today),
+                                child: Icon(
+                                  Icons.calendar_today,
+                                  color: colors.darkPrimaryTextColor,
+                                ),
                               ),
                               Expanded(
                                 flex: 1,
@@ -87,7 +90,8 @@ class DatePickerWidget extends FormField<DateTime> {
                             padding: EdgeInsets.all(7),
                             child: Text(
                               state.errorText ?? "error",
-                              style: TextStyle(color: colors.errorColor, fontSize: 10),
+                              style: TextStyle(
+                                  color: colors.errorColor, fontSize: 10),
                             ),
                           )
                         : Container()

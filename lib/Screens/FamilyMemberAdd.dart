@@ -120,6 +120,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 GenderPickerWithImage(
                   verticalAlignedText: false,
                   selectedGender: Gender.Male,
+                  maleImage: AssetImage("assets/avatar_man.png"),
+                  linearGradient: LinearGradient(
+                      colors: [Color(0xfff54b64), Color(0xfff78361)]),
+                  femaleImage: AssetImage("assets/avatar_woman.png"),
                   selectedGenderTextStyle: TextStyle(
                       color: Colors.greenAccent, fontWeight: FontWeight.bold),
                   unSelectedGenderTextStyle: TextStyle(
@@ -132,7 +136,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   animationDuration: Duration(milliseconds: 300),
                   isCircular: true,
                   // default : true,
-                  opacityOfGradient: 0.3,
+                  opacityOfGradient: 0.2,
                   padding: const EdgeInsets.all(3),
                   size: 70, //default : 40
                 ),
