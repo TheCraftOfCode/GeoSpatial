@@ -7,6 +7,35 @@ import 'package:intl/intl.dart';
 class FamilyMemberIndividualDataModel {
   int id = 0;
   String? userName;
+  String? dateOfBirth;
+  String? gender;
+  String? phoneNumber;
+  String? educationQualification;
+  String? aadhaarNumber;
+  List<String>? vulnerabilities;
+  List<String>? occupation;
+  String? dailyWageWorker;
+  String? incomePerDay;
+  String? incomePerMonth;
+  String? pension;
+  String? businessStatus;
+  String? maritalStatus;
+  List<String>? specialSkills;
+  List<String>? frequentAilments;
+  List<String>? commutableDisease;
+  List<String>? nonCommutableDisease;
+  String? surgeries;
+  String? anganwadiServicesAware;
+  String? anganwadiServicesUsing;
+  List<String>? anganwadiServicesUsedList;
+  List<String>? PHCServicesUsedList;
+  List<String>? privateClinicServicesUsedList;
+  String? privateServiceReason;
+  String? useOfTobacco;
+  String? useOfAlcohol;
+  String? aarogyaSetuInstalled;
+  String? vizhithiruInstalled;
+
   String? savedTime = DateFormat('kk:mm:ss, EEE d MMM').format(DateTime.now());
 
   FamilyMemberIndividualDataModel({this.userName});
@@ -19,11 +48,8 @@ class FamilyMembersCommonDataModel {
   Position? locationTopRight;
   Position? locationBottomLeft;
   Position? locationBottomRight;
-
-  @Property(type: PropertyType.byteVector)
-  List<int>? keys;
+  final individualDataList = ToMany<FamilyMemberIndividualDataModel>();
   String? savedTime = DateFormat('kk:mm:ss, EEE d MMM').format(DateTime.now());
-
 
   String? get dbLocationTopLeft {
     if (locationTopLeft == null) {
@@ -135,7 +161,7 @@ class FamilyMembersCommonDataModel {
   }
 
   FamilyMembersCommonDataModel({
-    this.keys,
+    //this.keys,
     this.locationBottomLeft,
     this.locationBottomRight,
     this.locationTopLeft,

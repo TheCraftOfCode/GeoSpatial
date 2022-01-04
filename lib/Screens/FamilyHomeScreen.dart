@@ -6,7 +6,6 @@ import 'package:geo_spatial/Utils/StoreInstance.dart';
 import 'package:geo_spatial/Widgets/AddRemoveBoxWidget.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
-import 'package:geo_spatial/Widgets/NavigationDrawer.dart';
 
 import '../objectbox.g.dart';
 import 'CollectLocationWidget.dart';
@@ -31,7 +30,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen>
 
     if (modelData == null)
       modelData =
-          widget.modelData ?? new FamilyMembersCommonDataModel(keys: []);
+          widget.modelData ?? new FamilyMembersCommonDataModel();
 
     return Scaffold(
       appBar: AppBarBackButton('Individual Data'),
@@ -100,7 +99,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen>
                           onPressed: () async {
                             store = await StoreInstance.getInstance();
                             Box box = store.box<FamilyMembersCommonDataModel>();
-                            int id = await box.put(modelData);
+                            await box.put(modelData);
                           }),
                     ),
                   )

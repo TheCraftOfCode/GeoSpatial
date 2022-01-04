@@ -54,7 +54,7 @@
     },
     {
       "id": "2:1860532570098563020",
-      "lastPropertyId": "9:7198889010838595583",
+      "lastPropertyId": "10:2008589073662093950",
       "name": "FamilyMembersCommonDataModel",
       "properties": [
         {
@@ -87,18 +87,19 @@
           "id": "8:4682325687318046173",
           "name": "dbLocationBottomRight",
           "type": 9
-        },
-        {
-          "id": "9:7198889010838595583",
-          "name": "keys",
-          "type": 23
         }
       ],
-      "relations": []
+      "relations": [
+        {
+          "id": "3:371184347085100722",
+          "name": "individualDataList",
+          "targetId": "4:8671447701453785879"
+        }
+      ]
     },
     {
       "id": "4:8671447701453785879",
-      "lastPropertyId": "3:4526862708267238768",
+      "lastPropertyId": "31:1397399115057201044",
       "name": "FamilyMemberIndividualDataModel",
       "properties": [
         {
@@ -116,6 +117,146 @@
           "id": "3:4526862708267238768",
           "name": "savedTime",
           "type": 9
+        },
+        {
+          "id": "4:3085664632559939021",
+          "name": "dateOfBirth",
+          "type": 9
+        },
+        {
+          "id": "5:4089981874949227093",
+          "name": "gender",
+          "type": 9
+        },
+        {
+          "id": "6:8147924758541863603",
+          "name": "phoneNumber",
+          "type": 9
+        },
+        {
+          "id": "7:8362247275532978895",
+          "name": "educationQualification",
+          "type": 9
+        },
+        {
+          "id": "8:5679091799904005563",
+          "name": "aadhaarNumber",
+          "type": 9
+        },
+        {
+          "id": "9:93176754199097596",
+          "name": "vulnerabilities",
+          "type": 30
+        },
+        {
+          "id": "10:6683743346766211386",
+          "name": "occupation",
+          "type": 30
+        },
+        {
+          "id": "11:7674773686375268308",
+          "name": "dailyWageWorker",
+          "type": 9
+        },
+        {
+          "id": "12:3825178531183591336",
+          "name": "incomePerDay",
+          "type": 9
+        },
+        {
+          "id": "13:6800080566226023846",
+          "name": "incomePerMonth",
+          "type": 9
+        },
+        {
+          "id": "14:6682636002341351132",
+          "name": "pension",
+          "type": 9
+        },
+        {
+          "id": "15:5889517609383333513",
+          "name": "businessStatus",
+          "type": 9
+        },
+        {
+          "id": "16:1551885345947737655",
+          "name": "maritalStatus",
+          "type": 9
+        },
+        {
+          "id": "17:7362378614402948609",
+          "name": "specialSkills",
+          "type": 30
+        },
+        {
+          "id": "18:8079660499990560077",
+          "name": "frequentAilments",
+          "type": 30
+        },
+        {
+          "id": "19:4413374908120023856",
+          "name": "commutableDisease",
+          "type": 30
+        },
+        {
+          "id": "20:4250702923463112078",
+          "name": "nonCommutableDisease",
+          "type": 30
+        },
+        {
+          "id": "21:1237433258990716055",
+          "name": "surgeries",
+          "type": 9
+        },
+        {
+          "id": "22:6965476731638035450",
+          "name": "anganwadiServicesAware",
+          "type": 9
+        },
+        {
+          "id": "23:4550221857104463869",
+          "name": "anganwadiServicesUsing",
+          "type": 9
+        },
+        {
+          "id": "24:9085531839818427243",
+          "name": "anganwadiServicesUsedList",
+          "type": 30
+        },
+        {
+          "id": "25:6866114763519136439",
+          "name": "PHCServicesUsedList",
+          "type": 30
+        },
+        {
+          "id": "26:4835734038831150727",
+          "name": "privateClinicServicesUsedList",
+          "type": 30
+        },
+        {
+          "id": "27:4667157897046339139",
+          "name": "privateServiceReason",
+          "type": 9
+        },
+        {
+          "id": "28:3779166862225991045",
+          "name": "useOfTobacco",
+          "type": 9
+        },
+        {
+          "id": "29:3268788816803461695",
+          "name": "useOfAlcohol",
+          "type": 9
+        },
+        {
+          "id": "30:4255114771534059896",
+          "name": "aarogyaSetuInstalled",
+          "type": 9
+        },
+        {
+          "id": "31:1397399115057201044",
+          "name": "vizhithiruInstalled",
+          "type": 9
         }
       ],
       "relations": []
@@ -123,7 +264,7 @@
   ],
   "lastEntityId": "4:8671447701453785879",
   "lastIndexId": "2:3780641643474411567",
-  "lastRelationId": "2:991746608797753194",
+  "lastRelationId": "3:371184347085100722",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
@@ -142,7 +283,9 @@
     2435262721668243080,
     5992078344277508825,
     2398616950182668401,
-    635977564128467162
+    635977564128467162,
+    7198889010838595583,
+    2008589073662093950
   ],
   "retiredRelationUids": [
     7533083279143375120,
