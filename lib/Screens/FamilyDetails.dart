@@ -81,276 +81,306 @@ class _FamilyDetailsState extends State<FamilyDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: colors.darkScaffoldColor,
-        appBar: AppBarBackButton('Family Details'),
-        body: SizedBox(
-            height: MediaQuery.of(context).size.height -
-                MediaQuery.of(context).viewInsets.bottom * 1.1,
-            child: SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
-                child: FormPageView([
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      OptionsWidget(options: [
-                        ['Yes', 'yes'],
-                        ['No', 'no']
-                      ], title: "Do you have drinking water available?"),
-                      DropDownFormField(
-                        list: [
-                          'None',
-                          'Lake',
-                          'Pond',
-                          'Groundwater',
-                          'Well',
-                          'Tap',
-                          'Water supply',
-                          'Lorry/Van'
-                        ],
-                        hint: "Select source",
-                        title: "Source of Water",
-                        errorField: "Please choose an option",
-                      ),
-                      OptionsWidget(options: [
-                        ['Yes', 'yes'],
-                        ['No', 'no']
-                      ], title: "Do you have toilet facilities?"),
-                      OptionsWidget(options: [
-                        ['Yes', 'yes'],
-                        ['No', 'no']
-                      ], title: "If not toilet, community toilet?"),
-                      OptionsWidget(options: [
-                        ['Clean', 'clean'],
-                        ['Unclean', 'unclean']
-                      ], title: "Environmental sanitation level: "),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      OptionsWidget(options: [
-                        ['Yes', 'yes'],
-                        ['No', 'no']
-                      ], title: "Is running water available?"),
-                      DropDownFormField(
-                        list: ['1', '2', '3', '4', '5', 'More'],
-                        hint: "Select the highest",
-                        title: "No of two wheelers",
-                        errorField: "Please choose a valid number",
-                      ),
-                      DropDownFormField(
-                        list: ['1', '2', '3', '4', '5', 'More'],
-                        hint: "Select the highest",
-                        title: "No of three wheelers",
-                        errorField: "Please choose a valid number",
-                      ),
-                      CheckBoxAlertDialog(
-                        title: 'Two/Three wheeler manufacturer',
-                        hint: 'Please choose manufacturers',
-                        dataMap: two_three_mfg,
-                        singleOption: false,
-                        context: context,
-                        onSaved: (map) {
-                          print(map);
-                        },
-                        errorField: "Please choose a manufacturer",
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
-                      ),
-                      DropDownFormField(
-                        list: ['1', '2', '3', '4', '5', 'More'],
-                        hint: "Select the highest",
-                        title: "No of four wheelers",
-                        errorField: "Please choose a valid number",
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      CheckBoxAlertDialog(
-                        title: 'Four wheeler manufacturer',
-                        hint: 'Please choose manufacturers',
-                        dataMap: four_mfg,
-                        singleOption: false,
-                        context: context,
-                        onSaved: (map) {
-                          print(map);
-                        },
-                        errorField: "Please choose a manufacturer",
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
-                      ),
-                      OptionsWidget(options: [
-                        ['Yes', 'yes'],
-                        ['No', 'no']
-                      ], title: "Do you own cattle?"),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 10.0, right: 10.0, top: 20.0),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              hintStyle: GoogleFonts.poppins(
-                                  color: colors.darkSecondaryTextColor),
-                              contentPadding: EdgeInsets.all(7.0),
-                              hintText: "Enter income in Rupees",
-                              label: Text(
-                                'Income from cattle',
-                                style: GoogleFonts.poppins(
-                                    color: colors.darkSecondaryTextColor),
-                              )),
-                          autovalidateMode: AutovalidateMode.always,
-                          keyboardType: TextInputType.number,
+    return WillPopScope(
+      onWillPop: () async {
+        //TODO: Add condition here to check if page has been filled
+        if (false) {
+          return true;
+        }
+        final result = await showDialog(
+          context: context,
+          builder: (context)  =>  AlertDialog(
+            title: Text("Are you sure?"),
+            content: Text("All unsaved changes would be lost"),
+            actions: <Widget>[
+              TextButton(
+                child: Text('No'),
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+              ),
+              TextButton(
+                child: Text('Yes', style: TextStyle(color: Colors.red)),
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+              ),
+            ],
+          ),
+        );
+        return result;
+      },
+      child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor: colors.darkScaffoldColor,
+          appBar: AppBarBackButton('Family Details'),
+          body: SizedBox(
+              height: MediaQuery.of(context).size.height -
+                  MediaQuery.of(context).viewInsets.bottom * 1.1,
+              child: SingleChildScrollView(
+                  physics: ClampingScrollPhysics(),
+                  child: FormPageView([
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        OptionsWidget(options: [
+                          ['Yes', 'yes'],
+                          ['No', 'no']
+                        ], title: "Do you have drinking water available?"),
+                        DropDownFormField(
+                          list: [
+                            'None',
+                            'Lake',
+                            'Pond',
+                            'Groundwater',
+                            'Well',
+                            'Tap',
+                            'Water supply',
+                            'Lorry/Van'
+                          ],
+                          hint: "Select source",
+                          title: "Source of Water",
+                          errorField: "Please choose an option",
                         ),
-                      ),
-                      OptionsWidget(
-                        options: [
+                        OptionsWidget(options: [
                           ['Yes', 'yes'],
                           ['No', 'no']
-                        ],
-                        title: "Do you own farmland?",
-                      ),
-                      OptionsWidget(
-                        options: [
+                        ], title: "Do you have toilet facilities?"),
+                        OptionsWidget(options: [
                           ['Yes', 'yes'],
                           ['No', 'no']
-                        ],
-                        title: "Do you preserve seeds?",
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      //TODO: Display if answer to previous question is yes
-                      CheckBoxAddExtraAlertDialog(
-                        title: 'Seeds Preserved',
-                        hint: 'Choose preserved seeds',
-                        dataMap: seeds_preserved,
-                        singleOption: false,
-                        context: context,
-                        onSaved: (map) {
-                          print(map);
-                        },
-                      ),
-                      CheckBoxAddExtraAlertDialog(
-                        title: 'Trees owned',
-                        hint: 'Choose trees owned',
-                        dataMap: trees_owned,
-                        singleOption: false,
-                        context: context,
-                        onSaved: (map) {
-                          print(map);
-                        },
-                      ),
-                      CheckBoxAddExtraAlertDialog(
-                        title: 'Choose resource',
-                        hint: 'Choose your resource',
-                        dataMap: local_food,
-                        singleOption: false,
-                        context: context,
-                        onSaved: (map) {
-                          print(map);
-                        },
-                      ),
+                        ], title: "If not toilet, community toilet?"),
+                        OptionsWidget(options: [
+                          ['Clean', 'clean'],
+                          ['Unclean', 'unclean']
+                        ], title: "Environmental sanitation level: "),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        OptionsWidget(options: [
+                          ['Yes', 'yes'],
+                          ['No', 'no']
+                        ], title: "Is running water available?"),
+                        DropDownFormField(
+                          list: ['1', '2', '3', '4', '5', 'More'],
+                          hint: "Select the highest",
+                          title: "No of two wheelers",
+                          errorField: "Please choose a valid number",
+                        ),
+                        DropDownFormField(
+                          list: ['1', '2', '3', '4', '5', 'More'],
+                          hint: "Select the highest",
+                          title: "No of three wheelers",
+                          errorField: "Please choose a valid number",
+                        ),
+                        CheckBoxAlertDialog(
+                          title: 'Two/Three wheeler manufacturer',
+                          hint: 'Please choose manufacturers',
+                          dataMap: two_three_mfg,
+                          singleOption: false,
+                          context: context,
+                          onSaved: (map) {
+                            print(map);
+                          },
+                          errorField: "Please choose a manufacturer",
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                        ),
+                        DropDownFormField(
+                          list: ['1', '2', '3', '4', '5', 'More'],
+                          hint: "Select the highest",
+                          title: "No of four wheelers",
+                          errorField: "Please choose a valid number",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        CheckBoxAlertDialog(
+                          title: 'Four wheeler manufacturer',
+                          hint: 'Please choose manufacturers',
+                          dataMap: four_mfg,
+                          singleOption: false,
+                          context: context,
+                          onSaved: (map) {
+                            print(map);
+                          },
+                          errorField: "Please choose a manufacturer",
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                        ),
+                        OptionsWidget(options: [
+                          ['Yes', 'yes'],
+                          ['No', 'no']
+                        ], title: "Do you own cattle?"),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10.0, right: 10.0, top: 20.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                                hintStyle: GoogleFonts.poppins(
+                                    color: colors.darkSecondaryTextColor),
+                                contentPadding: EdgeInsets.all(7.0),
+                                hintText: "Enter income in Rupees",
+                                label: Text(
+                                  'Income from cattle',
+                                  style: GoogleFonts.poppins(
+                                      color: colors.darkSecondaryTextColor),
+                                )),
+                            autovalidateMode: AutovalidateMode.always,
+                            keyboardType: TextInputType.number,
+                          ),
+                        ),
+                        OptionsWidget(
+                          options: [
+                            ['Yes', 'yes'],
+                            ['No', 'no']
+                          ],
+                          title: "Do you own farmland?",
+                        ),
+                        OptionsWidget(
+                          options: [
+                            ['Yes', 'yes'],
+                            ['No', 'no']
+                          ],
+                          title: "Do you preserve seeds?",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        //TODO: Display if answer to previous question is yes
+                        CheckBoxAddExtraAlertDialog(
+                          title: 'Seeds Preserved',
+                          hint: 'Choose preserved seeds',
+                          dataMap: seeds_preserved,
+                          singleOption: false,
+                          context: context,
+                          onSaved: (map) {
+                            print(map);
+                          },
+                        ),
+                        CheckBoxAddExtraAlertDialog(
+                          title: 'Trees owned',
+                          hint: 'Choose trees owned',
+                          dataMap: trees_owned,
+                          singleOption: false,
+                          context: context,
+                          onSaved: (map) {
+                            print(map);
+                          },
+                        ),
+                        CheckBoxAddExtraAlertDialog(
+                          title: 'Choose resource',
+                          hint: 'Choose your resource',
+                          dataMap: local_food,
+                          singleOption: false,
+                          context: context,
+                          onSaved: (map) {
+                            print(map);
+                          },
+                        ),
 
-                      //TODO: Add autosuggest text widget for locally consumed food
-                      //TODO: Add autosuggest text widget for trees owned
-                      OptionsWidget(
-                        options: [
-                          ['Yes', 'yes'],
-                          ['No', 'no']
-                        ],
-                        title: "Do you have a kitchen garden?",
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      CheckBoxAddExtraAlertDialog(
-                        title: 'Kitchen Garden plants',
-                        hint: 'Choose garden plants',
-                        dataMap: garden_plants,
-                        singleOption: false,
-                        context: context,
-                        onSaved: (map) {
-                          print(map);
-                        },
-                      ),
-                      //TODO: Add autosuggest text widget for kitchen garden crops
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 15.0),
-                                  child: Text(
-                                    "Address",
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 15.0,
-                                        color: colors.darkPrimaryTextColor),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 70.0),
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    label: Text(
-                                      "First Line",
-                                      style: GoogleFonts.poppins(
-                                          color: colors.darkSecondaryTextColor),
+                        //TODO: Add autosuggest text widget for locally consumed food
+                        //TODO: Add autosuggest text widget for trees owned
+                        OptionsWidget(
+                          options: [
+                            ['Yes', 'yes'],
+                            ['No', 'no']
+                          ],
+                          title: "Do you have a kitchen garden?",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        CheckBoxAddExtraAlertDialog(
+                          title: 'Kitchen Garden plants',
+                          hint: 'Choose garden plants',
+                          dataMap: garden_plants,
+                          singleOption: false,
+                          context: context,
+                          onSaved: (map) {
+                            print(map);
+                          },
+                        ),
+                        //TODO: Add autosuggest text widget for kitchen garden crops
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 15.0),
+                                    child: Text(
+                                      "Address",
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: 15.0,
+                                          color: colors.darkPrimaryTextColor),
                                     ),
-                                    hintText: "Please enter first line",
-                                    hintStyle: GoogleFonts.poppins(
-                                        color: colors.darkSecondaryTextColor),
-                                    contentPadding: EdgeInsets.all(7.0),
                                   ),
-                                  validator: (value) {
-                                    if (value == "") {
-                                      return "Enter First Line";
-                                    }
-                                  },
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 70.0),
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    label: Text(
-                                      "Second Line",
-                                      style: GoogleFonts.poppins(
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 70.0),
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                      label: Text(
+                                        "First Line",
+                                        style: GoogleFonts.poppins(
+                                            color: colors.darkSecondaryTextColor),
+                                      ),
+                                      hintText: "Please enter first line",
+                                      hintStyle: GoogleFonts.poppins(
                                           color: colors.darkSecondaryTextColor),
+                                      contentPadding: EdgeInsets.all(7.0),
                                     ),
-                                    hintText: "Please enter second line",
-                                    hintStyle: GoogleFonts.poppins(
-                                        color: colors.darkSecondaryTextColor),
-                                    contentPadding: EdgeInsets.all(7.0),
+                                    validator: (value) {
+                                      if (value == "") {
+                                        return "Enter First Line";
+                                      }
+                                    },
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 70.0),
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    label: Text(
-                                      "City",
-                                      style: GoogleFonts.poppins(
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 70.0),
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                      label: Text(
+                                        "Second Line",
+                                        style: GoogleFonts.poppins(
+                                            color: colors.darkSecondaryTextColor),
+                                      ),
+                                      hintText: "Please enter second line",
+                                      hintStyle: GoogleFonts.poppins(
                                           color: colors.darkSecondaryTextColor),
+                                      contentPadding: EdgeInsets.all(7.0),
                                     ),
-                                    hintText: "Please enter city",
-                                    hintStyle: GoogleFonts.poppins(
-                                        color: colors.darkSecondaryTextColor),
-                                    contentPadding: EdgeInsets.all(7.0),
                                   ),
                                 ),
-                              ),
-                            ],
-                      ),
-                    ],
-                  )
-                ], _onSubmit))));
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 70.0),
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                      label: Text(
+                                        "City",
+                                        style: GoogleFonts.poppins(
+                                            color: colors.darkSecondaryTextColor),
+                                      ),
+                                      hintText: "Please enter city",
+                                      hintStyle: GoogleFonts.poppins(
+                                          color: colors.darkSecondaryTextColor),
+                                      contentPadding: EdgeInsets.all(7.0),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                        ),
+                      ],
+                    )
+                  ], _onSubmit)))),
+    );
   }
 }
