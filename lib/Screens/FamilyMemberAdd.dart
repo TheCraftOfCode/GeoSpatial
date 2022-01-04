@@ -16,9 +16,15 @@ import 'package:google_fonts/google_fonts.dart';
 import '../objectbox.g.dart';
 
 class FamilyMemberAdd extends StatefulWidget {
-  const FamilyMemberAdd({Key? key, this.familyMemberIndividualDataModel})
+  const FamilyMemberAdd(
+      {Key? key,
+      this.familyMemberIndividualDataModel,
+      this.dataModel,
+      this.index})
       : super(key: key);
   final FamilyMemberIndividualDataModel? familyMemberIndividualDataModel;
+  final FamilyMembersCommonDataModel? dataModel;
+  final int? index;
 
   @override
   _FamilyMemberAddState createState() => _FamilyMemberAddState();
@@ -61,6 +67,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
 
   @override
   Widget build(BuildContext context) {
+    print(
+        "${widget.familyMemberIndividualDataModel!.vulnerabilities} vulnerabilities");
     return WillPopScope(
       onWillPop: () async {
         //TODO: Add condition here to check if page has been filled
@@ -69,7 +77,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
         }
         final result = await showDialog(
           context: context,
-          builder: (context)  =>  AlertDialog(
+          builder: (context) => AlertDialog(
             title: Text("Are you sure?"),
             content: Text("All unsaved changes would be lost"),
             actions: <Widget>[
@@ -96,7 +104,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
         appBar: AppBarBackButton('Add Family Member'),
         body: SizedBox(
           height: MediaQuery.of(context).size.height -
-              MediaQuery.of(context).viewInsets.bottom * 1.45,
+              MediaQuery.of(context).viewInsets.bottom * 1.1,
           child: SingleChildScrollView(
             physics: ClampingScrollPhysics(),
             child: FormPageView(
@@ -111,7 +119,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         initialValue:
                             widget.familyMemberIndividualDataModel?.userName,
                         onSaved: (String? data) async {
-                          widget.familyMemberIndividualDataModel!.userName = data;
+                          widget.familyMemberIndividualDataModel!.userName =
+                              data;
                         },
                         style: darkTheme.DarkTheme.textTheme.bodyText2,
                         decoration: InputDecoration(
@@ -136,15 +145,16 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       ),
                     ),
                     DatePickerWidget(
-                      //TODO: Add initial value
+                      defaultDate:
+                          widget.familyMemberIndividualDataModel?.dateOfBirth,
                       context: context,
                       title: "Date of Birth",
                       hint: "Choose a date",
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       onSaved: (data) {
-                        // widget.familyMemberIndividualDataModel!.dateOfBirth =
-                        //     "${data!.day}/${data.month}/${data.year}";
-                        // print(data);
+                        widget.familyMemberIndividualDataModel!.dateOfBirth =
+                            data;
+                        print(data);
                       },
                     ),
                     GenderPickerWithImage(
@@ -155,7 +165,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           colors: [Color(0xfff54b64), Color(0xfff78361)]),
                       femaleImage: AssetImage("assets/avatar_woman.png"),
                       selectedGenderTextStyle: TextStyle(
-                          color: Colors.greenAccent, fontWeight: FontWeight.bold),
+                          color: Colors.greenAccent,
+                          fontWeight: FontWeight.bold),
                       unSelectedGenderTextStyle: TextStyle(
                           color: colors.darkPrimaryTextColor,
                           fontWeight: FontWeight.normal),
@@ -232,8 +243,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     Padding(
                       padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                       child: TextFormField(
-                        initialValue:
-                            widget.familyMemberIndividualDataModel?.aadhaarNumber,
+                        initialValue: widget
+                            .familyMemberIndividualDataModel?.aadhaarNumber,
                         keyboardType: TextInputType.number,
                         style: darkTheme.DarkTheme.textTheme.bodyText2,
                         decoration: InputDecoration(
@@ -256,8 +267,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                             return null;
                         },
                         onSaved: (data) {
-                          widget.familyMemberIndividualDataModel!.aadhaarNumber =
-                              data;
+                          widget.familyMemberIndividualDataModel!
+                              .aadhaarNumber = data;
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
@@ -265,11 +276,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     CheckBoxAddExtraAlertDialog(
                       title: 'Vulnerabilities',
                       hint: 'Please choose a vulnerability',
-                      dataMap: vulnerabilities,
+                      dataMap: widget.familyMemberIndividualDataModel!
+                              .vulnerabilities ??
+                          vulnerabilities,
                       singleOption: false,
                       context: context,
                       onSaved: (map) {
-                        print(map);
+                        widget.familyMemberIndividualDataModel!
+                            .vulnerabilities = map;
                       },
                       errorField: "Please choose a vulnerability / None",
                       autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -277,34 +291,40 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     CheckBoxAddExtraAlertDialog(
                       title: 'Occupation',
                       hint: 'Select applicable',
-                      dataMap: occupations,
+                      dataMap:
+                          widget.familyMemberIndividualDataModel!.occupation ??
+                              occupations,
                       singleOption: false,
                       context: context,
                       onSaved: (map) {
                         print(map);
+                        widget.familyMemberIndividualDataModel!.occupation =
+                            map;
                       },
                       errorField: "Please choose an occupation / None",
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                     ),
                     OptionsWidget(
+                      defaultValue: widget
+                          .familyMemberIndividualDataModel!.dailyWageWorker,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       options: [
-                        ["Yes", true],
-                        ["No", false]
+                        ["Yes", "true"],
+                        ["No", "false"]
                       ],
                       title: "Daily wage worker?",
                       onSaved: (val) {
                         //dailyWageWorker = value.toLowerCase() as bool;
-                        print(val.toString());
-                        widget.familyMemberIndividualDataModel!.dailyWageWorker =
-                            val;
+                        print("Value recorded: $val");
+                        widget.familyMemberIndividualDataModel!
+                            .dailyWageWorker = val;
                       },
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                       child: TextFormField(
-                        initialValue:
-                            widget.familyMemberIndividualDataModel?.incomePerDay,
+                        initialValue: widget
+                            .familyMemberIndividualDataModel?.incomePerDay,
                         keyboardType: TextInputType.number,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         style: darkTheme.DarkTheme.textTheme.bodyText2,
@@ -336,10 +356,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 ),
                 Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       //TODO: Add work timings
                       Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                        padding: const EdgeInsets.only(
+                            left: 10.0, right: 10.0, top: 10.0),
                         child: TextFormField(
                           initialValue: widget
                               .familyMemberIndividualDataModel?.incomePerMonth,
@@ -373,6 +395,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: OptionsWidget(
+                          defaultValue:
+                              widget.familyMemberIndividualDataModel!.pension,
                           autoValidateMode: AutovalidateMode.onUserInteraction,
                           options: [
                             ["Eligible", "eligible"],
@@ -383,11 +407,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           onSaved: (val) {
                             //dailyWageWorker = value.toLowerCase() as bool;
                             print(val.toString());
-                            widget.familyMemberIndividualDataModel!.pension = val;
+                            widget.familyMemberIndividualDataModel!.pension =
+                                val;
                           },
                         ),
                       ),
                       OptionsWidget(
+                        defaultValue: widget
+                            .familyMemberIndividualDataModel!.businessStatus,
                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         options: [
                           ["Yes", "yes"],
@@ -397,13 +424,15 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         onSaved: (val) {
                           //dailyWageWorker = value.toLowerCase() as bool;
                           print(val.toString());
-                          widget.familyMemberIndividualDataModel!.businessStatus =
-                              val;
+                          widget.familyMemberIndividualDataModel!
+                              .businessStatus = val;
                         },
                       ),
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: OptionsWidget(
+                          defaultValue: widget
+                              .familyMemberIndividualDataModel!.maritalStatus,
                           autoValidateMode: AutovalidateMode.onUserInteraction,
                           options: [
                             ["Married", "married"],
@@ -425,6 +454,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           autoValidateMode: AutovalidateMode.onUserInteraction,
                           label: "Special Skills",
                           hint: "Enter skills here",
+                          initialValue: widget
+                              .familyMemberIndividualDataModel!.specialSkills,
                           onSaved: (data) {
                             widget.familyMemberIndividualDataModel!
                                 .specialSkills = data;
@@ -442,12 +473,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
+                      padding: const EdgeInsets.only(
+                          left: 10.0, right: 10.0, top: 30),
                       child: TagTextWidget(
                           autoValidateMode: AutovalidateMode.onUserInteraction,
                           label: "Frequent ailments",
                           hint: "Enter ailments here",
+                          initialValue: widget.familyMemberIndividualDataModel!
+                              .frequentAilments,
                           onSaved: (data) {
                             widget.familyMemberIndividualDataModel!
                                 .frequentAilments = data;
@@ -463,12 +496,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       height: 20,
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
+                      padding: const EdgeInsets.only(
+                          left: 10.0, right: 10.0, top: 30),
                       child: TagTextWidget(
                           autoValidateMode: AutovalidateMode.onUserInteraction,
                           label: "Communicable Diseases",
                           hint: "Enter diseases here",
+                          initialValue: widget.familyMemberIndividualDataModel!
+                              .commutableDisease,
                           onSaved: (data) {
                             widget.familyMemberIndividualDataModel!
                                 .commutableDisease = data;
@@ -484,12 +519,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       height: 20,
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
+                      padding: const EdgeInsets.only(
+                          left: 10.0, right: 10.0, top: 30),
                       child: TagTextWidget(
                           autoValidateMode: AutovalidateMode.onUserInteraction,
                           label: "Non-communicable diseases",
                           hint: "Enter diseases here",
+                          initialValue: widget.familyMemberIndividualDataModel!
+                              .nonCommutableDisease,
                           onSaved: (data) {
                             widget.familyMemberIndividualDataModel!
                                 .nonCommutableDisease = data;
@@ -504,6 +541,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: OptionsWidget(
+                        defaultValue:
+                            widget.familyMemberIndividualDataModel!.surgeries,
                         options: [
                           ["Yes", "yes"],
                           ["No", "no"],
@@ -521,6 +560,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     OptionsWidget(
+                      defaultValue: widget.familyMemberIndividualDataModel!
+                          .anganwadiServicesAware,
                       options: [
                         ["Yes", "yes"],
                         ["No", "no"],
@@ -534,6 +575,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: OptionsWidget(
+                        defaultValue: widget.familyMemberIndividualDataModel!
+                            .anganwadiServicesUsing,
                         options: [
                           ["Yes", "yes"],
                           ["No", "no"],
@@ -549,6 +592,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         label: "Anganwadi services utilised",
                         hint: "Enter services here",
+                        initialValue: widget.familyMemberIndividualDataModel!
+                            .anganwadiServicesUsedList,
                         onSaved: (data) {
                           widget.familyMemberIndividualDataModel!
                               .anganwadiServicesUsedList = data;
@@ -563,6 +608,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         label: "PHC services utilised",
                         hint: "Enter services here",
+                        initialValue: widget.familyMemberIndividualDataModel!
+                            .PHCServicesUsedList,
                         onSaved: (data) {
                           widget.familyMemberIndividualDataModel!
                               .PHCServicesUsedList = data;
@@ -577,6 +624,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         label: "Private Clinic services utilised",
                         hint: "Enter services here",
+                        initialValue: widget.familyMemberIndividualDataModel!
+                            .privateClinicServicesUsedList,
                         onSaved: (data) {
                           widget.familyMemberIndividualDataModel!
                               .privateClinicServicesUsedList = data;
@@ -622,6 +671,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       ),
                     ),
                     OptionsWidget(
+                      defaultValue:
+                          widget.familyMemberIndividualDataModel!.useOfTobacco,
                       options: [
                         ['Yes', 'yes'],
                         ['No', 'no']
@@ -633,6 +684,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       },
                     ),
                     OptionsWidget(
+                      defaultValue:
+                          widget.familyMemberIndividualDataModel!.useOfAlcohol,
                       options: [
                         ['Yes', 'yes'],
                         ['No', 'no']
@@ -644,6 +697,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       },
                     ),
                     OptionsWidget(
+                      defaultValue: widget.familyMemberIndividualDataModel!
+                          .aarogyaSetuInstalled,
                       options: [
                         ['Yes', 'yes'],
                         ['No', 'no']
@@ -655,6 +710,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       },
                     ),
                     OptionsWidget(
+                      defaultValue: widget
+                          .familyMemberIndividualDataModel!.vizhithiruInstalled,
                       options: [
                         ['Yes', 'yes'],
                         ['No', 'no']
@@ -673,6 +730,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 var store = await StoreInstance.getInstance();
                 Box box = store.box<FamilyMemberIndividualDataModel>();
                 await box.put(widget.familyMemberIndividualDataModel);
+                widget.dataModel!.individualDataList[widget.index!] =
+                    widget.familyMemberIndividualDataModel!;
               },
             ),
           ),

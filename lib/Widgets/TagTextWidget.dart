@@ -15,6 +15,7 @@ class TagTextWidget extends FormField<List<String>> {
       errorField,
       autofillHints,
       search = const [],
+      initialValue,
       AutovalidateMode autoValidateMode = AutovalidateMode.onUserInteraction})
       : super(
             onSaved: onSaved,
@@ -24,7 +25,7 @@ class TagTextWidget extends FormField<List<String>> {
                     return errorField ?? "Please enter a value";
                   return null;
                 },
-            initialValue: [],
+            initialValue: initialValue ?? [],
             autovalidateMode: autoValidateMode,
             builder: (FormFieldState<List<String>> state) {
               final TextEditingController _contentEditingController =

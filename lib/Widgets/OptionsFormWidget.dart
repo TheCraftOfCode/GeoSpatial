@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
-
 /**
  * Implementation:
  *OptionsWidget(options: [["Yes", "yes"], ["No", "no"]], setDefaultValue: false, onSaved: (data){print(data);}),
@@ -15,8 +14,8 @@ class OptionsWidget extends FormField<dynamic> {
       {FormFieldSetter<dynamic>? onSaved,
       FormFieldValidator<dynamic>? validator,
       required List<dynamic> options,
-        required String title,
-      bool setDefaultValue = false,
+      required String title,
+      String? defaultValue,
       AutovalidateMode autoValidateMode = AutovalidateMode.onUserInteraction})
       : super(
             onSaved: onSaved,
@@ -25,7 +24,7 @@ class OptionsWidget extends FormField<dynamic> {
                   if (data == null) return "Please choose an option";
                   return null;
                 },
-            initialValue: setDefaultValue ? options[0][1] : null,
+            initialValue: defaultValue,
             autovalidateMode: autoValidateMode,
             builder: (FormFieldState<dynamic> state) {
               return Padding(
@@ -34,7 +33,11 @@ class OptionsWidget extends FormField<dynamic> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(title,style: GoogleFonts.poppins(fontSize: 15.0,color: colors.darkPrimaryTextColor),),
+                    Text(
+                      title,
+                      style: GoogleFonts.poppins(
+                          fontSize: 15.0, color: colors.darkPrimaryTextColor),
+                    ),
                     Wrap(
                         alignment: WrapAlignment.center,
                         children: options
@@ -50,7 +53,8 @@ class OptionsWidget extends FormField<dynamic> {
                       child: state.hasError
                           ? Text(
                               state.errorText ?? "error",
-                              style: GoogleFonts.poppins(color: colors.errorColor, fontSize: 10),
+                              style: GoogleFonts.poppins(
+                                  color: colors.errorColor, fontSize: 10),
                             )
                           : Container(),
                     )
@@ -96,7 +100,10 @@ class OptionButton extends StatelessWidget {
           onPressed: () {
             state.didChange(optionKey);
           },
-          child: Text(text,style: GoogleFonts.poppins(color: Colors.white),)),
+          child: Text(
+            text,
+            style: GoogleFonts.poppins(color: Colors.white),
+          )),
     );
   }
 }

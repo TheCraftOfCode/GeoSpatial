@@ -7,13 +7,14 @@ import 'package:intl/intl.dart';
 class FamilyMemberIndividualDataModel {
   int id = 0;
   String? userName;
-  String? dateOfBirth;
+  @Property(type: PropertyType.date)
+  DateTime? dateOfBirth;
   String? gender;
   String? phoneNumber;
   String? educationQualification;
   String? aadhaarNumber;
-  List<String>? vulnerabilities;
-  List<String>? occupation;
+  Map<String, bool>? vulnerabilities;
+  Map<String, bool>? occupation;
   String? dailyWageWorker;
   String? incomePerDay;
   String? incomePerMonth;
@@ -39,6 +40,30 @@ class FamilyMemberIndividualDataModel {
   String? savedTime = DateFormat('kk:mm:ss, EEE d MMM').format(DateTime.now());
 
   FamilyMemberIndividualDataModel({this.userName});
+
+  String? get dbVulnerabilities =>
+      vulnerabilities == null ? null : json.encode(vulnerabilities);
+
+  set dbVulnerabilities(String? value) {
+    if (value == null) {
+      vulnerabilities = null;
+    } else {
+      vulnerabilities = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
+
+  String? get dbOccupation =>
+      occupation == null ? null : json.encode(vulnerabilities);
+
+  set dbOccupation(String? value) {
+    if (value == null) {
+      occupation = null;
+    } else {
+      occupation = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
 }
 
 @Entity()
@@ -48,6 +73,30 @@ class FamilyMembersCommonDataModel {
   Position? locationTopRight;
   Position? locationBottomLeft;
   Position? locationBottomRight;
+  String? drinkingWater;
+  String? sourceOfDrinkingWater;
+  String? toiletFacility;
+  String? communityToilet;
+  String? environmentSanitationLevel;
+  String? runningWaterAvailable;
+  String? noOfTwoWheelers;
+  String? noOfThreeWheelers;
+  String? noOfFourWheelers;
+  Map<String, bool>? twoThreeWheelManufacturer;
+  Map<String, bool>? twoFourManufacturer;
+  String? isCattleOwned;
+  String? incomeFromCattle;
+  String? isFarmLandOwned;
+  String? isSeedsPreserved;
+  Map<String, bool>? preservedSeedsMap;
+  Map<String, bool>? treesOwnedMap;
+  String? isKitchenGardenOwned;
+  Map<String, bool>? kitchenGardenPlants;
+  String? addressOne;
+  String? addressTwo;
+  String? addressThree;
+
+
   final individualDataList = ToMany<FamilyMemberIndividualDataModel>();
   String? savedTime = DateFormat('kk:mm:ss, EEE d MMM').format(DateTime.now());
 

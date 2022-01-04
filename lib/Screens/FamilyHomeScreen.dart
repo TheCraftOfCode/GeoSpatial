@@ -29,8 +29,8 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen>
     super.build(context);
 
     if (modelData == null)
-      modelData =
-          widget.modelData ?? new FamilyMembersCommonDataModel();
+      modelData = widget.modelData ?? new FamilyMembersCommonDataModel();
+
 
     return Scaffold(
       appBar: AppBarBackButton('Individual Data'),

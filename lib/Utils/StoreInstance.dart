@@ -13,7 +13,6 @@ class StoreInstance {
         store.close();
         store = await openStore();
       }
-      print("NULL");
     }
     return store;
   }

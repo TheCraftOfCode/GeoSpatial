@@ -12,7 +12,7 @@ class DropDownFormField extends FormField<dynamic> {
       required hint,
       String? defaultValue,
       errorField,
-      AutovalidateMode autoValidateMode = AutovalidateMode.disabled})
+      AutovalidateMode autoValidateMode = AutovalidateMode.onUserInteraction})
       : super(
             onSaved: onSaved,
             validator: validator ??
