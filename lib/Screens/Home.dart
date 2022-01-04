@@ -62,8 +62,8 @@ class _HomeWidgetState extends State<Home> {
                 'Individual data',
                 'Individual data entry for everyone in home',
                 'assets/svg/female.svg',
-                FamilyHomeScreen(),
-                //VillageSelectionScreen(),
+                //FamilyHomeScreen(),
+                VillageSelectionScreen(),
                 Color(0xfff54b64),
                 Color(0xfff78361)),
             DataCard(
