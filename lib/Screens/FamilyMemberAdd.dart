@@ -13,7 +13,6 @@ import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
 import 'package:geo_spatial/Widgets/TagTextWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../objectbox.g.dart';
 
 class FamilyMemberAdd extends StatefulWidget {
@@ -342,9 +341,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     }
                   },
                   validator: (value) {
-                    if (value == "") {
+                    if (value == null || value.isEmpty) {
                       return "Enter a value / NA";
-                    }
+                    } else
+                      return null;
                   },
                 ),
               ),
@@ -365,9 +365,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         }
                       },
                       validator: (value) {
-                        if (value == "") {
+                        if (value == null || value.isEmpty) {
                           return "Enter a value / NA";
-                        }
+                        } else
+                          return null;
                       }),
                 ),
                 SizedBox(
@@ -377,7 +378,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   padding:
                       const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
                   child: TagTextWidget(
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
                       label: "Communicable Diseases",
                       hint: "Enter diseases here",
                       onSaved: (data) {
@@ -386,9 +387,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         }
                       },
                       validator: (value) {
-                        if (value == "") {
+                        if (value == null || value.isEmpty) {
                           return "Enter a value / NA";
-                        }
+                        } else
+                          return null;
                       }),
                 ),
                 SizedBox(
@@ -398,7 +400,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   padding:
                       const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
                   child: TagTextWidget(
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
                       label: "Non-communicable diseases",
                       hint: "Enter diseases here",
                       onSaved: (data) {
@@ -407,9 +409,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         }
                       },
                       validator: (value) {
-                        if (value == "") {
+                        if (value == null || value.isEmpty) {
                           return "Enter a value / NA";
-                        }
+                        } else
+                          return null;
                       }),
                 ),
                 Padding(
@@ -445,7 +448,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   ),
                 ),
                 TagTextWidget(
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
                     label: "Anganwadi services utilised",
                     hint: "Enter services here",
                     onSaved: (data) {
@@ -454,12 +457,13 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       }
                     },
                     validator: (value) {
-                      if (value == "") {
+                      if (value == null || value.isEmpty) {
                         return "Enter a value / NA";
-                      }
+                      } else
+                        return null;
                     }),
                 TagTextWidget(
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
                     label: "PHC services utilised",
                     hint: "Enter services here",
                     onSaved: (data) {
@@ -468,12 +472,13 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       }
                     },
                     validator: (value) {
-                      if (value == "") {
+                      if (value == null || value.isEmpty) {
                         return "Enter a value / NA";
-                      }
+                      } else
+                        return null;
                     }),
                 TagTextWidget(
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
                     label: "Private Clinic services utilised",
                     hint: "Enter services here",
                     onSaved: (data) {
@@ -482,9 +487,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       }
                     },
                     validator: (value) {
-                      if (value == "") {
+                      if (value == null || value.isEmpty) {
                         return "Enter a value / NA";
-                      }
+                      } else
+                        return null;
                     }),
               ],
             ),
@@ -494,25 +500,24 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    style: darkTheme.DarkTheme.textTheme.bodyText2,
-                    decoration: InputDecoration(
-                      label: Text(
-                        "Why private?",
-                        style: GoogleFonts.poppins(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      style: darkTheme.DarkTheme.textTheme.bodyText2,
+                      decoration: InputDecoration(
+                        label: Text(
+                          "Why private?",
+                          style: GoogleFonts.poppins(
+                              color: colors.darkSecondaryTextColor),
+                        ),
+                        hintText: "Please enter reason",
+                        hintStyle: GoogleFonts.poppins(
                             color: colors.darkSecondaryTextColor),
+                        contentPadding: EdgeInsets.all(7.0),
                       ),
-                      hintText: "Please enter reason",
-                      hintStyle: GoogleFonts.poppins(
-                          color: colors.darkSecondaryTextColor),
-                      contentPadding: EdgeInsets.all(7.0),
-                    ),
                       validator: (value) {
                         if (value == "") {
                           return "Enter a value / NA";
                         }
-                      }
-                  ),
+                      }),
                 ),
                 OptionsWidget(options: [
                   ['Yes', 'yes'],
