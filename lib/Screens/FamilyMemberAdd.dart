@@ -89,7 +89,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               ),
               TextButton(
                 child: Text('Yes', style: TextStyle(color: Colors.red)),
-                onPressed: () {
+                onPressed: () async {
                   Navigator.pop(context, true);
                 },
               ),

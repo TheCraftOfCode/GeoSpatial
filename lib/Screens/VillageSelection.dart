@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
+import 'package:geo_spatial/Screens/Home.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/CheckBoxAlertDialog.dart';
@@ -16,7 +19,21 @@ class VillageSelectionScreen extends StatefulWidget {
   var isGenerated = false;
 }
 
+
 class _VillageSelectionScreenState extends State<VillageSelectionScreen> {
+  void refreshData(){
+    widget.isGenerated = false;
+  }
+
+  FutureOr onGoBack(dynamic value){
+    refreshData();
+    setState(() {});
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) =>
+            Home()));
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +104,9 @@ class _VillageSelectionScreenState extends State<VillageSelectionScreen> {
                                     const EdgeInsets.symmetric(vertical: 20.0),
                                 child: Text(
                                   'Sample UIN',
-                                  style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 20,
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20,
                                       color: colors.darkPrimaryTextColor),
                                 ),
                               ),
@@ -107,11 +126,12 @@ class _VillageSelectionScreenState extends State<VillageSelectionScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(20),
                                             side: BorderSide(
-                                                color: colors
-                                                    .darkScaffoldColor)))),
+                                                color:
+                                                    colors.darkScaffoldColor)))),
                                 onPressed: () {
-                                  Navigator.of(context)
-                                      .push(MaterialPageRoute(builder: (context) => FamilyHomeScreen()));
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          FamilyHomeScreen())).then(onGoBack);
                                 },
                                 icon: Icon(Icons.arrow_right_alt_sharp),
                               ),
@@ -122,9 +142,11 @@ class _VillageSelectionScreenState extends State<VillageSelectionScreen> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.1,
                     ),
-                    TextButton(
-                        onPressed: () {}, child: Text("Generate UIN later"))
+                    if (!widget.isGenerated)
+                      TextButton(
+                          onPressed: () {}, child: Text("Generate UIN later"))
                   ],
+
                 ),
               ),
             )
