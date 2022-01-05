@@ -103,7 +103,6 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
                   child: ListTile(
                     onTap: () {},
                     //Pass a function which is called onSaved in the next page and add data to the class object
-                    leading: Icon(Icons.person),
                     title: Text(
                       _searchList[index],
                       style: GoogleFonts.poppins(
