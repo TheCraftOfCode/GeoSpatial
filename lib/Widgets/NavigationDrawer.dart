@@ -10,6 +10,7 @@ class NavigationDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Drawer(
       child: Material(
         color: colors.darkScaffoldColor,
@@ -59,7 +60,7 @@ class NavigationDrawer extends StatelessWidget {
                 await storage.delete(key: 'jwt');
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(builder: (context) => Login()),
-                    (Route<dynamic> route) => false);
+                        (Route<dynamic> route) => false);
               },
             ),
           ],
@@ -71,7 +72,7 @@ class NavigationDrawer extends StatelessWidget {
   Widget buildMenuItem({
     required String text,
     required IconData icon,
-    Function? onTap,
+    VoidCallback? onTap,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -85,7 +86,7 @@ class NavigationDrawer extends StatelessWidget {
           text,
           style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
         ),
-        onTap: onTap!(),
+        onTap: onTap,
       ),
     );
   }
