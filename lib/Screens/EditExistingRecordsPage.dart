@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/CheckBoxAddExtraDialog.dart';
+import 'package:geo_spatial/Utils/Colors.dart'as colors;
 
 class EditRecordsScreen extends StatelessWidget {
   const EditRecordsScreen({Key? key}) : super(key: key);
@@ -8,7 +9,14 @@ class EditRecordsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBackButton('Edit Existing Data'),
+      appBar: AppBarBackButton('Edit Existing Data', actions: [IconButton(
+          splashRadius: 20,
+          icon: Icon(
+            Icons.search,
+            color: colors.darkAccentColor,
+          ),
+          onPressed: () {
+          })],),
       body: Container(
         child: CheckBoxAddExtraAlertDialog(
           onSaved: (data) {

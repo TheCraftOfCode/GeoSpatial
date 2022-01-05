@@ -4,9 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:geo_spatial/Utils/Colors.dart'as colors;
 
 class AppBarBackButton extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarBackButton(this.title);
+  const AppBarBackButton(this.title, {this.actions});
 
   final String title;
+  final List<Widget>? actions;
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -35,6 +36,7 @@ class AppBarBackButton extends StatelessWidget implements PreferredSizeWidget {
             Navigator.pop(context);
           }),
       elevation: 0,
+      actions: actions ?? [],
       centerTitle: true,
       title: Text(
         title,

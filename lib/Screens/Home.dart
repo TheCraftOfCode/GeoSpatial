@@ -37,21 +37,6 @@ class _HomeWidgetState extends State<Home> {
                 fontSize: 18, color: colors.darkPrimaryTextColor),
           ),
           backgroundColor: Colors.transparent,
-          actions: [
-            IconButton(
-              splashRadius: 20,
-              icon: Icon(
-                Icons.person,
-                color: colors.darkAccentColor,
-              ),
-              onPressed: () async {
-                await storage.delete(key: 'jwt');
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => Login()),
-                    (Route<dynamic> route) => false);
-              },
-            )
-          ],
           ),
       body: SafeArea(
         child: Column(

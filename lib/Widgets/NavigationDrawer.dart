@@ -40,7 +40,9 @@ class NavigationDrawer extends StatelessWidget {
                     GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
               ),
             ),
-            buildMenuItem(text: 'Home', icon: Icons.home, onTap: () {}),
+            buildMenuItem(text: 'Home', icon: Icons.home, onTap: () {
+              Navigator.of(context).pop();
+            }),
             buildMenuItem(text: 'Profile', icon: Icons.person, onTap: () {}),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),

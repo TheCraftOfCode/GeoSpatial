@@ -21,21 +21,15 @@ class VillageSelectionScreen extends StatefulWidget {
 
 
 class _VillageSelectionScreenState extends State<VillageSelectionScreen> {
-  void refreshData(){
+
+  initState(){
+    super.initState();
     widget.isGenerated = false;
   }
 
-  FutureOr onGoBack(dynamic value){
-    refreshData();
-    setState(() {});
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) =>
-            Home()));
-  }
-
-
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: colors.darkScaffoldColor,
       appBar: AppBarBackButton('Generate UID'),
@@ -129,9 +123,9 @@ class _VillageSelectionScreenState extends State<VillageSelectionScreen> {
                                                 color:
                                                     colors.darkScaffoldColor)))),
                                 onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
+                                  Navigator.of(context).pushReplacement(MaterialPageRoute(
                                       builder: (context) =>
-                                          FamilyHomeScreen())).then(onGoBack);
+                                          FamilyHomeScreen()));
                                 },
                                 icon: Icon(Icons.arrow_right_alt_sharp),
                               ),
