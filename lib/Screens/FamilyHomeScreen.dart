@@ -6,8 +6,7 @@ import 'package:geo_spatial/Utils/StoreInstance.dart';
 import 'package:geo_spatial/Widgets/AddRemoveBoxWidget.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
-
-import '../objectbox.g.dart';
+import 'package:geo_spatial/objectbox.g.dart';
 import 'CollectLocationWidget.dart';
 
 class FamilyHomeScreen extends StatefulWidget {
@@ -24,12 +23,25 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen>
     with AutomaticKeepAliveClientMixin {
   var store;
 
+
+  void initState(){
+    super.initState();
+    setState(() {
+      if (modelData == null)
+        modelData = widget.modelData ?? new FamilyMembersCommonDataModel();
+
+      for(var i in modelData!.individualDataList){
+        print(i);
+        modelData!.individualDataListTransient.add(i);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
-    if (modelData == null)
-      modelData = widget.modelData ?? new FamilyMembersCommonDataModel();
+
 
 
     return WillPopScope(
@@ -99,9 +111,19 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen>
                                         borderRadius: BorderRadius.circular(20),
                                         side: BorderSide(color: Colors.white)))),
                             onPressed: () async {
+
+                              var store = await StoreInstance.getInstance();
+                              Box individualDataBox = store.box<FamilyMemberIndividualDataModel>();
+
+                              List<int> i = await individualDataBox.putMany(modelData!.individualDataListTransient);
+                              print("ID: $i");
+
+                              modelData!.individualDataList.addAll(modelData!.individualDataListTransient);
+
                               store = await StoreInstance.getInstance();
                               Box box = store.box<FamilyMembersCommonDataModel>();
                               await box.put(modelData);
+
                             }),
                       ),
                     )

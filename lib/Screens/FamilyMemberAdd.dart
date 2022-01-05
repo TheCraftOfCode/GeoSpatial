@@ -4,7 +4,6 @@ import 'package:gender_picker/source/enums.dart';
 import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/DarkTheme.dart';
-import 'package:geo_spatial/Utils/StoreInstance.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/CheckBoxAddExtraDialog.dart';
 import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
@@ -13,7 +12,6 @@ import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
 import 'package:geo_spatial/Widgets/TagTextWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../objectbox.g.dart';
 
 class FamilyMemberAdd extends StatefulWidget {
   const FamilyMemberAdd(
@@ -31,11 +29,16 @@ class FamilyMemberAdd extends StatefulWidget {
 }
 
 class _FamilyMemberAddState extends State<FamilyMemberAdd> {
+  bool dailyWageWorker = false;
+
   _onSubmit(bool isValid) {
     print(isValid.toString());
+    setState(() {
+      isPageValid = isValid;
+    });
   }
 
-  bool dailyWageWorker = false;
+  bool isPageValid = false;
   int count = 0;
 
   var vulnerabilities = <String, bool>{
@@ -71,8 +74,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
         "${widget.familyMemberIndividualDataModel!.vulnerabilities} vulnerabilities");
     return WillPopScope(
       onWillPop: () async {
-        //TODO: Add condition here to check if page has been filled
-        if (false) {
+        if (!isPageValid) {
           return true;
         }
         final result = await showDialog(
@@ -727,9 +729,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               ],
               _onSubmit,
               saveData: () async {
-                var store = await StoreInstance.getInstance();
-                Box box = store.box<FamilyMemberIndividualDataModel>();
-                await box.put(widget.familyMemberIndividualDataModel);
                 widget.dataModel!.individualDataList[widget.index!] =
                     widget.familyMemberIndividualDataModel!;
               },

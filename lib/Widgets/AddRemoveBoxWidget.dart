@@ -40,7 +40,7 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                   TextButton(
                     onPressed: () {
                       setState(() {
-                        widget.modelData?.individualDataList
+                        widget.modelData?.individualDataListTransient
                             .add(FamilyMemberIndividualDataModel());
                       });
                     },
@@ -51,7 +51,7 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                   IconButton(
                       onPressed: () {
                         setState(() {
-                          widget.modelData?.individualDataList
+                          widget.modelData?.individualDataListTransient
                               .add(FamilyMemberIndividualDataModel());
                         });
                       },
@@ -66,10 +66,10 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
               ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.35,
-                child: widget.modelData!.individualDataList.isEmpty
+                child: widget.modelData!.individualDataListTransient.isEmpty
                     ? Center(child: Text('No Members Added'))
                     : ListView.builder(
-                        itemCount: widget.modelData!.individualDataList.length,
+                        itemCount: widget.modelData!.individualDataListTransient.length,
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           return Card(
@@ -79,7 +79,7 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => FamilyMemberAdd(
                                         familyMemberIndividualDataModel: widget
-                                            .modelData!.individualDataList
+                                            .modelData!.individualDataListTransient
                                             .elementAt(index))));
                               },
                               //Pass a function which is called onSaved in the next page and add data to the class object
@@ -96,7 +96,7 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                                 icon: Icon(Icons.close),
                                 onPressed: () async {
                                   setState(() {
-                                    widget.modelData!.individualDataList
+                                    widget.modelData!.individualDataListTransient
                                         .removeAt(index);
                                   });
                                 },

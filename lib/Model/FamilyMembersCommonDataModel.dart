@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:geolocator/geolocator.dart';
-import 'package:objectbox/objectbox.dart';
 import 'package:intl/intl.dart';
+import 'package:geo_spatial/objectbox.g.dart';
+
 
 @Entity()
 class FamilyMemberIndividualDataModel {
@@ -97,7 +98,10 @@ class FamilyMembersCommonDataModel {
   String? addressThree;
 
 
+  @Transient()
+  final individualDataListTransient = <FamilyMemberIndividualDataModel>[];
   final individualDataList = ToMany<FamilyMemberIndividualDataModel>();
+
   String? savedTime = DateFormat('kk:mm:ss, EEE d MMM').format(DateTime.now());
 
   String? get dbLocationTopLeft {
