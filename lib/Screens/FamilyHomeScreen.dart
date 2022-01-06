@@ -7,6 +7,7 @@ import 'package:geo_spatial/Widgets/AddRemoveBoxWidget.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
 import 'package:geo_spatial/objectbox.g.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'CollectLocationWidget.dart';
 
 class FamilyHomeScreen extends StatefulWidget {
@@ -49,8 +50,15 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen>
             AddRemoveBoxWidget(
               modelData: modelData,
             ),
-            DataCard("\nCollect Common Details", "", "assets/svg/house.svg",
-                FamilyDetails(modelData: modelData,), Color(0xfff54b64), Color(0xfff78361)),
+            DataCard(
+                "\nCollect Common Details",
+                "",
+                "assets/svg/house.svg",
+                FamilyDetails(
+                  modelData: modelData,
+                ),
+                Color(0xfff54b64),
+                Color(0xfff78361)),
             DataCard(
                 "Record GPS Data",
                 "Make sure GPS is enabled",
@@ -118,7 +126,31 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen>
 
                             store = await StoreInstance.getInstance();
                             Box box = store.box<FamilyMembersCommonDataModel>();
-                            await box.put(modelData);
+                            int id = await box.put(modelData);
+
+                            AlertDialog alertDialog = AlertDialog(
+                              title: Text(
+                                'Record Saved',
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              content: Text(
+                                  'The Record has been saved with record ID ${id}',
+                                  style: GoogleFonts.poppins()),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context, rootNavigator: true)
+                                        .pop('dialog');
+                                  },
+                                  child: Text('OK'),
+                                )
+                              ],
+                            );
+
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) => alertDialog);
                           }),
                     ),
                   )

@@ -40,24 +40,25 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
         }
         final result = await showDialog(
           context: context,
-          builder: (context)  =>  AlertDialog(
-            title: Text("Are you sure?"),
-            content: Text("All unsaved changes would be lost"),
-            actions: <Widget>[
-              TextButton(
-                child: Text('No'),
-                onPressed: () {
-                  Navigator.pop(context, false);
-                },
+          builder: (context) =>
+              AlertDialog(
+                title: Text("Are you sure?"),
+                content: Text("All unsaved changes would be lost"),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text('No'),
+                    onPressed: () {
+                      Navigator.pop(context, false);
+                    },
+                  ),
+                  TextButton(
+                    child: Text('Yes', style: TextStyle(color: Colors.red)),
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                  ),
+                ],
               ),
-              TextButton(
-                child: Text('Yes', style: TextStyle(color: Colors.red)),
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-              ),
-            ],
-          ),
         );
         return result;
       },
@@ -65,47 +66,49 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
           backgroundColor: colors.darkScaffoldColor,
           appBar: AppBarBackButton('Get Location'),
           body: FormPageView(
-            [
-              LocationWidgetField(
-                title: "Record location at top left part of the facility",
-                context: context,
-                defaultValue: widget.modelData.locationTopLeft,
-                onSaved: (data) {
-                  print(data);
-                  widget.modelData.locationTopLeft = data;
-                },
-              ),
-              LocationWidgetField(
-                title: "Record location at top right part of the facility",
-                context: context,
-                defaultValue: widget.modelData.locationTopRight,
-                onSaved: (data) {
-                  print(data);
-                  widget.modelData.locationTopRight = data;
-                },
-              ),
-              LocationWidgetField(
-                title: "Record location at bottom left part of the facility",
-                context: context,
-                defaultValue: widget.modelData.locationBottomLeft,
-                onSaved: (data) {
-                  print(data);
-                  widget.modelData.locationBottomLeft = data;
-                },
-              ),
-              LocationWidgetField(
-                title: "Record location at bottom right part of the facility",
-                context: context,
-                defaultValue: widget.modelData.locationBottomRight,
-                onSaved: (data) {
-                  print(data);
-                  widget.modelData.locationBottomRight = data;
-                },
-              ),
-            ],
-            _onSubmit,
-            submitMessage:
-                "Submit to Continue or go back to re-record location data",
+              [
+                LocationWidgetField(
+                  title: "Record location at top left part of the facility",
+                  context: context,
+                  defaultValue: widget.modelData.locationTopLeft,
+                  onSaved: (data) {
+                    print(data);
+                    widget.modelData.locationTopLeft = data;
+                  },
+                ),
+                LocationWidgetField(
+                  title: "Record location at top right part of the facility",
+                  context: context,
+                  defaultValue: widget.modelData.locationTopRight,
+                  onSaved: (data) {
+                    print(data);
+                    widget.modelData.locationTopRight = data;
+                  },
+                ),
+                LocationWidgetField(
+                  title: "Record location at bottom left part of the facility",
+                  context: context,
+                  defaultValue: widget.modelData.locationBottomLeft,
+                  onSaved: (data) {
+                    print(data);
+                    widget.modelData.locationBottomLeft = data;
+                  },
+                ),
+                LocationWidgetField(
+                  title: "Record location at bottom right part of the facility",
+                  context: context,
+                  defaultValue: widget.modelData.locationBottomRight,
+                  onSaved: (data) {
+                    print(data);
+                    widget.modelData.locationBottomRight = data;
+                  },
+                ),
+              ],
+              _onSubmit,
+              submitMessage:
+              "Submit to Continue or go back to re-record location data",
+              note: "The entered fields are automatically saved when moving to next page and doesn't require submit to be clicked to save",
+
           )),
     );
   }

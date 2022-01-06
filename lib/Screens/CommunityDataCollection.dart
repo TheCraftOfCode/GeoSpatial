@@ -62,25 +62,22 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
       print(isValid.toString());
 
       if (isValid) {
-        print("Valid!");
-        print(modelData.villageCode);
-        print(modelData.locationBottomRight);
-        print(modelData.locationBottomLeft);
-        print(modelData.locationTopRight);
-        print(modelData.locationTopLeft);
-        print(modelData.resourceType);
-
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Upload successful"),
+          content: Text(
+            "Upload successful",
+            style: TextStyle(color: Colors.red),
+          ),
         ));
 
         Navigator.pop(context);
 
         //TODO: Send data to server from here
-      }
-      else{
+      } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Please fill all fields!", style: TextStyle(color: colors.errorColor),),
+          content: Text(
+            "Please fill all fields!",
+            style: TextStyle(color: Colors.red),
+          ),
         ));
       }
     }
@@ -121,7 +118,7 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
         }
         final result = await showDialog(
           context: context,
-          builder: (context)  =>  AlertDialog(
+          builder: (context) => AlertDialog(
             title: Text("Are you sure?"),
             content: Text("All unsaved changes would be lost"),
             actions: <Widget>[
@@ -158,41 +155,41 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
                 hint: "Select resource type",
                 errorField: "Please choose a resource to tag"),
             LocationWidgetField(
-                title: "Record location at top left part of the facility",
-                defaultValue: modelData.locationTopLeft,
-                context: context,
-                onSaved: (data) {
-                  print(data);
-                  modelData.locationTopLeft = data;
-                },
-                ),
+              title: "Record location at top left part of the facility",
+              defaultValue: modelData.locationTopLeft,
+              context: context,
+              onSaved: (data) {
+                print(data);
+                modelData.locationTopLeft = data;
+              },
+            ),
             LocationWidgetField(
-                title: "Record location at top right part of the facility",
-                defaultValue: modelData.locationTopRight,
-                context: context,
-                onSaved: (data) {
-                  print(data);
-                  modelData.locationTopRight = data;
-                },
-                ),
+              title: "Record location at top right part of the facility",
+              defaultValue: modelData.locationTopRight,
+              context: context,
+              onSaved: (data) {
+                print(data);
+                modelData.locationTopRight = data;
+              },
+            ),
             LocationWidgetField(
-                title: "Record location at bottom left part of the facility",
-                defaultValue: modelData.locationBottomLeft,
-                context: context,
-                onSaved: (data) {
-                  print(data);
-                  modelData.locationBottomLeft = data;
-                },
-                ),
+              title: "Record location at bottom left part of the facility",
+              defaultValue: modelData.locationBottomLeft,
+              context: context,
+              onSaved: (data) {
+                print(data);
+                modelData.locationBottomLeft = data;
+              },
+            ),
             LocationWidgetField(
-                title: "Record location at bottom right part of the facility",
-                defaultValue: modelData.locationBottomRight,
-                context: context,
-                onSaved: (data) {
-                  print(data);
-                  modelData.locationBottomRight = data;
-                },
-                ),
+              title: "Record location at bottom right part of the facility",
+              defaultValue: modelData.locationBottomRight,
+              context: context,
+              onSaved: (data) {
+                print(data);
+                modelData.locationBottomRight = data;
+              },
+            ),
             DropDownFormField(
                 defaultValue: modelData.villageCode,
                 list: widget._villageCodeName,

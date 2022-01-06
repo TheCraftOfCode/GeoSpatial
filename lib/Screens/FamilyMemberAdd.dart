@@ -37,6 +37,18 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
     setState(() {
       isPageValid = isValid;
     });
+
+    if (isValid) {
+      print("Valid!");
+      Navigator.pop(context);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          "Please fill all fields!",
+          style: TextStyle(color: Colors.red),
+        ),
+      ));
+    }
   }
 
   bool isPageValid = false;
@@ -740,11 +752,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 )
               ],
               _onSubmit,
-              saveData: () async {
-                // print(widget.dataModel);
-                // widget.dataModel!.individualDataList[widget.index!] =
-                //     widget.familyMemberIndividualDataModel!;
-              },
+              submitMessage: "Submit to Continue or go back to re-record data",
+              note:
+                  "The entered fields are automatically saved when moving to next page and doesn't require submit to be clicked to save",
             ),
           ),
         ),
