@@ -96,10 +96,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        //TODO: Add condition here to check if page has been filled
-        if (false) {
-          return true;
-        }
         final result = await showDialog(
           context: context,
           builder: (context) => AlertDialog(
