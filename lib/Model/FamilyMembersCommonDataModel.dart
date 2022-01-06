@@ -104,6 +104,33 @@ class FamilyMembersCommonDataModel {
   final individualDataListTransient = <FamilyMemberIndividualDataModel>[];
   final individualDataList = ToMany<FamilyMemberIndividualDataModel>();
 
+  Map<String, dynamic> toJson() => {
+        'drinkingWater': drinkingWater,
+        'sourceOfDrinkingWater': sourceOfDrinkingWater,
+        'toiletFacility': toiletFacility,
+        'communityToilet': communityToilet,
+        'environmentSanitationLevel': environmentSanitationLevel,
+        'runningWaterAvailable': runningWaterAvailable,
+        'noOfTwoWheelers': noOfTwoWheelers,
+        'noOfThreeWheelers': noOfThreeWheelers,
+        'locationTopLeft': [
+          locationTopLeft!.latitude,
+          locationTopLeft!.longitude
+        ],
+        'locationTopRight': [
+          locationTopRight!.latitude,
+          locationTopRight!.longitude
+        ],
+        'locationBottomLeft': [
+          locationBottomLeft!.latitude,
+          locationBottomLeft!.longitude
+        ],
+        'locationBottomRight': [
+          locationBottomRight!.latitude,
+          locationBottomRight!.longitude
+        ],
+      };
+
   String? savedTime = DateFormat('kk:mm:ss, EEE d MMM').format(DateTime.now());
 
   String? get dbLocationTopLeft {

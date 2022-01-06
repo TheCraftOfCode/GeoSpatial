@@ -142,71 +142,73 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
       child: Scaffold(
         backgroundColor: colors.darkScaffoldColor,
         appBar: AppBarBackButton('Community Data'),
-        body: FormPageView(
-          [
-            DropDownFormField(
-                defaultValue: modelData.resourceType,
-                list: widget._publicResourceList,
+        body: SingleChildScrollView(
+          child: FormPageView(
+            [
+              DropDownFormField(
+                  defaultValue: modelData.resourceType,
+                  list: widget._publicResourceList,
+                  onSaved: (data) {
+                    print(data);
+                    modelData.resourceType = data;
+                  },
+                  title: "Choose type of resource to tag",
+                  hint: "Select resource type",
+                  errorField: "Please choose a resource to tag"),
+              LocationWidgetField(
+                title: "Record location at top left part of the facility",
+                defaultValue: modelData.locationTopLeft,
+                context: context,
                 onSaved: (data) {
                   print(data);
-                  modelData.resourceType = data;
+                  modelData.locationTopLeft = data;
                 },
-                title: "Choose type of resource to tag",
-                hint: "Select resource type",
-                errorField: "Please choose a resource to tag"),
-            LocationWidgetField(
-              title: "Record location at top left part of the facility",
-              defaultValue: modelData.locationTopLeft,
-              context: context,
-              onSaved: (data) {
-                print(data);
-                modelData.locationTopLeft = data;
-              },
-            ),
-            LocationWidgetField(
-              title: "Record location at top right part of the facility",
-              defaultValue: modelData.locationTopRight,
-              context: context,
-              onSaved: (data) {
-                print(data);
-                modelData.locationTopRight = data;
-              },
-            ),
-            LocationWidgetField(
-              title: "Record location at bottom left part of the facility",
-              defaultValue: modelData.locationBottomLeft,
-              context: context,
-              onSaved: (data) {
-                print(data);
-                modelData.locationBottomLeft = data;
-              },
-            ),
-            LocationWidgetField(
-              title: "Record location at bottom right part of the facility",
-              defaultValue: modelData.locationBottomRight,
-              context: context,
-              onSaved: (data) {
-                print(data);
-                modelData.locationBottomRight = data;
-              },
-            ),
-            DropDownFormField(
-                defaultValue: modelData.villageCode,
-                list: widget._villageCodeName,
+              ),
+              LocationWidgetField(
+                title: "Record location at top right part of the facility",
+                defaultValue: modelData.locationTopRight,
+                context: context,
                 onSaved: (data) {
                   print(data);
-                  modelData.villageCode = data;
+                  modelData.locationTopRight = data;
                 },
-                title: "Choose Village Code",
-                hint: "Select Village Code",
-                errorField: "Please choose a village code"),
-          ],
-          _onSubmit,
-          submitMessage:
-              "Submit record to server or Save record locally for later editing",
-          saveData: _onSave,
-          note:
-              "Note: Saving existing records will over-write the record and not create new one",
+              ),
+              LocationWidgetField(
+                title: "Record location at bottom left part of the facility",
+                defaultValue: modelData.locationBottomLeft,
+                context: context,
+                onSaved: (data) {
+                  print(data);
+                  modelData.locationBottomLeft = data;
+                },
+              ),
+              LocationWidgetField(
+                title: "Record location at bottom right part of the facility",
+                defaultValue: modelData.locationBottomRight,
+                context: context,
+                onSaved: (data) {
+                  print(data);
+                  modelData.locationBottomRight = data;
+                },
+              ),
+              DropDownFormField(
+                  defaultValue: modelData.villageCode,
+                  list: widget._villageCodeName,
+                  onSaved: (data) {
+                    print(data);
+                    modelData.villageCode = data;
+                  },
+                  title: "Choose Village Code",
+                  hint: "Select Village Code",
+                  errorField: "Please choose a village code"),
+            ],
+            _onSubmit,
+            submitMessage:
+                "Submit record to server or Save record locally for later editing",
+            saveData: _onSave,
+            note:
+                "Note: Saving existing records will over-write the record and not create new one",
+          ),
         ),
       ),
     );

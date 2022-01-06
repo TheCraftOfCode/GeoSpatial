@@ -64,11 +64,11 @@ class DataCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           AutoSizeText(heading,
-                              maxLines: 3,
+                              maxLines: 2,
                               style: GoogleFonts.montserrat(
                                   fontSize: 25, color: colors.darkPrimaryTextColor)),
                           AutoSizeText(subHeading,
-                              maxLines: 2,
+                              maxLines: 1,
                               style: GoogleFonts.montserrat(
                                   fontSize: 15, color: colors.darkPrimaryTextColor))
                         ],

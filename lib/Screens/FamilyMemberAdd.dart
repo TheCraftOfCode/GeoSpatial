@@ -127,11 +127,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
         resizeToAvoidBottomInset: true,
         backgroundColor: colors.darkScaffoldColor,
         appBar: AppBarBackButton('Add Family Member'),
-        body: SizedBox(
-          height: MediaQuery.of(context).size.height -
-              MediaQuery.of(context).viewInsets.bottom * 1.1,
-          child: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
+        body: SingleChildScrollView(
             child: FormPageView(
               [
                 Column(
@@ -774,7 +770,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
             ),
           ),
         ),
-      ),
     );
   }
 }

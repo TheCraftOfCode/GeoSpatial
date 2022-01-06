@@ -143,11 +143,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
           resizeToAvoidBottomInset: true,
           backgroundColor: colors.darkScaffoldColor,
           appBar: AppBarBackButton('Family Details'),
-          body: SizedBox(
-              height: MediaQuery.of(context).size.height -
-                  MediaQuery.of(context).viewInsets.bottom * 1.1,
-              child: SingleChildScrollView(
-                  physics: ClampingScrollPhysics(),
+              body: SingleChildScrollView(
                   child: FormPageView(
                     [
                       Column(
@@ -544,7 +540,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         "Submit to Continue or go back to re-record data",
                     note:
                         "The entered fields are automatically saved when moving to next page and doesn't require submit to be clicked to save",
-                  )))),
+                  )))
     );
   }
 }

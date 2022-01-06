@@ -61,54 +61,56 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
       child: Scaffold(
           backgroundColor: colors.darkScaffoldColor,
           appBar: AppBarBackButton('Get Location'),
-          body: FormPageView(
-              [
-                LocationWidgetField(
-                  title: "Record location at top left part of the facility",
-                  context: context,
-                  defaultValue: widget.modelData?.locationTopLeft,
-                  onSaved: (data) {
-                    print(data);
-                    widget.modelData?.locationTopLeft = data;
-                  },
-                ),
-                LocationWidgetField(
-                  title: "Record location at top right part of the facility",
-                  context: context,
-                  defaultValue: widget.modelData?.locationTopRight,
-                  onSaved: (data) {
-                    print(data);
-                    widget.modelData?.locationTopRight = data;
-                  },
-                ),
-                LocationWidgetField(
-                  title: "Record location at bottom left part of the facility",
-                  context: context,
-                  defaultValue: widget.modelData?.locationBottomLeft,
-                  onSaved: (data) {
-                    print(data);
-                    widget.modelData?.locationBottomLeft = data;
-                  },
-                ),
-                LocationWidgetField(
-                  title: "Record location at bottom right part of the facility",
-                  context: context,
-                  defaultValue: widget.modelData?.locationBottomRight,
-                  onSaved: (data) {
-                    print(data);
-                    widget.modelData?.locationBottomRight = data;
-                  },
-                ),
-              ],
-              _onSubmit,
-              onChange: (isValid){
-                print("IS LOCATION VALID: ${widget.modelData?.locationPageValid}");
-                widget.modelData?.locationPageValid = isValid;
-              },
-              submitMessage:
-              "Submit to Continue or go back to re-record location data",
-              note: "The entered fields are automatically saved when moving to next page and doesn't require submit to be clicked to save",
+          body: SingleChildScrollView(
+            child: FormPageView(
+                [
+                  LocationWidgetField(
+                    title: "Record location at top left part of the facility",
+                    context: context,
+                    defaultValue: widget.modelData?.locationTopLeft,
+                    onSaved: (data) {
+                      print(data);
+                      widget.modelData?.locationTopLeft = data;
+                    },
+                  ),
+                  LocationWidgetField(
+                    title: "Record location at top right part of the facility",
+                    context: context,
+                    defaultValue: widget.modelData?.locationTopRight,
+                    onSaved: (data) {
+                      print(data);
+                      widget.modelData?.locationTopRight = data;
+                    },
+                  ),
+                  LocationWidgetField(
+                    title: "Record location at bottom left part of the facility",
+                    context: context,
+                    defaultValue: widget.modelData?.locationBottomLeft,
+                    onSaved: (data) {
+                      print(data);
+                      widget.modelData?.locationBottomLeft = data;
+                    },
+                  ),
+                  LocationWidgetField(
+                    title: "Record location at bottom right part of the facility",
+                    context: context,
+                    defaultValue: widget.modelData?.locationBottomRight,
+                    onSaved: (data) {
+                      print(data);
+                      widget.modelData?.locationBottomRight = data;
+                    },
+                  ),
+                ],
+                _onSubmit,
+                onChange: (isValid){
+                  print("IS LOCATION VALID: ${widget.modelData?.locationPageValid}");
+                  widget.modelData?.locationPageValid = isValid;
+                },
+                submitMessage:
+                "Submit to Continue or go back to re-record location data",
+                note: "The entered fields are automatically saved when moving to next page and doesn't require submit to be clicked to save",
 
+            ),
           )),
     );
   }

@@ -22,16 +22,15 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.45,
+      height: MediaQuery.of(context).size.height * 0.4,
       color: colors.darkScaffoldColor,
       child: Padding(
         padding: EdgeInsets.all(10),
         child: Container(
           color: colors.darkScaffoldColor,
-          height: MediaQuery.of(context).size.height * 0.45,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
+          height: MediaQuery.of(context).size.height * 0.4,
+          child: Wrap(
+
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

@@ -39,7 +39,7 @@ class CommunityDataModel {
           accuracy: body['accuracy'] ?? 0,
           altitude: body['altitude'] ?? 0,
           heading: body['heading'] ?? 0,
-          speed: body['speed']  ?? 0,
+          speed: body['speed'] ?? 0,
           speedAccuracy: body['speedAccuracy'] ?? 0);
     }
   }
@@ -68,7 +68,7 @@ class CommunityDataModel {
           accuracy: body['accuracy'] ?? 0,
           altitude: body['altitude'] ?? 0,
           heading: body['heading'] ?? 0,
-          speed: body['speed']  ?? 0,
+          speed: body['speed'] ?? 0,
           speedAccuracy: body['speedAccuracy'] ?? 0);
     }
   }
@@ -97,7 +97,7 @@ class CommunityDataModel {
           accuracy: body['accuracy'] ?? 0,
           altitude: body['altitude'] ?? 0,
           heading: body['heading'] ?? 0,
-          speed: body['speed']  ?? 0,
+          speed: body['speed'] ?? 0,
           speedAccuracy: body['speedAccuracy'] ?? 0);
     }
   }
@@ -127,7 +127,7 @@ class CommunityDataModel {
           accuracy: body['accuracy'] ?? 0,
           altitude: body['altitude'] ?? 0,
           heading: body['heading'] ?? 0,
-          speed: body['speed']  ?? 0,
+          speed: body['speed'] ?? 0,
           speedAccuracy: body['speedAccuracy'] ?? 0);
     }
   }
@@ -140,4 +140,24 @@ class CommunityDataModel {
       this.resourceType,
       this.villageCode});
 
+  Map<String, dynamic> toJson() => {
+        'resourceType': resourceType,
+        'villageCode': villageCode,
+        'locationTopLeft': [
+          locationTopLeft!.latitude,
+          locationTopLeft!.longitude
+        ],
+        'locationTopRight': [
+          locationTopRight!.latitude,
+          locationTopRight!.longitude
+        ],
+        'locationBottomLeft': [
+          locationBottomLeft!.latitude,
+          locationBottomLeft!.longitude
+        ],
+        'locationBottomRight': [
+          locationBottomRight!.latitude,
+          locationBottomRight!.longitude
+        ],
+      };
 }
