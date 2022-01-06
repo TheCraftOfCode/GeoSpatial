@@ -140,7 +140,9 @@ class _FormPageViewState extends State<FormPageView> {
         formErrorTile[i] = !isValid;
       });
     }
-    widget.onChange!(isAllValid);
+    if(widget.onChange != null){
+      widget.onChange!(isAllValid);
+    }
     setState(() {
       count = page;
     });
