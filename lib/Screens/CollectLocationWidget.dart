@@ -1,9 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/LocationWidget.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CollectLocationWidget extends StatefulWidget {
   const CollectLocationWidget({Key? key, this.modelData}) : super(key: key);
@@ -22,9 +24,9 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
         Navigator.pop(context);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
+          content: AutoSizeText(
             "Please fill all fields!",
-            style: TextStyle(color: Colors.red),
+            style: GoogleFonts.poppins(color: colors.errorColor),
           ),
         ));
       }
@@ -32,25 +34,21 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
 
     return WillPopScope(
       onWillPop: () async {
-        //TODO: Add condition here to check if page has been filled
-        if (false) {
-          return true;
-        }
         final result = await showDialog(
           context: context,
           builder: (context) =>
               AlertDialog(
-                title: Text("Are you sure?"),
-                content: Text("All unsaved changes would be lost"),
+                title: AutoSizeText("Are you sure?"),
+                content: AutoSizeText("All unsaved changes would be lost"),
                 actions: <Widget>[
                   TextButton(
-                    child: Text('No'),
+                    child: AutoSizeText('No'),
                     onPressed: () {
                       Navigator.pop(context, false);
                     },
                   ),
                   TextButton(
-                    child: Text('Yes', style: TextStyle(color: Colors.red)),
+                    child: AutoSizeText('Yes', style: TextStyle(color: Colors.red)),
                     onPressed: () {
                       Navigator.pop(context, true);
                     },

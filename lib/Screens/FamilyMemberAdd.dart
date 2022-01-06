@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gender_picker/gender_picker.dart';
-import 'package:gender_picker/source/enums.dart';
 import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/DarkTheme.dart';
@@ -45,7 +43,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(
           "Please fill all fields!",
-          style: TextStyle(color: Colors.red),
+          style: GoogleFonts.poppins(color: colors.errorColor),
         ),
       ));
     }
@@ -57,12 +55,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   var vulnerabilities = <String, bool>{
     'Widower': false,
     'Divorcee': false,
-    'Differently Abled': false,
+    'Differently Able': false,
     'Pregnant Woman': false,
     'Lactating Mother': false,
     'Elderly (>60 years)': false,
-    'Widower': false,
-    'Differently Abled': false,
     'Children below 2 years': false,
     'Others': false,
     'None': false
@@ -83,8 +79,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        "${widget.familyMemberIndividualDataModel!.vulnerabilities} vulnerabilities");
     return WillPopScope(
       onWillPop: () async {
         if (!isPageValid) {
@@ -93,17 +87,33 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
         final result = await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text("Are you sure?"),
-            content: Text("All unsaved changes would be lost"),
+            backgroundColor: colors.darkScaffoldColor,
+            title: Text(
+              "Are you sure?",
+              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+            ),
+            content: Text(
+              "All unsaved changes would be lost",
+              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+            ),
             actions: <Widget>[
               TextButton(
-                child: Text('No'),
+                child: Text(
+                  'No',
+                  style:
+                      GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                ),
                 onPressed: () {
                   Navigator.pop(context, false);
                 },
               ),
-              TextButton(
-                child: Text('Yes', style: TextStyle(color: Colors.red)),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: colors.darkAccentColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)))),
+                child: Text('Yes',
+                    style: TextStyle(color: colors.darkPrimaryTextColor)),
                 onPressed: () async {
                   Navigator.pop(context, true);
                 },
@@ -114,7 +124,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
         return result;
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         backgroundColor: colors.darkScaffoldColor,
         appBar: AppBarBackButton('Add Family Member'),
         body: SizedBox(
@@ -752,12 +762,13 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 )
               ],
               _onSubmit,
-              onChange: (isValid){
+              onChange: (isValid) {
                 print(isValid);
-                print("IS FAM VALID: ${widget.familyMemberIndividualDataModel?.dataValid}");
+                print(
+                    "IS FAM VALID: ${widget.familyMemberIndividualDataModel?.dataValid}");
                 widget.familyMemberIndividualDataModel?.dataValid = isValid;
               },
-              submitMessage: "Submit to Continue or go back to re-record data",
+              submitMessage: "Submit to continue or go back to re-record data",
               note:
                   "The entered fields are automatically saved when moving to next page and doesn't require submit to be clicked to save",
             ),

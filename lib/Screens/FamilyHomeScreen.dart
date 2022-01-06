@@ -141,21 +141,26 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                             int id = await box.put(modelData);
 
                             AlertDialog alertDialog = AlertDialog(
+                              backgroundColor: colors.darkScaffoldColor,
                               title: Text(
                                 'Record Saved',
                                 style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.bold),
+                                    color: colors.darkPrimaryTextColor),
                               ),
                               content: Text(
                                   'The Record has been saved with record ID ${id}',
-                                  style: GoogleFonts.poppins()),
+                                  style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor)),
                               actions: [
-                                TextButton(
+                                ElevatedButton(
                                   onPressed: () {
                                     Navigator.of(context, rootNavigator: true)
                                         .pop('dialog');
                                   },
-                                  child: Text('OK'),
+                                  child: Text('OK',style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),),
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20)),),
+                                    primary: colors.darkAccentColor
+                                  ),
                                 )
                               ],
                             );

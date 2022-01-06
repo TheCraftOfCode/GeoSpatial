@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -219,12 +220,7 @@ class _MyAppState extends State<Login> {
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/Illustration.png"),
-                    fit: BoxFit.cover)),
-          ),
+          SvgPicture.asset("assets/svg/background.svg",fit: BoxFit.cover,),
           SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(left: 20.0, right: 20.0),

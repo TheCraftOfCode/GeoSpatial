@@ -48,6 +48,7 @@ class _VillageSelectionScreenState extends State<VillageSelectionScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CheckBoxAlertDialog(
+                      singleOption: true,
                       title: "Choose Village Code",
                       context: context,
                       hint: 'Choose here',
@@ -134,7 +135,7 @@ class _VillageSelectionScreenState extends State<VillageSelectionScreen> {
                         ),
                       ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.1,
+                      height: MediaQuery.of(context).size.height * 0.2,
                     ),
                     if (!widget.isGenerated)
                       TextButton(

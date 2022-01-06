@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
 import 'package:geo_spatial/Screens/FamilyMemberAdd.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:google_fonts/google_fonts.dart';
 
 /**
  * Added a dataclass
@@ -69,39 +69,36 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                 child: widget.modelData!.individualDataListTransient.isEmpty
                     ? Center(child: Text('No Members Added'))
                     : ListView.builder(
-                        itemCount: widget.modelData!.individualDataListTransient.length,
+                        itemCount: widget
+                            .modelData!.individualDataListTransient.length,
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           return Card(
                             color: colors.darkSecondBackgroundColor,
                             child: ListTile(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => FamilyMemberAdd(
-                                        familyMemberIndividualDataModel: widget
-                                            .modelData!.individualDataListTransient
-                                            .elementAt(index))));
-                              },
-                              //Pass a function which is called onSaved in the next page and add data to the class object
-                              leading: Icon(Icons.person),
-                              title: Text(
-                                "User ${index + 1}",
-                                style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 20),
-                              ),
-                              trailing: IconButton(
-                                color: colors.darkSecondAccentColor,
-                                icon: Icon(Icons.close),
-                                onPressed: () async {
-                                  setState(() {
-                                    widget.modelData!.individualDataListTransient
-                                        .removeAt(index);
-                                  });
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => FamilyMemberAdd(
+                                          familyMemberIndividualDataModel:
+                                              widget.modelData!
+                                                  .individualDataListTransient
+                                                  .elementAt(index))));
                                 },
-                              ),
-                            ),
+                                //Pass a function which is called onSaved in the next page and add data to the class object
+                                leading: Icon(Icons.person),
+                                title: Text(
+                                  "User ${index + 1}",
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 20),
+                                ),
+                                trailing: IconButton(
+                                    color: colors.darkSecondAccentColor,
+                                    icon: Icon(Icons.close),
+                                    onPressed: () async {
+                                      Dialog(index);
+                                    })),
                           );
                         }),
               ),
@@ -110,5 +107,50 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
         ),
       ),
     );
+  }
+
+  void Dialog(index) async {
+    final result = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+          backgroundColor: colors.darkScaffoldColor,
+          title: Text(
+            "Are you sure?",
+            style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+          ),
+          content: Text(
+            "All unsaved changes will be lost",
+            style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'No',
+                style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+              ),
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+            ),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: colors.darkAccentColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)))),
+                child: Text(
+                  'Yes',
+                  style:
+                      GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                ),
+                onPressed: () {
+                  setState(() {
+                    widget.modelData!.individualDataListTransient
+                        .removeAt(index);
+                  });
+                  Navigator.pop(context);
+                })
+          ]),
+    );
+    return result;
   }
 }

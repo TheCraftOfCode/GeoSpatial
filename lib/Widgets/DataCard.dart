@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -62,10 +63,12 @@ class DataCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Text(heading,
+                          AutoSizeText(heading,
+                              maxLines: 3,
                               style: GoogleFonts.montserrat(
                                   fontSize: 25, color: colors.darkPrimaryTextColor)),
-                          Text(subHeading,
+                          AutoSizeText(subHeading,
+                              maxLines: 2,
                               style: GoogleFonts.montserrat(
                                   fontSize: 15, color: colors.darkPrimaryTextColor))
                         ],

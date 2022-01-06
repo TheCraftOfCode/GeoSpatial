@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
@@ -25,7 +26,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
       Navigator.pop(context);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
+        content: AutoSizeText(
           "Please fill all fields!",
           style: TextStyle(color: Colors.red),
         ),
@@ -99,17 +100,36 @@ class _FamilyDetailsState extends State<FamilyDetails> {
         final result = await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text("Are you sure?"),
-            content: Text("All unsaved changes would be lost"),
+            backgroundColor: colors.darkScaffoldColor,
+            title: AutoSizeText(
+              "Are you sure?",
+              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+            ),
+            content: AutoSizeText(
+              "All unsaved changes would be lost",
+              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+            ),
             actions: <Widget>[
               TextButton(
-                child: Text('No'),
+                child: AutoSizeText(
+                  'No',
+                  style:
+                      GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                ),
                 onPressed: () {
                   Navigator.pop(context, false);
                 },
               ),
-              TextButton(
-                child: Text('Yes', style: TextStyle(color: Colors.red)),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: colors.darkAccentColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)))),
+                child: AutoSizeText(
+                  'Yes',
+                  style:
+                      GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                ),
                 onPressed: () {
                   Navigator.pop(context, true);
                 },
@@ -120,7 +140,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
         return result;
       },
       child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           backgroundColor: colors.darkScaffoldColor,
           appBar: AppBarBackButton('Family Details'),
           body: SizedBox(
@@ -311,7 +331,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                       color: colors.darkSecondaryTextColor),
                                   contentPadding: EdgeInsets.all(7.0),
                                   hintText: "Enter income in Rupees",
-                                  label: Text(
+                                  label: AutoSizeText(
                                     'Income from cattle',
                                     style: GoogleFonts.poppins(
                                         color: colors.darkSecondaryTextColor),
@@ -389,8 +409,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                             context: context,
                           ),
 
-                          //TODO: Add autosuggest text widget for locally consumed food
-                          //TODO: Add autosuggest text widget for trees owned
+                          //TODO: Add autosuggest AutoSizeText widget for locally consumed food
+                          //TODO: Add autosuggest AutoSizeText widget for trees owned
                           OptionsWidget(
                             options: [
                               ['Yes', 'yes'],
@@ -421,7 +441,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                               widget.modelData!.kitchenGardenPlants = val;
                             },
                           ),
-                          //TODO: Add autosuggest text widget for kitchen garden crops
+                          //TODO: Add autosuggest AutoSizeText widget for kitchen garden crops
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -430,7 +450,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 10.0, right: 10.0, bottom: 15.0),
-                                  child: Text(
+                                  child: AutoSizeText(
                                     "Address",
                                     style: GoogleFonts.montserrat(
                                         fontSize: 15.0,
@@ -528,3 +548,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     );
   }
 }
+
+//TODO: Check textbox colors
+//TODO: Keyboard inset not working - clampingscroll issue?
+//TODO: Source of water has to be changed
+//TODO: Insert values to checkboxalertdialogs
