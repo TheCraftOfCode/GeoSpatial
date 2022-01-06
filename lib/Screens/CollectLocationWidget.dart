@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
@@ -6,7 +7,7 @@ import 'package:geo_spatial/Widgets/LocationWidget.dart';
 
 class CollectLocationWidget extends StatefulWidget {
   const CollectLocationWidget({Key? key, this.modelData}) : super(key: key);
-  final modelData;
+  final FamilyMembersCommonDataModel? modelData;
 
   @override
   _CollectLocationWidgetState createState() => _CollectLocationWidgetState();
@@ -16,9 +17,6 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
   @override
   Widget build(BuildContext context) {
     _onSubmit(bool isValid) async {
-      print("All data valid");
-      print(isValid.toString());
-
       if (isValid) {
         print("Valid!");
         Navigator.pop(context);
@@ -70,41 +68,45 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
                 LocationWidgetField(
                   title: "Record location at top left part of the facility",
                   context: context,
-                  defaultValue: widget.modelData.locationTopLeft,
+                  defaultValue: widget.modelData?.locationTopLeft,
                   onSaved: (data) {
                     print(data);
-                    widget.modelData.locationTopLeft = data;
+                    widget.modelData?.locationTopLeft = data;
                   },
                 ),
                 LocationWidgetField(
                   title: "Record location at top right part of the facility",
                   context: context,
-                  defaultValue: widget.modelData.locationTopRight,
+                  defaultValue: widget.modelData?.locationTopRight,
                   onSaved: (data) {
                     print(data);
-                    widget.modelData.locationTopRight = data;
+                    widget.modelData?.locationTopRight = data;
                   },
                 ),
                 LocationWidgetField(
                   title: "Record location at bottom left part of the facility",
                   context: context,
-                  defaultValue: widget.modelData.locationBottomLeft,
+                  defaultValue: widget.modelData?.locationBottomLeft,
                   onSaved: (data) {
                     print(data);
-                    widget.modelData.locationBottomLeft = data;
+                    widget.modelData?.locationBottomLeft = data;
                   },
                 ),
                 LocationWidgetField(
                   title: "Record location at bottom right part of the facility",
                   context: context,
-                  defaultValue: widget.modelData.locationBottomRight,
+                  defaultValue: widget.modelData?.locationBottomRight,
                   onSaved: (data) {
                     print(data);
-                    widget.modelData.locationBottomRight = data;
+                    widget.modelData?.locationBottomRight = data;
                   },
                 ),
               ],
               _onSubmit,
+              onChange: (isValid){
+                print("IS LOCATION VALID: ${widget.modelData?.locationPageValid}");
+                widget.modelData?.locationPageValid = isValid;
+              },
               submitMessage:
               "Submit to Continue or go back to re-record location data",
               note: "The entered fields are automatically saved when moving to next page and doesn't require submit to be clicked to save",

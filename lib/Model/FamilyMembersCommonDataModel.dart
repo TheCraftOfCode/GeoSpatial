@@ -36,6 +36,7 @@ class FamilyMemberIndividualDataModel {
   String? useOfAlcohol;
   String? aarogyaSetuInstalled;
   String? vizhithiruInstalled;
+  bool? dataValid = false;
 
   String? savedTime = DateFormat('kk:mm:ss, EEE d MMM').format(DateTime.now());
 
@@ -96,6 +97,8 @@ class FamilyMembersCommonDataModel {
   String? addressOne;
   String? addressTwo;
   String? city;
+  bool? locationPageValid = false;
+  bool? commonDetailsValid = false;
 
   @Transient()
   final individualDataListTransient = <FamilyMemberIndividualDataModel>[];

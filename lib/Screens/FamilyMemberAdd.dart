@@ -752,6 +752,11 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 )
               ],
               _onSubmit,
+              onChange: (isValid){
+                print(isValid);
+                print("IS FAM VALID: ${widget.familyMemberIndividualDataModel?.dataValid}");
+                widget.familyMemberIndividualDataModel?.dataValid = isValid;
+              },
               submitMessage: "Submit to Continue or go back to re-record data",
               note:
                   "The entered fields are automatically saved when moving to next page and doesn't require submit to be clicked to save",

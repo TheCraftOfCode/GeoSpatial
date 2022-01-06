@@ -45,7 +45,6 @@ class _StepCounterWidgetState extends State<StepCounterWidget> {
           widget.errorArray[i]
               ? checkBoxWidgetList.add(CheckBox(0, widget.controller, i))
               : checkBoxWidgetList.add(CheckBox(1, widget.controller, i));
-          print(widget.errorArray[i].toString() + " " + i.toString());
         } catch (error) {
           checkBoxWidgetList.add(CheckBox(1, widget.controller, i));
         }

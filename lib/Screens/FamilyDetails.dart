@@ -515,6 +515,11 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       )
                     ],
                     _onSubmit,
+                    onChange: (isValid){
+                      print(isValid);
+                      print("IS FAM VALID: ${widget.modelData?.commonDetailsValid}");
+                      widget.modelData?.commonDetailsValid = isValid;
+                    },
                     submitMessage:
                         "Submit to Continue or go back to re-record data",
                     note:

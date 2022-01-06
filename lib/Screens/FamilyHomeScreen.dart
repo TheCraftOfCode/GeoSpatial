@@ -20,8 +20,7 @@ class FamilyHomeScreen extends StatefulWidget {
 
 FamilyMembersCommonDataModel? modelData;
 
-class _FamilyHomeScreenState extends State<FamilyHomeScreen>
-    with AutomaticKeepAliveClientMixin {
+class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
   var store;
 
   void initState() {
@@ -30,6 +29,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen>
       if (modelData == null)
         modelData = widget.modelData ?? new FamilyMembersCommonDataModel();
 
+      modelData!.individualDataListTransient.clear();
       for (var i in modelData!.individualDataList) {
         print(i);
         modelData!.individualDataListTransient.add(i);
@@ -39,8 +39,6 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-
     return Scaffold(
       appBar: AppBarBackButton('Individual Data'),
       backgroundColor: colors.darkScaffoldColor,
@@ -90,7 +88,21 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen>
                                       side: BorderSide(
                                           color: colors
                                               .darkSecondBackgroundColor)))),
-                          onPressed: () {}),
+                          onPressed: () {
+                            bool isValid = true;
+                            print("Common ${modelData!.commonDetailsValid}");
+                            print("Location ${modelData!.locationPageValid}");
+                            isValid &= modelData!.commonDetailsValid! &&
+                                modelData!.locationPageValid!;
+
+                            for (var i
+                                in modelData!.individualDataListTransient) {
+                              isValid &= i.dataValid!;
+                              print("Indv ${i.dataValid}");
+                            }
+
+                            print("Is Valid: $isValid");
+                          }),
                     ),
                   ),
                   Padding(
@@ -169,7 +181,4 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen>
     print("DISPOSED");
     modelData = null;
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

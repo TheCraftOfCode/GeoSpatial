@@ -8,11 +8,12 @@ import 'PageViewContentBox.dart';
 
 class FormPageView extends StatefulWidget {
   const FormPageView(this.pageWidgetList, this.onSubmit,
-      {Key? key, this.saveData, this.submitMessage, this.note})
+      {Key? key, this.saveData, this.submitMessage, this.note, this.onChange})
       : super(key: key);
 
   final List<Widget> pageWidgetList;
   final Function(bool) onSubmit;
+  final Function(bool)? onChange;
   final saveData;
   final submitMessage;
   final note;
@@ -35,16 +36,10 @@ class _FormPageViewState extends State<FormPageView> {
     super.initState();
 
     widgetLength = widget.pageWidgetList.length + 1;
-    print(widgetLength);
     formErrorTile = List.generate(widgetLength - 1, (index) => false);
-
-    print(formErrorTile);
 
     formKeyList = List.generate(
         widgetLength - 1, (index) => GlobalObjectKey<FormState>(index));
-
-    print(formKeyList);
-
     widgetList = List.generate(
         widgetLength - 1,
         (index) => PageViewContentBox(FormKeepAlive(
@@ -86,8 +81,7 @@ class _FormPageViewState extends State<FormPageView> {
                       isValid &= isDataValid;
                       formKeyList[i].currentState!.save();
 
-                      if (isDataValid) {
-                      }
+                      if (isDataValid) {}
                     }
                     widget.onSubmit(isValid);
                   }),
@@ -136,15 +130,17 @@ class _FormPageViewState extends State<FormPageView> {
   }
 
   _onPageViewChange(int page) {
+    var isAllValid = true;
     for (int i = 0; i < page; i++) {
       setState(() {
         var isValid = formKeyList[i].currentState!.validate();
+        isAllValid &= isValid;
         formKeyList[i].currentState!.save();
-        if (isValid) {
-        }
+        if (isValid) {}
         formErrorTile[i] = !isValid;
       });
     }
+    widget.onChange!(isAllValid);
     setState(() {
       count = page;
     });
@@ -193,6 +189,7 @@ class _FormKeepAliveState extends State<FormKeepAlive>
     return Form(
       child: widget.childWidget,
       key: widget._formKey,
+      onChanged: () {},
     );
   }
 
