@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geo_spatial/Screens/Login.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/Globals.dart' as globals;
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
@@ -20,7 +21,22 @@ class ProfilePage extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppBarBackButton('Profile'),
+            AppBarBackButton(
+              'Profile',
+              actions: [
+                IconButton(
+                    onPressed: () async {
+                      await storage.delete(key: 'jwt');
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => Login()),
+                          (Route<dynamic> route) => false);
+                    },
+                    icon: Icon(
+                      Icons.logout,
+                      color: colors.darkAccentColor,
+                    ))
+              ],
+            ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.08,
             ),
@@ -89,21 +105,24 @@ class ProfilePage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Container(
-                      padding: EdgeInsets.only(top: 15,left: 20.0),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)),color: Color(0xff34344B)),
+                      padding: EdgeInsets.only(top: 15, left: 20.0),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          color: Color(0xff34344B)),
                       height: 50,
-                      width: MediaQuery.of(context).size.width*0.8,
+                      width: MediaQuery.of(context).size.width * 0.8,
                       child: Text('Joined on: '),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 15,left: 20.0),
-                    width: MediaQuery.of(context).size.width*0.8,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)),color: Color(0xff34344B)),
+                    padding: EdgeInsets.only(top: 15, left: 20.0),
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        color: Color(0xff34344B)),
                     height: 50,
                     child: Text('Records collected: '),
                   )
-
                 ],
               ),
             )
