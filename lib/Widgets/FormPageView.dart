@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/StepCounterWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:preload_page_view/preload_page_view.dart';
 
 import 'PageViewContentBox.dart';
 
@@ -28,7 +29,8 @@ class _FormPageViewState extends State<FormPageView> {
   late int widgetLength;
   late final List<GlobalObjectKey<FormState>> formKeyList;
   late final List<bool> formErrorTile;
-  final PageController controller = PageController(initialPage: 0);
+  final PreloadPageController controller =
+      PreloadPageController(initialPage: 0);
   late final List<Widget> widgetList;
 
   @override
@@ -140,7 +142,7 @@ class _FormPageViewState extends State<FormPageView> {
         formErrorTile[i] = !isValid;
       });
     }
-    if(widget.onChange != null){
+    if (widget.onChange != null) {
       widget.onChange!(isAllValid);
     }
     setState(() {
@@ -159,12 +161,21 @@ class _FormPageViewState extends State<FormPageView> {
           StepCounterWidget(widgetLength, count, formErrorTile, controller),
           Container(
             height: MediaQuery.of(context).size.height * 0.85,
-            child: PageView(
-              onPageChanged: _onPageViewChange,
-              scrollDirection: Axis.horizontal,
-              controller: controller,
-              children: widgetList,
-            ),
+            // child: PageView(
+            //   onPageChanged: _onPageViewChange,
+            //   scrollDirection: Axis.horizontal,
+            //   controller: controller,
+            //   children: widgetList,
+            // ),
+            child: PreloadPageView.builder(
+                onPageChanged: _onPageViewChange,
+                scrollDirection: Axis.horizontal,
+                preloadPagesCount: widgetList.length - 1,
+                itemCount: widgetList.length,
+                controller: controller,
+                itemBuilder: (BuildContext context, int position) {
+                  return widgetList[position];
+                }),
           ),
         ],
       ),

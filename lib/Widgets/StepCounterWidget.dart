@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:preload_page_view/preload_page_view.dart';
 
 /**
  * Widget for steps count in registration pages
@@ -21,7 +22,7 @@ class StepCounterWidget extends StatefulWidget {
   final int totalSteps;
   final int currentStep;
   final List<bool> errorArray;
-  final PageController controller;
+  final PreloadPageController controller;
 
   @override
   _StepCounterWidgetState createState() => _StepCounterWidgetState();
@@ -67,7 +68,7 @@ class CheckBox extends StatelessWidget {
   const CheckBox(this.iconType, this.controller, this.tilePosition, {Key? key})
       : super(key: key);
   final int iconType;
-  final PageController controller;
+  final PreloadPageController controller;
   final int tilePosition;
 
   @override
