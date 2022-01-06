@@ -217,3 +217,6 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
     super.dispose();
   }
 }
+
+
+//TODO: Fix colors of dialog

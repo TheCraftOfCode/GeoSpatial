@@ -90,7 +90,7 @@ class _VillageSelectionScreenState extends State<VillageSelectionScreen> {
                         elevation: 10,
                         color: colors.darkScaffoldColor,
                         child: SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.16,
+                          height: MediaQuery.of(context).size.height * 0.22,
                           width: MediaQuery.of(context).size.width * 0.7,
                           child: Column(
                             children: [
