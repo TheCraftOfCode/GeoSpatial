@@ -1,0 +1,406 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:6144760902505378968",
+      "lastPropertyId": "8:1374390598853638581",
+      "name": "CommunityDataModel",
+      "properties": [
+        {
+          "id": "1:4748866847843651725",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2932393208152434267",
+          "name": "resourceType",
+          "type": 9
+        },
+        {
+          "id": "3:1921952090063309092",
+          "name": "villageCode",
+          "type": 9
+        },
+        {
+          "id": "4:4458344485253850474",
+          "name": "savedTime",
+          "type": 9
+        },
+        {
+          "id": "5:7168925326320672943",
+          "name": "dbLocationTopLeft",
+          "type": 9
+        },
+        {
+          "id": "6:6976643051535550913",
+          "name": "dbLocationTopRight",
+          "type": 9
+        },
+        {
+          "id": "7:2527558881981362435",
+          "name": "dbLocationBottomLeft",
+          "type": 9
+        },
+        {
+          "id": "8:1374390598853638581",
+          "name": "dbLocationBottomRight",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:4604626538020621410",
+      "lastPropertyId": "32:1328642062638523745",
+      "name": "FamilyMemberIndividualDataModel",
+      "properties": [
+        {
+          "id": "1:1615626269752887015",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:147960419452912546",
+          "name": "userName",
+          "type": 9
+        },
+        {
+          "id": "3:2641592509733256058",
+          "name": "dateOfBirth",
+          "type": 10
+        },
+        {
+          "id": "4:6282594208002927050",
+          "name": "gender",
+          "type": 9
+        },
+        {
+          "id": "5:4209209735115259461",
+          "name": "phoneNumber",
+          "type": 9
+        },
+        {
+          "id": "6:3962014586057530124",
+          "name": "educationQualification",
+          "type": 9
+        },
+        {
+          "id": "7:1340435734295744333",
+          "name": "aadhaarNumber",
+          "type": 9
+        },
+        {
+          "id": "8:8202265740818534316",
+          "name": "dailyWageWorker",
+          "type": 9
+        },
+        {
+          "id": "9:5611188519781040934",
+          "name": "incomePerDay",
+          "type": 9
+        },
+        {
+          "id": "10:1258910779661384685",
+          "name": "incomePerMonth",
+          "type": 9
+        },
+        {
+          "id": "11:742592545502650523",
+          "name": "pension",
+          "type": 9
+        },
+        {
+          "id": "12:7975675992055446810",
+          "name": "businessStatus",
+          "type": 9
+        },
+        {
+          "id": "13:747564586513409332",
+          "name": "maritalStatus",
+          "type": 9
+        },
+        {
+          "id": "14:5573484003127214285",
+          "name": "specialSkills",
+          "type": 30
+        },
+        {
+          "id": "15:1780571115080959247",
+          "name": "frequentAilments",
+          "type": 30
+        },
+        {
+          "id": "16:5383502869453245964",
+          "name": "commutableDisease",
+          "type": 30
+        },
+        {
+          "id": "17:2820386840249227222",
+          "name": "nonCommutableDisease",
+          "type": 30
+        },
+        {
+          "id": "18:2506597441281996495",
+          "name": "surgeries",
+          "type": 9
+        },
+        {
+          "id": "19:7773359300531977330",
+          "name": "anganwadiServicesAware",
+          "type": 9
+        },
+        {
+          "id": "20:9088237078871159207",
+          "name": "anganwadiServicesUsing",
+          "type": 9
+        },
+        {
+          "id": "21:591653671698069367",
+          "name": "anganwadiServicesUsedList",
+          "type": 30
+        },
+        {
+          "id": "22:8089710746679848906",
+          "name": "PHCServicesUsedList",
+          "type": 30
+        },
+        {
+          "id": "23:4567441488943246138",
+          "name": "privateClinicServicesUsedList",
+          "type": 30
+        },
+        {
+          "id": "24:1321911158882624161",
+          "name": "privateServiceReason",
+          "type": 9
+        },
+        {
+          "id": "25:515443054774028092",
+          "name": "useOfTobacco",
+          "type": 9
+        },
+        {
+          "id": "26:8707238561404829402",
+          "name": "useOfAlcohol",
+          "type": 9
+        },
+        {
+          "id": "27:3309599826830426346",
+          "name": "aarogyaSetuInstalled",
+          "type": 9
+        },
+        {
+          "id": "28:9084202418978987072",
+          "name": "vizhithiruInstalled",
+          "type": 9
+        },
+        {
+          "id": "29:7889719359007222937",
+          "name": "dataValid",
+          "type": 1
+        },
+        {
+          "id": "30:3511831625273329956",
+          "name": "savedTime",
+          "type": 9
+        },
+        {
+          "id": "31:4870102737459248754",
+          "name": "dbVulnerabilities",
+          "type": 9
+        },
+        {
+          "id": "32:1328642062638523745",
+          "name": "dbOccupation",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:4555229639046191310",
+      "lastPropertyId": "31:257396080593114234",
+      "name": "FamilyMembersCommonDataModel",
+      "properties": [
+        {
+          "id": "1:8819136016483451605",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3437476224699639583",
+          "name": "drinkingWater",
+          "type": 9
+        },
+        {
+          "id": "3:961043903550204529",
+          "name": "sourceOfDrinkingWater",
+          "type": 9
+        },
+        {
+          "id": "4:2341047533460923742",
+          "name": "toiletFacility",
+          "type": 9
+        },
+        {
+          "id": "5:111976571800950215",
+          "name": "communityToilet",
+          "type": 9
+        },
+        {
+          "id": "6:8175958428232054206",
+          "name": "environmentSanitationLevel",
+          "type": 9
+        },
+        {
+          "id": "7:7080507576734769781",
+          "name": "runningWaterAvailable",
+          "type": 9
+        },
+        {
+          "id": "8:3619777862295069103",
+          "name": "noOfTwoWheelers",
+          "type": 9
+        },
+        {
+          "id": "9:2220681223517389029",
+          "name": "noOfThreeWheelers",
+          "type": 9
+        },
+        {
+          "id": "10:5295960391830025761",
+          "name": "noOfFourWheelers",
+          "type": 9
+        },
+        {
+          "id": "11:3999230000658269584",
+          "name": "isCattleOwned",
+          "type": 9
+        },
+        {
+          "id": "12:8174000252850380247",
+          "name": "incomeFromCattle",
+          "type": 9
+        },
+        {
+          "id": "13:4187254125313827388",
+          "name": "isFarmLandOwned",
+          "type": 9
+        },
+        {
+          "id": "14:4007865345223693029",
+          "name": "isSeedsPreserved",
+          "type": 9
+        },
+        {
+          "id": "15:5799753283360608792",
+          "name": "isKitchenGardenOwned",
+          "type": 9
+        },
+        {
+          "id": "16:3272250098967751212",
+          "name": "addressOne",
+          "type": 9
+        },
+        {
+          "id": "17:5993366458798453696",
+          "name": "addressTwo",
+          "type": 9
+        },
+        {
+          "id": "18:8246574557213969028",
+          "name": "city",
+          "type": 9
+        },
+        {
+          "id": "19:5398790887074809282",
+          "name": "locationPageValid",
+          "type": 1
+        },
+        {
+          "id": "20:6657479069084504293",
+          "name": "commonDetailsValid",
+          "type": 1
+        },
+        {
+          "id": "21:6821885131227205219",
+          "name": "savedTime",
+          "type": 9
+        },
+        {
+          "id": "22:5541702793145940965",
+          "name": "dbLocationTopLeft",
+          "type": 9
+        },
+        {
+          "id": "23:4155729105605878928",
+          "name": "dbLocationTopRight",
+          "type": 9
+        },
+        {
+          "id": "24:176578608674560191",
+          "name": "dbLocationBottomLeft",
+          "type": 9
+        },
+        {
+          "id": "25:3352596760349944439",
+          "name": "dbLocationBottomRight",
+          "type": 9
+        },
+        {
+          "id": "26:8858146981830191665",
+          "name": "dbTwoThreeWheelManufacturer",
+          "type": 9
+        },
+        {
+          "id": "27:6657331618266238890",
+          "name": "dbTwoFourManufacturer",
+          "type": 9
+        },
+        {
+          "id": "28:2360124385132929587",
+          "name": "dbLocalFoodMap",
+          "type": 9
+        },
+        {
+          "id": "29:5230846993278344596",
+          "name": "dbPreservedSeedsMap",
+          "type": 9
+        },
+        {
+          "id": "30:2725907391283288263",
+          "name": "dbTreesOwnedMap",
+          "type": 9
+        },
+        {
+          "id": "31:257396080593114234",
+          "name": "dbKitchenGardenPlants",
+          "type": 9
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:3641078863127427509",
+          "name": "individualDataList",
+          "targetId": "2:4604626538020621410"
+        }
+      ]
+    }
+  ],
+  "lastEntityId": "3:4555229639046191310",
+  "lastIndexId": "0:0",
+  "lastRelationId": "1:3641078863127427509",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
