@@ -115,7 +115,7 @@ class CheckBox extends StatelessWidget {
             controller.animateToPage(
               tilePosition,
               curve: Curves.ease,
-              duration: Duration(milliseconds: 650),
+              duration: Duration(seconds: 1),
             );
           },
           child: Padding(
