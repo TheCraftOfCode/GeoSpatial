@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
@@ -47,6 +48,7 @@ class ProfilePage extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -62,16 +64,46 @@ class ProfilePage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: colors.darkSecondaryTextColor.withOpacity(0.2),
+                    ),
+                    onPressed: () {
+                      print('Button Clicked');
+                    },
+                    child: Text(
+                      'Change\nUsername',
+                      style: GoogleFonts.poppins(
+                          color: colors.darkPrimaryTextColor),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ],
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('Joined on: '),
-                  Text('Records collected: '),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Container(
+                      padding: EdgeInsets.only(top: 15,left: 20.0),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)),color: Color(0xff34344B)),
+                      height: 50,
+                      width: MediaQuery.of(context).size.width*0.8,
+                      child: Text('Joined on: '),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 15,left: 20.0),
+                    width: MediaQuery.of(context).size.width*0.8,
+                    decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)),color: Color(0xff34344B)),
+                    height: 50,
+                    child: Text('Records collected: '),
+                  )
+
                 ],
               ),
             )
