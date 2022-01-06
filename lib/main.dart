@@ -15,8 +15,7 @@ void main() {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     runApp(MaterialApp(
-        home: ProfilePage(),
-        //LoadValidPageWidget(Login(), Home()),
+        home: LoadValidPageWidget(Login(), Home()),
         debugShowCheckedModeBanner: false,
         theme: darkTheme.DarkTheme
     ));

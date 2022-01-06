@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Screens/Login.dart';
+import 'package:geo_spatial/Screens/ProfilePage.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/Globals.dart' as globals;
 import 'package:google_fonts/google_fonts.dart';
@@ -10,7 +11,6 @@ class NavigationDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Drawer(
       child: Material(
         color: colors.darkScaffoldColor,
@@ -40,10 +40,19 @@ class NavigationDrawer extends StatelessWidget {
                     GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
               ),
             ),
-            buildMenuItem(text: 'Home', icon: Icons.home, onTap: () {
-              Navigator.of(context).pop();
-            }),
-            buildMenuItem(text: 'Profile', icon: Icons.person, onTap: () {}),
+            buildMenuItem(
+                text: 'Home',
+                icon: Icons.home,
+                onTap: () {
+                  Navigator.of(context).pop();
+                }),
+            buildMenuItem(
+                text: 'Profile',
+                icon: Icons.person,
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ProfilePage()));
+                }),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Container(
@@ -62,7 +71,7 @@ class NavigationDrawer extends StatelessWidget {
                 await storage.delete(key: 'jwt');
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(builder: (context) => Login()),
-                        (Route<dynamic> route) => false);
+                    (Route<dynamic> route) => false);
               },
             ),
           ],
