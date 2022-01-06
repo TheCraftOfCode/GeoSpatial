@@ -66,32 +66,50 @@ class ProfilePage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: colors.darkSecondaryTextColor.withOpacity(0.2),
-                    ),
-                    onPressed: () {
-                      print('Button Clicked');
-                    },
-                    child: Text(
-                      'Change\nPassword',
-                      style: GoogleFonts.poppins(
-                          color: colors.darkPrimaryTextColor),
-                      textAlign: TextAlign.center,
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 6, left: 20),
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          primary: colors.darkSecondaryTextColor.withOpacity(0.2),
+                        ),
+                        onPressed: () {
+                          print('Button Clicked');
+                        },
+                        icon: Icon(
+                          Icons.lock,
+                          color: colors.darkAccentColor,
+                        ),
+                        label: Text(
+                          'Change\nPassword',
+                          style: GoogleFonts.poppins(
+                              color: colors.darkPrimaryTextColor),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: colors.darkSecondaryTextColor.withOpacity(0.2),
-                    ),
-                    onPressed: () {
-                      print('Button Clicked');
-                    },
-                    child: Text(
-                      'Change\nUsername',
-                      style: GoogleFonts.poppins(
-                          color: colors.darkPrimaryTextColor),
-                      textAlign: TextAlign.center,
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 6, right: 20),
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          primary: colors.darkSecondaryTextColor.withOpacity(0.2),
+                        ),
+                        onPressed: () {
+                          print('Button Clicked');
+                        },
+                        label: Text(
+                          'Change\nUsername',
+                          style: GoogleFonts.poppins(
+                              color: colors.darkPrimaryTextColor),
+                          textAlign: TextAlign.center,
+                        ),
+                        icon: Icon(
+                          Icons.person,
+                          color: colors.darkAccentColor,
+                        ),
+                      ),
                     ),
                   ),
                 ],
