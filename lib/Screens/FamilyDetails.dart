@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/CheckBoxAddExtraDialog.dart';
@@ -9,7 +10,8 @@ import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FamilyDetails extends StatefulWidget {
-  const FamilyDetails({Key? key}) : super(key: key);
+  const FamilyDetails({Key? key, this.modelData}) : super(key: key);
+  final FamilyMembersCommonDataModel? modelData;
 
   @override
   State<FamilyDetails> createState() => _FamilyDetailsState();
@@ -89,7 +91,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
         }
         final result = await showDialog(
           context: context,
-          builder: (context)  =>  AlertDialog(
+          builder: (context) => AlertDialog(
             title: Text("Are you sure?"),
             content: Text("All unsaved changes would be lost"),
             actions: <Widget>[
@@ -123,10 +125,17 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        OptionsWidget(options: [
-                          ['Yes', 'yes'],
-                          ['No', 'no']
-                        ], title: "Do you have drinking water available?"),
+                        OptionsWidget(
+                            options: [
+                              ['Yes', 'yes'],
+                              ['No', 'no']
+                            ],
+                            defaultValue: widget.modelData!.drinkingWater,
+                            onSaved: (val) {
+                              print("Value recorded: $val");
+                              widget.modelData!.drinkingWater = val;
+                            },
+                            title: "Do you have drinking water available?"),
                         DropDownFormField(
                           list: [
                             'None',
@@ -138,51 +147,100 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                             'Water supply',
                             'Lorry/Van'
                           ],
+                          defaultValue: widget.modelData!.sourceOfDrinkingWater,
+                          onSaved: (val) {
+                            print("Value recorded: $val");
+                            widget.modelData!.sourceOfDrinkingWater = val;
+                          },
                           hint: "Select source",
                           title: "Source of Water",
                           errorField: "Please choose an option",
                         ),
-                        OptionsWidget(options: [
-                          ['Yes', 'yes'],
-                          ['No', 'no']
-                        ], title: "Do you have toilet facilities?"),
-                        OptionsWidget(options: [
-                          ['Yes', 'yes'],
-                          ['No', 'no']
-                        ], title: "If not toilet, community toilet?"),
-                        OptionsWidget(options: [
-                          ['Clean', 'clean'],
-                          ['Unclean', 'unclean']
-                        ], title: "Environmental sanitation level: "),
+                        OptionsWidget(
+                            options: [
+                              ['Yes', 'yes'],
+                              ['No', 'no']
+                            ],
+                            defaultValue: widget.modelData!.toiletFacility,
+                            onSaved: (val) {
+                              print("Value recorded: $val");
+                              widget.modelData!.toiletFacility = val;
+                            },
+                            title: "Do you have toilet facilities?"),
+                        OptionsWidget(
+                            options: [
+                              ['Yes', 'yes'],
+                              ['No', 'no']
+                            ],
+                            defaultValue: widget.modelData!.communityToilet,
+                            onSaved: (val) {
+                              print("Value recorded: $val");
+                              widget.modelData!.communityToilet = val;
+                            },
+                            title: "If not toilet, community toilet?"),
+                        OptionsWidget(
+                            options: [
+                              ['Clean', 'clean'],
+                              ['Unclean', 'unclean']
+                            ],
+                            defaultValue:
+                                widget.modelData!.environmentSanitationLevel,
+                            onSaved: (val) {
+                              print("Value recorded: $val");
+                              widget.modelData!.environmentSanitationLevel =
+                                  val;
+                            },
+                            title: "Environmental sanitation level: "),
                       ],
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        OptionsWidget(options: [
-                          ['Yes', 'yes'],
-                          ['No', 'no']
-                        ], title: "Is running water available?"),
+                        OptionsWidget(
+                            options: [
+                              ['Yes', 'yes'],
+                              ['No', 'no']
+                            ],
+                            defaultValue:
+                                widget.modelData!.runningWaterAvailable,
+                            onSaved: (val) {
+                              print("Value recorded: $val");
+                              widget.modelData!.runningWaterAvailable = val;
+                            },
+                            title: "Is running water available?"),
                         DropDownFormField(
                           list: ['1', '2', '3', '4', '5', 'More'],
                           hint: "Select the highest",
                           title: "No of two wheelers",
+                          defaultValue: widget.modelData!.noOfTwoWheelers,
+                          onSaved: (val) {
+                            print("Value recorded: $val");
+                            widget.modelData!.noOfTwoWheelers = val;
+                          },
                           errorField: "Please choose a valid number",
                         ),
                         DropDownFormField(
                           list: ['1', '2', '3', '4', '5', 'More'],
                           hint: "Select the highest",
                           title: "No of three wheelers",
+                          defaultValue: widget.modelData!.noOfThreeWheelers,
+                          onSaved: (val) {
+                            print("Value recorded: $val");
+                            widget.modelData!.noOfThreeWheelers = val;
+                          },
                           errorField: "Please choose a valid number",
                         ),
                         CheckBoxAlertDialog(
                           title: 'Two/Three wheeler manufacturer',
                           hint: 'Please choose manufacturers',
-                          dataMap: two_three_mfg,
                           singleOption: false,
                           context: context,
-                          onSaved: (map) {
-                            print(map);
+                          dataMap:
+                              widget.modelData!.twoThreeWheelManufacturer ??
+                                  two_three_mfg,
+                          onSaved: (val) {
+                            print("Value recorded: $val");
+                            widget.modelData?.twoThreeWheelManufacturer = val;
                           },
                           errorField: "Please choose a manufacturer",
                           autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -192,6 +250,11 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           hint: "Select the highest",
                           title: "No of four wheelers",
                           errorField: "Please choose a valid number",
+                          defaultValue: widget.modelData!.noOfFourWheelers,
+                          onSaved: (val) {
+                            print("Value recorded: $val");
+                            widget.modelData!.noOfFourWheelers = val;
+                          },
                         ),
                       ],
                     ),
@@ -201,23 +264,37 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         CheckBoxAlertDialog(
                           title: 'Four wheeler manufacturer',
                           hint: 'Please choose manufacturers',
-                          dataMap: four_mfg,
                           singleOption: false,
                           context: context,
-                          onSaved: (map) {
-                            print(map);
+                          dataMap:
+                              widget.modelData!.twoFourManufacturer ?? four_mfg,
+                          onSaved: (val) {
+                            print("Value recorded: $val");
+                            widget.modelData?.twoFourManufacturer = val;
                           },
                           errorField: "Please choose a manufacturer",
                           autoValidateMode: AutovalidateMode.onUserInteraction,
                         ),
-                        OptionsWidget(options: [
-                          ['Yes', 'yes'],
-                          ['No', 'no']
-                        ], title: "Do you own cattle?"),
+                        OptionsWidget(
+                            options: [
+                              ['Yes', 'yes'],
+                              ['No', 'no']
+                            ],
+                            defaultValue: widget.modelData!.isCattleOwned,
+                            onSaved: (val) {
+                              print("Value recorded: $val");
+                              widget.modelData!.isCattleOwned = val;
+                            },
+                            title: "Do you own cattle?"),
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 10.0, right: 10.0, top: 20.0),
                           child: TextFormField(
+                            initialValue: widget.modelData!.incomeFromCattle,
+                            onSaved: (val) {
+                              print("Value recorded: $val");
+                              widget.modelData!.incomeFromCattle = val;
+                            },
                             decoration: InputDecoration(
                                 hintStyle: GoogleFonts.poppins(
                                     color: colors.darkSecondaryTextColor),
@@ -237,6 +314,11 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                             ['Yes', 'yes'],
                             ['No', 'no']
                           ],
+                          defaultValue: widget.modelData!.isFarmLandOwned,
+                          onSaved: (val) {
+                            print("Value recorded: $val");
+                            widget.modelData!.isFarmLandOwned = val;
+                          },
                           title: "Do you own farmland?",
                         ),
                         OptionsWidget(
@@ -244,6 +326,11 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                             ['Yes', 'yes'],
                             ['No', 'no']
                           ],
+                          defaultValue: widget.modelData!.isSeedsPreserved,
+                          onSaved: (val) {
+                            print("Value recorded: $val");
+                            widget.modelData!.isSeedsPreserved = val;
+                          },
                           title: "Do you preserve seeds?",
                         ),
                       ],
@@ -255,32 +342,39 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         CheckBoxAddExtraAlertDialog(
                           title: 'Seeds Preserved',
                           hint: 'Choose preserved seeds',
-                          dataMap: seeds_preserved,
                           singleOption: false,
                           context: context,
-                          onSaved: (map) {
-                            print(map);
+                          dataMap: widget.modelData!.preservedSeedsMap ??
+                              seeds_preserved,
+                          onSaved: (val) {
+                            print("Value recorded: $val");
+                            widget.modelData!.preservedSeedsMap = val;
                           },
                         ),
                         CheckBoxAddExtraAlertDialog(
                           title: 'Trees owned',
                           hint: 'Choose trees owned',
-                          dataMap: trees_owned,
                           singleOption: false,
                           context: context,
-                          onSaved: (map) {
-                            print(map);
+                          dataMap:
+                              widget.modelData!.treesOwnedMap ?? trees_owned,
+                          onSaved: (val) {
+                            print("Value recorded: $val");
+                            widget.modelData!.treesOwnedMap = val;
                           },
                         ),
                         CheckBoxAddExtraAlertDialog(
                           title: 'Choose resource',
                           hint: 'Choose your resource',
-                          dataMap: local_food,
+                          //TODO: Change variable to local foood
+
+                          dataMap: widget.modelData!.localFoodMap ?? local_food,
+                          onSaved: (val) {
+                            print("Value recorded: $val");
+                            widget.modelData!.localFoodMap = val;
+                          },
                           singleOption: false,
                           context: context,
-                          onSaved: (map) {
-                            print(map);
-                          },
                         ),
 
                         //TODO: Add autosuggest text widget for locally consumed food
@@ -290,6 +384,11 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                             ['Yes', 'yes'],
                             ['No', 'no']
                           ],
+                          defaultValue: widget.modelData!.isKitchenGardenOwned,
+                          onSaved: (val) {
+                            print("Value recorded: $val");
+                            widget.modelData!.isKitchenGardenOwned = val;
+                          },
                           title: "Do you have a kitchen garden?",
                         ),
                       ],
@@ -300,83 +399,104 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         CheckBoxAddExtraAlertDialog(
                           title: 'Kitchen Garden plants',
                           hint: 'Choose garden plants',
-                          dataMap: garden_plants,
                           singleOption: false,
                           context: context,
-                          onSaved: (map) {
-                            print(map);
+                          dataMap: widget.modelData!.kitchenGardenPlants ??
+                              garden_plants,
+                          onSaved: (val) {
+                            print("Value recorded: $val");
+                            widget.modelData!.kitchenGardenPlants = val;
                           },
                         ),
                         //TODO: Add autosuggest text widget for kitchen garden crops
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 15.0),
-                                    child: Text(
-                                      "Address",
-                                      style: GoogleFonts.montserrat(
-                                          fontSize: 15.0,
-                                          color: colors.darkPrimaryTextColor),
-                                    ),
-                                  ),
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10.0, right: 10.0, bottom: 15.0),
+                                child: Text(
+                                  "Address",
+                                  style: GoogleFonts.montserrat(
+                                      fontSize: 15.0,
+                                      color: colors.darkPrimaryTextColor),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 70.0),
-                                  child: TextFormField(
-                                    decoration: InputDecoration(
-                                      label: Text(
-                                        "First Line",
-                                        style: GoogleFonts.poppins(
-                                            color: colors.darkSecondaryTextColor),
-                                      ),
-                                      hintText: "Please enter first line",
-                                      hintStyle: GoogleFonts.poppins(
-                                          color: colors.darkSecondaryTextColor),
-                                      contentPadding: EdgeInsets.all(7.0),
-                                    ),
-                                    validator: (value) {
-                                      if (value == "") {
-                                        return "Enter First Line";
-                                      }
-                                    },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10.0, right: 10.0, bottom: 70.0),
+                              child: TextFormField(
+                                initialValue: widget.modelData!.addressOne,
+                                onSaved: (val) {
+                                  print("Value recorded: $val");
+                                  widget.modelData!.addressOne = val;
+                                },
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "First Line",
+                                    style: GoogleFonts.poppins(
+                                        color: colors.darkSecondaryTextColor),
                                   ),
+                                  hintText: "Please enter first line",
+                                  hintStyle: GoogleFonts.poppins(
+                                      color: colors.darkSecondaryTextColor),
+                                  contentPadding: EdgeInsets.all(7.0),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 70.0),
-                                  child: TextFormField(
-                                    decoration: InputDecoration(
-                                      label: Text(
-                                        "Second Line",
-                                        style: GoogleFonts.poppins(
-                                            color: colors.darkSecondaryTextColor),
-                                      ),
-                                      hintText: "Please enter second line",
-                                      hintStyle: GoogleFonts.poppins(
-                                          color: colors.darkSecondaryTextColor),
-                                      contentPadding: EdgeInsets.all(7.0),
-                                    ),
+                                validator: (value) {
+                                  if (value == "") {
+                                    return "Enter First Line";
+                                  }
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10.0, right: 10.0, bottom: 70.0),
+                              child: TextFormField(
+                                initialValue: widget.modelData!.addressTwo,
+                                onSaved: (val) {
+                                  print("Value recorded: $val");
+                                  widget.modelData!.addressTwo = val;
+                                },
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Second Line",
+                                    style: GoogleFonts.poppins(
+                                        color: colors.darkSecondaryTextColor),
                                   ),
+                                  hintText: "Please enter second line",
+                                  hintStyle: GoogleFonts.poppins(
+                                      color: colors.darkSecondaryTextColor),
+                                  contentPadding: EdgeInsets.all(7.0),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 70.0),
-                                  child: TextFormField(
-                                    decoration: InputDecoration(
-                                      label: Text(
-                                        "City",
-                                        style: GoogleFonts.poppins(
-                                            color: colors.darkSecondaryTextColor),
-                                      ),
-                                      hintText: "Please enter city",
-                                      hintStyle: GoogleFonts.poppins(
-                                          color: colors.darkSecondaryTextColor),
-                                      contentPadding: EdgeInsets.all(7.0),
-                                    ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10.0, right: 10.0, bottom: 70.0),
+                              child: TextFormField(
+                                initialValue: widget.modelData!.city,
+                                onSaved: (val) {
+                                  print("Value recorded: $val");
+                                  widget.modelData!.city = val;
+                                },
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "City",
+                                    style: GoogleFonts.poppins(
+                                        color: colors.darkSecondaryTextColor),
                                   ),
+                                  hintText: "Please enter city",
+                                  hintStyle: GoogleFonts.poppins(
+                                      color: colors.darkSecondaryTextColor),
+                                  contentPadding: EdgeInsets.all(7.0),
                                 ),
-                              ],
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     )

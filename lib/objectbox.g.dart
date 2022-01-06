@@ -231,7 +231,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(3, 5004688671325240296),
       name: 'FamilyMembersCommonDataModel',
-      lastPropertyId: const IdUid(23, 6516827898200627863),
+      lastPropertyId: const IdUid(30, 4709957910567293326),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -320,11 +320,6 @@ final _entities = <ModelEntity>[
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(18, 5524724872707357697),
-            name: 'addressThree',
-            type: 9,
-            flags: 0),
-        ModelProperty(
             id: const IdUid(19, 1423273990910471875),
             name: 'savedTime',
             type: 9,
@@ -347,6 +342,41 @@ final _entities = <ModelEntity>[
         ModelProperty(
             id: const IdUid(23, 6516827898200627863),
             name: 'dbLocationBottomRight',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(24, 614476397339919731),
+            name: 'city',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(25, 6573872590519653208),
+            name: 'dbTwoThreeWheelManufacturer',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(26, 697696816698768514),
+            name: 'dbTwoFourManufacturer',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(27, 4321042013916961622),
+            name: 'dbLocalFoodMap',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(28, 5736085922745483974),
+            name: 'dbPreservedSeedsMap',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(29, 8804761426863292202),
+            name: 'dbTreesOwnedMap',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(30, 4709957910567293326),
+            name: 'dbKitchenGardenPlants',
             type: 9,
             flags: 0)
       ],
@@ -385,7 +415,7 @@ ModelDefinition getObjectBoxModel() {
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [7346081088137941172],
-      retiredPropertyUids: const [1969777098633351831],
+      retiredPropertyUids: const [1969777098633351831, 5524724872707357697],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -749,9 +779,6 @@ ModelDefinition getObjectBoxModel() {
           final addressTwoOffset = object.addressTwo == null
               ? null
               : fbb.writeString(object.addressTwo!);
-          final addressThreeOffset = object.addressThree == null
-              ? null
-              : fbb.writeString(object.addressThree!);
           final savedTimeOffset = object.savedTime == null
               ? null
               : fbb.writeString(object.savedTime!);
@@ -768,7 +795,30 @@ ModelDefinition getObjectBoxModel() {
               object.dbLocationBottomRight == null
                   ? null
                   : fbb.writeString(object.dbLocationBottomRight!);
-          fbb.startTable(24);
+          final cityOffset =
+              object.city == null ? null : fbb.writeString(object.city!);
+          final dbTwoThreeWheelManufacturerOffset =
+              object.dbTwoThreeWheelManufacturer == null
+                  ? null
+                  : fbb.writeString(object.dbTwoThreeWheelManufacturer!);
+          final dbTwoFourManufacturerOffset =
+              object.dbTwoFourManufacturer == null
+                  ? null
+                  : fbb.writeString(object.dbTwoFourManufacturer!);
+          final dbLocalFoodMapOffset = object.dbLocalFoodMap == null
+              ? null
+              : fbb.writeString(object.dbLocalFoodMap!);
+          final dbPreservedSeedsMapOffset = object.dbPreservedSeedsMap == null
+              ? null
+              : fbb.writeString(object.dbPreservedSeedsMap!);
+          final dbTreesOwnedMapOffset = object.dbTreesOwnedMap == null
+              ? null
+              : fbb.writeString(object.dbTreesOwnedMap!);
+          final dbKitchenGardenPlantsOffset =
+              object.dbKitchenGardenPlants == null
+                  ? null
+                  : fbb.writeString(object.dbKitchenGardenPlants!);
+          fbb.startTable(31);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, drinkingWaterOffset);
           fbb.addOffset(2, sourceOfDrinkingWaterOffset);
@@ -786,12 +836,18 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(14, isKitchenGardenOwnedOffset);
           fbb.addOffset(15, addressOneOffset);
           fbb.addOffset(16, addressTwoOffset);
-          fbb.addOffset(17, addressThreeOffset);
           fbb.addOffset(18, savedTimeOffset);
           fbb.addOffset(19, dbLocationTopLeftOffset);
           fbb.addOffset(20, dbLocationTopRightOffset);
           fbb.addOffset(21, dbLocationBottomLeftOffset);
           fbb.addOffset(22, dbLocationBottomRightOffset);
+          fbb.addOffset(23, cityOffset);
+          fbb.addOffset(24, dbTwoThreeWheelManufacturerOffset);
+          fbb.addOffset(25, dbTwoFourManufacturerOffset);
+          fbb.addOffset(26, dbLocalFoodMapOffset);
+          fbb.addOffset(27, dbPreservedSeedsMapOffset);
+          fbb.addOffset(28, dbTreesOwnedMapOffset);
+          fbb.addOffset(29, dbKitchenGardenPlantsOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -833,8 +889,6 @@ ModelDefinition getObjectBoxModel() {
                 .vTableGetNullable(buffer, rootOffset, 34)
             ..addressTwo = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 36)
-            ..addressThree = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 38)
             ..savedTime = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 40)
             ..dbLocationTopLeft = const fb.StringReader()
@@ -844,7 +898,21 @@ ModelDefinition getObjectBoxModel() {
             ..dbLocationBottomLeft = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 46)
             ..dbLocationBottomRight = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 48);
+                .vTableGetNullable(buffer, rootOffset, 48)
+            ..city = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 50)
+            ..dbTwoThreeWheelManufacturer = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 52)
+            ..dbTwoFourManufacturer = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 54)
+            ..dbLocalFoodMap = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 56)
+            ..dbPreservedSeedsMap = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 58)
+            ..dbTreesOwnedMap = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 60)
+            ..dbKitchenGardenPlants = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 62);
           InternalToManyAccess.setRelInfo(
               object.individualDataList,
               store,
@@ -1128,33 +1196,63 @@ class FamilyMembersCommonDataModel_ {
   static final addressTwo = QueryStringProperty<FamilyMembersCommonDataModel>(
       _entities[2].properties[16]);
 
-  /// see [FamilyMembersCommonDataModel.addressThree]
-  static final addressThree = QueryStringProperty<FamilyMembersCommonDataModel>(
-      _entities[2].properties[17]);
-
   /// see [FamilyMembersCommonDataModel.savedTime]
   static final savedTime = QueryStringProperty<FamilyMembersCommonDataModel>(
-      _entities[2].properties[18]);
+      _entities[2].properties[17]);
 
   /// see [FamilyMembersCommonDataModel.dbLocationTopLeft]
   static final dbLocationTopLeft =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[19]);
+          _entities[2].properties[18]);
 
   /// see [FamilyMembersCommonDataModel.dbLocationTopRight]
   static final dbLocationTopRight =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[20]);
+          _entities[2].properties[19]);
 
   /// see [FamilyMembersCommonDataModel.dbLocationBottomLeft]
   static final dbLocationBottomLeft =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[21]);
+          _entities[2].properties[20]);
 
   /// see [FamilyMembersCommonDataModel.dbLocationBottomRight]
   static final dbLocationBottomRight =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[22]);
+          _entities[2].properties[21]);
+
+  /// see [FamilyMembersCommonDataModel.city]
+  static final city = QueryStringProperty<FamilyMembersCommonDataModel>(
+      _entities[2].properties[22]);
+
+  /// see [FamilyMembersCommonDataModel.dbTwoThreeWheelManufacturer]
+  static final dbTwoThreeWheelManufacturer =
+      QueryStringProperty<FamilyMembersCommonDataModel>(
+          _entities[2].properties[23]);
+
+  /// see [FamilyMembersCommonDataModel.dbTwoFourManufacturer]
+  static final dbTwoFourManufacturer =
+      QueryStringProperty<FamilyMembersCommonDataModel>(
+          _entities[2].properties[24]);
+
+  /// see [FamilyMembersCommonDataModel.dbLocalFoodMap]
+  static final dbLocalFoodMap =
+      QueryStringProperty<FamilyMembersCommonDataModel>(
+          _entities[2].properties[25]);
+
+  /// see [FamilyMembersCommonDataModel.dbPreservedSeedsMap]
+  static final dbPreservedSeedsMap =
+      QueryStringProperty<FamilyMembersCommonDataModel>(
+          _entities[2].properties[26]);
+
+  /// see [FamilyMembersCommonDataModel.dbTreesOwnedMap]
+  static final dbTreesOwnedMap =
+      QueryStringProperty<FamilyMembersCommonDataModel>(
+          _entities[2].properties[27]);
+
+  /// see [FamilyMembersCommonDataModel.dbKitchenGardenPlants]
+  static final dbKitchenGardenPlants =
+      QueryStringProperty<FamilyMembersCommonDataModel>(
+          _entities[2].properties[28]);
 
   /// see [FamilyMembersCommonDataModel.individualDataList]
   static final individualDataList = QueryRelationToMany<

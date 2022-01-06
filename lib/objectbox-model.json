@@ -218,7 +218,7 @@
     },
     {
       "id": "3:5004688671325240296",
-      "lastPropertyId": "23:6516827898200627863",
+      "lastPropertyId": "30:4709957910567293326",
       "name": "FamilyMembersCommonDataModel",
       "properties": [
         {
@@ -308,11 +308,6 @@
           "type": 9
         },
         {
-          "id": "18:5524724872707357697",
-          "name": "addressThree",
-          "type": 9
-        },
-        {
           "id": "19:1423273990910471875",
           "name": "savedTime",
           "type": 9
@@ -336,6 +331,41 @@
           "id": "23:6516827898200627863",
           "name": "dbLocationBottomRight",
           "type": 9
+        },
+        {
+          "id": "24:614476397339919731",
+          "name": "city",
+          "type": 9
+        },
+        {
+          "id": "25:6573872590519653208",
+          "name": "dbTwoThreeWheelManufacturer",
+          "type": 9
+        },
+        {
+          "id": "26:697696816698768514",
+          "name": "dbTwoFourManufacturer",
+          "type": 9
+        },
+        {
+          "id": "27:4321042013916961622",
+          "name": "dbLocalFoodMap",
+          "type": 9
+        },
+        {
+          "id": "28:5736085922745483974",
+          "name": "dbPreservedSeedsMap",
+          "type": 9
+        },
+        {
+          "id": "29:8804761426863292202",
+          "name": "dbTreesOwnedMap",
+          "type": 9
+        },
+        {
+          "id": "30:4709957910567293326",
+          "name": "dbKitchenGardenPlants",
+          "type": 9
         }
       ],
       "relations": [
@@ -358,7 +388,8 @@
     7346081088137941172
   ],
   "retiredPropertyUids": [
-    1969777098633351831
+    1969777098633351831,
+    5524724872707357697
   ],
   "retiredRelationUids": [],
   "version": 1

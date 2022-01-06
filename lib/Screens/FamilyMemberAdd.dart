@@ -729,8 +729,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               ],
               _onSubmit,
               saveData: () async {
-                widget.dataModel!.individualDataList[widget.index!] =
-                    widget.familyMemberIndividualDataModel!;
+                // print(widget.dataModel);
+                // widget.dataModel!.individualDataList[widget.index!] =
+                //     widget.familyMemberIndividualDataModel!;
               },
             ),
           ),

@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
-import 'package:geo_spatial/objectbox.g.dart';
-
+import 'package:objectbox/objectbox.dart';
 
 @Entity()
 class FamilyMemberIndividualDataModel {
@@ -55,7 +54,7 @@ class FamilyMemberIndividualDataModel {
   }
 
   String? get dbOccupation =>
-      occupation == null ? null : json.encode(vulnerabilities);
+      occupation == null ? null : json.encode(occupation);
 
   set dbOccupation(String? value) {
     if (value == null) {
@@ -85,6 +84,7 @@ class FamilyMembersCommonDataModel {
   String? noOfFourWheelers;
   Map<String, bool>? twoThreeWheelManufacturer;
   Map<String, bool>? twoFourManufacturer;
+  Map<String, bool>? localFoodMap;
   String? isCattleOwned;
   String? incomeFromCattle;
   String? isFarmLandOwned;
@@ -95,8 +95,7 @@ class FamilyMembersCommonDataModel {
   Map<String, bool>? kitchenGardenPlants;
   String? addressOne;
   String? addressTwo;
-  String? addressThree;
-
+  String? city;
 
   @Transient()
   final individualDataListTransient = <FamilyMemberIndividualDataModel>[];
@@ -210,6 +209,79 @@ class FamilyMembersCommonDataModel {
           heading: body['heading'] ?? 0,
           speed: body['speed'] ?? 0,
           speedAccuracy: body['speedAccuracy'] ?? 0);
+    }
+  }
+
+  String? get dbTwoThreeWheelManufacturer => twoThreeWheelManufacturer == null
+      ? null
+      : json.encode(twoThreeWheelManufacturer);
+
+  set dbTwoThreeWheelManufacturer(String? value) {
+    if (value == null) {
+      twoThreeWheelManufacturer = null;
+    } else {
+      twoThreeWheelManufacturer = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
+
+  String? get dbTwoFourManufacturer =>
+      twoFourManufacturer == null ? null : json.encode(twoFourManufacturer);
+
+  set dbTwoFourManufacturer(String? value) {
+    if (value == null) {
+      twoFourManufacturer = null;
+    } else {
+      twoFourManufacturer = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
+
+  String? get dbLocalFoodMap =>
+      localFoodMap == null ? null : json.encode(localFoodMap);
+
+  set dbLocalFoodMap(String? value) {
+    if (value == null) {
+      localFoodMap = null;
+    } else {
+      localFoodMap = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
+
+  String? get dbPreservedSeedsMap =>
+      preservedSeedsMap == null ? null : json.encode(preservedSeedsMap);
+
+  set dbPreservedSeedsMap(String? value) {
+    if (value == null) {
+      preservedSeedsMap = null;
+    } else {
+      preservedSeedsMap = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
+
+  String? get dbTreesOwnedMap =>
+      treesOwnedMap == null ? null : json.encode(treesOwnedMap);
+
+  set dbTreesOwnedMap(String? value) {
+    if (value == null) {
+      treesOwnedMap = null;
+    } else {
+      treesOwnedMap = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
+
+  String? get dbKitchenGardenPlants =>
+      kitchenGardenPlants == null ? null : json.encode(kitchenGardenPlants);
+
+  set dbKitchenGardenPlants(String? value) {
+    if (value == null) {
+      kitchenGardenPlants = null;
+    } else {
+      kitchenGardenPlants = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
     }
   }
 

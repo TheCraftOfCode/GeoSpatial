@@ -23,13 +23,13 @@ import 'package:geo_spatial/Utils/Colors.dart' as colors;
     ),
  */
 
-class CheckBoxAlertDialog extends FormField<Map> {
+class CheckBoxAlertDialog extends FormField<Map<String, bool>> {
   CheckBoxAlertDialog(
-      {FormFieldSetter<Map>? onSaved,
-      FormFieldValidator<Map>? validator,
+      {FormFieldSetter<Map<String, bool>>? onSaved,
+      FormFieldValidator<Map<String, bool>>? validator,
       required title,
       required hint,
-      required Map dataMap,
+      required Map<String, bool> dataMap,
       errorField,
       singleOption = false,
       required context,
@@ -50,7 +50,7 @@ class CheckBoxAlertDialog extends FormField<Map> {
                 },
             initialValue: dataMap,
             autovalidateMode: autoValidateMode,
-            builder: (FormFieldState<Map> state) {
+            builder: (FormFieldState<Map<String, bool>> state) {
               getDisplayOptions() {
                 if (state.hasError) {
                   return Text(

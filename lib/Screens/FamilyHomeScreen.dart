@@ -50,7 +50,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen>
               modelData: modelData,
             ),
             DataCard("\nCollect Common Details", "", "assets/svg/house.svg",
-                FamilyDetails(), Color(0xfff54b64), Color(0xfff78361)),
+                FamilyDetails(modelData: modelData,), Color(0xfff54b64), Color(0xfff78361)),
             DataCard(
                 "Record GPS Data",
                 "Make sure GPS is enabled",
