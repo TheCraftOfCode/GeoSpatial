@@ -67,7 +67,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(2, 4604626538020621410),
       name: 'FamilyMemberIndividualDataModel',
-      lastPropertyId: const IdUid(32, 1328642062638523745),
+      lastPropertyId: const IdUid(33, 5419770240499089417),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -229,6 +229,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(32, 1328642062638523745),
             name: 'dbOccupation',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(33, 5419770240499089417),
+            name: 'workTimings',
+            type: 30,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -622,7 +627,12 @@ ModelDefinition getObjectBoxModel() {
           final dbOccupationOffset = object.dbOccupation == null
               ? null
               : fbb.writeString(object.dbOccupation!);
-          fbb.startTable(33);
+          final workTimingsOffset = object.workTimings == null
+              ? null
+              : fbb.writeList(object.workTimings!
+                  .map(fbb.writeString)
+                  .toList(growable: false));
+          fbb.startTable(34);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, userNameOffset);
           fbb.addInt64(2, object.dateOfBirth?.millisecondsSinceEpoch);
@@ -655,6 +665,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(29, savedTimeOffset);
           fbb.addOffset(30, dbVulnerabilitiesOffset);
           fbb.addOffset(31, dbOccupationOffset);
+          fbb.addOffset(32, workTimingsOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -734,7 +745,10 @@ ModelDefinition getObjectBoxModel() {
             ..dbVulnerabilities = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 64)
             ..dbOccupation = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 66);
+                .vTableGetNullable(buffer, rootOffset, 66)
+            ..workTimings =
+                const fb.ListReader<String>(fb.StringReader(), lazy: false)
+                    .vTableGetNullable(buffer, rootOffset, 68);
 
           return object;
         }),
@@ -1150,6 +1164,11 @@ class FamilyMemberIndividualDataModel_ {
   static final dbOccupation =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
           _entities[1].properties[31]);
+
+  /// see [FamilyMemberIndividualDataModel.workTimings]
+  static final workTimings =
+      QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
+          _entities[1].properties[32]);
 }
 
 /// [FamilyMembersCommonDataModel] entity fields to define ObjectBox queries.

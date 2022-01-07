@@ -54,7 +54,7 @@
     },
     {
       "id": "2:4604626538020621410",
-      "lastPropertyId": "32:1328642062638523745",
+      "lastPropertyId": "33:5419770240499089417",
       "name": "FamilyMemberIndividualDataModel",
       "properties": [
         {
@@ -217,6 +217,11 @@
           "id": "32:1328642062638523745",
           "name": "dbOccupation",
           "type": 9
+        },
+        {
+          "id": "33:5419770240499089417",
+          "name": "workTimings",
+          "type": 30
         }
       ],
       "relations": []

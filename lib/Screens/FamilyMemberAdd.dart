@@ -135,9 +135,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  StartingEndingTimeWidget(
-                    onSaved: (List<TimeOfDay>? timeList) {},
-                  ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                     child: TextFormField(
@@ -348,11 +345,50 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     ],
                     title: "Daily wage worker?",
                     onSaved: (val) {
-                      //dailyWageWorker = value.toLowerCase() as bool;
                       print("Value recorded: $val");
                       widget.familyMemberIndividualDataModel!.dailyWageWorker =
                           val;
                     },
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(15),
+                    child: StartingEndingTimeWidget(
+                      initialValue:
+                          widget.familyMemberIndividualDataModel!.workTimings !=
+                                  null
+                              ? [
+                                  TimeOfDay(
+                                      hour: int.parse(widget
+                                          .familyMemberIndividualDataModel!
+                                          .workTimings![0]
+                                          .split(":")[0]),
+                                      minute: int.parse(widget
+                                          .familyMemberIndividualDataModel!
+                                          .workTimings![0]
+                                          .split(":")[1]
+                                          .replaceAll(new RegExp(r"\D"), ""))),
+                                  TimeOfDay(
+                                      hour: int.parse(widget
+                                          .familyMemberIndividualDataModel!
+                                          .workTimings![1]
+                                          .split(":")[0]),
+                                      minute: int.parse(widget
+                                          .familyMemberIndividualDataModel!
+                                          .workTimings![1]
+                                          .split(":")[1]
+                                          .replaceAll(new RegExp(r"\D"), "")))
+                                ]
+                              : null,
+                      onSaved: (List<TimeOfDay>? timeList) {
+                        print(timeList);
+                        var timeFinalString = [
+                          "${timeList![0].hour}:${timeList[0].minute} ${timeList[0].period == DayPeriod.am ? "AM" : "PM"}",
+                          "${timeList[1].hour}:${timeList[1].minute} ${timeList[1].period == DayPeriod.am ? "AM" : "PM"}"
+                        ];
+                        widget.familyMemberIndividualDataModel!.workTimings =
+                            timeFinalString;
+                      },
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0, right: 10.0),
@@ -379,7 +415,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         }
                       },
                       onSaved: (val) {
-                        //dailyWageWorker = value.toLowerCase() as bool;
                         print(val.toString());
                         widget.familyMemberIndividualDataModel!.incomePerDay =
                             val;
@@ -419,7 +454,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           }
                         },
                         onSaved: (val) {
-                          //dailyWageWorker = value.toLowerCase() as bool;
                           print(val.toString());
                           widget.familyMemberIndividualDataModel!
                               .incomePerMonth = val;
@@ -439,7 +473,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         ],
                         title: 'Old age pension',
                         onSaved: (val) {
-                          //dailyWageWorker = value.toLowerCase() as bool;
                           print(val.toString());
                           widget.familyMemberIndividualDataModel!.pension = val;
                         },
@@ -455,7 +488,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       ],
                       title: 'Doing/Did business',
                       onSaved: (val) {
-                        //dailyWageWorker = value.toLowerCase() as bool;
                         print(val.toString());
                         widget.familyMemberIndividualDataModel!.businessStatus =
                             val;
@@ -473,7 +505,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         ],
                         title: 'Marital Status',
                         onSaved: (val) {
-                          //dailyWageWorker = value.toLowerCase() as bool;
                           print(val.toString());
                           widget.familyMemberIndividualDataModel!
                               .maritalStatus = val;

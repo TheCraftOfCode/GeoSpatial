@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:objectbox/objectbox.dart';
@@ -36,6 +37,7 @@ class FamilyMemberIndividualDataModel {
   List<String>? frequentAilments;
   List<String>? commutableDisease;
   List<String>? nonCommutableDisease;
+  List<String>? workTimings;
   String? surgeries;
   String? anganwadiServicesAware;
   String? anganwadiServicesUsing;
@@ -71,8 +73,7 @@ class FamilyMemberIndividualDataModel {
       "isADailyWageWorker": dailyWageWorker,
       "incomePerDay": incomePerDay,
       "incomePerMonth": incomePerMonth,
-      "workTimings": "",
-      //TODO:Add work timings
+      "workTimings": workTimings,
       "maritalStatus": maritalStatus,
       "specialSkills": specialSkills,
       "frequentHealthAilments": frequentAilments,
