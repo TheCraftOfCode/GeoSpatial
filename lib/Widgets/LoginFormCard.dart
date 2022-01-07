@@ -30,6 +30,7 @@ class FormCard extends StatelessWidget {
               height: 30,
             ),
             TextField(
+              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
               controller: _usernameController,
               decoration: InputDecoration(
                   hintText: "Enter username here",
@@ -59,6 +60,7 @@ class FormCard extends StatelessWidget {
             TextField(
                 controller: _passwordController,
                 obscureText: true,
+                style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                 decoration: InputDecoration(
                   hintText: "Enter password here",
                   hintStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
