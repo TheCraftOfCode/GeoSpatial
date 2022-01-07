@@ -409,7 +409,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           CheckBoxAddExtraAlertDialog(
                             title: 'Local foods consumed',
                             hint: 'Choose your resource',
-                            //TODO: Change variable to local foood
+                            //TODO: Change variable to local food
 
                             dataMap:
                                 widget.modelData!.localFoodMap ?? local_food,
@@ -565,5 +565,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
 }
 
 
-//TODO: Source of water has to be changed in objectbox
 //TODO: Insert values to checkboxalertdialogs
+
+

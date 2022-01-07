@@ -204,11 +204,6 @@
           "type": 1
         },
         {
-          "id": "30:3511831625273329956",
-          "name": "savedTime",
-          "type": 9
-        },
-        {
           "id": "31:4870102737459248754",
           "name": "dbVulnerabilities",
           "type": 9
@@ -412,7 +407,8 @@
   "retiredIndexUids": [],
   "retiredPropertyUids": [
     961043903550204529,
-    6821885131227205219
+    6821885131227205219,
+    3511831625273329956
   ],
   "retiredRelationUids": [],
   "version": 1

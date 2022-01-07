@@ -51,13 +51,13 @@ class FamilyMemberIndividualDataModel {
   String? vizhithiruInstalled;
   bool? dataValid = false;
 
-  String? savedTime = DateFormat('hh:mm a').format(DateTime.now());
+  //String? savedTime = DateFormat('hh:mm a').format(DateTime.now());
 
   Map<String, dynamic> toJson() {
     return {
       "UIN": "",
       "username": "",
-      "timeStamp": savedTime,
+      //"timeStamp": savedTime,
       "name": userName,
       "date": "${dateOfBirth!.day}-${dateOfBirth!.month}-${dateOfBirth!.year}",
       "gender": gender,
@@ -66,10 +66,10 @@ class FamilyMemberIndividualDataModel {
       "aadharNumber": aadhaarNumber,
       "Vulnerabilities": vulnerabilities != null
           ? buildListForOptionWidget(vulnerabilities!)
-          : [],
+          : ['None'],
       "oldAgePension": pension,
       "occupation":
-          occupation != null ? buildListForOptionWidget(occupation!) : [],
+          occupation != null ? buildListForOptionWidget(occupation!) : ['None'],
       "isADailyWageWorker": dailyWageWorker,
       "incomePerDay": incomePerDay,
       "incomePerMonth": incomePerMonth,
@@ -81,9 +81,7 @@ class FamilyMemberIndividualDataModel {
       "nonCommunicableDiseases": nonCommutableDisease,
       "surgeriesUndergone": surgeries,
       "anganwadiServicesAware": anganwadiServicesAware,
-      //TODO:Remind shridhar to change name
       "anganwadiServicesUsed": anganwadiServicesUsing,
-      //TODO:Remind shridhar to add
       "anganwadiServicesUtilised": anganwadiServicesUsedList,
       "phcServicesUtilised": PHCServicesUsedList,
       "privateHealthClinicFacilitiesUsed": privateClinicServicesUsedList,
@@ -202,11 +200,10 @@ class FamilyMembersCommonDataModel {
 
       "brandsOfTwoThreeWheelers": twoThreeWheelManufacturer != null
           ? buildListForOptionWidget(twoThreeWheelManufacturer!)
-          : [], //TODO: Change field name in backend model
+          : [],
 
       "numberOfThreeWheelers": noOfThreeWheelers,
 
-      //"brandsOfThreeWheelers": String, //TODO: Remove field
 
       "numberOfFourWheelers": noOfFourWheelers,
 
