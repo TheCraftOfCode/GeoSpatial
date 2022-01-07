@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
+import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/AddRemoveBoxWidget.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
+import 'package:geo_spatial/objectbox.g.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EditRecordsScreen extends StatefulWidget {
@@ -131,7 +133,15 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
                                 child: ListTile(
                                   contentPadding: EdgeInsets.symmetric(vertical: 10,horizontal: 20.0),
                                   minLeadingWidth: 30,
-                                  onTap: () {},
+                                  onTap: () {
+                                   var modelData =  FamilyMembersCommonDataModel();
+                                   modelData.individualDataListTransient.add(FamilyMemberIndividualDataModel());
+                                   modelData.individualDataListTransient.add(FamilyMemberIndividualDataModel());
+                                   modelData.individualDataListTransient.add(FamilyMemberIndividualDataModel());
+                                   modelData.individualDataListTransient.add(FamilyMemberIndividualDataModel());
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(builder: (context) => FamilyHomeScreen(modelData: modelData,)));
+                                  },
                                   //Pass a function which is called onSaved in the next page and add data to the class object
                                   title: Text(
                                     _searchList[index],

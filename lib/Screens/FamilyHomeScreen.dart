@@ -32,7 +32,6 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
     setState(() {
       if (modelData == null)
         modelData = widget.modelData ?? new FamilyMembersCommonDataModel();
-      modelData!.individualDataListTransient.clear();
       for (var i in modelData!.individualDataList) {
         print(i);
         modelData!.individualDataListTransient.add(i);
@@ -188,6 +187,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
   void dispose() {
     super.dispose();
     print("DISPOSED");
+    modelData!.individualDataListTransient.clear();
     modelData = null;
   }
 }
