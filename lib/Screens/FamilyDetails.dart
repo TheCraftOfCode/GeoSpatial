@@ -93,6 +93,17 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     'no': false,
   };
 
+  var water_sources = {
+    'None':false,
+    'Lake':false,
+    'Pond':false,
+    'Groundwater':false,
+    'Well':false,
+    'Tap':false,
+    'Water supply':false,
+    'Lorry/Van':false
+  };
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -101,17 +112,17 @@ class _FamilyDetailsState extends State<FamilyDetails> {
           context: context,
           builder: (context) => AlertDialog(
             backgroundColor: colors.darkScaffoldColor,
-            title: AutoSizeText(
+            title: Text(
               "Are you sure?",
               style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
             ),
-            content: AutoSizeText(
-              "All unsaved changes would be lost",
+            content: Text(
+              "All unsaved changes will be lost.",
               style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
             ),
             actions: <Widget>[
               TextButton(
-                child: AutoSizeText(
+                child:Text(
                   'No',
                   style:
                       GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
@@ -125,7 +136,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                     primary: colors.darkAccentColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20)))),
-                child: AutoSizeText(
+                child: Text(
                   'Yes',
                   style:
                       GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
@@ -160,26 +171,17 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 widget.modelData!.drinkingWater = val;
                               },
                               title: "Do you have drinking water available?"),
-                          DropDownFormField(
-                            list: [
-                              'None',
-                              'Lake',
-                              'Pond',
-                              'Groundwater',
-                              'Well',
-                              'Tap',
-                              'Water supply',
-                              'Lorry/Van'
-                            ],
-                            defaultValue:
-                                widget.modelData!.sourceOfDrinkingWater,
+                          CheckBoxAddExtraAlertDialog(
+                            singleOption: false,
+                            dataMap: water_sources,
                             onSaved: (val) {
                               print("Value recorded: $val");
-                              widget.modelData!.sourceOfDrinkingWater = val;
+                              //widget.modelData!.sourceOfDrinkingWater = val;
                             },
                             hint: "Select source",
                             title: "Source of Water",
                             errorField: "Please choose an option",
+                            context: context,
                           ),
                           OptionsWidget(
                               options: [
@@ -317,6 +319,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                             padding: const EdgeInsets.only(
                                 left: 10.0, right: 10.0, top: 20.0),
                             child: TextFormField(
+                              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                               initialValue: widget.modelData!.incomeFromCattle,
                               onSaved: (val) {
                                 print("Value recorded: $val");
@@ -365,7 +368,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          //TODO: Display if answer to previous question is yes
                           CheckBoxAddExtraAlertDialog(
                             title: 'Seeds Preserved',
                             hint: 'Choose preserved seeds',
@@ -391,7 +393,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                             },
                           ),
                           CheckBoxAddExtraAlertDialog(
-                            title: 'Choose resource',
+                            title: 'Local foods consumed',
                             hint: 'Choose your resource',
                             //TODO: Change variable to local foood
 
@@ -446,7 +448,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 10.0, right: 10.0, bottom: 15.0),
-                                  child: AutoSizeText(
+                                  child: Text(
                                     "Address",
                                     style: GoogleFonts.montserrat(
                                         fontSize: 15.0,
@@ -458,6 +460,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 padding: const EdgeInsets.only(
                                     left: 10.0, right: 10.0, bottom: 70.0),
                                 child: TextFormField(
+                                  style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                                   initialValue: widget.modelData!.addressOne,
                                   onSaved: (val) {
                                     print("Value recorded: $val");
@@ -485,6 +488,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 padding: const EdgeInsets.only(
                                     left: 10.0, right: 10.0, bottom: 70.0),
                                 child: TextFormField(
+                                  style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                                   initialValue: widget.modelData!.addressTwo,
                                   onSaved: (val) {
                                     print("Value recorded: $val");
@@ -507,6 +511,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 padding: const EdgeInsets.only(
                                     left: 10.0, right: 10.0, bottom: 70.0),
                                 child: TextFormField(
+                                  style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                                   initialValue: widget.modelData!.city,
                                   onSaved: (val) {
                                     print("Value recorded: $val");
@@ -545,7 +550,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
   }
 }
 
-//TODO: Check textbox colors
-//TODO: Keyboard inset not working - clampingscroll issue?
-//TODO: Source of water has to be changed
+
+//TODO: Source of water has to be changed in objectbox
 //TODO: Insert values to checkboxalertdialogs

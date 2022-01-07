@@ -38,17 +38,17 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
           context: context,
           builder: (context) =>
               AlertDialog(
-                title: AutoSizeText("Are you sure?"),
-                content: AutoSizeText("All unsaved changes would be lost"),
+                title: Text("Are you sure?"),
+                content: Text("All unsaved changes will be lost."),
                 actions: <Widget>[
                   TextButton(
-                    child: AutoSizeText('No'),
+                    child:Text('No'),
                     onPressed: () {
                       Navigator.pop(context, false);
                     },
                   ),
                   TextButton(
-                    child: AutoSizeText('Yes', style: TextStyle(color: Colors.red)),
+                    child: Text('Yes', style: TextStyle(color: Colors.red)),
                     onPressed: () {
                       Navigator.pop(context, true);
                     },

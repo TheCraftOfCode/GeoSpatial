@@ -129,7 +129,7 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
               style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
             ),
             content: Text(
-              "All unsaved changes would be lost",
+              "All unsaved changes will be lost.",
               style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
             ),
             actions: <Widget>[

@@ -93,7 +93,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
             ),
             content: Text(
-              "All unsaved changes would be lost",
+              "All unsaved changes will be lost.",
               style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
             ),
             actions: <Widget>[
