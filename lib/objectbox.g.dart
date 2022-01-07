@@ -216,11 +216,6 @@ final _entities = <ModelEntity>[
             type: 1,
             flags: 0),
         ModelProperty(
-            id: const IdUid(30, 3511831625273329956),
-            name: 'savedTime',
-            type: 9,
-            flags: 0),
-        ModelProperty(
             id: const IdUid(31, 4870102737459248754),
             name: 'dbVulnerabilities',
             type: 9,
@@ -440,7 +435,11 @@ ModelDefinition getObjectBoxModel() {
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [961043903550204529, 6821885131227205219],
+      retiredPropertyUids: const [
+        961043903550204529,
+        6821885131227205219,
+        3511831625273329956
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -618,9 +617,6 @@ ModelDefinition getObjectBoxModel() {
           final vizhithiruInstalledOffset = object.vizhithiruInstalled == null
               ? null
               : fbb.writeString(object.vizhithiruInstalled!);
-          final savedTimeOffset = object.savedTime == null
-              ? null
-              : fbb.writeString(object.savedTime!);
           final dbVulnerabilitiesOffset = object.dbVulnerabilities == null
               ? null
               : fbb.writeString(object.dbVulnerabilities!);
@@ -662,7 +658,6 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(26, aarogyaSetuInstalledOffset);
           fbb.addOffset(27, vizhithiruInstalledOffset);
           fbb.addBool(28, object.dataValid);
-          fbb.addOffset(29, savedTimeOffset);
           fbb.addOffset(30, dbVulnerabilitiesOffset);
           fbb.addOffset(31, dbOccupationOffset);
           fbb.addOffset(32, workTimingsOffset);
@@ -740,8 +735,6 @@ ModelDefinition getObjectBoxModel() {
                 .vTableGetNullable(buffer, rootOffset, 58)
             ..dataValid =
                 const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 60)
-            ..savedTime = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 62)
             ..dbVulnerabilities = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 64)
             ..dbOccupation = const fb.StringReader()
@@ -1151,24 +1144,20 @@ class FamilyMemberIndividualDataModel_ {
       QueryBooleanProperty<FamilyMemberIndividualDataModel>(
           _entities[1].properties[28]);
 
-  /// see [FamilyMemberIndividualDataModel.savedTime]
-  static final savedTime = QueryStringProperty<FamilyMemberIndividualDataModel>(
-      _entities[1].properties[29]);
-
   /// see [FamilyMemberIndividualDataModel.dbVulnerabilities]
   static final dbVulnerabilities =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[30]);
+          _entities[1].properties[29]);
 
   /// see [FamilyMemberIndividualDataModel.dbOccupation]
   static final dbOccupation =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[31]);
+          _entities[1].properties[30]);
 
   /// see [FamilyMemberIndividualDataModel.workTimings]
   static final workTimings =
       QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[32]);
+          _entities[1].properties[31]);
 }
 
 /// [FamilyMembersCommonDataModel] entity fields to define ObjectBox queries.

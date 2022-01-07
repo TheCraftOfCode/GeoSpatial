@@ -11,7 +11,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'CollectLocationWidget.dart';
 
 class FamilyHomeScreen extends StatefulWidget {
-  const FamilyHomeScreen({Key? key, this.modelData}) : super(key: key);
+
+
+  FamilyHomeScreen({Key? key, this.modelData,this.isGenerated}) : super(key: key);
+
+  var isGenerated;
 
   @override
   State<FamilyHomeScreen> createState() => _FamilyHomeScreenState();
@@ -187,3 +191,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
     modelData = null;
   }
 }
+
+
+
+//TODO: send isGenerated, isEdited to the request

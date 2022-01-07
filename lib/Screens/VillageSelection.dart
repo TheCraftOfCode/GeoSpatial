@@ -119,7 +119,11 @@ class _VillageSelectionScreenState extends State<VillageSelectionScreen> {
                 height: MediaQuery.of(context).size.height * 0.2,
               ),
               if (!widget.isGenerated)
-                TextButton(onPressed: () {}, child: Text("Generate UIN later"))
+                TextButton(onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                          builder: (context) => FamilyHomeScreen(isGenerated: widget.isGenerated)));
+                }, child: Text("Generate UIN later"))
             ],
           ),
         ),
