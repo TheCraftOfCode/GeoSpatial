@@ -133,8 +133,6 @@ class _MyAppState extends State<Login> {
   String _validateUserName(String username) {
     if (username.isEmpty)
       return 'Please enter username';
-    else if (username.length != 16)
-      return 'Username has to be 16 characters long';
     else
       return '';
   }
@@ -151,7 +149,7 @@ class _MyAppState extends State<Login> {
     String url = NETWORK_ADDRESS;
     var body = json.encode({"username": username, "password": password});
 
-    var res = await http.post(Uri.http(url, '/api/login'),
+    var res = await http.post(Uri.https(url, '/api/login'),
         headers: {"Content-Type": "application/json"}, body: body);
     return res;
   }
@@ -270,11 +268,12 @@ class _MyAppState extends State<Login> {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Home()),
-                                );
+                                _login();
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => Home()),
+                                // );
                               },
                               child: Center(
                                 child: Text("SIGN IN",
