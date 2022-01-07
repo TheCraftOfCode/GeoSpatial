@@ -40,6 +40,39 @@ class FamilyMemberIndividualDataModel {
 
   String? savedTime = DateFormat('kk:mm:ss, EEE d MMM').format(DateTime.now());
 
+  Map<String, dynamic> toJson() => {
+        'userName': userName,
+        'dateOfBirth':
+            "${dateOfBirth!.day}/${dateOfBirth!.month}/${dateOfBirth!.year}",
+        'gender': gender,
+        'phoneNumber': phoneNumber,
+        'educationQualification': educationQualification,
+        'aadhaarNumber': aadhaarNumber,
+        'vulnerabilities': vulnerabilities,
+        'occupation': occupation,
+        'dailyWageWorker': dailyWageWorker,
+        'incomePerDay': incomePerDay,
+        'incomePerMonth': incomePerMonth,
+        'pension': pension,
+        'businessStatus': businessStatus,
+        'maritalStatus': maritalStatus,
+        'specialSkills': specialSkills,
+        'frequentAilments': frequentAilments,
+        'commutableDisease': commutableDisease,
+        'nonCommutableDisease': nonCommutableDisease,
+        'surgeries': surgeries,
+        'anganwadiServicesAware': anganwadiServicesAware,
+        'anganwadiServicesUsing': anganwadiServicesUsing,
+        'anganwadiServicesUsedList': anganwadiServicesUsedList,
+        'PHCServicesUsedList': PHCServicesUsedList,
+        'privateClinicServicesUsedList': privateClinicServicesUsedList,
+        'privateServiceReason': privateServiceReason,
+        'useOfTobacco': useOfTobacco,
+        'useOfAlcohol': useOfAlcohol,
+        'aarogyaSetuInstalled': aarogyaSetuInstalled,
+        'vizhithiruInstalled': vizhithiruInstalled
+      };
+
   FamilyMemberIndividualDataModel({this.userName});
 
   String? get dbVulnerabilities =>
@@ -74,8 +107,9 @@ class FamilyMembersCommonDataModel {
   Position? locationTopRight;
   Position? locationBottomLeft;
   Position? locationBottomRight;
+
   String? drinkingWater;
-  String? sourceOfDrinkingWater;
+  Map<String, bool>? sourceOfDrinkingWater;
   String? toiletFacility;
   String? communityToilet;
   String? environmentSanitationLevel;
@@ -113,6 +147,23 @@ class FamilyMembersCommonDataModel {
         'runningWaterAvailable': runningWaterAvailable,
         'noOfTwoWheelers': noOfTwoWheelers,
         'noOfThreeWheelers': noOfThreeWheelers,
+        'noOfFourWheelers': noOfFourWheelers,
+        'twoThreeWheelManufacturer': twoThreeWheelManufacturer,
+        'twoFourManufacturer': twoFourManufacturer,
+        'localFoodMap': localFoodMap,
+        'isCattleOwned': isCattleOwned,
+        'incomeFromCattle': incomeFromCattle,
+        'isFarmLandOwned': isFarmLandOwned,
+        'isSeedsPreserved': isSeedsPreserved,
+        'preservedSeedsMap': preservedSeedsMap,
+        'treesOwnedMap': treesOwnedMap,
+        'isKitchenGardenOwned': isKitchenGardenOwned,
+        'kitchenGardenPlants': kitchenGardenPlants,
+        'addressOne': addressOne,
+        'addressTwo': addressTwo,
+        'city': city,
+        'familyMemberData':
+            individualDataListTransient.map((item) => item.toJson()).toList(),
         'locationTopLeft': [
           locationTopLeft!.latitude,
           locationTopLeft!.longitude
@@ -251,6 +302,18 @@ class FamilyMembersCommonDataModel {
       twoThreeWheelManufacturer = null;
     } else {
       twoThreeWheelManufacturer = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
+
+  String? get dbSourceOfDrinkingWater =>
+      sourceOfDrinkingWater == null ? null : json.encode(sourceOfDrinkingWater);
+
+  set dbSourceOfDrinkingWater(String? value) {
+    if (value == null) {
+      sourceOfDrinkingWater = null;
+    } else {
+      sourceOfDrinkingWater = Map.from(
           json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
     }
   }

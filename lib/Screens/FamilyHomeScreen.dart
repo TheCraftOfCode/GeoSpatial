@@ -28,7 +28,6 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
     setState(() {
       if (modelData == null)
         modelData = widget.modelData ?? new FamilyMembersCommonDataModel();
-
       modelData!.individualDataListTransient.clear();
       for (var i in modelData!.individualDataList) {
         print(i);
@@ -98,6 +97,9 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                                   in modelData!.individualDataListTransient) {
                                 isValid &= i.dataValid!;
                                 print("Indv ${i.dataValid}");
+                              }
+                              if(isValid){
+                                print("MODEL JSON: ${widget.modelData.toJson()}");
                               }
 
                               print("Is Valid: $isValid");

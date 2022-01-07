@@ -173,10 +173,10 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                               title: "Do you have drinking water available?"),
                           CheckBoxAddExtraAlertDialog(
                             singleOption: false,
-                            dataMap: water_sources,
+                            dataMap: widget.modelData!.sourceOfDrinkingWater ?? water_sources,
                             onSaved: (val) {
                               print("Value recorded: $val");
-                              //widget.modelData!.sourceOfDrinkingWater = val;
+                              widget.modelData!.sourceOfDrinkingWater = val;
                             },
                             hint: "Select source",
                             title: "Source of Water",

@@ -223,7 +223,7 @@
     },
     {
       "id": "3:4555229639046191310",
-      "lastPropertyId": "31:257396080593114234",
+      "lastPropertyId": "32:2980984211940443041",
       "name": "FamilyMembersCommonDataModel",
       "properties": [
         {
@@ -235,11 +235,6 @@
         {
           "id": "2:3437476224699639583",
           "name": "drinkingWater",
-          "type": 9
-        },
-        {
-          "id": "3:961043903550204529",
-          "name": "sourceOfDrinkingWater",
           "type": 9
         },
         {
@@ -381,6 +376,11 @@
           "id": "31:257396080593114234",
           "name": "dbKitchenGardenPlants",
           "type": 9
+        },
+        {
+          "id": "32:2980984211940443041",
+          "name": "dbSourceOfDrinkingWater",
+          "type": 9
         }
       ],
       "relations": [
@@ -400,7 +400,9 @@
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    961043903550204529
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

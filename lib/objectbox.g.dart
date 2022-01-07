@@ -236,7 +236,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(3, 4555229639046191310),
       name: 'FamilyMembersCommonDataModel',
-      lastPropertyId: const IdUid(31, 257396080593114234),
+      lastPropertyId: const IdUid(32, 2980984211940443041),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -247,11 +247,6 @@ final _entities = <ModelEntity>[
         ModelProperty(
             id: const IdUid(2, 3437476224699639583),
             name: 'drinkingWater',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(3, 961043903550204529),
-            name: 'sourceOfDrinkingWater',
             type: 9,
             flags: 0),
         ModelProperty(
@@ -393,6 +388,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(31, 257396080593114234),
             name: 'dbKitchenGardenPlants',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(32, 2980984211940443041),
+            name: 'dbSourceOfDrinkingWater',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[
@@ -430,7 +430,7 @@ ModelDefinition getObjectBoxModel() {
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [961043903550204529],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -749,10 +749,6 @@ ModelDefinition getObjectBoxModel() {
           final drinkingWaterOffset = object.drinkingWater == null
               ? null
               : fbb.writeString(object.drinkingWater!);
-          final sourceOfDrinkingWaterOffset =
-              object.sourceOfDrinkingWater == null
-                  ? null
-                  : fbb.writeString(object.sourceOfDrinkingWater!);
           final toiletFacilityOffset = object.toiletFacility == null
               ? null
               : fbb.writeString(object.toiletFacility!);
@@ -836,10 +832,13 @@ ModelDefinition getObjectBoxModel() {
               object.dbKitchenGardenPlants == null
                   ? null
                   : fbb.writeString(object.dbKitchenGardenPlants!);
-          fbb.startTable(32);
+          final dbSourceOfDrinkingWaterOffset =
+              object.dbSourceOfDrinkingWater == null
+                  ? null
+                  : fbb.writeString(object.dbSourceOfDrinkingWater!);
+          fbb.startTable(33);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, drinkingWaterOffset);
-          fbb.addOffset(2, sourceOfDrinkingWaterOffset);
           fbb.addOffset(3, toiletFacilityOffset);
           fbb.addOffset(4, communityToiletOffset);
           fbb.addOffset(5, environmentSanitationLevelOffset);
@@ -868,6 +867,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(28, dbPreservedSeedsMapOffset);
           fbb.addOffset(29, dbTreesOwnedMapOffset);
           fbb.addOffset(30, dbKitchenGardenPlantsOffset);
+          fbb.addOffset(31, dbSourceOfDrinkingWaterOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -879,8 +879,6 @@ ModelDefinition getObjectBoxModel() {
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
             ..drinkingWater =
                 const fb.StringReader().vTableGetNullable(buffer, rootOffset, 6)
-            ..sourceOfDrinkingWater =
-                const fb.StringReader().vTableGetNullable(buffer, rootOffset, 8)
             ..toiletFacility = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 10)
             ..communityToilet = const fb.StringReader()
@@ -936,7 +934,9 @@ ModelDefinition getObjectBoxModel() {
             ..dbTreesOwnedMap = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 62)
             ..dbKitchenGardenPlants = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 64);
+                .vTableGetNullable(buffer, rootOffset, 64)
+            ..dbSourceOfDrinkingWater = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 66);
           InternalToManyAccess.setRelInfo(
               object.individualDataList,
               store,
@@ -1152,144 +1152,144 @@ class FamilyMembersCommonDataModel_ {
       QueryStringProperty<FamilyMembersCommonDataModel>(
           _entities[2].properties[1]);
 
-  /// see [FamilyMembersCommonDataModel.sourceOfDrinkingWater]
-  static final sourceOfDrinkingWater =
-      QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[2]);
-
   /// see [FamilyMembersCommonDataModel.toiletFacility]
   static final toiletFacility =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[3]);
+          _entities[2].properties[2]);
 
   /// see [FamilyMembersCommonDataModel.communityToilet]
   static final communityToilet =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[4]);
+          _entities[2].properties[3]);
 
   /// see [FamilyMembersCommonDataModel.environmentSanitationLevel]
   static final environmentSanitationLevel =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[5]);
+          _entities[2].properties[4]);
 
   /// see [FamilyMembersCommonDataModel.runningWaterAvailable]
   static final runningWaterAvailable =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[6]);
+          _entities[2].properties[5]);
 
   /// see [FamilyMembersCommonDataModel.noOfTwoWheelers]
   static final noOfTwoWheelers =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[7]);
+          _entities[2].properties[6]);
 
   /// see [FamilyMembersCommonDataModel.noOfThreeWheelers]
   static final noOfThreeWheelers =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[8]);
+          _entities[2].properties[7]);
 
   /// see [FamilyMembersCommonDataModel.noOfFourWheelers]
   static final noOfFourWheelers =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[9]);
+          _entities[2].properties[8]);
 
   /// see [FamilyMembersCommonDataModel.isCattleOwned]
   static final isCattleOwned =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[10]);
+          _entities[2].properties[9]);
 
   /// see [FamilyMembersCommonDataModel.incomeFromCattle]
   static final incomeFromCattle =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[11]);
+          _entities[2].properties[10]);
 
   /// see [FamilyMembersCommonDataModel.isFarmLandOwned]
   static final isFarmLandOwned =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[12]);
+          _entities[2].properties[11]);
 
   /// see [FamilyMembersCommonDataModel.isSeedsPreserved]
   static final isSeedsPreserved =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[13]);
+          _entities[2].properties[12]);
 
   /// see [FamilyMembersCommonDataModel.isKitchenGardenOwned]
   static final isKitchenGardenOwned =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[14]);
+          _entities[2].properties[13]);
 
   /// see [FamilyMembersCommonDataModel.addressOne]
   static final addressOne = QueryStringProperty<FamilyMembersCommonDataModel>(
-      _entities[2].properties[15]);
+      _entities[2].properties[14]);
 
   /// see [FamilyMembersCommonDataModel.addressTwo]
   static final addressTwo = QueryStringProperty<FamilyMembersCommonDataModel>(
-      _entities[2].properties[16]);
+      _entities[2].properties[15]);
 
   /// see [FamilyMembersCommonDataModel.city]
   static final city = QueryStringProperty<FamilyMembersCommonDataModel>(
-      _entities[2].properties[17]);
+      _entities[2].properties[16]);
 
   /// see [FamilyMembersCommonDataModel.locationPageValid]
   static final locationPageValid =
       QueryBooleanProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[18]);
+          _entities[2].properties[17]);
 
   /// see [FamilyMembersCommonDataModel.commonDetailsValid]
   static final commonDetailsValid =
       QueryBooleanProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[19]);
+          _entities[2].properties[18]);
 
   /// see [FamilyMembersCommonDataModel.savedTime]
   static final savedTime = QueryStringProperty<FamilyMembersCommonDataModel>(
-      _entities[2].properties[20]);
+      _entities[2].properties[19]);
 
   /// see [FamilyMembersCommonDataModel.dbLocationTopLeft]
   static final dbLocationTopLeft =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[21]);
+          _entities[2].properties[20]);
 
   /// see [FamilyMembersCommonDataModel.dbLocationTopRight]
   static final dbLocationTopRight =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[22]);
+          _entities[2].properties[21]);
 
   /// see [FamilyMembersCommonDataModel.dbLocationBottomLeft]
   static final dbLocationBottomLeft =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[23]);
+          _entities[2].properties[22]);
 
   /// see [FamilyMembersCommonDataModel.dbLocationBottomRight]
   static final dbLocationBottomRight =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[24]);
+          _entities[2].properties[23]);
 
   /// see [FamilyMembersCommonDataModel.dbTwoThreeWheelManufacturer]
   static final dbTwoThreeWheelManufacturer =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[25]);
+          _entities[2].properties[24]);
 
   /// see [FamilyMembersCommonDataModel.dbTwoFourManufacturer]
   static final dbTwoFourManufacturer =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[26]);
+          _entities[2].properties[25]);
 
   /// see [FamilyMembersCommonDataModel.dbLocalFoodMap]
   static final dbLocalFoodMap =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[27]);
+          _entities[2].properties[26]);
 
   /// see [FamilyMembersCommonDataModel.dbPreservedSeedsMap]
   static final dbPreservedSeedsMap =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[28]);
+          _entities[2].properties[27]);
 
   /// see [FamilyMembersCommonDataModel.dbTreesOwnedMap]
   static final dbTreesOwnedMap =
       QueryStringProperty<FamilyMembersCommonDataModel>(
-          _entities[2].properties[29]);
+          _entities[2].properties[28]);
 
   /// see [FamilyMembersCommonDataModel.dbKitchenGardenPlants]
   static final dbKitchenGardenPlants =
+      QueryStringProperty<FamilyMembersCommonDataModel>(
+          _entities[2].properties[29]);
+
+  /// see [FamilyMembersCommonDataModel.dbSourceOfDrinkingWater]
+  static final dbSourceOfDrinkingWater =
       QueryStringProperty<FamilyMembersCommonDataModel>(
           _entities[2].properties[30]);
 
