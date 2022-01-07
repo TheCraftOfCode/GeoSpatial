@@ -65,12 +65,10 @@ class DataCard extends StatelessWidget {
                         children: [
                           AutoSizeText(heading,
                               maxLines: 3,
-                              overflow: TextOverflow.fade,
                               style: GoogleFonts.montserrat(
                                   fontSize: 25, color: colors.darkPrimaryTextColor)),
                           AutoSizeText(subHeading,
                               maxLines: 1,
-                              overflow: TextOverflow.fade,
                               style: GoogleFonts.montserrat(
                                   fontSize: 15, color: colors.darkPrimaryTextColor))
                         ],
