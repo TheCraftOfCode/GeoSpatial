@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geo_spatial/Screens/ChangePassword.dart';
 import 'package:geo_spatial/Screens/Login.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/Globals.dart' as globals;
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: Stack(children: [
         SvgPicture.asset(
           'assets/svg/profile_bg.svg',
@@ -62,8 +69,8 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 40.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -72,10 +79,13 @@ class ProfilePage extends StatelessWidget {
                         padding: EdgeInsets.only(right: 6, left: 20),
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
-                            primary: colors.darkSecondaryTextColor.withOpacity(0.2),
+                            primary:
+                                colors.darkSecondaryTextColor.withOpacity(0.2),
                           ),
                           onPressed: () {
                             print('Button Clicked');
+                            Route route = MaterialPageRoute(builder: (context) => ChangePassword());
+                            Navigator.push(context, route);
                           },
                           icon: Icon(
                             Icons.lock,
@@ -95,10 +105,12 @@ class ProfilePage extends StatelessWidget {
                         padding: EdgeInsets.only(left: 6, right: 20),
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
-                            primary: colors.darkSecondaryTextColor.withOpacity(0.2),
+                            primary:
+                                colors.darkSecondaryTextColor.withOpacity(0.2),
                           ),
                           onPressed: () {
                             print('Button Clicked');
+                            _displayTextInputDialog(context);
                           },
                           label: Text(
                             'Change\nUsername',
@@ -151,4 +163,40 @@ class ProfilePage extends StatelessWidget {
       ]),
     );
   }
+}
+
+Future<void> _displayTextInputDialog(BuildContext context) async {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        var _textFieldController = TextEditingController();
+        return AlertDialog(
+          backgroundColor: colors.darkScaffoldColor,
+            title: Text('Enter Name',style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),),
+            content: TextField(
+              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+              onChanged: (value) {},
+              controller: _textFieldController = TextEditingController(),
+              decoration: InputDecoration(hintText: "Text Field in Dialog",hintStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor)),
+            ),
+            actions: <Widget>[
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: colors.darkAccentColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      textStyle: GoogleFonts.poppins(
+                          color: colors.darkPrimaryTextColor)),
+                  child: Text(
+                    'OK',
+                    style:
+                        GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                  ),
+                  onPressed: () {
+                    if(_textFieldController.text!=null)
+                      globals.Name = _textFieldController.text;
+                    Navigator.pop(context);
+                  })
+            ]);
+      });
 }
