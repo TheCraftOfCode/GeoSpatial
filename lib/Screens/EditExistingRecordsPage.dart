@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EditRecordsScreen extends StatefulWidget {
@@ -25,6 +26,7 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: colors.darkScaffoldColor,
       appBar: AppBarBackButton(
         'Edit Existing Data',
         actions: [
@@ -43,78 +45,114 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
         ],
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Visibility(
-            visible: isSearchOpen,
-            child: Padding(
-              padding:
-                  EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
-              child: TextField(
-                onChanged: (text) {
-                  print("INVOKED");
-                  setState(() {
-                    _searchList = _dataList
-                        .where(
-                            (i) => i.toLowerCase().contains(text.toLowerCase()))
-                        .toList();
-                  });
-                },
-                controller: _textEditingController,
-                style: TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: colors.darkSecondaryTextColor, width: 1.0)),
-                    contentPadding: EdgeInsets.only(left: 10, right: 10),
-                    fillColor: colors.darkSecondBackgroundColor,
-                    prefixIcon: Icon(Icons.search),
-                    // suffixIcon: Material(
-                    //   borderRadius: BorderRadius.only(
-                    //       topRight: Radius.circular(4),
-                    //       bottomRight: Radius.circular(4)),
-                    //   child: IconButton(
-                    //     splashRadius: 16,
-                    //     icon: Icon(
-                    //       Icons.clear,
-                    //       color: colors.darkSecondAccentColor,
-                    //     ),
-                    //     onPressed: () {
-                    //       _textEditingController.text = "";
-                    //     },
-                    //   ),
-                    // ),
-                    label: Text(
-                      "Search",
-                      style: GoogleFonts.poppins(
-                          color: colors.darkSecondaryTextColor),
-                    ),
-                    hintText: "Search for records..."),
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Visibility(
+              visible: isSearchOpen,
+              child: Padding(
+                padding:
+                    EdgeInsets.only(top: 30, left: 15, right: 15, bottom: 30),
+                child: TextField(
+                  onChanged: (text) {
+                    print("INVOKED");
+                    setState(() {
+                      _searchList = _dataList
+                          .where(
+                              (i) => i.toLowerCase().contains(text.toLowerCase()))
+                          .toList();
+                    });
+                  },
+                  controller: _textEditingController,
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: colors.darkSecondaryTextColor, width: 1.0)),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                      fillColor: colors.darkScaffoldColor,
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: colors.darkAccentColor,
+                      ),
+                      // suffixIcon: Material(
+                      //   borderRadius: BorderRadius.only(
+                      //       topRight: Radius.circular(4),
+                      //       bottomRight: Radius.circular(4)),
+                      //   child: IconButton(
+                      //     splashRadius: 16,
+                      //     icon: Icon(
+                      //       Icons.clear,
+                      //       color: colors.darkSecondAccentColor,
+                      //     ),
+                      //     onPressed: () {
+                      //       _textEditingController.text = "";
+                      //     },
+                      //   ),
+                      // ),
+                      label: Text(
+                        "Search",
+                        style: GoogleFonts.poppins(
+                            color: colors.darkSecondaryTextColor),
+                      ),
+                      hintText: "Search for records...",
+                      hintStyle: GoogleFonts.poppins(
+                          color: colors.darkSecondaryTextColor)),
+                ),
               ),
             ),
-          ),
-          ListView.builder(
-              itemCount: _searchList.length,
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  color: colors.darkSecondBackgroundColor,
-                  //TODO: Replace with better ListTile
-                  child: ListTile(
-                    onTap: () {},
-                    //Pass a function which is called onSaved in the next page and add data to the class object
-                    title: Text(
-                      _searchList[index],
-                      style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 20),
-                    ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height*0.7,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: colors.darkSecondBackgroundColor,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0xBC252426),
+                        blurRadius: 8.0,
+                      ),
+                    ],
                   ),
-                );
-              })
-        ],
-      ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ListView.builder(
+                        itemCount: _searchList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 3.0),
+                              child: Card(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
+                                elevation: 10,
+                                color: colors.darkScaffoldColor,
+                                child: ListTile(
+                                  contentPadding: EdgeInsets.symmetric(vertical: 10,horizontal: 20.0),
+                                  minLeadingWidth: 30,
+                                  onTap: () {},
+                                  //Pass a function which is called onSaved in the next page and add data to the class object
+                                  title: Text(
+                                    _searchList[index],
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 20),
+                                  ),
+                                  subtitle: Text('Click to edit',style: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),),
+                                  leading: SvgPicture.asset("assets/svg/user-id-icon.svg",fit: BoxFit.fill,),
+                                  isThreeLine: true,
+                                  trailing: Icon(Icons.chevron_right,color: colors.darkAccentColor,),
+                                ),
+                              ),
+                          );
+                        }),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
     );
   }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Model/CommunityDataModel.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/StoreInstance.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/LocationWidget.dart';
-import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:google_fonts/google_fonts.dart';
 
 class CommunityDataCollection extends StatefulWidget {
@@ -90,18 +90,26 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
       print("Entering data at id ${id}");
 
       AlertDialog alertDialog = AlertDialog(
+        backgroundColor: colors.darkScaffoldColor,
         title: Text(
           'Record Saved',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+          style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
         ),
-        content: Text('The Record has been saved with record ID ${id}',
-            style: GoogleFonts.poppins()),
+        content: Text('The record has been saved with record ID ${id}',
+            style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor)),
         actions: [
-          TextButton(
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                primary: colors.darkAccentColor,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)))),
             onPressed: () {
               Navigator.of(context, rootNavigator: true).pop('dialog');
             },
-            child: Text('OK'),
+            child: Text(
+              'OK',
+              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+            ),
           )
         ],
       );
@@ -112,24 +120,39 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
 
     return WillPopScope(
       onWillPop: () async {
-        //TODO: Add condition here to check if page has been filled
-        if (false) {
-          return true;
-        }
         final result = await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text("Are you sure?"),
-            content: Text("All unsaved changes would be lost"),
+            backgroundColor: colors.darkScaffoldColor,
+            title: Text(
+              "Are you sure?",
+              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+            ),
+            content: Text(
+              "All unsaved changes would be lost",
+              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+            ),
             actions: <Widget>[
               TextButton(
-                child: Text('No'),
+                child: Text(
+                  'No',
+                  style:
+                      GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                ),
                 onPressed: () {
                   Navigator.pop(context, false);
                 },
               ),
-              TextButton(
-                child: Text('Yes', style: TextStyle(color: Colors.red)),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: colors.darkAccentColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)))),
+                child: Text(
+                  'Yes',
+                  style:
+                      GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                ),
                 onPressed: () {
                   Navigator.pop(context, true);
                 },
@@ -219,6 +242,3 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
     super.dispose();
   }
 }
-
-
-//TODO: Fix colors of dialog
