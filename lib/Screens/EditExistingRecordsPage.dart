@@ -15,7 +15,7 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
   bool isSearchOpen = false;
   TextEditingController _textEditingController = new TextEditingController();
 
-  List<String> _dataList = <String>["ONE", "TWO", "THREE"];
+  List<String> _dataList = <String>["ONE", "TWO", "THREE", "THREE", "THREE", "THREE", "THREE", "THREE", "THREE", "THREE"];
   late List<String> _searchList;
 
   initState() {
@@ -50,8 +50,7 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
             Visibility(
               visible: isSearchOpen,
               child: Padding(
-                padding:
-                    EdgeInsets.only(top: 30, left: 15, right: 15, bottom: 30),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: TextField(
                   onChanged: (text) {
                     print("INVOKED");
@@ -100,28 +99,26 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height*0.7,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: colors.darkSecondBackgroundColor,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xBC252426),
-                        blurRadius: 8.0,
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ListView.builder(
-                        itemCount: _searchList.length,
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Padding(
+             Expanded(
+               child: Padding(
+                 padding: EdgeInsets.all(20),
+                 child: Container(
+                   decoration: BoxDecoration(
+                     color: colors.darkSecondBackgroundColor,
+                     borderRadius: BorderRadius.circular(20),
+                     boxShadow: [
+                       BoxShadow(
+                         color: Color(0xBC252426),
+                         blurRadius: 8.0,
+                       ),
+                     ],
+                   ),
+                   child: Padding(
+                     padding: EdgeInsets.all(12),
+                     child: ListView.builder(
+                          itemCount: _searchList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 3.0),
                               child: Card(
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
@@ -145,12 +142,12 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
                                   trailing: Icon(Icons.chevron_right,color: colors.darkAccentColor,),
                                 ),
                               ),
-                          );
-                        }),
-                  ),
-                ),
-              ),
-            )
+                            );
+                          }),
+                   ),
+                 ),
+               ),
+             ),
           ],
         ),
     );
