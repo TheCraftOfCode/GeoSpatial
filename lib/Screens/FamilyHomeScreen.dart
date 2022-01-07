@@ -70,105 +70,103 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 10, right: 10),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: ElevatedButton(
-                          child: Text("Submit", style: TextStyle(fontSize: 14)),
-                          style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.white),
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  colors.darkSecondBackgroundColor),
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      side: BorderSide(
-                                          color: colors
-                                              .darkSecondBackgroundColor)))),
-                          onPressed: () {
-                            bool isValid = true;
-                            print("Common ${modelData!.commonDetailsValid}");
-                            print("Location ${modelData!.locationPageValid}");
-                            isValid &= modelData!.commonDetailsValid! &&
-                                modelData!.locationPageValid!;
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                        child: ElevatedButton(
+                            child: Text("Submit", style: TextStyle(fontSize: 14)),
+                            style: ButtonStyle(
+                                foregroundColor: MaterialStateProperty.all<Color>(
+                                    Colors.white),
+                                backgroundColor: MaterialStateProperty.all<Color>(
+                                    colors.darkSecondBackgroundColor),
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        side: BorderSide(
+                                            color: colors
+                                                .darkSecondBackgroundColor)))),
+                            onPressed: () {
+                              bool isValid = true;
+                              print("Common ${modelData!.commonDetailsValid}");
+                              print("Location ${modelData!.locationPageValid}");
+                              isValid &= modelData!.commonDetailsValid! &&
+                                  modelData!.locationPageValid!;
 
-                            for (var i
-                                in modelData!.individualDataListTransient) {
-                              isValid &= i.dataValid!;
-                              print("Indv ${i.dataValid}");
-                            }
+                              for (var i
+                                  in modelData!.individualDataListTransient) {
+                                isValid &= i.dataValid!;
+                                print("Indv ${i.dataValid}");
+                              }
 
-                            print("Is Valid: $isValid");
-                          }),
+                              print("Is Valid: $isValid");
+                            }),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: 10, right: 10, top: 5, bottom: 10),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: ElevatedButton(
-                          child: Text("Save",
-                              style:
-                                  TextStyle(fontSize: 14, color: Colors.black)),
-                          style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.white),
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.white),
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      side: BorderSide(color: Colors.white)))),
-                          onPressed: () async {
-                            var store = await StoreInstance.getInstance();
-                            Box individualDataBox =
-                                store.box<FamilyMemberIndividualDataModel>();
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: 10, right: 10, top: 5, bottom: 10),
+                        child: ElevatedButton(
+                            child: Text("Save",
+                                style:
+                                    TextStyle(fontSize: 14, color: Colors.black)),
+                            style: ButtonStyle(
+                                foregroundColor: MaterialStateProperty.all<Color>(
+                                    Colors.white),
+                                backgroundColor: MaterialStateProperty.all<Color>(
+                                    Colors.white),
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        side: BorderSide(color: Colors.white)))),
+                            onPressed: () async {
+                              var store = await StoreInstance.getInstance();
+                              Box individualDataBox =
+                                  store.box<FamilyMemberIndividualDataModel>();
 
-                            List<int> i = await individualDataBox.putMany(
-                                modelData!.individualDataListTransient);
-                            print("ID: $i");
+                              List<int> i = await individualDataBox.putMany(
+                                  modelData!.individualDataListTransient);
+                              print("ID: $i");
 
-                            modelData!.individualDataList
-                                .addAll(modelData!.individualDataListTransient);
+                              modelData!.individualDataList
+                                  .addAll(modelData!.individualDataListTransient);
 
-                            store = await StoreInstance.getInstance();
-                            Box box = store.box<FamilyMembersCommonDataModel>();
-                            int id = await box.put(modelData);
+                              store = await StoreInstance.getInstance();
+                              Box box = store.box<FamilyMembersCommonDataModel>();
+                              int id = await box.put(modelData);
 
-                            AlertDialog alertDialog = AlertDialog(
-                              backgroundColor: colors.darkScaffoldColor,
-                              title: Text(
-                                'Record Saved',
-                                style: GoogleFonts.poppins(
-                                    color: colors.darkPrimaryTextColor),
-                              ),
-                              content: Text(
-                                  'The Record has been saved with record ID ${id}',
-                                  style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor)),
-                              actions: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context, rootNavigator: true)
-                                        .pop('dialog');
-                                  },
-                                  child: Text('OK',style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),),
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20)),),
-                                    primary: colors.darkAccentColor
-                                  ),
-                                )
-                              ],
-                            );
+                              AlertDialog alertDialog = AlertDialog(
+                                backgroundColor: colors.darkScaffoldColor,
+                                title: Text(
+                                  'Record Saved',
+                                  style: GoogleFonts.poppins(
+                                      color: colors.darkPrimaryTextColor),
+                                ),
+                                content: Text(
+                                    'The Record has been saved with record ID ${id}',
+                                    style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor)),
+                                actions: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pop('dialog');
+                                    },
+                                    child: Text('OK',style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),),
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20)),),
+                                      primary: colors.darkAccentColor
+                                    ),
+                                  )
+                                ],
+                              );
 
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) => alertDialog);
-                          }),
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) => alertDialog);
+                            }),
                     ),
                   )
                 ],

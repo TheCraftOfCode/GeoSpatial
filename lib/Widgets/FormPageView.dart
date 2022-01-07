@@ -161,12 +161,6 @@ class _FormPageViewState extends State<FormPageView> {
           StepCounterWidget(widgetLength, count, formErrorTile, controller),
           Container(
             height: MediaQuery.of(context).size.height * 0.85,
-            // child: PageView(
-            //   onPageChanged: _onPageViewChange,
-            //   scrollDirection: Axis.horizontal,
-            //   controller: controller,
-            //   children: widgetList,
-            // ),
             child: PreloadPageView.builder(
                 onPageChanged: _onPageViewChange,
                 scrollDirection: Axis.horizontal,
