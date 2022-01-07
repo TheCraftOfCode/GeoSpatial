@@ -22,6 +22,10 @@ class GenderPickerWidget extends FormField<String> {
             builder: (FormFieldState<String> state) {
               onChanged!(state.value ?? MALE);
               return Wrap(
+
+                crossAxisAlignment: WrapCrossAlignment.center,
+                alignment: WrapAlignment.center,
+                runSpacing: 4.0,
                 children: [
                   GenderWidget(
                       gender: MALE,
