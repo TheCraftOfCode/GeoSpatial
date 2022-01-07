@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:geo_spatial/Constants/Constants.dart';
 import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
 import 'package:geo_spatial/Screens/FamilyDetails.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
@@ -9,13 +12,14 @@ import 'package:geo_spatial/Widgets/DataCard.dart';
 import 'package:geo_spatial/objectbox.g.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'CollectLocationWidget.dart';
+import 'package:http/http.dart' as http;
 
 class FamilyHomeScreen extends StatefulWidget {
 
 
   FamilyHomeScreen({Key? key, this.modelData,this.isGenerated}) : super(key: key);
 
-  var isGenerated;
+  final isGenerated;
 
   @override
   State<FamilyHomeScreen> createState() => _FamilyHomeScreenState();
@@ -37,6 +41,16 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
         modelData!.individualDataListTransient.add(i);
       }
     });
+  }
+
+  Future<http.Response> _makeRequest(
+      var data, String node) async {
+    String url = NETWORK_ADDRESS;
+    var body = json.encode(data);
+
+    var res = await http.post(Uri.https(url, '/api/$node'),
+        headers: {"Content-Type": "application/json"}, body: body);
+    return res;
   }
 
   @override
@@ -89,7 +103,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                                         side: BorderSide(
                                             color: colors
                                                 .darkSecondBackgroundColor)))),
-                            onPressed: () {
+                            onPressed: () async {
                               bool isValid = true;
                               print("Common ${modelData!.commonDetailsValid}");
                               print("Location ${modelData!.locationPageValid}");
@@ -101,8 +115,11 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                                 isValid &= i.dataValid!;
                                 print("Indv ${i.dataValid}");
                               }
+
+                              //TODO: Change end point and check res for errors
                               if(isValid){
                                 print("MODEL JSON: ${widget.modelData.toJson()}");
+                                http.Response res = await _makeRequest(modelData!.toJson(), "familyData");
                               }
 
                               print("Is Valid: $isValid");

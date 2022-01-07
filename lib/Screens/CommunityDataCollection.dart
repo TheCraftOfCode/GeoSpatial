@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:geo_spatial/Constants/Constants.dart';
 import 'package:geo_spatial/Model/CommunityDataModel.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/StoreInstance.dart';
@@ -7,6 +10,7 @@ import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/LocationWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 
 class CommunityDataCollection extends StatefulWidget {
   CommunityDataCollection({Key? key, CommunityDataModel? this.modelData})
@@ -53,6 +57,16 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
   late CommunityDataModel modelData;
   var store;
 
+  Future<http.Response> _makeRequest(
+      var data, String node) async {
+    String url = NETWORK_ADDRESS;
+    var body = json.encode(data);
+
+    var res = await http.post(Uri.https(url, '/api/$node'),
+        headers: {"Content-Type": "application/json"}, body: body);
+    return res;
+  }
+
   @override
   Widget build(BuildContext context) {
     modelData = widget.modelData ?? new CommunityDataModel();
@@ -62,9 +76,11 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
       print(isValid.toString());
 
       if (isValid) {
+        //TODO: Change end point and check res for errors
+        http.Response res = await _makeRequest(modelData.toJson(), "communityData");
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
-            "Upload successful",
+            res.body,
             style: TextStyle(color: Colors.red),
           ),
         ));
