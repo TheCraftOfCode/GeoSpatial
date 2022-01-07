@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:geo_spatial/Widgets/AddRemoveBoxWidget.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,7 +27,7 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       backgroundColor: colors.darkScaffoldColor,
       appBar: AppBarBackButton(
         'Edit Existing Data',
@@ -115,7 +117,9 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
                    ),
                    child: Padding(
                      padding: EdgeInsets.all(12),
-                     child: ListView.builder(
+                     child:
+                     _searchList.isNotEmpty ?
+                     ListView.builder(
                           itemCount: _searchList.length,
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
@@ -143,7 +147,7 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
                                 ),
                               ),
                             );
-                          }),
+                          }) : Container(width: double.infinity, child: Text("No Results Found", textAlign: TextAlign.center,)),
                    ),
                  ),
                ),

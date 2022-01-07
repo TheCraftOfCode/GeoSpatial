@@ -21,91 +21,84 @@ class AddRemoveBoxWidget extends StatefulWidget {
 class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.4,
-      color: colors.darkScaffoldColor,
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Container(
-          color: colors.darkScaffoldColor,
-          height: MediaQuery.of(context).size.height * 0.4,
-          child: Wrap(
-
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        widget.modelData?.individualDataListTransient
-                            .add(FamilyMemberIndividualDataModel());
-                      });
-                    },
-                    child: Text("Add New User Information",
-                        style: GoogleFonts.poppins(
-                            fontSize: 18, color: colors.darkAccentColor)),
-                  ),
-                  IconButton(
+    return
+      Expanded(
+        flex: 2,
+        child: Padding(
+          padding: EdgeInsets.all(5),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
                       onPressed: () {
                         setState(() {
                           widget.modelData?.individualDataListTransient
                               .add(FamilyMemberIndividualDataModel());
                         });
                       },
-                      icon: Icon(
-                        Icons.add,
-                        color: colors.darkAccentColor,
-                      ))
-                ],
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.35,
-                child: widget.modelData!.individualDataListTransient.isEmpty
-                    ? Center(child: Text('No Members Added'))
-                    : ListView.builder(
-                        itemCount: widget
-                            .modelData!.individualDataListTransient.length,
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Card(
-                            color: colors.darkSecondBackgroundColor,
-                            child: ListTile(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => FamilyMemberAdd(
-                                          familyMemberIndividualDataModel:
-                                              widget.modelData!
-                                                  .individualDataListTransient
-                                                  .elementAt(index))));
-                                },
-                                //Pass a function which is called onSaved in the next page and add data to the class object
-                                leading: Icon(Icons.person),
-                                title: Text(
-                                  "User ${index + 1}",
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 20),
-                                ),
-                                trailing: IconButton(
-                                    color: colors.darkSecondAccentColor,
-                                    icon: Icon(Icons.close),
-                                    onPressed: () async {
-                                      Dialog(index);
-                                    })),
-                          );
-                        }),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+                      child: Text("Add New User Information",
+                          style: GoogleFonts.poppins(
+                              fontSize: 18, color: colors.darkAccentColor)),
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            widget.modelData?.individualDataListTransient
+                                .add(FamilyMemberIndividualDataModel());
+                          });
+                        },
+                        icon: Icon(
+                          Icons.add,
+                          color: colors.darkAccentColor,
+                        ))
+                  ],
+                ),
+                Flexible(
+                  child: Container(
+                    child: widget.modelData!.individualDataListTransient.isEmpty
+                        ? Center(child: Text('No Members Added'))
+                        : ListView.builder(
+                            itemCount: widget
+                                .modelData!.individualDataListTransient.length,
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Card(
+                                color: colors.darkSecondBackgroundColor,
+                                child: ListTile(
+                                    onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (context) => FamilyMemberAdd(
+                                              familyMemberIndividualDataModel:
+                                                  widget.modelData!
+                                                      .individualDataListTransient
+                                                      .elementAt(index))));
+                                    },
+                                    //Pass a function which is called onSaved in the next page and add data to the class object
+                                    leading: Icon(Icons.person),
+                                    title: Text(
+                                      "User ${index + 1}",
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 20),
+                                    ),
+                                    trailing: IconButton(
+                                        color: colors.darkSecondAccentColor,
+                                        icon: Icon(Icons.close),
+                                        onPressed: () async {
+                                          Dialog(index);
+                                        })),
+                              );
+                            }),
+                  ),
+                ),
+              ],
+            ),
+    ),
+      );
   }
 
   void Dialog(index) async {
