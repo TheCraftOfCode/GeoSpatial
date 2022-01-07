@@ -104,6 +104,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     'Lorry/Van':false
   };
 
+  var incomeFromCattleEnabled = false;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -350,6 +352,18 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                               widget.modelData!.isFarmLandOwned = val;
                             },
                             title: "Do you own farmland?",
+                          ),
+                          CheckBoxAddExtraAlertDialog(
+                            title: 'Crops Cultivated',
+                            hint: 'Choose cultivated crops',
+                            singleOption: false,
+                            context: context,
+                            dataMap: widget.modelData!.cropsCultivated ??
+                                seeds_preserved,
+                            onSaved: (val) {
+                              print("Value recorded: $val");
+                              widget.modelData!.cropsCultivated = val;
+                            },
                           ),
                           OptionsWidget(
                             options: [

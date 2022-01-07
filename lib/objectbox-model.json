@@ -223,7 +223,7 @@
     },
     {
       "id": "3:4555229639046191310",
-      "lastPropertyId": "32:2980984211940443041",
+      "lastPropertyId": "34:938904163813263655",
       "name": "FamilyMembersCommonDataModel",
       "properties": [
         {
@@ -323,11 +323,6 @@
           "type": 1
         },
         {
-          "id": "21:6821885131227205219",
-          "name": "savedTime",
-          "type": 9
-        },
-        {
           "id": "22:5541702793145940965",
           "name": "dbLocationTopLeft",
           "type": 9
@@ -381,6 +376,16 @@
           "id": "32:2980984211940443041",
           "name": "dbSourceOfDrinkingWater",
           "type": 9
+        },
+        {
+          "id": "33:2417488989427376885",
+          "name": "villageCode",
+          "type": 9
+        },
+        {
+          "id": "34:938904163813263655",
+          "name": "savedTime",
+          "type": 9
         }
       ],
       "relations": [
@@ -401,7 +406,8 @@
   "retiredEntityUids": [],
   "retiredIndexUids": [],
   "retiredPropertyUids": [
-    961043903550204529
+    961043903550204529,
+    6821885131227205219
   ],
   "retiredRelationUids": [],
   "version": 1

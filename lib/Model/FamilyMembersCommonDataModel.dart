@@ -3,6 +3,17 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:objectbox/objectbox.dart';
 
+List<String> buildListForOptionWidget(Map<String, bool> mapData) {
+  var listData = <String>[];
+
+  mapData.forEach((key, value) {
+    if (value) {
+      listData.add(key);
+    }
+  });
+  return listData;
+}
+
 @Entity()
 class FamilyMemberIndividualDataModel {
   int id = 0;
@@ -38,40 +49,51 @@ class FamilyMemberIndividualDataModel {
   String? vizhithiruInstalled;
   bool? dataValid = false;
 
-  String? savedTime = DateFormat('kk:mm:ss, EEE d MMM').format(DateTime.now());
+  String? savedTime = DateFormat('hh:mm a').format(DateTime.now());
 
-  Map<String, dynamic> toJson() => {
-        'userName': userName,
-        'dateOfBirth':
-            "${dateOfBirth!.day}/${dateOfBirth!.month}/${dateOfBirth!.year}",
-        'gender': gender,
-        'phoneNumber': phoneNumber,
-        'educationQualification': educationQualification,
-        'aadhaarNumber': aadhaarNumber,
-        'vulnerabilities': vulnerabilities,
-        'occupation': occupation,
-        'dailyWageWorker': dailyWageWorker,
-        'incomePerDay': incomePerDay,
-        'incomePerMonth': incomePerMonth,
-        'pension': pension,
-        'businessStatus': businessStatus,
-        'maritalStatus': maritalStatus,
-        'specialSkills': specialSkills,
-        'frequentAilments': frequentAilments,
-        'commutableDisease': commutableDisease,
-        'nonCommutableDisease': nonCommutableDisease,
-        'surgeries': surgeries,
-        'anganwadiServicesAware': anganwadiServicesAware,
-        'anganwadiServicesUsing': anganwadiServicesUsing,
-        'anganwadiServicesUsedList': anganwadiServicesUsedList,
-        'PHCServicesUsedList': PHCServicesUsedList,
-        'privateClinicServicesUsedList': privateClinicServicesUsedList,
-        'privateServiceReason': privateServiceReason,
-        'useOfTobacco': useOfTobacco,
-        'useOfAlcohol': useOfAlcohol,
-        'aarogyaSetuInstalled': aarogyaSetuInstalled,
-        'vizhithiruInstalled': vizhithiruInstalled
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      "UIN": "",
+      "username": "",
+      "timeStamp": savedTime,
+      "name": userName,
+      "date": "${dateOfBirth!.day}-${dateOfBirth!.month}-${dateOfBirth!.year}",
+      "gender": gender,
+      "educationalQualification": educationQualification,
+      "phoneNumber": phoneNumber,
+      "aadharNumber": aadhaarNumber,
+      "Vulnerabilities": vulnerabilities != null
+          ? buildListForOptionWidget(vulnerabilities!)
+          : [],
+      "oldAgePension": pension,
+      "occupation":
+          occupation != null ? buildListForOptionWidget(occupation!) : [],
+      "isADailyWageWorker": dailyWageWorker,
+      "incomePerDay": incomePerDay,
+      "incomePerMonth": incomePerMonth,
+      "workTimings": "",
+      //TODO:Add work timings
+      "maritalStatus": maritalStatus,
+      "specialSkills": specialSkills,
+      "frequentHealthAilments": frequentAilments,
+      "communicableDiseases": commutableDisease,
+      "nonCommunicableDiseases": nonCommutableDisease,
+      "surgeriesUndergone": surgeries,
+      "anganwadiServicesAware": anganwadiServicesAware,
+      //TODO:Remind shridhar to change name
+      "anganwadiServicesUsed": anganwadiServicesUsing,
+      //TODO:Remind shridhar to add
+      "anganwadiServicesUtilised": anganwadiServicesUsedList,
+      "phcServicesUtilised": PHCServicesUsedList,
+      "privateHealthClinicFacilitiesUsed": privateClinicServicesUsedList,
+      "reasonsForVisitingPrivateHealthClinic": privateServiceReason,
+      "tobaccoBasedProductsUsage": useOfTobacco,
+      "alcoholConsumption": useOfAlcohol,
+      "businessStatus": businessStatus,
+      "arogyaSethuAppInstallationStatus": aarogyaSetuInstalled,
+      "vizhithiruAppInstallationStatus": vizhithiruInstalled
+    };
+  }
 
   FamilyMemberIndividualDataModel({this.userName});
 
@@ -124,6 +146,7 @@ class FamilyMembersCommonDataModel {
   String? incomeFromCattle;
   String? isFarmLandOwned;
   String? isSeedsPreserved;
+  Map<String, bool>? cropsCultivated;
   Map<String, bool>? preservedSeedsMap;
   Map<String, bool>? treesOwnedMap;
   String? isKitchenGardenOwned;
@@ -131,6 +154,7 @@ class FamilyMembersCommonDataModel {
   String? addressOne;
   String? addressTwo;
   String? city;
+  String? villageCode;
   bool? locationPageValid = false;
   bool? commonDetailsValid = false;
 
@@ -138,49 +162,88 @@ class FamilyMembersCommonDataModel {
   final individualDataListTransient = <FamilyMemberIndividualDataModel>[];
   final individualDataList = ToMany<FamilyMemberIndividualDataModel>();
 
-  Map<String, dynamic> toJson() => {
-        'drinkingWater': drinkingWater,
-        'sourceOfDrinkingWater': sourceOfDrinkingWater,
-        'toiletFacility': toiletFacility,
-        'communityToilet': communityToilet,
-        'environmentSanitationLevel': environmentSanitationLevel,
-        'runningWaterAvailable': runningWaterAvailable,
-        'noOfTwoWheelers': noOfTwoWheelers,
-        'noOfThreeWheelers': noOfThreeWheelers,
-        'noOfFourWheelers': noOfFourWheelers,
-        'twoThreeWheelManufacturer': twoThreeWheelManufacturer,
-        'twoFourManufacturer': twoFourManufacturer,
-        'localFoodMap': localFoodMap,
-        'isCattleOwned': isCattleOwned,
-        'incomeFromCattle': incomeFromCattle,
-        'isFarmLandOwned': isFarmLandOwned,
-        'isSeedsPreserved': isSeedsPreserved,
-        'preservedSeedsMap': preservedSeedsMap,
-        'treesOwnedMap': treesOwnedMap,
-        'isKitchenGardenOwned': isKitchenGardenOwned,
-        'kitchenGardenPlants': kitchenGardenPlants,
-        'addressOne': addressOne,
-        'addressTwo': addressTwo,
-        'city': city,
-        'familyMemberData':
-            individualDataListTransient.map((item) => item.toJson()).toList(),
-        'locationTopLeft': [
-          locationTopLeft!.latitude,
-          locationTopLeft!.longitude
-        ],
-        'locationTopRight': [
-          locationTopRight!.latitude,
-          locationTopRight!.longitude
-        ],
-        'locationBottomLeft': [
-          locationBottomLeft!.latitude,
-          locationBottomLeft!.longitude
-        ],
-        'locationBottomRight': [
-          locationBottomRight!.latitude,
-          locationBottomRight!.longitude
-        ],
-      };
+  //TODO: Add condition to set empty value to dependent fields
+  Map<String, dynamic> toJson() {
+    return {
+      'familyMemberData':
+      individualDataListTransient.map((item) => item.toJson()).toList(),
+      'locationTopLeft': [
+        locationTopLeft!.latitude,
+        locationTopLeft!.longitude
+      ],
+      'locationTopRight': [
+        locationTopRight!.latitude,
+        locationTopRight!.longitude
+      ],
+      'locationBottomLeft': [
+        locationBottomLeft!.latitude,
+        locationBottomLeft!.longitude
+      ],
+      'locationBottomRight': [
+        locationBottomRight!.latitude,
+        locationBottomRight!.longitude
+      ],
+      "availabilityOfDrinkingWater": runningWaterAvailable,
+
+      "drinkingWaterSource": sourceOfDrinkingWater != null
+          ? buildListForOptionWidget(sourceOfDrinkingWater!)
+          : [],
+
+      "areToiletsAvailableInHouse": toiletFacility,
+
+      "availabilityOfWaterInToilets": String,
+
+      "alternativeForHouseholdToilet": String,
+
+      "statusOfEnvironmentalSanitation": environmentSanitationLevel,
+
+      "numberOfTwoWheelers": noOfTwoWheelers,
+
+      "brandsOfTwoThreeWheelers": twoThreeWheelManufacturer != null
+          ? buildListForOptionWidget(twoThreeWheelManufacturer!)
+          : [], //TODO: Change field name in backend model
+
+      "numberOfThreeWheelers": noOfThreeWheelers,
+
+      //"brandsOfThreeWheelers": String, //TODO: Remove field
+
+      "numberOfFourWheelers": noOfFourWheelers,
+
+      "brandsOfFourWheelers": twoFourManufacturer != null
+          ? buildListForOptionWidget(twoFourManufacturer!)
+          : [],
+
+      "doYouOwnCattle": isCattleOwned,
+
+      "incomeFromCattle": isCattleOwned == 'yes' ? incomeFromCattle : '',
+
+      "doYouOwnFarmLand": isFarmLandOwned,
+
+      "cropsCultivated":  cropsCultivated != null ? buildListForOptionWidget(cropsCultivated!) : [],
+
+      "doYouPreserveSeeds": isSeedsPreserved,
+
+      "typesOfSeedsPreserved": preservedSeedsMap != null
+          ? buildListForOptionWidget(preservedSeedsMap!)
+          : [],
+
+      "locallyAvailableFoodsConsumed":
+          localFoodMap != null ? buildListForOptionWidget(localFoodMap!) : [],
+
+      "treesOwnedIfAny":
+          treesOwnedMap != null ? buildListForOptionWidget(treesOwnedMap!) : [],
+
+      "isKitchenGardenAvailable": isKitchenGardenOwned,
+
+      "cropsInKitchenGarden": kitchenGardenPlants != null
+          ? buildListForOptionWidget(kitchenGardenPlants!)
+          : [],
+
+      "address": "$addressOne\n$addressTwo\n$city",
+
+      "villageCode": villageCode ?? ""
+    };
+  }
 
   String? savedTime = DateFormat('kk:mm:ss, EEE d MMM').format(DateTime.now());
 

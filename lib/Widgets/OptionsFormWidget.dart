@@ -13,6 +13,7 @@ class OptionsWidget extends FormField<dynamic> {
   OptionsWidget(
       {FormFieldSetter<dynamic>? onSaved,
       FormFieldValidator<dynamic>? validator,
+      Function(dynamic)? onChanged,
       required List<dynamic> options,
       required String title,
       String? defaultValue,
@@ -42,6 +43,7 @@ class OptionsWidget extends FormField<dynamic> {
                         alignment: WrapAlignment.center,
                         children: options
                             .map((e) => new OptionButton(
+                                onChanged: onChanged,
                                 text: e[0],
                                 optionKey: e[1],
                                 state: state,
@@ -71,6 +73,7 @@ class OptionButton extends StatelessWidget {
       required this.optionKey,
       required this.state,
       required this.isSelected,
+      this.onChanged,
       this.isError = false})
       : super(key: key);
 
@@ -79,6 +82,7 @@ class OptionButton extends StatelessWidget {
   final state;
   final isSelected;
   final isError;
+  final onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +103,9 @@ class OptionButton extends StatelessWidget {
                           : BorderSide.none))),
           onPressed: () {
             state.didChange(optionKey);
+            if (onChanged != null) {
+              onChanged!(optionKey);
+            }
           },
           child: Text(
             text,

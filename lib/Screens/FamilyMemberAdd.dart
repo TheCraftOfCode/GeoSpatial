@@ -341,8 +341,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           .familyMemberIndividualDataModel!.dailyWageWorker,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       options: [
-                        ["Yes", "true"],
-                        ["No", "false"]
+                        ["Yes", "yes"],
+                        ["No", "no"]
                       ],
                       title: "Daily wage worker?",
                       onSaved: (val) {
