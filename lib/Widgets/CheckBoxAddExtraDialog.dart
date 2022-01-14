@@ -27,7 +27,8 @@ class CheckBoxAddExtraAlertDialog extends FormField<Map<String, bool>> {
   CheckBoxAddExtraAlertDialog(
       {FormFieldSetter<Map<String, bool>>? onSaved,
       FormFieldValidator<Map<String, bool>>? validator,
-      required title,
+      autoSave = false,
+      title,
       required hint,
       required Map<String, bool> dataMap,
       errorField,
@@ -92,13 +93,15 @@ class CheckBoxAddExtraAlertDialog extends FormField<Map<String, bool>> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Text(title,
-                          style: GoogleFonts.montserrat(
-                              fontSize: 15,
-                              color: colors.darkPrimaryTextColor)),
-                    ),
+                    title != null
+                        ? Padding(
+                            padding: EdgeInsets.only(bottom: 20),
+                            child: Text(title,
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 15,
+                                    color: colors.darkPrimaryTextColor)),
+                          )
+                        : Container(),
                     Card(
                       color: colors.darkScaffoldColor,
                       elevation: 5,
@@ -106,7 +109,7 @@ class CheckBoxAddExtraAlertDialog extends FormField<Map<String, bool>> {
                       child: InkWell(
                         onTap: () {
                           _showMyDialog(context, title, state, singleOption,
-                              showAddNewBox);
+                              showAddNewBox, autoSave);
                         },
                         child: Padding(
                           padding: EdgeInsets.only(
@@ -149,12 +152,13 @@ class CheckBoxAddExtraAlertDialog extends FormField<Map<String, bool>> {
 }
 
 Future<void> _showMyDialog(
-    context, dialogTitle, state, singleOption, showAddNewBox) async {
+    context, dialogTitle, state, singleOption, showAddNewBox, autoSave) async {
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
       return AlertDialogWidget(
-        dialogTitle: dialogTitle,
+        autoSave: autoSave,
+        dialogTitle: dialogTitle ?? "Choose an option",
         state: state,
         showAddNew: showAddNewBox,
         singleOption: singleOption,
@@ -168,13 +172,15 @@ class AlertDialogWidget extends StatefulWidget {
   final state;
   final singleOption;
   final showAddNew;
+  final bool autoSave;
 
   const AlertDialogWidget(
       {Key? key,
       required this.dialogTitle,
       required this.state,
       required this.singleOption,
-      this.showAddNew})
+      this.showAddNew,
+      required this.autoSave})
       : super(key: key);
 
   @override
@@ -256,6 +262,9 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                 dataList = newPair;
               });
               widget.state.didChange(newPair);
+              if (widget.autoSave) {
+                widget.state.save();
+              }
             },
           ))
         });

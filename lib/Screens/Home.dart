@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
+import 'package:geo_spatial/Screens/NestedOptionsWidget.dart';
 import 'package:geo_spatial/Screens/VillageSelection.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/Globals.dart' as globals;
@@ -26,16 +27,16 @@ class _HomeWidgetState extends State<Home> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-
         final result = await showDialog(
             context: context,
             builder: (_) => AlertDialog(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
                   backgroundColor: colors.darkScaffoldColor,
                   title: Text(
                     "Are you sure you want to quit?",
-                    style:
-                        GoogleFonts.poppins(color: colors.darkPrimaryTextColor,fontSize: 15),
+                    style: GoogleFonts.poppins(
+                        color: colors.darkPrimaryTextColor, fontSize: 15),
                   ),
                   actions: [
                     ElevatedButton(
@@ -45,8 +46,8 @@ class _HomeWidgetState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)))),
                         onPressed: () {
-                          SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-
+                          SystemChannels.platform
+                              .invokeMethod('SystemNavigator.pop');
                         },
                         child: Text(
                           'Yes',
@@ -54,8 +55,8 @@ class _HomeWidgetState extends State<Home> {
                               color: colors.darkPrimaryTextColor),
                         )),
                     TextButton(
-                        onPressed: (){
-                          Navigator.pop(context,true);
+                        onPressed: () {
+                          Navigator.pop(context, true);
                         },
                         child: Text(
                           'No',
@@ -151,6 +152,31 @@ class _HomeWidgetState extends State<Home> {
                   'View all data saved in local storage',
                   'assets/svg/storage_image.svg',
                   SavedDataPage(),
+                  Color(0xfff54b64),
+                  Color(0xfff78361)),
+              DataCard(
+                  'Debug Card',
+                  'Debug and test pages here',
+                  'assets/svg/houses.svg',
+                  //FamilyHomeScreen(),
+                  NestedOptionWidget(
+                    title: "Select your options",
+                    onChanged: (val){
+                      for(var i in val){
+                        print(i.boxName);
+                        print(i.subOptionDataMap.toString());
+                        print(i.isSelected);
+                        print("\n");
+                      }
+                      print(val);
+                    },
+                    nestedOptionData: [
+                      new NestedOptionData(subOptionDataMap: {"yes" : true, "no" : true}, boxName: 'One'),
+                      new NestedOptionData(subOptionDataMap: {"yes" : true, "no" : true}, boxName: 'Two'),
+                      new NestedOptionData(subOptionDataMap: {"yes" : true, "no" : true}, boxName: 'Three'),
+                      new NestedOptionData(subOptionDataMap: {"yes" : false, "no" : false}, boxName: 'Four')
+                    ],
+                  ),
                   Color(0xfff54b64),
                   Color(0xfff78361)),
             ],

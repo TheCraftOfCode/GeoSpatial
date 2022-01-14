@@ -178,11 +178,6 @@ class _MyAppState extends State<Login> {
                             child: InkWell(
                               onTap: () {
                                 _login();
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) => Home()),
-                                // );
                               },
                               child: Center(
                                 child: Text("SIGN IN",
