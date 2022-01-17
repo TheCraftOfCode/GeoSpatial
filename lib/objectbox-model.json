@@ -54,7 +54,7 @@
     },
     {
       "id": "2:4604626538020621410",
-      "lastPropertyId": "33:5419770240499089417",
+      "lastPropertyId": "36:6440758785035669475",
       "name": "FamilyMemberIndividualDataModel",
       "properties": [
         {
@@ -164,21 +164,6 @@
           "type": 30
         },
         {
-          "id": "22:8089710746679848906",
-          "name": "PHCServicesUsedList",
-          "type": 30
-        },
-        {
-          "id": "23:4567441488943246138",
-          "name": "privateClinicServicesUsedList",
-          "type": 30
-        },
-        {
-          "id": "24:1321911158882624161",
-          "name": "privateServiceReason",
-          "type": 9
-        },
-        {
           "id": "25:515443054774028092",
           "name": "useOfTobacco",
           "type": 9
@@ -217,6 +202,21 @@
           "id": "33:5419770240499089417",
           "name": "workTimings",
           "type": 30
+        },
+        {
+          "id": "34:339180766123450759",
+          "name": "noOfDaysWorking",
+          "type": 9
+        },
+        {
+          "id": "35:239463832765470197",
+          "name": "PHCServicesUsed",
+          "type": 9
+        },
+        {
+          "id": "36:6440758785035669475",
+          "name": "privateClinicServicesUsed",
+          "type": 9
         }
       ],
       "relations": []
@@ -408,7 +408,10 @@
   "retiredPropertyUids": [
     961043903550204529,
     6821885131227205219,
-    3511831625273329956
+    3511831625273329956,
+    8089710746679848906,
+    4567441488943246138,
+    1321911158882624161
   ],
   "retiredRelationUids": [],
   "version": 1

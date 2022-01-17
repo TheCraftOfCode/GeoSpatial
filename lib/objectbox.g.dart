@@ -67,7 +67,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(2, 4604626538020621410),
       name: 'FamilyMemberIndividualDataModel',
-      lastPropertyId: const IdUid(33, 5419770240499089417),
+      lastPropertyId: const IdUid(36, 6440758785035669475),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -176,21 +176,6 @@ final _entities = <ModelEntity>[
             type: 30,
             flags: 0),
         ModelProperty(
-            id: const IdUid(22, 8089710746679848906),
-            name: 'PHCServicesUsedList',
-            type: 30,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(23, 4567441488943246138),
-            name: 'privateClinicServicesUsedList',
-            type: 30,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(24, 1321911158882624161),
-            name: 'privateServiceReason',
-            type: 9,
-            flags: 0),
-        ModelProperty(
             id: const IdUid(25, 515443054774028092),
             name: 'useOfTobacco',
             type: 9,
@@ -229,6 +214,21 @@ final _entities = <ModelEntity>[
             id: const IdUid(33, 5419770240499089417),
             name: 'workTimings',
             type: 30,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(34, 339180766123450759),
+            name: 'noOfDaysWorking',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(35, 239463832765470197),
+            name: 'PHCServicesUsed',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(36, 6440758785035669475),
+            name: 'privateClinicServicesUsed',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -438,7 +438,10 @@ ModelDefinition getObjectBoxModel() {
       retiredPropertyUids: const [
         961043903550204529,
         6821885131227205219,
-        3511831625273329956
+        3511831625273329956,
+        8089710746679848906,
+        4567441488943246138,
+        1321911158882624161
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -591,20 +594,6 @@ ModelDefinition getObjectBoxModel() {
                   : fbb.writeList(object.anganwadiServicesUsedList!
                       .map(fbb.writeString)
                       .toList(growable: false));
-          final PHCServicesUsedListOffset = object.PHCServicesUsedList == null
-              ? null
-              : fbb.writeList(object.PHCServicesUsedList!
-                  .map(fbb.writeString)
-                  .toList(growable: false));
-          final privateClinicServicesUsedListOffset =
-              object.privateClinicServicesUsedList == null
-                  ? null
-                  : fbb.writeList(object.privateClinicServicesUsedList!
-                      .map(fbb.writeString)
-                      .toList(growable: false));
-          final privateServiceReasonOffset = object.privateServiceReason == null
-              ? null
-              : fbb.writeString(object.privateServiceReason!);
           final useOfTobaccoOffset = object.useOfTobacco == null
               ? null
               : fbb.writeString(object.useOfTobacco!);
@@ -628,7 +617,17 @@ ModelDefinition getObjectBoxModel() {
               : fbb.writeList(object.workTimings!
                   .map(fbb.writeString)
                   .toList(growable: false));
-          fbb.startTable(34);
+          final noOfDaysWorkingOffset = object.noOfDaysWorking == null
+              ? null
+              : fbb.writeString(object.noOfDaysWorking!);
+          final PHCServicesUsedOffset = object.PHCServicesUsed == null
+              ? null
+              : fbb.writeString(object.PHCServicesUsed!);
+          final privateClinicServicesUsedOffset =
+              object.privateClinicServicesUsed == null
+                  ? null
+                  : fbb.writeString(object.privateClinicServicesUsed!);
+          fbb.startTable(37);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, userNameOffset);
           fbb.addInt64(2, object.dateOfBirth?.millisecondsSinceEpoch);
@@ -650,9 +649,6 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(18, anganwadiServicesAwareOffset);
           fbb.addOffset(19, anganwadiServicesUsingOffset);
           fbb.addOffset(20, anganwadiServicesUsedListOffset);
-          fbb.addOffset(21, PHCServicesUsedListOffset);
-          fbb.addOffset(22, privateClinicServicesUsedListOffset);
-          fbb.addOffset(23, privateServiceReasonOffset);
           fbb.addOffset(24, useOfTobaccoOffset);
           fbb.addOffset(25, useOfAlcoholOffset);
           fbb.addOffset(26, aarogyaSetuInstalledOffset);
@@ -661,6 +657,9 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(30, dbVulnerabilitiesOffset);
           fbb.addOffset(31, dbOccupationOffset);
           fbb.addOffset(32, workTimingsOffset);
+          fbb.addOffset(33, noOfDaysWorkingOffset);
+          fbb.addOffset(34, PHCServicesUsedOffset);
+          fbb.addOffset(35, privateClinicServicesUsedOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -717,14 +716,6 @@ ModelDefinition getObjectBoxModel() {
             ..anganwadiServicesUsedList =
                 const fb.ListReader<String>(fb.StringReader(), lazy: false)
                     .vTableGetNullable(buffer, rootOffset, 44)
-            ..PHCServicesUsedList =
-                const fb.ListReader<String>(fb.StringReader(), lazy: false)
-                    .vTableGetNullable(buffer, rootOffset, 46)
-            ..privateClinicServicesUsedList =
-                const fb.ListReader<String>(fb.StringReader(), lazy: false)
-                    .vTableGetNullable(buffer, rootOffset, 48)
-            ..privateServiceReason = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 50)
             ..useOfTobacco = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 52)
             ..useOfAlcohol = const fb.StringReader()
@@ -741,7 +732,13 @@ ModelDefinition getObjectBoxModel() {
                 .vTableGetNullable(buffer, rootOffset, 66)
             ..workTimings =
                 const fb.ListReader<String>(fb.StringReader(), lazy: false)
-                    .vTableGetNullable(buffer, rootOffset, 68);
+                    .vTableGetNullable(buffer, rootOffset, 68)
+            ..noOfDaysWorking = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 70)
+            ..PHCServicesUsed = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 72)
+            ..privateClinicServicesUsed = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 74);
 
           return object;
         }),
@@ -1104,59 +1101,59 @@ class FamilyMemberIndividualDataModel_ {
       QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
           _entities[1].properties[20]);
 
-  /// see [FamilyMemberIndividualDataModel.PHCServicesUsedList]
-  static final PHCServicesUsedList =
-      QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[21]);
-
-  /// see [FamilyMemberIndividualDataModel.privateClinicServicesUsedList]
-  static final privateClinicServicesUsedList =
-      QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[22]);
-
-  /// see [FamilyMemberIndividualDataModel.privateServiceReason]
-  static final privateServiceReason =
-      QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[23]);
-
   /// see [FamilyMemberIndividualDataModel.useOfTobacco]
   static final useOfTobacco =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[24]);
+          _entities[1].properties[21]);
 
   /// see [FamilyMemberIndividualDataModel.useOfAlcohol]
   static final useOfAlcohol =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[25]);
+          _entities[1].properties[22]);
 
   /// see [FamilyMemberIndividualDataModel.aarogyaSetuInstalled]
   static final aarogyaSetuInstalled =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[26]);
+          _entities[1].properties[23]);
 
   /// see [FamilyMemberIndividualDataModel.vizhithiruInstalled]
   static final vizhithiruInstalled =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[27]);
+          _entities[1].properties[24]);
 
   /// see [FamilyMemberIndividualDataModel.dataValid]
   static final dataValid =
       QueryBooleanProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[28]);
+          _entities[1].properties[25]);
 
   /// see [FamilyMemberIndividualDataModel.dbVulnerabilities]
   static final dbVulnerabilities =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[29]);
+          _entities[1].properties[26]);
 
   /// see [FamilyMemberIndividualDataModel.dbOccupation]
   static final dbOccupation =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[30]);
+          _entities[1].properties[27]);
 
   /// see [FamilyMemberIndividualDataModel.workTimings]
   static final workTimings =
       QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
+          _entities[1].properties[28]);
+
+  /// see [FamilyMemberIndividualDataModel.noOfDaysWorking]
+  static final noOfDaysWorking =
+      QueryStringProperty<FamilyMemberIndividualDataModel>(
+          _entities[1].properties[29]);
+
+  /// see [FamilyMemberIndividualDataModel.PHCServicesUsed]
+  static final PHCServicesUsed =
+      QueryStringProperty<FamilyMemberIndividualDataModel>(
+          _entities[1].properties[30]);
+
+  /// see [FamilyMemberIndividualDataModel.privateClinicServicesUsed]
+  static final privateClinicServicesUsed =
+      QueryStringProperty<FamilyMemberIndividualDataModel>(
           _entities[1].properties[31]);
 }
 

@@ -29,40 +29,85 @@ class NestedOptionWidgetFormField extends FormField<List<NestedOptionData>> {
                   return null;
                 },
             builder: (state) {
-              return Card(
-                elevation: 5,
-                margin: EdgeInsets.only(top: 3, bottom: 3),
-                color: colors.darkScaffoldColor,
-                child: ListTile(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => NestedOptionWidget(
-                        title: "Select your options",
-                        onChanged: (val) {
-                          state.didChange(val);
-                          state.validate();
-                        },
-                        nestedOptionData: state.value!,
-                      ),
-                    ));
-                  },
-                  //Pass a function which is called onSaved in the next page and add data to the class object
-                  trailing: Icon(
-                    Icons.arrow_right,
-                    color: colors.darkSecondaryTextColor,
-                  ),
-                  title: state.hasError
-                      ? Text(
-                          state.errorText ?? "Please choose a value",
-                          style: GoogleFonts.poppins(color: colors.errorColor),
-                        )
-                      : Text(
-                          "NO error",
-                          style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16),
-                        ),
+              getDisplayData() {
+                if (state.hasError) {
+                  return Text(
+                    state.errorText ?? "Please choose a value",
+                    style: GoogleFonts.poppins(color: colors.errorColor),
+                  );
+                } else {
+                  var selectedOptions = [];
+                  for (var i in state.value!) {
+                    if (i.isSelected) selectedOptions.add(i.boxName);
+                  }
+                  if (selectedOptions.isNotEmpty) {
+                    return Text(
+                      selectedOptions.join(", "),
+                      style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16),
+                    );
+                  } else {
+                    return Text(
+                      "Please choose a value",
+                      style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16),
+                    );
+                  }
+                }
+              }
+
+              return Padding(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 8),
+                      child: Text(title,
+                          style: GoogleFonts.montserrat(
+                              fontSize: 15,
+                              color: colors.darkPrimaryTextColor)),
+                    ),
+                    Card(
+                      elevation: 5,
+                      margin: EdgeInsets.only(top: 3, bottom: 3),
+                      color: colors.darkScaffoldColor,
+                      child: ListTile(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => NestedOptionWidget(
+                                title: title,
+                                onChanged: (val) {
+                                  state.didChange(val);
+                                  state.validate();
+                                },
+                                nestedOptionData: state.value!,
+                              ),
+                            ));
+                          },
+                          //Pass a function which is called onSaved in the next page and add data to the class object
+                          trailing: Icon(
+                            Icons.arrow_right,
+                            color: colors.darkSecondaryTextColor,
+                          ),
+                          title: getDisplayData()),
+                    ),
+                    state.hasError
+                        ? Container(
+                            padding: EdgeInsets.all(10),
+                            child: Text(
+                              state.errorText ?? "error",
+                              style: GoogleFonts.poppins(
+                                  color: colors.errorColor, fontSize: 10),
+                            ),
+                          )
+                        : Container()
+                  ],
                 ),
               );
               ;

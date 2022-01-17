@@ -9,6 +9,7 @@ import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/GenderWidget.dart';
+import 'package:geo_spatial/Widgets/IncomeWithTypeTextField.dart';
 import 'package:geo_spatial/Widgets/NestedOptionWidgetFormField.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
 import 'package:geo_spatial/Widgets/StartingEndingTimeWidget.dart';
@@ -80,10 +81,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
     'Unemployed': false,
   };
 
-  var privateClinicReasons = <String,bool>{
-    'Better treatment and personalised care' : false,
-    'Easy to access' : false,
-    'Less waiting time' : false
+  var privateClinicReasons = <String, bool>{
+    'Better treatment and personalised care': false,
+    'Easy to access': false,
+    'Less waiting time': false
   };
 
   @override
@@ -143,6 +144,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  IncomeWithTypeTextField(
+                    onSaved: (textValue, option) {
+                      print(textValue! + " " + option!);
+                    },
+                    text: 'Income',
+                    hintText: 'Enter income',
+                    listOfOptions: ["Day", "Week", "Month"],
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                     child: TextFormField(
@@ -333,18 +342,24 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           val;
                     },
                   ),
-                  NestedOptionWidgetFormField(nestedOptionData: [
-                    new NestedOptionData(
-                        subOptionDataMap: {"yes": true, "no": true}, boxName: 'One'),
-                    new NestedOptionData(
-                        subOptionDataMap: {"yes": true, "no": true}, boxName: 'Two'),
-                    new NestedOptionData(subOptionDataMap: {"yes": true, "no": true},
-                        boxName: 'Three'),
-                    new NestedOptionData(
-                        subOptionDataMap: {"yes": false, "no": false},
-                        boxName: 'Four')
-                  ], title: 'Select some options', context: context,),
-
+                  NestedOptionWidgetFormField(
+                    nestedOptionData: [
+                      new NestedOptionData(
+                          subOptionDataMap: {"yes": true, "no": true},
+                          boxName: 'One'),
+                      new NestedOptionData(
+                          subOptionDataMap: {"yes": true, "no": true},
+                          boxName: 'Two'),
+                      new NestedOptionData(
+                          subOptionDataMap: {"yes": true, "no": true},
+                          boxName: 'Three'),
+                      new NestedOptionData(
+                          subOptionDataMap: {"yes": false, "no": false},
+                          boxName: 'Four')
+                    ],
+                    title: 'Select some options',
+                    context: context,
+                  ),
                   Padding(
                     padding: EdgeInsets.all(15),
                     child: StartingEndingTimeWidget(
@@ -391,9 +406,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 20.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 20.0),
                       child: TextFormField(
-                        initialValue: widget.familyMemberIndividualDataModel!.noOfDaysWorking,
+                        initialValue: widget
+                            .familyMemberIndividualDataModel!.noOfDaysWorking,
                         keyboardType: TextInputType.number,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         style: darkTheme.DarkTheme.textTheme.bodyText2,
@@ -409,24 +427,25 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           contentPadding: EdgeInsets.all(7.0),
                         ),
                         validator: (value) {
-                          if (int.parse(value!)< 1) {
+                          if (int.parse(value!) < 1) {
                             return "Enter number of work days";
-                          }
-                          else if(int.parse(value)>31){
+                          } else if (int.parse(value) > 31) {
                             return "Enter a valid number of work days";
                           }
                         },
                         onSaved: (val) {
                           print(val.toString());
-                          widget.familyMemberIndividualDataModel!.noOfDaysWorking =
-                              val;
+                          widget.familyMemberIndividualDataModel!
+                              .noOfDaysWorking = val;
                         },
-                      ),),
+                      ),
+                    ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10.0, right: 10.0,bottom: 20.0,top: 10.0),
+                      padding: const EdgeInsets.only(
+                          left: 10.0, right: 10.0, bottom: 20.0, top: 10.0),
                       child: TextFormField(
-                        initialValue:
-                        widget.familyMemberIndividualDataModel?.incomePerDay,
+                        initialValue: widget
+                            .familyMemberIndividualDataModel?.incomePerDay,
                         keyboardType: TextInputType.number,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         style: darkTheme.DarkTheme.textTheme.bodyText2,
@@ -541,17 +560,17 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 10.0, right: 10.0, top: 20),
+                    padding:
+                        const EdgeInsets.only(left: 10.0, right: 10.0, top: 20),
                     child: TagTextWidget(
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       label: "Special Skills",
                       hint: "Enter skills here",
-                      initialValue: widget
-                          .familyMemberIndividualDataModel!.specialSkills,
+                      initialValue:
+                          widget.familyMemberIndividualDataModel!.specialSkills,
                       onSaved: (data) {
-                        widget.familyMemberIndividualDataModel!
-                            .specialSkills = data;
+                        widget.familyMemberIndividualDataModel!.specialSkills =
+                            data;
                       },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -696,8 +715,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: OptionsWidget(
-                      defaultValue: widget.familyMemberIndividualDataModel!
-                          .PHCServicesUsed,
+                      defaultValue: widget
+                          .familyMemberIndividualDataModel!.PHCServicesUsed,
                       options: [
                         ["Yes", "yes"],
                         ["No", "no"],
@@ -707,7 +726,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                             .PHCServicesUsed = data;
                       },
                       title: 'Using any PHC services?',
-                    ),),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: OptionsWidget(
@@ -722,7 +742,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                             .privateClinicServicesUsed = data;
                       },
                       title: 'Do you visit a private hospital?',
-                    ),),
+                    ),
+                  ),
                 ],
               ),
               Column(
@@ -731,8 +752,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   CheckBoxAddExtraAlertDialog(
                     title: 'Reasons for using a private clinic',
                     hint: 'Please choose a reason',
-                    dataMap: widget
-                        .familyMemberIndividualDataModel!.privateServiceReason ??
+                    dataMap: widget.familyMemberIndividualDataModel!
+                            .privateServiceReason ??
                         privateClinicReasons,
                     singleOption: false,
                     context: context,
