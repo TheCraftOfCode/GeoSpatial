@@ -78,6 +78,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
     'Unemployed': false,
   };
 
+  var privateClinicReasons = <String,bool>{
+    'Better treatment and personalised care' : false,
+    'Easy to access' : false,
+    'Less waiting time' : false
+  };
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -708,34 +714,20 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                    child: TextFormField(
-                      initialValue: widget.familyMemberIndividualDataModel
-                          ?.privateServiceReason,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      style: darkTheme.DarkTheme.textTheme.bodyText2,
-                      decoration: InputDecoration(
-                        label: Text(
-                          "Why private?",
-                          style: GoogleFonts.poppins(
-                              color: colors.darkSecondaryTextColor),
-                        ),
-                        hintText: "Please enter reason",
-                        hintStyle: GoogleFonts.poppins(
-                            color: colors.darkSecondaryTextColor),
-                        contentPadding: EdgeInsets.all(7.0),
-                      ),
-                      validator: (value) {
-                        if (value == "") {
-                          return "Enter a value / NA";
-                        }
-                      },
-                      onSaved: (data) {
-                        widget.familyMemberIndividualDataModel!
-                            .privateServiceReason = data;
-                      },
-                    ),
+                  CheckBoxAddExtraAlertDialog(
+                    title: 'Reasons for using a private clinic',
+                    hint: 'Please choose a reason',
+                    dataMap: widget
+                        .familyMemberIndividualDataModel!.privateServiceReason ??
+                        privateClinicReasons,
+                    singleOption: false,
+                    context: context,
+                    onSaved: (map) {
+                      widget.familyMemberIndividualDataModel!.vulnerabilities =
+                          map;
+                    },
+                    errorField: "Please choose a vulnerability / None",
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   OptionsWidget(
                     defaultValue:

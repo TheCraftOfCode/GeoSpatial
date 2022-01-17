@@ -44,7 +44,7 @@ class FamilyMemberIndividualDataModel {
   List<String>? anganwadiServicesUsedList;
   String? PHCServicesUsed;             //TODO: Inform Change
   String? privateClinicServicesUsed; //TODO: Inform Change
-  List<String>? privateServiceReason;  //TODO: Inform Change
+  Map<String,bool>? privateServiceReason;  //TODO: Inform Change
   String? useOfTobacco;
   String? useOfAlcohol;
   String? aarogyaSetuInstalled;
