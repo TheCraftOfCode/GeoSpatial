@@ -9,7 +9,7 @@ import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:geo_spatial/Utils/DarkTheme.dart';
+
 
 class FamilyDetails extends StatefulWidget {
   const FamilyDetails({Key? key, this.modelData}) : super(key: key);
@@ -99,6 +99,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     'Lake':false,
     'Pond':false,
     'Groundwater':false,
+    'Borewell':false,
     'Well':false,
     'Tap':false,
     'Water supply':false,
@@ -272,9 +273,9 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                             },
                             errorField: "Please choose a valid number",
                           ),
-                          CheckBoxAlertDialog(
-                            title: 'Two/Three wheeler manufacturer',
-                            hint: 'Please choose manufacturers',
+                          CheckBoxAddExtraAlertDialog(
+                            title: 'Two/Three wheeler brand',
+                            hint: 'Please choose brands',
                             singleOption: false,
                             context: context,
                             dataMap:
@@ -284,7 +285,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                               print("Value recorded: $val");
                               widget.modelData?.twoThreeWheelManufacturer = val;
                             },
-                            errorField: "Please choose a manufacturer",
+                            errorField: "Please choose a brand",
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                           ),
@@ -304,9 +305,9 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          CheckBoxAlertDialog(
-                            title: 'Four wheeler manufacturer',
-                            hint: 'Please choose manufacturers',
+                          CheckBoxAddExtraAlertDialog(
+                            title: 'Four wheeler brand',
+                            hint: 'Please choose brand',
                             singleOption: false,
                             context: context,
                             dataMap: widget.modelData!.twoFourManufacturer ??
@@ -315,7 +316,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                               print("Value recorded: $val");
                               widget.modelData?.twoFourManufacturer = val;
                             },
-                            errorField: "Please choose a manufacturer",
+                            errorField: "Please choose a brand",
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                           ),
@@ -346,7 +347,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                   contentPadding: EdgeInsets.all(7.0),
                                   hintText: "Enter income in Rupees",
                                   label: AutoSizeText(
-                                    'Income from cattle',
+                                    'Income from cattle/month',
                                     style: GoogleFonts.poppins(
                                         color: colors.darkSecondaryTextColor),
                                   )),
