@@ -154,31 +154,6 @@ class _HomeWidgetState extends State<Home> {
                   SavedDataPage(),
                   Color(0xfff54b64),
                   Color(0xfff78361)),
-              DataCard(
-                  'Debug Card',
-                  'Debug and test pages here',
-                  'assets/svg/houses.svg',
-                  //FamilyHomeScreen(),
-                  NestedOptionWidget(
-                    title: "Select your options",
-                    onChanged: (val){
-                      for(var i in val){
-                        print(i.boxName);
-                        print(i.subOptionDataMap.toString());
-                        print(i.isSelected);
-                        print("\n");
-                      }
-                      print(val);
-                    },
-                    nestedOptionData: [
-                      new NestedOptionData(subOptionDataMap: {"yes" : true, "no" : true}, boxName: 'One'),
-                      new NestedOptionData(subOptionDataMap: {"yes" : true, "no" : true}, boxName: 'Two'),
-                      new NestedOptionData(subOptionDataMap: {"yes" : true, "no" : true}, boxName: 'Three'),
-                      new NestedOptionData(subOptionDataMap: {"yes" : false, "no" : false}, boxName: 'Four')
-                    ],
-                  ),
-                  Color(0xfff54b64),
-                  Color(0xfff78361)),
             ],
           ),
         ),
