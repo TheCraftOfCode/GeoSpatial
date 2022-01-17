@@ -9,6 +9,7 @@ import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:geo_spatial/Utils/DarkTheme.dart';
 
 class FamilyDetails extends StatefulWidget {
   const FamilyDetails({Key? key, this.modelData}) : super(key: key);
@@ -162,6 +163,18 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: DropDownFormField(
+                              //TODO: Fetch names from family member add saved objects and populate list
+                              title: 'Head of family',
+                              hint: 'Choose the head of family',
+                              errorField: 'Please choose a head of family',
+                              autoValidateMode: AutovalidateMode.onUserInteraction,
+                              validator: (val){},
+                              list: [],
+                            )
+                          ),
                           OptionsWidget(
                               options: [
                                 ['Yes', 'yes'],

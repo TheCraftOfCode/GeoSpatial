@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:objectbox/objectbox.dart';
@@ -33,6 +32,7 @@ class FamilyMemberIndividualDataModel {
   String? pension;
   String? businessStatus;
   String? maritalStatus;
+  String? noOfDaysWorking;
   List<String>? specialSkills;
   List<String>? frequentAilments;
   List<String>? commutableDisease;
@@ -70,6 +70,7 @@ class FamilyMemberIndividualDataModel {
       "oldAgePension": pension,
       "occupation":
           occupation != null ? buildListForOptionWidget(occupation!) : ['None'],
+      "noOfDaysWorking": noOfDaysWorking,
       "isADailyWageWorker": dailyWageWorker,
       "incomePerDay": incomePerDay,
       "incomePerMonth": incomePerMonth,

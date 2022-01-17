@@ -365,6 +365,37 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       },
                     ),
                   ),
+                  Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: TextFormField(
+                    initialValue: widget.familyMemberIndividualDataModel!.noOfDaysWorking,
+                    keyboardType: TextInputType.number,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    style: darkTheme.DarkTheme.textTheme.bodyText2,
+                    decoration: InputDecoration(
+                      label: Text(
+                        "Number of work days",
+                        style: GoogleFonts.poppins(
+                            color: colors.darkSecondaryTextColor),
+                      ),
+                      hintText: "Please enter number of work days",
+                      hintStyle: GoogleFonts.poppins(
+                          color: colors.darkSecondaryTextColor),
+                      contentPadding: EdgeInsets.all(7.0),
+                    ),
+                    validator: (value) {
+                      if (int.parse(value!)< 1) {
+                        return "Enter number of work days";
+                      }
+                      else if(int.parse(value)>31){
+                        return "Enter a valid number of work days";
+                      }
+                    },
+                    onSaved: (val) {
+                      print(val.toString());
+                      widget.familyMemberIndividualDataModel!.noOfDaysWorking =
+                          val;
+                    },
+                  ),),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                     child: TextFormField(
