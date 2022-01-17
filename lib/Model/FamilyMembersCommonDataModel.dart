@@ -42,9 +42,9 @@ class FamilyMemberIndividualDataModel {
   String? anganwadiServicesAware;
   String? anganwadiServicesUsing;
   List<String>? anganwadiServicesUsedList;
-  List<String>? PHCServicesUsedList;
-  List<String>? privateClinicServicesUsedList;
-  String? privateServiceReason;
+  String? PHCServicesUsed;             //TODO: Inform Change
+  String? privateClinicServicesUsed; //TODO: Inform Change
+  List<String>? privateServiceReason;  //TODO: Inform Change
   String? useOfTobacco;
   String? useOfAlcohol;
   String? aarogyaSetuInstalled;
@@ -84,8 +84,8 @@ class FamilyMemberIndividualDataModel {
       "anganwadiServicesAware": anganwadiServicesAware,
       "anganwadiServicesUsed": anganwadiServicesUsing,
       "anganwadiServicesUtilised": anganwadiServicesUsedList,
-      "phcServicesUtilised": PHCServicesUsedList,
-      "privateHealthClinicFacilitiesUsed": privateClinicServicesUsedList,
+      "phcServicesUtilised": PHCServicesUsed,
+      "privateHealthClinicFacilitiesUsed": privateClinicServicesUsed,
       "reasonsForVisitingPrivateHealthClinic": privateServiceReason,
       "tobaccoBasedProductsUsage": useOfTobacco,
       "alcoholConsumption": useOfAlcohol,
