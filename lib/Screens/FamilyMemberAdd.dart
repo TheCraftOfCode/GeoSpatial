@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
+import 'package:geo_spatial/Screens/NestedOptionsWidget.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
@@ -8,6 +9,7 @@ import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/GenderWidget.dart';
+import 'package:geo_spatial/Widgets/NestedOptionWidgetFormField.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
 import 'package:geo_spatial/Widgets/StartingEndingTimeWidget.dart';
 import 'package:geo_spatial/Widgets/TagTextWidget.dart';
@@ -331,6 +333,18 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           val;
                     },
                   ),
+                  NestedOptionWidgetFormField(nestedOptionData: [
+                    new NestedOptionData(
+                        subOptionDataMap: {"yes": true, "no": true}, boxName: 'One'),
+                    new NestedOptionData(
+                        subOptionDataMap: {"yes": true, "no": true}, boxName: 'Two'),
+                    new NestedOptionData(subOptionDataMap: {"yes": true, "no": true},
+                        boxName: 'Three'),
+                    new NestedOptionData(
+                        subOptionDataMap: {"yes": false, "no": false},
+                        boxName: 'Four')
+                  ], title: 'Select some options', context: context,),
+
                   Padding(
                     padding: EdgeInsets.all(15),
                     child: StartingEndingTimeWidget(
