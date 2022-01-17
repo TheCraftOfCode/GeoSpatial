@@ -427,7 +427,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           contentPadding: EdgeInsets.all(7.0),
                         ),
                         validator: (value) {
-                          if (int.parse(value!) < 1) {
+                          print(value);
+                          print("value");
+                          if(value == null || value == "") return "Please enter number of work days";
+                          else if (int.parse(value) < 1) {
                             return "Enter number of work days";
                           } else if (int.parse(value) > 31) {
                             return "Enter a valid number of work days";
