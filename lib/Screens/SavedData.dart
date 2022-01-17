@@ -20,7 +20,7 @@ class SavedDataPage extends StatelessWidget {
             tabs: [
               Tab(
                   icon: Icon(
-                Icons.person,
+                Icons.apartment,
                 color: colors.darkPrimaryTextColor,
               )),
               Tab(
