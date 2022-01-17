@@ -26,6 +26,9 @@ class NestedOptionWidget extends StatefulWidget {
 }
 
 class _NestedOptionWidgetState extends State<NestedOptionWidget> {
+
+  var selectedColor = Color(0xffffffff);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +36,16 @@ class _NestedOptionWidgetState extends State<NestedOptionWidget> {
       body: Padding(
         padding: EdgeInsets.all(20),
         child: Container(
+          decoration: BoxDecoration(
+            color: colors.darkSecondBackgroundColor,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Color(0xBC252426),
+                blurRadius: 8.0,
+              ),
+            ],
+          ),
           child: Padding(
             padding: EdgeInsets.all(0),
             child: ListView.builder(
@@ -42,28 +55,19 @@ class _NestedOptionWidgetState extends State<NestedOptionWidget> {
                     padding: EdgeInsets.all(5),
                     child: Container(
                       padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: colors.darkSecondBackgroundColor,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0xBC252426),
-                            blurRadius: 8.0,
-                          ),
-                        ],
-                      ),
                       child: Column(
                         children: [
                           Card(
                             elevation: 10,
                             color: colors.darkScaffoldColor,
                             child: CheckboxListTile(
+                              activeColor: colors.darkAccentColor,
                                 value:
                                     widget.nestedOptionData[index].isSelected,
                                 title: Text(
                                   widget.nestedOptionData[index].boxName,
                                   style: GoogleFonts.poppins(
-                                      color: Colors.white,
+                                      color: selectedColor,
                                       fontWeight: FontWeight.w400,
                                       fontSize: 18),
                                 ),
@@ -80,19 +84,27 @@ class _NestedOptionWidgetState extends State<NestedOptionWidget> {
                                 }),
                           ),
                           widget.nestedOptionData[index].isSelected
-                              ? CheckBoxAddExtraAlertDialog(
-                                  hint: "hint",
-                                  autoSave: true,
-                                  onSaved: (map) {
-                                    widget.nestedOptionData[index]
-                                        .subOptionDataMap = map!;
-                                    if (widget.onChanged != null)
-                                      widget
-                                          .onChanged!(widget.nestedOptionData);
-                                  },
-                                  dataMap: widget
-                                      .nestedOptionData[index].subOptionDataMap,
-                                  context: context)
+                              ? Container(
+                            margin: EdgeInsets.symmetric(horizontal: 5),
+                                decoration: BoxDecoration(
+                                  color: colors.darkSecondAccentColor,
+                                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10))
+                                ),
+
+                                child: CheckBoxAddExtraAlertDialog(
+                                    hint: "hint",
+                                    autoSave: true,
+                                    onSaved: (map) {
+                                      widget.nestedOptionData[index]
+                                          .subOptionDataMap = map!;
+                                      if (widget.onChanged != null)
+                                        widget
+                                            .onChanged!(widget.nestedOptionData);
+                                    },
+                                    dataMap: widget
+                                        .nestedOptionData[index].subOptionDataMap,
+                                    context: context),
+                              )
                               : Container()
                         ],
                       ),

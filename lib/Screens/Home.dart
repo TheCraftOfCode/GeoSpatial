@@ -174,7 +174,10 @@ class _HomeWidgetState extends State<Home> {
                       new NestedOptionData(subOptionDataMap: {"yes" : true, "no" : true}, boxName: 'One'),
                       new NestedOptionData(subOptionDataMap: {"yes" : true, "no" : true}, boxName: 'Two'),
                       new NestedOptionData(subOptionDataMap: {"yes" : true, "no" : true}, boxName: 'Three'),
-                      new NestedOptionData(subOptionDataMap: {"yes" : false, "no" : false}, boxName: 'Four')
+                      new NestedOptionData(subOptionDataMap: {"yes" : false, "no" : false}, boxName: 'Four'),
+                      new NestedOptionData(subOptionDataMap: {"yes" : false, "no" : false}, boxName: 'Five'),
+                      new NestedOptionData(subOptionDataMap: {"yes" : false, "no" : false}, boxName: 'Six'),
+                      new NestedOptionData(subOptionDataMap: {"yes" : false, "no" : false}, boxName: 'Seven')
                     ],
                   ),
                   Color(0xfff54b64),
