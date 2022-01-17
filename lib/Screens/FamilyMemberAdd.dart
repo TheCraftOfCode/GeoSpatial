@@ -5,6 +5,7 @@ import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/CheckBoxAddExtraDialog.dart';
+import 'package:geo_spatial/Widgets/ConditionalRenderWidget.dart';
 import 'package:geo_spatial/Widgets/DatePickerWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
@@ -327,6 +328,45 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     errorField: "Please choose an occupation / None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
+                  /**
+                   * Example widget for conditional rendering
+                   */
+                  ConditionalRenderWidget(
+                    title: "Select data",
+                    defaultValue:
+                        widget.familyMemberIndividualDataModel!.dailyWageWorker,
+                    options: [
+                      ["Yes", "yes"],
+                      ["No", "no"]
+                    ],
+                    onSaved: (val) {
+                      print("Value recorded: $val");
+                      widget.familyMemberIndividualDataModel!.dailyWageWorker =
+                          val;
+                    },
+                    conditionalValue: 'yes',
+                    conditionalWidget: NestedOptionWidgetFormField(
+                      nestedOptionData: [
+                        new NestedOptionData(
+                            subOptionDataMap: {"yes": true, "no": true},
+                            boxName: 'One'),
+                        new NestedOptionData(
+                            subOptionDataMap: {"yes": true, "no": true},
+                            boxName: 'Two'),
+                        new NestedOptionData(
+                            subOptionDataMap: {"yes": true, "no": true},
+                            boxName: 'Three'),
+                        new NestedOptionData(
+                            subOptionDataMap: {"yes": false, "no": false},
+                            boxName: 'Four')
+                      ],
+                      title: 'Select some options',
+                      context: context,
+                    ),
+                  ),
+                  /**
+                   * Ends here
+                   */
                   OptionsWidget(
                     defaultValue:
                         widget.familyMemberIndividualDataModel!.dailyWageWorker,
@@ -335,6 +375,15 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       ["Yes", "yes"],
                       ["No", "no"]
                     ],
+                    onChanged: (val) {
+                      if (val == "yes") {
+                        print("SELECTED TRUE VAL");
+                      }
+
+                      setState(() {
+                        dailyWageWorker = val == "yes";
+                      });
+                    },
                     title: "Daily wage worker?",
                     onSaved: (val) {
                       print("Value recorded: $val");
@@ -429,7 +478,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         validator: (value) {
                           print(value);
                           print("value");
-                          if(value == null || value == "") return "Please enter number of work days";
+                          if (value == null || value == "")
+                            return "Please enter number of work days";
                           else if (int.parse(value) < 1) {
                             return "Enter number of work days";
                           } else if (int.parse(value) > 31) {
