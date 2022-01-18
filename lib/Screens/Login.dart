@@ -25,8 +25,7 @@ class _MyAppState extends State<Login> {
   var _nameError = null;
   var _passwordError = null;
   bool _isSelected = false;
-
-
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -99,6 +98,9 @@ class _MyAppState extends State<Login> {
             (Route<dynamic> route) => false);
       }
     }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   Widget radioButton(bool isSelected) => Container(
@@ -118,7 +120,6 @@ class _MyAppState extends State<Login> {
             : Container(),
       );
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,7 +128,10 @@ class _MyAppState extends State<Login> {
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          SvgPicture.asset("assets/svg/background.svg",fit: BoxFit.cover,),
+          SvgPicture.asset(
+            "assets/svg/background.svg",
+            fit: BoxFit.cover,
+          ),
           SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -162,34 +166,39 @@ class _MyAppState extends State<Login> {
                                   fontSize: 14.0))
                         ],
                       ),
-                      InkWell(
-                        child: Container(
-                          width: 100,
-                          height: 45,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                              Color(0xfff54b64),
-                              Color(0xfff78361),
-                            ]),
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {
-                                _login();
-                              },
-                              child: Center(
-                                child: Text("SIGN IN",
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        letterSpacing: 1.0)),
+                      _isLoading
+                          ? Padding(padding: EdgeInsets.only(right: 10) ,child: CircularProgressIndicator())
+                          : InkWell(
+                              child: Container(
+                                width: 100,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(colors: [
+                                    Color(0xfff54b64),
+                                    Color(0xfff78361),
+                                  ]),
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        _isLoading = true;
+                                      });
+                                      _login();
+                                    },
+                                    child: Center(
+                                      child: Text("SIGN IN",
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              letterSpacing: 1.0)),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ],

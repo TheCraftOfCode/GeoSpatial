@@ -8,7 +8,7 @@ class darkTheme{
       fontFamily: 'Poppins',
         primaryColor: Colors.white,
         scaffoldBackgroundColor: colors.darkScaffoldColor,
-
+        progressIndicatorTheme: ProgressIndicatorThemeData(color: colors.darkAccentColor),
         textTheme: TextTheme(
             headline1: GoogleFonts.poppins(color: Colors.white, fontSize: 40,fontWeight: FontWeight.w200),
             bodyText1: GoogleFonts.poppins(color: Colors.white,fontSize: 15,fontWeight: FontWeight.w100),
