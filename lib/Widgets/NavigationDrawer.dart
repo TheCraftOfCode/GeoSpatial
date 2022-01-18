@@ -1,9 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Screens/Login.dart';
 import 'package:geo_spatial/Screens/ProfilePage.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
-import 'package:geo_spatial/Utils/Globals.dart' as globals;
 import 'package:google_fonts/google_fonts.dart';
+
+final storage = FlutterSecureStorage();
+
+Future<String> get _getUserData async {
+  var userData = await storage.read(key: "userData");
+  print("userData " + userData.toString());
+
+  if (userData == null) return "";
+  return userData;
+}
 
 class NavigationDrawer extends StatelessWidget {
   NavigationDrawer({Key? key}) : super(key: key);
@@ -11,73 +23,90 @@ class NavigationDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: Material(
-        color: colors.darkScaffoldColor,
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
-                child: ClipOval(
-                  child: Image(
-                    image: AssetImage("assets/avatar_man.png"),
+    return FutureBuilder(
+        future: _getUserData,
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.hasData) {
+            {
+              var dataJson = json.decode(snapshot.requireData);
+              var gender = dataJson[0]["gender"];
+
+              return Drawer(
+                child: Material(
+                  color: colors.darkScaffoldColor,
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    children: [
+                      UserAccountsDrawerHeader(
+                        currentAccountPicture: CircleAvatar(
+                          child: ClipOval(
+                            child: Image(
+                              image: gender == "Male"
+                                  ? AssetImage("assets/avatar_man.png")
+                                  : AssetImage("assets/avatar_woman.png"),
+                            ),
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage("assets/Illustration.png"))),
+                        accountName: Text(
+                          dataJson[0]["Name"],
+                          style: GoogleFonts.poppins(
+                              color: colors.darkPrimaryTextColor, fontSize: 18),
+                        ),
+                        accountEmail: Text(
+                          dataJson[0]["username"],
+                          style: GoogleFonts.poppins(
+                              color: colors.darkSecondaryTextColor),
+                        ),
+                      ),
+                      buildMenuItem(
+                          text: 'Home',
+                          icon: Icons.home,
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          }),
+                      buildMenuItem(
+                          text: 'Profile',
+                          icon: Icons.person,
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => ProfilePage()));
+                          }),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Container(
+                          height: 1,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                      ),
+                      buildMenuItem(
+                        text: 'Sign Out',
+                        icon: Icons.logout,
+                        onTap: () async {
+                          await storage.delete(key: 'jwt');
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(builder: (context) => Login()),
+                              (Route<dynamic> route) => false);
+                        },
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage("assets/Illustration.png"))),
-              accountName: Text(
-                globals.Name,
-                style: GoogleFonts.poppins(
-                    color: colors.darkPrimaryTextColor, fontSize: 18),
-              ),
-              accountEmail: Text(
-                globals.userName,
-                style:
-                    GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
-              ),
-            ),
-            buildMenuItem(
-                text: 'Home',
-                icon: Icons.home,
-                onTap: () {
-                  Navigator.of(context).pop();
-                }),
-            buildMenuItem(
-                text: 'Profile',
-                icon: Icons.person,
-                onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ProfilePage()));
-                }),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Container(
-                height: 1,
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: Colors.grey),
-                  ),
-                ),
-              ),
-            ),
-            buildMenuItem(
-              text: 'Sign Out',
-              icon: Icons.logout,
-              onTap: () async {
-                await storage.delete(key: 'jwt');
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => Login()),
-                    (Route<dynamic> route) => false);
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+              );
+            }
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        });
   }
 
   Widget buildMenuItem({

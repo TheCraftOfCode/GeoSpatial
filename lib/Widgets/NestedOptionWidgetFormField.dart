@@ -84,6 +84,10 @@ class NestedOptionWidgetFormField extends FormField<List<NestedOptionData>> {
                               builder: (context) => NestedOptionWidget(
                                 title: title,
                                 onChanged: (val) {
+                                  for(var i in val){
+                                    print(i.toJsonString());
+                                    var decodedVal = NestedOptionData.fromJson(i.toJsonString());
+                                  }
                                   state.didChange(val);
                                   state.validate();
                                 },

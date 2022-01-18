@@ -1,10 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
 import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
-import 'package:geo_spatial/Widgets/NestedOptionsWidget.dart';
-import 'package:geo_spatial/Screens/VillageSelection.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/Globals.dart' as globals;
 import 'package:geo_spatial/Widgets/DataCard.dart';
@@ -22,6 +22,14 @@ class Home extends StatefulWidget {
 }
 
 final storage = FlutterSecureStorage();
+
+Future<String> get _getUserName async {
+  var userName = await storage.read(key: "userData");
+  print("userData " + userName.toString());
+
+  if (userName == null) return "";
+  return userName;
+}
 
 class _HomeWidgetState extends State<Home> {
   @override
@@ -73,10 +81,25 @@ class _HomeWidgetState extends State<Home> {
         backgroundColor: colors.darkScaffoldColor,
         appBar: AppBar(
           elevation: 40,
-          title: Text(
-            'Hello, ' + globals.Name + '!',
-            style: GoogleFonts.montserrat(
-                fontSize: 18, color: colors.darkPrimaryTextColor),
+          title: FutureBuilder(
+            future: _getUserName,
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              if (snapshot.hasData) {
+                var dataJson = json.decode(snapshot.requireData);
+                print("DATA: ${snapshot.requireData}");
+                return Text(
+                  'Hello, ' + dataJson[0]["Name"] + '!',
+                  style: GoogleFonts.montserrat(
+                      fontSize: 18, color: colors.darkPrimaryTextColor),
+                );
+              } else{
+                return Text(
+                  'Geo Spatial Api!',
+                  style: GoogleFonts.montserrat(
+                      fontSize: 18, color: colors.darkPrimaryTextColor),
+                );
+              }
+            },
           ),
           backgroundColor: Colors.transparent,
         ),

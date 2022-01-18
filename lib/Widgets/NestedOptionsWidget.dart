@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
@@ -6,10 +8,28 @@ import 'package:google_fonts/google_fonts.dart';
 
 class NestedOptionData {
   bool isSelected = false;
-  late Map<String, bool> subOptionDataMap;
-  late String boxName;
+  Map<String, bool>? subOptionDataMap;
+  String? boxName;
 
-  NestedOptionData({required this.subOptionDataMap, required this.boxName});
+  NestedOptionData({this.subOptionDataMap, this.boxName});
+
+  toJsonString() {
+    return json.encode({
+      "isSelected": isSelected,
+      "boxName": boxName,
+      "selectedData": json.encode(subOptionDataMap),
+    });
+  }
+
+  factory NestedOptionData.fromJson(String jsonObject) {
+    var decodedJson = json.decode(jsonObject);
+    var nestedDataObject = NestedOptionData();
+    nestedDataObject.boxName = decodedJson['boxName'] as String;
+    nestedDataObject.isSelected = decodedJson['isSelected'] as bool;
+    nestedDataObject.subOptionDataMap =
+        Map<String, bool>.from(json.decode(decodedJson["selectedData"]));
+    return nestedDataObject;
+  }
 }
 
 class NestedOptionWidget extends StatefulWidget {
@@ -26,7 +46,6 @@ class NestedOptionWidget extends StatefulWidget {
 }
 
 class _NestedOptionWidgetState extends State<NestedOptionWidget> {
-
   var selectedColor = Color(0xffffffff);
 
   @override
@@ -61,11 +80,11 @@ class _NestedOptionWidgetState extends State<NestedOptionWidget> {
                             elevation: 10,
                             color: colors.darkScaffoldColor,
                             child: CheckboxListTile(
-                              activeColor: colors.darkAccentColor,
+                                activeColor: colors.darkAccentColor,
                                 value:
                                     widget.nestedOptionData[index].isSelected,
                                 title: Text(
-                                  widget.nestedOptionData[index].boxName,
+                                  widget.nestedOptionData[index].boxName!,
                                   style: GoogleFonts.poppins(
                                       color: selectedColor,
                                       fontWeight: FontWeight.w400,
@@ -85,26 +104,26 @@ class _NestedOptionWidgetState extends State<NestedOptionWidget> {
                           ),
                           widget.nestedOptionData[index].isSelected
                               ? Container(
-                            margin: EdgeInsets.symmetric(horizontal: 5),
-                                decoration: BoxDecoration(
-                                  color: colors.darkSecondAccentColor,
-                                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10))
-                                ),
-
-                                child: CheckBoxAddExtraAlertDialog(
-                                    hint: "hint",
-                                    autoSave: true,
-                                    onSaved: (map) {
-                                      widget.nestedOptionData[index]
-                                          .subOptionDataMap = map!;
-                                      if (widget.onChanged != null)
-                                        widget
-                                            .onChanged!(widget.nestedOptionData);
-                                    },
-                                    dataMap: widget
-                                        .nestedOptionData[index].subOptionDataMap,
-                                    context: context),
-                              )
+                                  margin: EdgeInsets.symmetric(horizontal: 5),
+                                  decoration: BoxDecoration(
+                                      color: colors.darkSecondAccentColor,
+                                      borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(10),
+                                          bottomRight: Radius.circular(10))),
+                                  child: CheckBoxAddExtraAlertDialog(
+                                      hint: "hint",
+                                      autoSave: true,
+                                      onSaved: (map) {
+                                        widget.nestedOptionData[index]
+                                            .subOptionDataMap = map!;
+                                        if (widget.onChanged != null)
+                                          widget.onChanged!(
+                                              widget.nestedOptionData);
+                                      },
+                                      dataMap: widget.nestedOptionData[index]
+                                          .subOptionDataMap!,
+                                      context: context),
+                                )
                               : Container()
                         ],
                       ),
