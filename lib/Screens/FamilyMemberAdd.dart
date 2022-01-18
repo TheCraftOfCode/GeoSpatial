@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
-import 'package:geo_spatial/Widgets/NestedOptionsWidget.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
@@ -12,6 +11,7 @@ import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/GenderWidget.dart';
 import 'package:geo_spatial/Widgets/IncomeWithTypeTextField.dart';
 import 'package:geo_spatial/Widgets/NestedOptionWidgetFormField.dart';
+import 'package:geo_spatial/Widgets/NestedOptionsWidget.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
 import 'package:geo_spatial/Widgets/StartingEndingTimeWidget.dart';
 import 'package:geo_spatial/Widgets/TagTextWidget.dart';
@@ -59,7 +59,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
 
   var vulnerabilities = <String, bool>{
     'Widower (M)': false,
-    'Widow (F)' : false,
+    'Widow (F)': false,
     'Divorcee': false,
     'Differently Abled': false,
     'Pregnant Woman': false,
@@ -88,26 +88,33 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
     'Less waiting time': false
   };
 
-  var frequentAilments = <String,bool>{
-    'Cold and Flu' : false,
-    'Diarrhoea' : false,
-    'Headaches' : false,
-    'Fever' : false
+  var frequentAilments = <String, bool>{
+    'Cold and Flu': false,
+    'Diarrhoea': false,
+    'Headaches': false,
+    'Fever': false
   };
 
-  var communicableDiseases = <String,bool>{
-    'COVID' : false,
-    'Typhoid' : false,
-    'Dengue' : false,
-    'Malaria' : false,
-    'HIV/AIDS' : false
+  var communicableDiseases = <String, bool>{
+    'COVID': false,
+    'Typhoid': false,
+    'Dengue': false,
+    'Malaria': false,
+    'HIV/AIDS': false
   };
 
-  var nonCommunicableDiseases = <String,bool>{
-    'Cardiovascular disease' : false,
-    'Diabetes' : false,
-    'Preventable cancers' : false,
-    'Hypertension' : false
+  var nonCommunicableDiseases = <String, bool>{
+    'Cardiovascular disease': false,
+    'Diabetes': false,
+    'Treatable cancers': false,
+    'Hypertension': false
+  };
+
+  var tobaccoProducts = <String, bool>{
+    'Normal tobacco': false,
+    'Hans': false,
+    'Betel nuts': false,
+    'Beedi': false
   };
 
   @override
@@ -167,14 +174,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  IncomeWithTypeTextField(
-                    onSaved: (textValue, option) {
-                      print(textValue! + " " + option!);
-                    },
-                    text: 'Income',
-                    hintText: 'Enter income',
-                    listOfOptions: ["Day", "Week", "Month"],
-                  ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                     child: TextFormField(
@@ -217,6 +216,11 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           data;
                       print(data);
                     },
+                    validator: (val) {
+                      if (val!.isAfter(DateTime.now())) {
+                        return 'Please choose a valid date';
+                      }
+                    },
                   ),
                   GenderPickerWidget(
                     initialGender:
@@ -248,9 +252,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         contentPadding: EdgeInsets.all(7.0),
                       ),
                       validator: (value) {
-                        if (value == "") {
-                          return "Please enter a value / 0 if no phone";
-                        } else if (value!.length != 10) {
+                        if (value!.length != 10 || value != "") {
                           return "Enter a valid number";
                         } else
                           return null;
@@ -288,7 +290,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                    padding: const EdgeInsets.only(
+                        left: 10.0, right: 10.0, bottom: 20.0),
                     child: TextFormField(
                       initialValue:
                           widget.familyMemberIndividualDataModel?.aadhaarNumber,
@@ -300,15 +303,16 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           style: GoogleFonts.poppins(
                               color: colors.darkSecondaryTextColor),
                         ),
-                        hintText: "Please enter 12 digit Aadhaar",
+                        hintText: "Please enter 12 digit Aadhaar.",
+                        helperText: "Enter 0 if person is not willing to share",
+                        helperStyle: GoogleFonts.poppins(
+                            color: colors.darkSecondaryTextColor),
                         hintStyle: GoogleFonts.poppins(
                             color: colors.darkSecondaryTextColor),
                         contentPadding: EdgeInsets.all(7.0),
                       ),
                       validator: (value) {
-                        if (value == "") {
-                          return "Enter 12 digit Aadhaar / 0 if absent";
-                        } else if (value!.length != 12) {
+                        if (value!.length != 12 || value != "") {
                           return "Enter a valid Aadhaar";
                         } else
                           return null;
@@ -335,6 +339,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     errorField: "Please choose a vulnerability / None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
+                  //TODO: Occupation widget replace
                   CheckBoxAddExtraAlertDialog(
                     title: 'Occupation',
                     hint: 'Select applicable',
@@ -515,69 +520,13 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         },
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 10.0, right: 10.0, bottom: 20.0, top: 10.0),
-                      child: TextFormField(
-                        initialValue: widget
-                            .familyMemberIndividualDataModel?.incomePerDay,
-                        keyboardType: TextInputType.number,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        style: darkTheme.DarkTheme.textTheme.bodyText2,
-                        decoration: InputDecoration(
-                          label: Text(
-                            "Income/Day",
-                            style: GoogleFonts.poppins(
-                                color: colors.darkSecondaryTextColor),
-                          ),
-                          hintText: "Please enter income per day",
-                          hintStyle: GoogleFonts.poppins(
-                              color: colors.darkSecondaryTextColor),
-                          contentPadding: EdgeInsets.all(7.0),
-                        ),
-                        validator: (value) {
-                          if (value == "") {
-                            return "Enter Income/Day / 0";
-                          }
-                        },
-                        onSaved: (val) {
-                          print(val.toString());
-                          widget.familyMemberIndividualDataModel!.incomePerDay =
-                              val;
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 10.0, right: 10.0, top: 10.0),
-                      child: TextFormField(
-                        initialValue: widget
-                            .familyMemberIndividualDataModel?.incomePerMonth,
-                        keyboardType: TextInputType.number,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        style: darkTheme.DarkTheme.textTheme.bodyText2,
-                        decoration: InputDecoration(
-                          label: Text(
-                            "Income/Month",
-                            style: GoogleFonts.poppins(
-                                color: colors.darkSecondaryTextColor),
-                          ),
-                          hintText: "Please enter income per month",
-                          hintStyle: GoogleFonts.poppins(
-                              color: colors.darkSecondaryTextColor),
-                          contentPadding: EdgeInsets.all(7.0),
-                        ),
-                        validator: (value) {
-                          if (value == "") {
-                            return "Enter Income/Month / 0";
-                          }
-                        },
-                        onSaved: (val) {
-                          print(val.toString());
-                          widget.familyMemberIndividualDataModel!
-                              .incomePerMonth = val;
-                        },
-                      ),
+                    IncomeWithTypeTextField(
+                      onSaved: (textValue, option) {
+                        print(textValue! + " " + option!);
+                      },
+                      text: 'Income',
+                      hintText: 'Enter income',
+                      listOfOptions: ["Day", "Week", "Month"],
                     ),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -586,7 +535,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                             widget.familyMemberIndividualDataModel!.pension,
                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         options: [
-                          ["Eligible", "eligible"],
+                          ["Eligible, not receiving", "eligible"],
                           ["Eligible, receiving", "eligible_receiving"],
                           ["Not eligible", "not_eligible"]
                         ],
@@ -658,9 +607,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   CheckBoxAddExtraAlertDialog(
                     title: 'Frequent ailments',
                     hint: 'Please choose the applicable',
-                    //TODO: Write db functions
                     dataMap: widget.familyMemberIndividualDataModel!
-                        .frequentAilments ??
+                            .frequentAilments ??
                         frequentAilments,
                     singleOption: false,
                     context: context,
@@ -677,15 +625,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   CheckBoxAddExtraAlertDialog(
                     title: 'Communicable diseases',
                     hint: 'Please choose the applicable',
-                    //TODO: Write db functions
                     dataMap: widget.familyMemberIndividualDataModel!
-                        .communicableDiseases??
+                            .communicableDiseases ??
                         communicableDiseases,
                     singleOption: false,
                     context: context,
                     onSaved: (map) {
-                      widget.familyMemberIndividualDataModel!.communicableDiseases =
-                          map;
+                      widget.familyMemberIndividualDataModel!
+                          .communicableDiseases = map;
                     },
                     errorField: "Please choose diseases/None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -696,15 +643,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   CheckBoxAddExtraAlertDialog(
                     title: 'Non Communicable diseases',
                     hint: 'Please choose the applicable',
-                    //TODO: Write db functions
                     dataMap: widget.familyMemberIndividualDataModel!
-                        .nonCommunicableDiseases??
+                            .nonCommunicableDiseases ??
                         nonCommunicableDiseases,
                     singleOption: false,
                     context: context,
                     onSaved: (map) {
-                      widget.familyMemberIndividualDataModel!.nonCommunicableDiseases =
-                          map;
+                      widget.familyMemberIndividualDataModel!
+                          .nonCommunicableDiseases = map;
                     },
                     errorField: "Please choose diseases/None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -792,7 +738,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: OptionsWidget(
                       defaultValue: widget.familyMemberIndividualDataModel!
                           .privateClinicServicesUsed,
@@ -821,8 +767,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     singleOption: false,
                     context: context,
                     onSaved: (map) {
-                      widget.familyMemberIndividualDataModel!.privateServiceReason =
-                          map;
+                      widget.familyMemberIndividualDataModel!
+                          .privateServiceReason = map;
                     },
                     errorField: "Please choose a reason",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -838,6 +784,19 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     onSaved: (data) {
                       widget.familyMemberIndividualDataModel!.useOfTobacco =
                           data;
+                    },
+                  ),
+                  CheckBoxAddExtraAlertDialog(
+                    title: 'Tobacco products',
+                    hint: 'Choose applicable products',
+                    dataMap: widget.familyMemberIndividualDataModel!
+                        .tobaccoProducts ??
+                        tobaccoProducts,
+                    context: context,
+                    errorField: 'Please choose at least one',
+                    onSaved: (map) {
+                      widget.familyMemberIndividualDataModel!
+                          .tobaccoProducts = map;
                     },
                   ),
                   OptionsWidget(
@@ -899,4 +858,4 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   }
 }
 
-//TODO: Add tobacco products
+

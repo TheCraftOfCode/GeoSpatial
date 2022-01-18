@@ -45,6 +45,7 @@ class FamilyMemberIndividualDataModel {
   Map<String,bool>? communicableDiseases; //TODO: Write get set functions
   Map<String,bool>? frequentAilments;     //TODO: Inform change, write functions
   Map<String,bool>? nonCommunicableDiseases;   //TODO: Inform change, write functions
+  Map<String,bool>? tobaccoProducts;        //TODO: Inform change, write functions
   String? useOfTobacco;
   String? useOfAlcohol;
   String? aarogyaSetuInstalled;
@@ -57,7 +58,6 @@ class FamilyMemberIndividualDataModel {
     return {
       "UIN": "",
       "username": "",
-      //"timeStamp": savedTime,
       "name": userName,
       "date": "${dateOfBirth!.day}-${dateOfBirth!.month}-${dateOfBirth!.year}",
       "gender": gender,
@@ -88,6 +88,7 @@ class FamilyMemberIndividualDataModel {
       "privateHealthClinicFacilitiesUsed": privateClinicServicesUsed,
       "reasonsForVisitingPrivateHealthClinic": privateServiceReason!= null ? buildListForOptionWidget(privateServiceReason!) : [],
       "tobaccoBasedProductsUsage": useOfTobacco,
+      "tobaccoProductsUsed" : tobaccoProducts,
       "alcoholConsumption": useOfAlcohol,
       "businessStatus": businessStatus,
       "arogyaSethuAppInstallationStatus": aarogyaSetuInstalled,

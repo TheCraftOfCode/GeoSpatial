@@ -28,7 +28,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: AutoSizeText(
           "Please fill all fields!",
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(color: colors.errorColor),
         ),
       ));
     }
@@ -68,7 +68,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     'Force': false,
     'Tempo': false,
     'Renault': false,
-    'Skodaa': false,
+    'Skoda': false,
     'Mitsubishi': false,
     'None': false
   };
@@ -131,6 +131,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
   var incomeFromCattleEnabled = false;
   var toiletFacility = false;
 
+  //TODO: Add village code
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -247,11 +248,11 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                             singleOption: false,
                             context: context,
                             dataMap:
-                            widget.modelData!.twoThreeWheelManufacturer ??
-                                two_three_mfg,
+                            widget.modelData!.noToiletsWhy ??
+                                noToiletsWhy,
                             onSaved: (val) {
                               print("Value recorded: $val");
-                              widget.modelData?.twoThreeWheelManufacturer = val;
+                              widget.modelData?.noToiletsWhy = val;
                             },
                             errorField: "Please choose a reason",
                             autoValidateMode:
@@ -301,7 +302,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           DropDownFormField(
                             list: ['1', '2', '3', '4', '5', 'More'],
                             hint: "Select the highest",
-                            title: "No of two wheelers",
+                            title: "No. of two wheelers",
                             defaultValue: widget.modelData!.noOfTwoWheelers,
                             onSaved: (val) {
                               print("Value recorded: $val");
@@ -312,7 +313,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           DropDownFormField(
                             list: ['1', '2', '3', '4', '5', 'More'],
                             hint: "Select the highest",
-                            title: "No of three wheelers",
+                            title: "No. of three wheelers",
                             defaultValue: widget.modelData!.noOfThreeWheelers,
                             onSaved: (val) {
                               print("Value recorded: $val");
@@ -339,7 +340,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           DropDownFormField(
                             list: ['1', '2', '3', '4', '5', 'More'],
                             hint: "Select the highest",
-                            title: "No of four wheelers",
+                            title: "No. of four wheelers",
                             errorField: "Please choose a valid number",
                             defaultValue: widget.modelData!.noOfFourWheelers,
                             onSaved: (val) {

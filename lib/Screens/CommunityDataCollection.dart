@@ -92,7 +92,7 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
             "Please fill all fields!",
-            style: TextStyle(color: Colors.red),
+            style: TextStyle(color: colors.errorColor),
           ),
         ));
       }

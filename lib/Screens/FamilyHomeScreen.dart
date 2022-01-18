@@ -17,9 +17,8 @@ import 'package:http/http.dart' as http;
 class FamilyHomeScreen extends StatefulWidget {
 
 
-  FamilyHomeScreen({Key? key, this.modelData,this.isGenerated}) : super(key: key);
+  FamilyHomeScreen({Key? key, this.modelData}) : super(key: key);
 
-  final isGenerated;
 
   @override
   State<FamilyHomeScreen> createState() => _FamilyHomeScreenState();
@@ -211,4 +210,4 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
 
 
 
-//TODO: send isGenerated, isEdited to the request
+//TODO: isEdited to the request

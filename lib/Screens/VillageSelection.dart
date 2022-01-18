@@ -207,7 +207,7 @@ class _ContentChildWidgetState extends State<ContentChildWidget> {
               onPressed: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (context) =>
-                        FamilyHomeScreen(isGenerated: isGenerated)));
+                        FamilyHomeScreen()));
               },
               child: Text("Generate UIN later"))
       ],
