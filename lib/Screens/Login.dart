@@ -60,7 +60,17 @@ class _MyAppState extends State<Login> {
 
     var res = await http.post(Uri.https(url, '/api/login'),
         headers: {"Content-Type": "application/json"}, body: body);
-    print("RES: ${res}");
+    print("RES: ${res.body}");
+
+    return res;
+  }
+
+  Future<http.Response> _getUserDetails(String JWT) async {
+    String url = NETWORK_ADDRESS;
+
+    var res = await http.get(Uri.https(url, '/api/getUserData'),
+        headers: {"Content-Type": "application/json", 'user-auth-token': JWT});
+    print("RES: ${res.body}");
 
     return res;
   }
@@ -97,10 +107,28 @@ class _MyAppState extends State<Login> {
             _passwordError = loginResponse.body;
           });
         } else {
-          storage.write(key: "jwt", value: loginResponse.body);
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => Home()),
-              (Route<dynamic> route) => false);
+          try {
+            http.Response userData = await _getUserDetails(loginResponse.body);
+            print("DATA: ${userData.body}");
+            if (userData.statusCode != 200) {
+              showToast(
+                  "Something went wrong, please check your network connection or try again later",
+                  position: ToastPosition.center,
+                  backgroundColor: colors.darkAccentColor);
+            } else {
+              storage.write(key: "userData", value: userData.body);
+              storage.write(key: "jwt", value: loginResponse.body);
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => Home()),
+                  (Route<dynamic> route) => false);
+            }
+          } catch (e) {
+            print(e);
+            showToast(
+                "Something went wrong, please check your network connection or try again later",
+                position: ToastPosition.center,
+                backgroundColor: colors.darkAccentColor);
+          }
         }
       } catch (e) {
         print(e);

@@ -106,7 +106,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   onPressed: () {
                                     print('Button Clicked');
                                     Route route = MaterialPageRoute(
-                                        builder: (context) => ChangePassword());
+                                        builder: (context) => ChangePassword(
+                                            userName: dataJson[0]["username"]));
                                     Navigator.push(context, route);
                                   },
                                   icon: Icon(

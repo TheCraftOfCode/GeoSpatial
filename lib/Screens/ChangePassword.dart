@@ -12,7 +12,8 @@ import 'package:http/http.dart' as http;
 final storage = FlutterSecureStorage();
 
 class ChangePassword extends StatefulWidget {
-  ChangePassword({Key? key}) : super(key: key);
+  ChangePassword({Key? key, required this.userName}) : super(key: key);
+  final String userName;
 
   @override
   _ChangePasswordState createState() => _ChangePasswordState();
@@ -35,7 +36,7 @@ Future<http.Response> _makeLoginRequest(
   String jwt = await jwtToken;
 
   var res = await http.post(
-      Uri.http(url, '/api/changeUserPassword/${username}'),
+      Uri.https(url, '/api/changeUserPassword/${username}'),
       headers: {"Content-Type": "application/json", 'user-auth-token': jwt},
       body: body);
   print("RES: ${res.body}");
@@ -44,14 +45,14 @@ Future<http.Response> _makeLoginRequest(
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
-  var password = "";
-  final _oldPasswordKey = GlobalKey<FormState>();
-  final _newPasswordKey = GlobalKey<FormState>();
-  final _newPasswordKeyRepeat = GlobalKey<FormState>();
+  var passwordOld = "";
+  var passwordNew = "";
+  final _oldPasswordKey = GlobalKey<FormFieldState>();
+  final _newPasswordKey = GlobalKey<FormFieldState>();
+  final _newPasswordKeyRepeat = GlobalKey<FormFieldState>();
 
   final TextEditingController _oldPasswordController = TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -111,14 +112,13 @@ class _ChangePasswordState extends State<ChangePassword> {
                             if (value!.isNotEmpty) {
                               if (value.length <= 7) {
                                 return "Password too small";
+                              } else {
+                                return null;
                               }
                             } else
-                              return null;
+                              return "Please enter password";
                           },
-                          onSaved: (data) {
-                            password = data!;
-                          },
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          autovalidateMode: AutovalidateMode.disabled,
                         ),
                       ),
                       SizedBox(
@@ -154,14 +154,13 @@ class _ChangePasswordState extends State<ChangePassword> {
                             if (value!.isNotEmpty) {
                               if (value.length <= 7) {
                                 return "Password too small";
+                              } else {
+                                return null;
                               }
                             } else
-                              return null;
+                              return "Please enter password";
                           },
-                          onSaved: (data) {
-                            password = data!;
-                          },
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          autovalidateMode: AutovalidateMode.disabled,
                         ),
                       ),
                       SizedBox(
@@ -194,13 +193,16 @@ class _ChangePasswordState extends State<ChangePassword> {
                           ),
                           validator: (value) {
                             if (value!.isNotEmpty) {
-                              if (value != password) {
-                                return "Passwords do not match";
+                              if (value.length <= 7) {
+                                return "Password too small";
+                              } else if (true) {
+                              } else {
+                                return null;
                               }
                             } else
-                              return null;
+                              return "Please enter password";
                           },
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          autovalidateMode: AutovalidateMode.disabled,
                         ),
                       ),
                       SizedBox(
@@ -233,6 +235,10 @@ class _ChangePasswordState extends State<ChangePassword> {
                                   _newPasswordKey.currentState!.validate() &&
                                   _newPasswordKeyRepeat.currentState!
                                       .validate()) {
+                                _makeLoginRequest(
+                                    "",
+                                    _oldPasswordController.text,
+                                    _newPasswordController.text);
                               }
                             },
                           ),
