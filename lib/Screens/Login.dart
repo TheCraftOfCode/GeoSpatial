@@ -10,6 +10,7 @@ import 'package:geo_spatial/Utils/colors.dart' as colors;
 import 'package:geo_spatial/Widgets/LoginFormCard.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:oktoast/oktoast.dart';
 
 final storage = FlutterSecureStorage();
 
@@ -59,6 +60,8 @@ class _MyAppState extends State<Login> {
 
     var res = await http.post(Uri.https(url, '/api/login'),
         headers: {"Content-Type": "application/json"}, body: body);
+    print("RES: ${res}");
+
     return res;
   }
 
@@ -85,17 +88,26 @@ class _MyAppState extends State<Login> {
     });
 
     if (_nameError == null && _passwordError == null) {
-      http.Response loginResponse = await _makeLoginRequest(username, password);
-      if (loginResponse.statusCode != 200) {
-        setState(() {
-          _nameError = loginResponse.body;
-          _passwordError = loginResponse.body;
-        });
-      } else {
-        storage.write(key: "jwt", value: loginResponse.body);
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => Home()),
-            (Route<dynamic> route) => false);
+      try {
+        http.Response loginResponse =
+            await _makeLoginRequest(username, password);
+        if (loginResponse.statusCode != 200) {
+          setState(() {
+            _nameError = loginResponse.body;
+            _passwordError = loginResponse.body;
+          });
+        } else {
+          storage.write(key: "jwt", value: loginResponse.body);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => Home()),
+              (Route<dynamic> route) => false);
+        }
+      } catch (e) {
+        print(e);
+        showToast(
+            "Something went wrong, please check your network connection or try again later",
+            position: ToastPosition.center,
+            backgroundColor: colors.darkAccentColor);
       }
     }
     setState(() {
@@ -167,7 +179,9 @@ class _MyAppState extends State<Login> {
                         ],
                       ),
                       _isLoading
-                          ? Padding(padding: EdgeInsets.only(right: 10) ,child: CircularProgressIndicator())
+                          ? Padding(
+                              padding: EdgeInsets.only(right: 10),
+                              child: CircularProgressIndicator())
                           : InkWell(
                               child: Container(
                                 width: 100,
