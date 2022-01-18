@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geo_spatial/Constants/Constants.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:google_fonts/google_fonts.dart';
 
 class GenderPickerWidget extends FormField<String> {
   GenderPickerWidget(
@@ -86,12 +88,15 @@ class GenderWidget extends StatelessWidget {
               child: SvgPicture.asset(assetPath),
             ),
           ),
-          Padding(
-              padding: EdgeInsets.only(left: 4, right: 10),
-              child: Text(
-                gender,
-                style: TextStyle(fontSize: 13),
-              ))
+          Container(
+            child: Padding(
+                padding: EdgeInsets.only(left: 4, right: 15),
+                child: Chip(
+                  backgroundColor: state.value == gender ? successColor ?? colors.successColor : colors.darkScaffoldColor,
+                  label: Text(gender),
+                  labelStyle: GoogleFonts.poppins(fontSize: 13,color: colors.darkPrimaryTextColor,fontWeight: state.value == gender ? FontWeight.bold : FontWeight.normal),
+                )),
+          )
         ],
       ),
     );

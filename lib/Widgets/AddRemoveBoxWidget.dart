@@ -76,8 +76,8 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                                                       .individualDataListTransient
                                                       .elementAt(index))));
                                     },
-                                    //Pass a function which is called onSaved in the next page and add data to the class object
                                     leading: Icon(Icons.person),
+                                    //TODO: Replace User n with user's name
                                     title: Text(
                                       "User ${index + 1}",
                                       style: GoogleFonts.poppins(

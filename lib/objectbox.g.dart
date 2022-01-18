@@ -141,21 +141,6 @@ final _entities = <ModelEntity>[
             type: 30,
             flags: 0),
         ModelProperty(
-            id: const IdUid(15, 1780571115080959247),
-            name: 'frequentAilments',
-            type: 30,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(16, 5383502869453245964),
-            name: 'commutableDisease',
-            type: 30,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(17, 2820386840249227222),
-            name: 'nonCommutableDisease',
-            type: 30,
-            flags: 0),
-        ModelProperty(
             id: const IdUid(18, 2506597441281996495),
             name: 'surgeries',
             type: 9,
@@ -441,7 +426,10 @@ ModelDefinition getObjectBoxModel() {
         3511831625273329956,
         8089710746679848906,
         4567441488943246138,
-        1321911158882624161
+        1321911158882624161,
+        1780571115080959247,
+        5383502869453245964,
+        2820386840249227222
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -562,21 +550,6 @@ ModelDefinition getObjectBoxModel() {
               : fbb.writeList(object.specialSkills!
                   .map(fbb.writeString)
                   .toList(growable: false));
-          final frequentAilmentsOffset = object.frequentAilments == null
-              ? null
-              : fbb.writeList(object.frequentAilments!
-                  .map(fbb.writeString)
-                  .toList(growable: false));
-          final commutableDiseaseOffset = object.commutableDisease == null
-              ? null
-              : fbb.writeList(object.commutableDisease!
-                  .map(fbb.writeString)
-                  .toList(growable: false));
-          final nonCommutableDiseaseOffset = object.nonCommutableDisease == null
-              ? null
-              : fbb.writeList(object.nonCommutableDisease!
-                  .map(fbb.writeString)
-                  .toList(growable: false));
           final surgeriesOffset = object.surgeries == null
               ? null
               : fbb.writeString(object.surgeries!);
@@ -642,9 +615,6 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(11, businessStatusOffset);
           fbb.addOffset(12, maritalStatusOffset);
           fbb.addOffset(13, specialSkillsOffset);
-          fbb.addOffset(14, frequentAilmentsOffset);
-          fbb.addOffset(15, commutableDiseaseOffset);
-          fbb.addOffset(16, nonCommutableDiseaseOffset);
           fbb.addOffset(17, surgeriesOffset);
           fbb.addOffset(18, anganwadiServicesAwareOffset);
           fbb.addOffset(19, anganwadiServicesUsingOffset);
@@ -698,15 +668,6 @@ ModelDefinition getObjectBoxModel() {
             ..specialSkills =
                 const fb.ListReader<String>(fb.StringReader(), lazy: false)
                     .vTableGetNullable(buffer, rootOffset, 30)
-            ..frequentAilments =
-                const fb.ListReader<String>(fb.StringReader(), lazy: false)
-                    .vTableGetNullable(buffer, rootOffset, 32)
-            ..commutableDisease =
-                const fb.ListReader<String>(fb.StringReader(), lazy: false)
-                    .vTableGetNullable(buffer, rootOffset, 34)
-            ..nonCommutableDisease =
-                const fb.ListReader<String>(fb.StringReader(), lazy: false)
-                    .vTableGetNullable(buffer, rootOffset, 36)
             ..surgeries = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 38)
             ..anganwadiServicesAware = const fb.StringReader()
@@ -1067,94 +1028,79 @@ class FamilyMemberIndividualDataModel_ {
       QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
           _entities[1].properties[13]);
 
-  /// see [FamilyMemberIndividualDataModel.frequentAilments]
-  static final frequentAilments =
-      QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[14]);
-
-  /// see [FamilyMemberIndividualDataModel.commutableDisease]
-  static final commutableDisease =
-      QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[15]);
-
-  /// see [FamilyMemberIndividualDataModel.nonCommutableDisease]
-  static final nonCommutableDisease =
-      QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[16]);
-
   /// see [FamilyMemberIndividualDataModel.surgeries]
   static final surgeries = QueryStringProperty<FamilyMemberIndividualDataModel>(
-      _entities[1].properties[17]);
+      _entities[1].properties[14]);
 
   /// see [FamilyMemberIndividualDataModel.anganwadiServicesAware]
   static final anganwadiServicesAware =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[18]);
+          _entities[1].properties[15]);
 
   /// see [FamilyMemberIndividualDataModel.anganwadiServicesUsing]
   static final anganwadiServicesUsing =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[19]);
+          _entities[1].properties[16]);
 
   /// see [FamilyMemberIndividualDataModel.anganwadiServicesUsedList]
   static final anganwadiServicesUsedList =
       QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[20]);
+          _entities[1].properties[17]);
 
   /// see [FamilyMemberIndividualDataModel.useOfTobacco]
   static final useOfTobacco =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[21]);
+          _entities[1].properties[18]);
 
   /// see [FamilyMemberIndividualDataModel.useOfAlcohol]
   static final useOfAlcohol =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[22]);
+          _entities[1].properties[19]);
 
   /// see [FamilyMemberIndividualDataModel.aarogyaSetuInstalled]
   static final aarogyaSetuInstalled =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[23]);
+          _entities[1].properties[20]);
 
   /// see [FamilyMemberIndividualDataModel.vizhithiruInstalled]
   static final vizhithiruInstalled =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[24]);
+          _entities[1].properties[21]);
 
   /// see [FamilyMemberIndividualDataModel.dataValid]
   static final dataValid =
       QueryBooleanProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[25]);
+          _entities[1].properties[22]);
 
   /// see [FamilyMemberIndividualDataModel.dbVulnerabilities]
   static final dbVulnerabilities =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[26]);
+          _entities[1].properties[23]);
 
   /// see [FamilyMemberIndividualDataModel.dbOccupation]
   static final dbOccupation =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[27]);
+          _entities[1].properties[24]);
 
   /// see [FamilyMemberIndividualDataModel.workTimings]
   static final workTimings =
       QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[28]);
+          _entities[1].properties[25]);
 
   /// see [FamilyMemberIndividualDataModel.noOfDaysWorking]
   static final noOfDaysWorking =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[29]);
+          _entities[1].properties[26]);
 
   /// see [FamilyMemberIndividualDataModel.PHCServicesUsed]
   static final PHCServicesUsed =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[30]);
+          _entities[1].properties[27]);
 
   /// see [FamilyMemberIndividualDataModel.privateClinicServicesUsed]
   static final privateClinicServicesUsed =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[31]);
+          _entities[1].properties[28]);
 }
 
 /// [FamilyMembersCommonDataModel] entity fields to define ObjectBox queries.

@@ -32,11 +32,8 @@ class FamilyMemberIndividualDataModel {
   String? pension;
   String? businessStatus;
   String? maritalStatus;
-  String? noOfDaysWorking;
+  String? noOfDaysWorking;      //TODO: Inform Change
   List<String>? specialSkills;
-  List<String>? frequentAilments;
-  List<String>? commutableDisease;
-  List<String>? nonCommutableDisease;
   List<String>? workTimings;
   String? surgeries;
   String? anganwadiServicesAware;
@@ -44,7 +41,10 @@ class FamilyMemberIndividualDataModel {
   List<String>? anganwadiServicesUsedList;
   String? PHCServicesUsed;             //TODO: Inform Change
   String? privateClinicServicesUsed; //TODO: Inform Change
-  Map<String,bool>? privateServiceReason;  //TODO: Inform Change
+  Map<String,bool>? privateServiceReason;  //TODO: Inform Change, write get set functions
+  Map<String,bool>? communicableDiseases; //TODO: Write get set functions
+  Map<String,bool>? frequentAilments;     //TODO: Inform change, write functions
+  Map<String,bool>? nonCommunicableDiseases;   //TODO: Inform change, write functions
   String? useOfTobacco;
   String? useOfAlcohol;
   String? aarogyaSetuInstalled;
@@ -77,16 +77,16 @@ class FamilyMemberIndividualDataModel {
       "workTimings": workTimings,
       "maritalStatus": maritalStatus,
       "specialSkills": specialSkills,
-      "frequentHealthAilments": frequentAilments,
-      "communicableDiseases": commutableDisease,
-      "nonCommunicableDiseases": nonCommutableDisease,
+      "frequentHealthAilments": frequentAilments!= null ? buildListForOptionWidget(frequentAilments!) : [],
+      "communicableDiseases": communicableDiseases!= null ? buildListForOptionWidget(communicableDiseases!) : [],
+      "nonCommunicableDiseases": nonCommunicableDiseases!=null ? buildListForOptionWidget(nonCommunicableDiseases!) : [],
       "surgeriesUndergone": surgeries,
       "anganwadiServicesAware": anganwadiServicesAware,
       "anganwadiServicesUsed": anganwadiServicesUsing,
       "anganwadiServicesUtilised": anganwadiServicesUsedList,
       "phcServicesUtilised": PHCServicesUsed,
       "privateHealthClinicFacilitiesUsed": privateClinicServicesUsed,
-      "reasonsForVisitingPrivateHealthClinic": privateServiceReason,
+      "reasonsForVisitingPrivateHealthClinic": privateServiceReason!= null ? buildListForOptionWidget(privateServiceReason!) : [],
       "tobaccoBasedProductsUsage": useOfTobacco,
       "alcoholConsumption": useOfAlcohol,
       "businessStatus": businessStatus,
@@ -142,6 +142,7 @@ class FamilyMembersCommonDataModel {
   Map<String, bool>? twoThreeWheelManufacturer;
   Map<String, bool>? twoFourManufacturer;
   Map<String, bool>? localFoodMap;
+  Map<String,bool>? noToiletsWhy;     //TODO: Write set get functions
   String? isCattleOwned;
   String? incomeFromCattle;
   String? isFarmLandOwned;
@@ -190,6 +191,8 @@ class FamilyMembersCommonDataModel {
           : [],
 
       "areToiletsAvailableInHouse": toiletFacility,
+
+      "noToiletsWhy" : noToiletsWhy != null ? buildListForOptionWidget(noToiletsWhy!) : [],    //TODO: Inform change
 
       "availabilityOfWaterInToilets": String,
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
-import 'package:geo_spatial/Screens/NestedOptionsWidget.dart';
+import 'package:geo_spatial/Widgets/NestedOptionsWidget.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
@@ -58,14 +58,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   int count = 0;
 
   var vulnerabilities = <String, bool>{
-    'Widower': false,
+    'Widower (M)': false,
+    'Widow (F)' : false,
     'Divorcee': false,
-    'Differently Able': false,
+    'Differently Abled': false,
     'Pregnant Woman': false,
     'Lactating Mother': false,
     'Elderly (>60 years)': false,
     'Children below 2 years': false,
-    'Others': false,
     'None': false
   };
 
@@ -86,6 +86,28 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
     'Better treatment and personalised care': false,
     'Easy to access': false,
     'Less waiting time': false
+  };
+
+  var frequentAilments = <String,bool>{
+    'Cold and Flu' : false,
+    'Diarrhoea' : false,
+    'Headaches' : false,
+    'Fever' : false
+  };
+
+  var communicableDiseases = <String,bool>{
+    'COVID' : false,
+    'Typhoid' : false,
+    'Dengue' : false,
+    'Malaria' : false,
+    'HIV/AIDS' : false
+  };
+
+  var nonCommunicableDiseases = <String,bool>{
+    'Cardiovascular disease' : false,
+    'Diabetes' : false,
+    'Preventable cancers' : false,
+    'Hypertension' : false
   };
 
   @override
@@ -633,71 +655,59 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       },
                     ),
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
-                    child: TagTextWidget(
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
-                        label: "Frequent ailments",
-                        hint: "Enter ailments here",
-                        initialValue: widget
-                            .familyMemberIndividualDataModel!.frequentAilments,
-                        onSaved: (data) {
-                          widget.familyMemberIndividualDataModel!
-                              .frequentAilments = data;
-                        },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Enter a value / NA";
-                          } else
-                            return null;
-                        }),
+                  CheckBoxAddExtraAlertDialog(
+                    title: 'Frequent ailments',
+                    hint: 'Please choose the applicable',
+                    //TODO: Write db functions
+                    dataMap: widget.familyMemberIndividualDataModel!
+                        .frequentAilments ??
+                        frequentAilments,
+                    singleOption: false,
+                    context: context,
+                    onSaved: (map) {
+                      widget.familyMemberIndividualDataModel!.frequentAilments =
+                          map;
+                    },
+                    errorField: "Please choose ailments/None",
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
-                    child: TagTextWidget(
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
-                        label: "Communicable Diseases",
-                        hint: "Enter diseases here",
-                        initialValue: widget
-                            .familyMemberIndividualDataModel!.commutableDisease,
-                        onSaved: (data) {
-                          widget.familyMemberIndividualDataModel!
-                              .commutableDisease = data;
-                        },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Enter a value / NA";
-                          } else
-                            return null;
-                        }),
+                  CheckBoxAddExtraAlertDialog(
+                    title: 'Communicable diseases',
+                    hint: 'Please choose the applicable',
+                    //TODO: Write db functions
+                    dataMap: widget.familyMemberIndividualDataModel!
+                        .communicableDiseases??
+                        communicableDiseases,
+                    singleOption: false,
+                    context: context,
+                    onSaved: (map) {
+                      widget.familyMemberIndividualDataModel!.communicableDiseases =
+                          map;
+                    },
+                    errorField: "Please choose diseases/None",
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 10.0, right: 10.0, top: 30),
-                    child: TagTextWidget(
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
-                        label: "Non-communicable diseases",
-                        hint: "Enter diseases here",
-                        initialValue: widget.familyMemberIndividualDataModel!
-                            .nonCommutableDisease,
-                        onSaved: (data) {
-                          widget.familyMemberIndividualDataModel!
-                              .nonCommutableDisease = data;
-                        },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Enter a value / NA";
-                          } else
-                            return null;
-                        }),
+                  CheckBoxAddExtraAlertDialog(
+                    title: 'Non Communicable diseases',
+                    hint: 'Please choose the applicable',
+                    //TODO: Write db functions
+                    dataMap: widget.familyMemberIndividualDataModel!
+                        .nonCommunicableDiseases??
+                        nonCommunicableDiseases,
+                    singleOption: false,
+                    context: context,
+                    onSaved: (map) {
+                      widget.familyMemberIndividualDataModel!.nonCommunicableDiseases =
+                          map;
+                    },
+                    errorField: "Please choose diseases/None",
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -811,10 +821,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     singleOption: false,
                     context: context,
                     onSaved: (map) {
-                      widget.familyMemberIndividualDataModel!.vulnerabilities =
+                      widget.familyMemberIndividualDataModel!.privateServiceReason =
                           map;
                     },
-                    errorField: "Please choose a vulnerability / None",
+                    errorField: "Please choose a reason",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   OptionsWidget(

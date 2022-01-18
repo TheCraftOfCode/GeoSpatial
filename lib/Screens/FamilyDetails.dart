@@ -4,7 +4,6 @@ import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/CheckBoxAddExtraDialog.dart';
-import 'package:geo_spatial/Widgets/CheckBoxAlertDialog.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
@@ -74,9 +73,17 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     'None': false
   };
 
+  var noToiletsWhy = <String,bool>{
+    'Lack of space' : false,
+    'Lack of money' : false,
+    'Habit of open defecation' : false,
+    'Using community toilets' : false
+  };
+
   var seeds_preserved = {
-    'yes': false,
-    'no': false,
+    'Country Seeds': false,
+    'Indigenous Seeds': false,
+    'Hybrid Seeds' : false
   };
 
   var local_food = {
@@ -85,13 +92,28 @@ class _FamilyDetailsState extends State<FamilyDetails> {
   };
 
   var trees_owned = {
-    'yes': false,
-    'no': false,
+    'Moringa Tree' : false,
+    'Guava Tree' : false,
+    'Papaya Tree' : false,
+    'Pomegranate Tree' : false,
+    'Custard Apple Tree' : false,
+    'Banana' : false,
+    'Indian Gooseberry': false
   };
 
   var garden_plants = {
-    'yes': false,
-    'no': false,
+    'Tapioca' : false,
+    'Tomato' : false,
+    'Brinjal' : false,
+    'Ladies finger' : false,
+    'Chili' : false,
+    'Mint' : false,
+    'Spinach' : false,
+    'Ridge Guard' : false,
+    'Bitter Guard' : false,
+    'Cluster Beans' : false,
+    'Long Beans' : false,
+    'Snake Guard' : false
   };
 
   var water_sources = {
@@ -107,6 +129,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
   };
 
   var incomeFromCattleEnabled = false;
+  var toiletFacility = false;
 
   @override
   Widget build(BuildContext context) {
@@ -204,12 +227,36 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 ['Yes', 'yes'],
                                 ['No', 'no']
                               ],
+                              onChanged: (val){
+                                if(val=='yes')
+                                toiletFacility = true;
+                              },
                               defaultValue: widget.modelData!.toiletFacility,
                               onSaved: (val) {
                                 print("Value recorded: $val");
                                 widget.modelData!.toiletFacility = val;
+                                setState(() {
+
+                                });
                               },
                               title: "Do you have toilet facilities?"),
+                          if(!toiletFacility)
+                          CheckBoxAddExtraAlertDialog(
+                            title: 'Why do you not have a toilet?',
+                            hint: 'Please choose reason',
+                            singleOption: false,
+                            context: context,
+                            dataMap:
+                            widget.modelData!.twoThreeWheelManufacturer ??
+                                two_three_mfg,
+                            onSaved: (val) {
+                              print("Value recorded: $val");
+                              widget.modelData?.twoThreeWheelManufacturer = val;
+                            },
+                            errorField: "Please choose a reason",
+                            autoValidateMode:
+                            AutovalidateMode.onUserInteraction,
+                          ),
                           OptionsWidget(
                               options: [
                                 ['Yes', 'yes'],
