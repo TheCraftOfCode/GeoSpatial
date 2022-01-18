@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 
-class FormCard extends StatelessWidget {
+class FormCard extends StatefulWidget {
   FormCard(this._usernameController, this._passwordController, this._nameError,
       this._passwordError);
 
@@ -11,6 +11,14 @@ class FormCard extends StatelessWidget {
   final TextEditingController _passwordController;
   final _nameError;
   final _passwordError;
+
+  @override
+  State<FormCard> createState() => _FormCardState();
+}
+
+class _FormCardState extends State<FormCard> {
+
+  var _showPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +39,7 @@ class FormCard extends StatelessWidget {
             ),
             TextField(
               style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-              controller: _usernameController,
+              controller: widget._usernameController,
               decoration: InputDecoration(
                   hintText: "Enter username here",
                   hintStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
@@ -50,7 +58,7 @@ class FormCard extends StatelessWidget {
                   // ),
                   floatingLabelStyle:
                       GoogleFonts.poppins(color: colors.darkAccentColor),
-                  errorText: _nameError,
+                  errorText: widget._nameError,
                   labelStyle: GoogleFonts.poppins(fontSize: 14)),
               cursorColor: colors.darkPrimaryTextColor,
             ),
@@ -58,10 +66,21 @@ class FormCard extends StatelessWidget {
               height: 40,
             ),
             TextField(
-                controller: _passwordController,
-                obscureText: true,
+                controller: widget._passwordController,
+                obscureText: !_showPassword,
                 style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
                 decoration: InputDecoration(
+                  suffixIcon: IconButton(onPressed: () {
+                    setState(() {
+                      _showPassword = !_showPassword;
+                    });
+                  },
+                    icon: Icon(
+                        _showPassword ? Icons.visibility_off : Icons.visibility,
+                      color: colors.darkAccentColor,
+                    ),
+
+                  ),
                   hintText: "Enter password here",
                   hintStyle: GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                   focusColor: Color(0xffF5A06D),
@@ -80,7 +99,7 @@ class FormCard extends StatelessWidget {
                       style: GoogleFonts.poppins(color: colors.darkSecondaryTextColor)),
                   floatingLabelStyle:
                       GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
-                  errorText: _passwordError,
+                  errorText: widget._passwordError,
                   labelStyle: GoogleFonts.poppins(fontSize: 14.0,color: colors.darkAccentColor),
                 )),
             SizedBox(
