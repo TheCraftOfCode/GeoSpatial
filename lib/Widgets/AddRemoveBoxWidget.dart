@@ -3,6 +3,7 @@ import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
 import 'package:geo_spatial/Screens/FamilyMemberAdd.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 /**
  * Added a dataclass
@@ -18,87 +19,110 @@ class AddRemoveBoxWidget extends StatefulWidget {
   _AddRemoveBoxWidgetState createState() => _AddRemoveBoxWidgetState();
 }
 
-class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
+class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget>
+    with WidgetsBindingObserver {
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    if (state == AppLifecycleState.resumed) {
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return
-      Expanded(
-        flex: 2,
-        child: Padding(
-          padding: EdgeInsets.all(5),
-            child: Column(
+    return Expanded(
+      flex: 2,
+      child: Padding(
+        padding: EdgeInsets.all(5),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        setState(() {
-                          widget.modelData?.individualDataListTransient
-                              .add(FamilyMemberIndividualDataModel());
-                        });
-                      },
-                      child: Text("Add New User Information",
-                          style: GoogleFonts.poppins(
-                              fontSize: 18, color: colors.darkAccentColor)),
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          setState(() {
-                            widget.modelData?.individualDataListTransient
-                                .add(FamilyMemberIndividualDataModel());
-                          });
-                        },
-                        icon: Icon(
-                          Icons.add,
-                          color: colors.darkAccentColor,
-                        ))
-                  ],
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      widget.modelData?.individualDataListTransient
+                          .add(FamilyMemberIndividualDataModel());
+                    });
+                  },
+                  child: Text("Add New User Information",
+                      style: GoogleFonts.poppins(
+                          fontSize: 18, color: colors.darkAccentColor)),
                 ),
-                Flexible(
-                  child: Container(
-                    child: widget.modelData!.individualDataListTransient.isEmpty
-                        ? Center(child: Text('No Members Added'))
-                        : ListView.builder(
-                            itemCount: widget
-                                .modelData!.individualDataListTransient.length,
-                            shrinkWrap: true,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Card(
-                                color: colors.darkSecondBackgroundColor,
-                                child: ListTile(
-                                    onTap: () {
-                                      Navigator.of(context).push(MaterialPageRoute(
-                                          builder: (context) => FamilyMemberAdd(
-                                              familyMemberIndividualDataModel:
-                                                  widget.modelData!
-                                                      .individualDataListTransient
-                                                      .elementAt(index))));
-                                    },
-                                    leading: Icon(Icons.person),
-                                    //TODO: Replace User n with user's name
-                                    title: Text(
-                                      "User ${index + 1}",
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 20),
-                                    ),
-                                    trailing: IconButton(
-                                        color: colors.darkSecondAccentColor,
-                                        icon: Icon(Icons.close),
-                                        onPressed: () async {
-                                          Dialog(index);
-                                        })),
-                              );
-                            }),
-                  ),
-                ),
+                IconButton(
+                    onPressed: () {
+                      setState(() {
+                        widget.modelData?.individualDataListTransient
+                            .add(FamilyMemberIndividualDataModel());
+                      });
+                    },
+                    icon: Icon(
+                      Icons.add,
+                      color: colors.darkAccentColor,
+                    ))
               ],
             ),
-    ),
-      );
+            Flexible(
+              child: Container(
+                child: widget.modelData!.individualDataListTransient.isEmpty
+                    ? Center(child: Text('No Members Added'))
+                    : ListView.builder(
+                        itemCount: widget
+                            .modelData!.individualDataListTransient.length,
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Card(
+                            color: colors.darkSecondBackgroundColor,
+                            child: VisibilityDetector(
+                              /**
+                           * Re-renders tiles whenever visibility changed
+                           * i.e, when user comes back from user page,
+                           * page re rendered and user name is reflected
+                           */
+                              onVisibilityChanged: (VisibilityInfo info) {
+                                setState(() {});
+                              },
+                              key: Key('add-remove-widget-key'),
+                              child: ListTile(
+                                  onTap: () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => FamilyMemberAdd(
+                                            familyMemberIndividualDataModel:
+                                                widget.modelData!
+                                                    .individualDataListTransient
+                                                    .elementAt(index))));
+                                  },
+                                  leading: Icon(Icons.person),
+                                  title: Text(
+                                    widget.modelData!
+                                            .individualDataListTransient
+                                            .elementAt(index)
+                                            .userName ??
+                                        "User ${index + 1}",
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 20),
+                                  ),
+                                  trailing: IconButton(
+                                      color: colors.darkSecondAccentColor,
+                                      icon: Icon(Icons.close),
+                                      onPressed: () async {
+                                        Dialog(index);
+                                      })),
+                            ),
+                          );
+                        }),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void Dialog(index) async {
