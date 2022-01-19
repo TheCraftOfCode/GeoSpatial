@@ -249,8 +249,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         contentPadding: EdgeInsets.all(7.0),
                       ),
                       validator: (value) {
-                        if (value!.length != 10 || value != "") {
-                          return "Enter a valid number";
+                        if (value == "" || value == null)
+                          return null;
+                        else if (value.length != 10) {
+                          return "Enter a valid Phone Number";
                         } else
                           return null;
                       },
@@ -286,42 +288,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 10.0, right: 10.0, bottom: 20.0, top: 20.0),
-                    child: TextFormField(
-                      initialValue:
-                          widget.familyMemberIndividualDataModel?.aadhaarNumber,
-                      keyboardType: TextInputType.number,
-                      style: darkTheme.DarkTheme.textTheme.bodyText2,
-                      decoration: InputDecoration(
-                        label: Text(
-                          "Aadhaar Number",
-                          style: GoogleFonts.poppins(
-                              color: colors.darkSecondaryTextColor),
-                        ),
-                        hintText: "Please enter 12 digit Aadhaar.",
-                        helperText: "Leave empty if person is not willing to share",
-                        helperStyle: GoogleFonts.poppins(
-                            color: colors.darkSecondaryTextColor),
-                        hintStyle: GoogleFonts.poppins(
-                            color: colors.darkSecondaryTextColor),
-                        contentPadding: EdgeInsets.all(7.0),
-                      ),
-                      validator: (value) {
-                        if (value == "" || value == null) return null;
-                        else if (value.length != 12) {
-                          return "Enter a valid Aadhaar";
-                        } else
-                          return null;
-                      },
-                      onSaved: (data) {
-                        widget.familyMemberIndividualDataModel!.aadhaarNumber =
-                            data;
-                      },
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                    ),
-                  ),
                   CheckBoxAddExtraAlertDialog(
                     title: 'Vulnerabilities',
                     hint: 'Please choose a vulnerability',
@@ -384,46 +350,116 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           val;
                     },
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(15),
-                    child: StartingEndingTimeWidget(
-                      initialValue:
-                          widget.familyMemberIndividualDataModel!.workTimings !=
-                                  null
-                              ? [
-                                  TimeOfDay(
-                                      hour: int.parse(widget
-                                          .familyMemberIndividualDataModel!
-                                          .workTimings![0]
-                                          .split(":")[0]),
-                                      minute: int.parse(widget
-                                          .familyMemberIndividualDataModel!
-                                          .workTimings![0]
-                                          .split(":")[1]
-                                          .replaceAll(new RegExp(r"\D"), ""))),
-                                  TimeOfDay(
-                                      hour: int.parse(widget
-                                          .familyMemberIndividualDataModel!
-                                          .workTimings![1]
-                                          .split(":")[0]),
-                                      minute: int.parse(widget
-                                          .familyMemberIndividualDataModel!
-                                          .workTimings![1]
-                                          .split(":")[1]
-                                          .replaceAll(new RegExp(r"\D"), "")))
-                                ]
-                              : null,
-                      onSaved: (List<TimeOfDay>? timeList) {
-                        print(timeList);
-                        var timeFinalString = [
-                          "${timeList![0].hour}:${timeList[0].minute} ${timeList[0].period == DayPeriod.am ? "AM" : "PM"}",
-                          "${timeList[1].hour}:${timeList[1].minute} ${timeList[1].period == DayPeriod.am ? "AM" : "PM"}"
-                        ];
-                        widget.familyMemberIndividualDataModel!.workTimings =
-                            timeFinalString;
+                  ConditionalRenderWidget(
+                      title: "Employed?",
+                      onSaved: (val) {
+                        widget.familyMemberIndividualDataModel!.employed = val;
                       },
-                    ),
-                  ),
+                      defaultValue:
+                          widget.familyMemberIndividualDataModel!.employed,
+                      conditionalPositiveWidget: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(15),
+                            child: StartingEndingTimeWidget(
+                              initialValue: widget
+                                          .familyMemberIndividualDataModel!
+                                          .workTimings !=
+                                      null
+                                  ? [
+                                      TimeOfDay(
+                                          hour: int.parse(widget
+                                              .familyMemberIndividualDataModel!
+                                              .workTimings![0]
+                                              .split(":")[0]),
+                                          minute: int.parse(widget
+                                              .familyMemberIndividualDataModel!
+                                              .workTimings![0]
+                                              .split(":")[1]
+                                              .replaceAll(
+                                                  new RegExp(r"\D"), ""))),
+                                      TimeOfDay(
+                                          hour: int.parse(widget
+                                              .familyMemberIndividualDataModel!
+                                              .workTimings![1]
+                                              .split(":")[0]),
+                                          minute: int.parse(widget
+                                              .familyMemberIndividualDataModel!
+                                              .workTimings![1]
+                                              .split(":")[1]
+                                              .replaceAll(
+                                                  new RegExp(r"\D"), "")))
+                                    ]
+                                  : null,
+                              onSaved: (List<TimeOfDay>? timeList) {
+                                print(timeList);
+                                var timeFinalString = [
+                                  "${timeList![0].hour}:${timeList[0].minute} ${timeList[0].period == DayPeriod.am ? "AM" : "PM"}",
+                                  "${timeList[1].hour}:${timeList[1].minute} ${timeList[1].period == DayPeriod.am ? "AM" : "PM"}"
+                                ];
+                                widget.familyMemberIndividualDataModel!
+                                    .workTimings = timeFinalString;
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 20.0),
+                            child: TextFormField(
+                              initialValue: widget
+                                  .familyMemberIndividualDataModel!
+                                  .noOfDaysWorking,
+                              keyboardType: TextInputType.number,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              style: darkTheme.DarkTheme.textTheme.bodyText2,
+                              decoration: InputDecoration(
+                                label: Text(
+                                  "Number of work days",
+                                  style: GoogleFonts.poppins(
+                                      color: colors.darkSecondaryTextColor),
+                                ),
+                                hintText: "Please enter number of work days",
+                                hintStyle: GoogleFonts.poppins(
+                                    color: colors.darkSecondaryTextColor),
+                                contentPadding: EdgeInsets.all(7.0),
+                              ),
+                              validator: (value) {
+                                print(value);
+                                print("value");
+                                if (value == null || value == "")
+                                  return "Please enter number of work days";
+                                else if (int.parse(value) < 1) {
+                                  return "Enter number of work days";
+                                } else if (int.parse(value) > 31) {
+                                  return "Enter a valid number of work days";
+                                }
+                              },
+                              onSaved: (val) {
+                                print(val.toString());
+                                widget.familyMemberIndividualDataModel!
+                                    .noOfDaysWorking = val;
+                              },
+                            ),
+                          ),
+                          //TODO: Make sure text field is enabled only after option is chosen
+                          IncomeWithTypeTextField(
+                            onSaved: (textValue, option) {
+                              print(textValue! + " " + option!);
+                            },
+                            text: 'Income',
+                            hintText: 'Enter income',
+                            listOfOptions: ["Day", "Week", "Month"],
+                          ),
+                        ],
+                      ),
+                      options: [
+                        ["Yes", "yes"],
+                        ["No", "no"],
+                      ],
+                      conditionalPositiveValue: "yes",
+                      conditionalNegativeValue: "no",
+                      conditionalNegativeWidget: Container())
                 ],
               ),
               Column(
@@ -431,54 +467,46 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 20.0),
+                      padding: const EdgeInsets.only(
+                          left: 10.0, right: 10.0, bottom: 20.0, top: 20.0),
                       child: TextFormField(
                         initialValue: widget
-                            .familyMemberIndividualDataModel!.noOfDaysWorking,
+                            .familyMemberIndividualDataModel?.aadhaarNumber,
                         keyboardType: TextInputType.number,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         style: darkTheme.DarkTheme.textTheme.bodyText2,
                         decoration: InputDecoration(
                           label: Text(
-                            "Number of work days",
+                            "Aadhaar Number",
                             style: GoogleFonts.poppins(
                                 color: colors.darkSecondaryTextColor),
                           ),
-                          hintText: "Please enter number of work days",
+                          hintText: "Please enter 12 digit Aadhaar.",
+                          helperText:
+                              "Leave empty if person is not willing to share",
+                          helperStyle: GoogleFonts.poppins(
+                              color: colors.darkSecondaryTextColor),
                           hintStyle: GoogleFonts.poppins(
                               color: colors.darkSecondaryTextColor),
                           contentPadding: EdgeInsets.all(7.0),
                         ),
                         validator: (value) {
-                          print(value);
-                          print("value");
-                          if (value == null || value == "")
-                            return "Please enter number of work days";
-                          else if (int.parse(value) < 1) {
-                            return "Enter number of work days";
-                          } else if (int.parse(value) > 31) {
-                            return "Enter a valid number of work days";
-                          }
+                          if (value == "" || value == null)
+                            return null;
+                          else if (value.length != 12) {
+                            return "Enter a valid Aadhaar";
+                          } else
+                            return null;
                         },
-                        onSaved: (val) {
-                          print(val.toString());
+                        onSaved: (data) {
                           widget.familyMemberIndividualDataModel!
-                              .noOfDaysWorking = val;
+                              .aadhaarNumber = data;
                         },
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                     ),
-                    //TODO: Make sure text field is enabled only after option is chosen
-                    IncomeWithTypeTextField(
-                      onSaved: (textValue, option) {
-                        print(textValue! + " " + option!);
-                      },
-                      text: 'Income',
-                      hintText: 'Enter income',
-                      listOfOptions: ["Day", "Week", "Month"],
-                    ),
                     Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 20.0),
                       child: OptionsWidget(
                         defaultValue:
                             widget.familyMemberIndividualDataModel!.pension,
@@ -511,7 +539,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       },
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 20.0),
                       child: OptionsWidget(
                         defaultValue: widget
                             .familyMemberIndividualDataModel!.maritalStatus,
@@ -534,7 +563,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 10.0, right: 10.0, top: 20),
+                        EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
                     child: TagTextWidget(
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       label: "Special Skills",
@@ -605,7 +634,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 20.0),
                     child: OptionsWidget(
                       defaultValue:
                           widget.familyMemberIndividualDataModel!.surgeries,
@@ -623,7 +653,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 ],
               ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   OptionsWidget(
                     defaultValue: widget.familyMemberIndividualDataModel!
@@ -639,7 +669,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     title: 'Aware about Anganwadi services?',
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 20.0),
                     child: ConditionalRenderWidget(
                       title: 'Using any Anganwadi services?',
                       defaultValue: widget.familyMemberIndividualDataModel!
@@ -655,27 +686,32 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       },
                       conditionalPositiveValue: 'yes',
                       conditionalNegativeValue: 'no',
-                      conditionalPositiveWidget: TagTextWidget(
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
-                          label: "Anganwadi services utilised",
-                          hint: "Enter services here",
-                          initialValue: widget.familyMemberIndividualDataModel!
-                              .anganwadiServicesUsedList,
-                          onSaved: (data) {
-                            widget.familyMemberIndividualDataModel!
-                                .anganwadiServicesUsedList = data;
-                          },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Enter a value / NA";
-                            } else
-                              return null;
-                          }),
+                      conditionalPositiveWidget: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: TagTextWidget(
+                            autoValidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            label: "Anganwadi services utilised",
+                            hint: "Enter services here",
+                            initialValue: widget
+                                .familyMemberIndividualDataModel!
+                                .anganwadiServicesUsedList,
+                            onSaved: (data) {
+                              widget.familyMemberIndividualDataModel!
+                                  .anganwadiServicesUsedList = data;
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Enter a value / NA";
+                              } else
+                                return null;
+                            }),
+                      ),
                       conditionalNegativeWidget: Container(),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(10),
                     child: OptionsWidget(
                       defaultValue: widget
                           .familyMemberIndividualDataModel!.PHCServicesUsed,
@@ -691,7 +727,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
                     child: ConditionalRenderWidget(
                       title: 'Do you visit a private hospital?',
                       defaultValue: widget.familyMemberIndividualDataModel!
@@ -731,7 +767,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(10),
                     child: ConditionalRenderWidget(
                       title: 'Do you use any tobacco based products?',
                       defaultValue:

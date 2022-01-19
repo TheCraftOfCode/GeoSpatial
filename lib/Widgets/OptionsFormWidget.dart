@@ -32,10 +32,14 @@ class OptionsWidget extends FormField<dynamic> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      title,
-                      style: GoogleFonts.poppins(
-                          fontSize: 15.0, color: colors.darkPrimaryTextColor),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: Text(
+                        title,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.poppins(
+                            fontSize: 15.0, color: colors.darkPrimaryTextColor),
+                      ),
                     ),
                     Wrap(
                         alignment: WrapAlignment.center,

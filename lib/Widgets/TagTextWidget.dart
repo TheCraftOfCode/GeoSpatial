@@ -33,7 +33,7 @@ class TagTextWidget extends FormField<List<String>> {
               ScrollController _scrollController = new ScrollController();
 
               return Padding(
-                padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                padding: EdgeInsets.only(bottom: 10),
                 child: Column(
                   children: [
                     Padding(

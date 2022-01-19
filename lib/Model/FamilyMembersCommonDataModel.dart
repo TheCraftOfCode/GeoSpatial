@@ -27,8 +27,11 @@ class FamilyMemberIndividualDataModel {
   Map<String, bool>? vulnerabilities;
   Map<String, bool>? occupation;
   String? dailyWageWorker;
-  String? incomePerDay;
-  String? incomePerMonth;
+  String? employed;
+  String? income;
+  String? incomeType;
+  String? incomePerDay; //TODO: Remove field
+  String? incomePerMonth; //TODO: Remove field
   String? pension;
   String? businessStatus;
   String? maritalStatus;

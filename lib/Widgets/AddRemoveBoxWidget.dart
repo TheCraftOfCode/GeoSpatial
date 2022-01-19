@@ -74,7 +74,12 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                          */
                             child: VisibilityDetector(
                               onVisibilityChanged: (VisibilityInfo info) {
-                                setState(() {}); //Re-renders page
+                                try{
+                                  setState(() {}); //Re-renders page
+                                }
+                                catch(e){
+
+                                }
                               },
                               key: Key('add-remove-widget-key'),
                               child: ListTile(
