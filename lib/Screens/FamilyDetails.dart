@@ -224,28 +224,10 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                             errorField: "Please choose an option",
                             context: context,
                           ),
-                          OptionsWidget(
-                              options: [
-                                ['Yes', 'yes'],
-                                ['No', 'no']
-                              ],
-                              onChanged: (val){
-                                if(val=='yes')
-                                toiletFacility = true;
-                              },
-                              defaultValue: widget.modelData!.toiletFacility,
-                              onSaved: (val) {
-                                print("Value recorded: $val");
-                                widget.modelData!.toiletFacility = val;
-                                setState(() {
-
-                                });
-                              },
-                              title: "Do you have toilet facilities?"),
                           Padding(
                             padding: const EdgeInsets.all(20),
                             child: ConditionalRenderWidget(
-                              title: "Source of Water",
+                              title: "Do you have toilet facilities?",
                               defaultValue:
                               widget.modelData!.toiletFacility,
                               options: [
@@ -395,17 +377,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                           ),
-                          OptionsWidget(
-                              options: [
-                                ['Yes', 'yes'],
-                                ['No', 'no']
-                              ],
-                              defaultValue: widget.modelData!.isCattleOwned,
-                              onSaved: (val) {
-                                print("Value recorded: $val");
-                                widget.modelData!.isCattleOwned = val;
-                              },
-                              title: "Do you own cattle?"),
                           ConditionalRenderWidget(
                             title: "Do you own cattle?",
                             defaultValue:
@@ -446,30 +417,62 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                               ),
                             ),
                             conditionalNegativeWidget: Container()),
-                          OptionsWidget(
-                            options: [
-                              ['Yes', 'yes'],
-                              ['No', 'no']
-                            ],
-                            defaultValue: widget.modelData!.isFarmLandOwned,
-                            onSaved: (val) {
-                              print("Value recorded: $val");
-                              widget.modelData!.isFarmLandOwned = val;
-                            },
-                            title: "Do you own farmland?",
-                          ),
-                          CheckBoxAddExtraAlertDialog(
-                            title: 'Crops Cultivated',
-                            hint: 'Choose cultivated crops',
-                            singleOption: false,
-                            context: context,
-                            dataMap: widget.modelData!.cropsCultivated ??
-                                seeds_preserved,
-                            onSaved: (val) {
-                              print("Value recorded: $val");
-                              widget.modelData!.cropsCultivated = val;
-                            },
-                          ),
+                          ConditionalRenderWidget(
+                              title: "Do you own farmland?",
+                              defaultValue:
+                              widget.modelData!.isFarmLandOwned,
+                              options: [
+                                ["Yes", "yes"],
+                                ["No", "no"]
+                              ],
+                              onSaved: (val) {
+                                print("Value recorded: $val");
+                                widget.modelData!.isFarmLandOwned =
+                                    val;
+                              },
+                              conditionalPositiveValue: 'yes',
+                              conditionalNegativeValue: 'no',
+                              conditionalPositiveWidget: CheckBoxAddExtraAlertDialog(
+                                title: 'Crops Cultivated',
+                                hint: 'Choose cultivated crops',
+                                singleOption: false,
+                                context: context,
+                                dataMap: widget.modelData!.cropsCultivated ??
+                                    seeds_preserved,
+                                onSaved: (val) {
+                                  print("Value recorded: $val");
+                                  widget.modelData!.cropsCultivated = val;
+                                },
+                              ),
+                              conditionalNegativeWidget: Container()),
+                          ConditionalRenderWidget(
+                              title: "Do you preserve seeds?",
+                              defaultValue:
+                              widget.modelData!.isSeedsPreserved,
+                              options: [
+                                ["Yes", "yes"],
+                                ["No", "no"]
+                              ],
+                              onSaved: (val) {
+                                print("Value recorded: $val");
+                                widget.modelData!.isSeedsPreserved =
+                                    val;
+                              },
+                              conditionalPositiveValue: 'yes',
+                              conditionalNegativeValue: 'no',
+                              conditionalPositiveWidget: CheckBoxAddExtraAlertDialog(
+                                title: 'Seeds Preserved',
+                                hint: 'Choose preserved seeds',
+                                singleOption: false,
+                                context: context,
+                                dataMap: widget.modelData!.preservedSeedsMap ??
+                                    seeds_preserved,
+                                onSaved: (val) {
+                                  print("Value recorded: $val");
+                                  widget.modelData!.preservedSeedsMap = val;
+                                },
+                              ),
+                              conditionalNegativeWidget: Container()),
                           OptionsWidget(
                             options: [
                               ['Yes', 'yes'],
@@ -487,18 +490,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          CheckBoxAddExtraAlertDialog(
-                            title: 'Seeds Preserved',
-                            hint: 'Choose preserved seeds',
-                            singleOption: false,
-                            context: context,
-                            dataMap: widget.modelData!.preservedSeedsMap ??
-                                seeds_preserved,
-                            onSaved: (val) {
-                              print("Value recorded: $val");
-                              widget.modelData!.preservedSeedsMap = val;
-                            },
-                          ),
                           CheckBoxAddExtraAlertDialog(
                             title: 'Trees owned',
                             hint: 'Choose trees owned',
@@ -525,39 +516,42 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                             singleOption: false,
                             context: context,
                           ),
-                          OptionsWidget(
-                            options: [
-                              ['Yes', 'yes'],
-                              ['No', 'no']
-                            ],
-                            defaultValue:
-                                widget.modelData!.isKitchenGardenOwned,
-                            onSaved: (val) {
-                              print("Value recorded: $val");
-                              widget.modelData!.isKitchenGardenOwned = val;
-                            },
-                            title: "Do you have a kitchen garden?",
-                          ),
                         ],
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          CheckBoxAddExtraAlertDialog(
-                            title: 'Kitchen Garden plants',
-                            hint: 'Choose garden plants',
-                            singleOption: false,
-                            context: context,
-                            dataMap: widget.modelData!.kitchenGardenPlants ??
-                                garden_plants,
-                            onSaved: (val) {
-                              print("Value recorded: $val");
-                              widget.modelData!.kitchenGardenPlants = val;
-                            },
-                          ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
+                              ConditionalRenderWidget(
+                                  title: "Do you have a kitchen garden?",
+                                  defaultValue:
+                                  widget.modelData!.isKitchenGardenOwned,
+                                  options: [
+                                    ["Yes", "yes"],
+                                    ["No", "no"]
+                                  ],
+                                  onSaved: (val) {
+                                    print("Value recorded: $val");
+                                    widget.modelData!.isKitchenGardenOwned =
+                                        val;
+                                  },
+                                  conditionalPositiveValue: 'yes',
+                                  conditionalNegativeValue: 'no',
+                                  conditionalPositiveWidget:  CheckBoxAddExtraAlertDialog(
+                                    title: 'Kitchen Garden plants',
+                                    hint: 'Choose garden plants',
+                                    singleOption: false,
+                                    context: context,
+                                    dataMap: widget.modelData!.kitchenGardenPlants ??
+                                        garden_plants,
+                                    onSaved: (val) {
+                                      print("Value recorded: $val");
+                                      widget.modelData!.kitchenGardenPlants = val;
+                                    },
+                                  ),
+                                  conditionalNegativeWidget: Container()),
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Padding(
