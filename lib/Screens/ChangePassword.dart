@@ -86,11 +86,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                         ),
                         height: 200,
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.05,
-                      ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20),
                         child: TextFormField(
                           obscureText: !_showPasswordOld,
                           key: _oldPasswordKey,
@@ -142,11 +139,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                           autovalidateMode: AutovalidateMode.disabled,
                         ),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.05,
-                      ),
+
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20),
                         child: TextFormField(
                           obscureText: !_showPasswordNew,
                           controller: _newPasswordController,
@@ -201,11 +196,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                           autovalidateMode: AutovalidateMode.disabled,
                         ),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.04,
-                      ),
+
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20),
                         child: TextFormField(
                           obscureText: !_showPasswordNewRepeat,
                           controller: _newPasswordControllerRepeat,
@@ -260,11 +253,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                           autovalidateMode: AutovalidateMode.disabled,
                         ),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.04,
-                      ),
+
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20),
                         child: _showProgressBar
                             ? CircularProgressIndicator()
                             : SizedBox(
