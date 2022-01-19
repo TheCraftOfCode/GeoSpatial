@@ -9,6 +9,7 @@ import 'package:geo_spatial/Screens/Login.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -17,8 +18,34 @@ class ProfilePage extends StatefulWidget {
 
 final storage = FlutterSecureStorage();
 
+Future<String> jwtToken() async {
+  var jwt = await storage.read(key: JWT_STORAGE_KEY);
+  print(JWT_STORAGE_KEY + jwt.toString());
+
+  if (jwt == null) return "";
+  return jwt;
+}
+
+Future<http.Response> _getUserDetails() async {
+  var jwt = await jwtToken();
+  String url = NETWORK_ADDRESS;
+
+  var res = await http.get(Uri.http(url, '/api/getUserData'),
+      headers: {"Content-Type": "application/json", 'user-auth-token': jwt});
+  print("RES: ${res.body}");
+
+  return res;
+}
+
 Future<String> get _getUserData async {
   var userData = await storage.read(key: USER_DATA_KEY);
+  try {
+    var res = await _getUserDetails();
+    if(res.statusCode == 200){
+      userData = res.body;
+      await storage.write(key: USER_DATA_KEY, value: userData);
+    }
+  } catch (e) {}
   print("userData " + userData.toString());
 
   if (userData == null) return "";

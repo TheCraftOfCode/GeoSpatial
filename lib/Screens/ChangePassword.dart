@@ -52,8 +52,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
     String jwt = await jwtToken;
 
-    var res = await http.put(
-        Uri.http(url, '/api/changeUserPassword/${username}'),
+    var res = await http.put(Uri.http(url, '/api/changeUserPassword'),
         headers: {"Content-Type": "application/json", 'user-auth-token': jwt},
         body: body);
     print("RES: ${res.body}");
@@ -87,7 +86,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                         height: 200,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40.0, vertical: 20),
                         child: TextFormField(
                           obscureText: !_showPasswordOld,
                           key: _oldPasswordKey,
@@ -139,9 +139,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                           autovalidateMode: AutovalidateMode.disabled,
                         ),
                       ),
-
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40.0, vertical: 20),
                         child: TextFormField(
                           obscureText: !_showPasswordNew,
                           controller: _newPasswordController,
@@ -196,9 +196,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                           autovalidateMode: AutovalidateMode.disabled,
                         ),
                       ),
-
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40.0, vertical: 20),
                         child: TextFormField(
                           obscureText: !_showPasswordNewRepeat,
                           controller: _newPasswordControllerRepeat,
@@ -253,9 +253,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                           autovalidateMode: AutovalidateMode.disabled,
                         ),
                       ),
-
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40.0, vertical: 20),
                         child: _showProgressBar
                             ? CircularProgressIndicator()
                             : SizedBox(

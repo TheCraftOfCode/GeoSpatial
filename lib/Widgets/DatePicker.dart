@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 
 class DatePicker extends StatefulWidget {
-
-
   DatePicker(this.title);
 
-  String title;
+  final String title;
 
   @override
   _DatePickerState createState() => _DatePickerState();
 }
 
 class _DatePickerState extends State<DatePicker> {
-
   @override
-  void initState(){
+  void initState() {
     super.initState();
   }
 
@@ -27,17 +23,13 @@ class _DatePickerState extends State<DatePicker> {
   String getText() {
     if (date == "") {
       return 'Pick date';
-    }
-
-    else {
+    } else {
       return '${date.day}/${date.month}/${date.year}';
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
-
     return Container(
       child: TextField(
         decoration: InputDecoration(
@@ -47,7 +39,6 @@ class _DatePickerState extends State<DatePicker> {
         onTap: () {
           pickDate(context);
         },
-
       ),
     );
   }
@@ -55,12 +46,12 @@ class _DatePickerState extends State<DatePicker> {
   Future pickDate(BuildContext context) async {
     final initialDate = DateTime.now();
     final newDate = await showRoundedDatePicker(
-      context: context, initialDate: initialDate,
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-      initialDatePickerMode: DatePickerMode.year,
-      borderRadius: 16
-    );
+        context: context,
+        initialDate: initialDate,
+        firstDate: DateTime(1900),
+        lastDate: DateTime.now(),
+        initialDatePickerMode: DatePickerMode.year,
+        borderRadius: 16);
 
     if (newDate == null) return;
 

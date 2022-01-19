@@ -301,7 +301,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                               color: colors.darkSecondaryTextColor),
                         ),
                         hintText: "Please enter 12 digit Aadhaar.",
-                        helperText: "Enter 0 if person is not willing to share",
+                        helperText: "Leave empty if person is not willing to share",
                         helperStyle: GoogleFonts.poppins(
                             color: colors.darkSecondaryTextColor),
                         hintStyle: GoogleFonts.poppins(
@@ -309,7 +309,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         contentPadding: EdgeInsets.all(7.0),
                       ),
                       validator: (value) {
-                        if (value!.length != 12 || value != "") {
+                        if (value == "" || value == null) return null;
+                        else if (value.length != 12) {
                           return "Enter a valid Aadhaar";
                         } else
                           return null;
@@ -339,18 +340,22 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   //TODO: Occupation widget db functions update
                   NestedOptionWidgetFormField(
                     nestedOptionData: [
-                      new NestedOptionData(
-                          subOptionDataMap: {"Occupation 1": false, "Occupation 2": false},
-                          boxName: 'Category One'),
-                      new NestedOptionData(
-                          subOptionDataMap: {"Occupation 1": false, "Occupation 2": false},
-                          boxName: 'Category Two'),
-                      new NestedOptionData(
-                          subOptionDataMap: {"Occupation 1": false, "Occupation 2": false},
-                          boxName: 'Category Three'),
-                      new NestedOptionData(
-                          subOptionDataMap: {"Occupation 1": false, "Occupation 2": false},
-                          boxName: 'Category Four')
+                      new NestedOptionData(subOptionDataMap: {
+                        "Occupation 1": false,
+                        "Occupation 2": false
+                      }, boxName: 'Category One'),
+                      new NestedOptionData(subOptionDataMap: {
+                        "Occupation 1": false,
+                        "Occupation 2": false
+                      }, boxName: 'Category Two'),
+                      new NestedOptionData(subOptionDataMap: {
+                        "Occupation 1": false,
+                        "Occupation 2": false
+                      }, boxName: 'Category Three'),
+                      new NestedOptionData(subOptionDataMap: {
+                        "Occupation 1": false,
+                        "Occupation 2": false
+                      }, boxName: 'Category Four')
                     ],
                     title: 'Occupation',
                     context: context,
@@ -463,6 +468,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         },
                       ),
                     ),
+                    //TODO: Make sure text field is enabled only after option is chosen
                     IncomeWithTypeTextField(
                       onSaved: (textValue, option) {
                         print(textValue! + " " + option!);
@@ -636,16 +642,16 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     padding: const EdgeInsets.all(20),
                     child: ConditionalRenderWidget(
                       title: 'Using any Anganwadi services?',
-                      defaultValue:
-                      widget.familyMemberIndividualDataModel!.anganwadiServicesUsing,
+                      defaultValue: widget.familyMemberIndividualDataModel!
+                          .anganwadiServicesUsing,
                       options: [
                         ["Yes", "yes"],
                         ["No", "no"]
                       ],
                       onSaved: (val) {
                         print("Value recorded: $val");
-                        widget.familyMemberIndividualDataModel!.anganwadiServicesUsing =
-                            val;
+                        widget.familyMemberIndividualDataModel!
+                            .anganwadiServicesUsing = val;
                       },
                       conditionalPositiveValue: 'yes',
                       conditionalNegativeValue: 'no',
@@ -664,7 +670,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                               return "Enter a value / NA";
                             } else
                               return null;
-                          }), conditionalNegativeWidget: Container(),
+                          }),
+                      conditionalNegativeWidget: Container(),
                     ),
                   ),
                   Padding(
@@ -687,16 +694,16 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     padding: const EdgeInsets.all(20),
                     child: ConditionalRenderWidget(
                       title: 'Do you visit a private hospital?',
-                      defaultValue:
-                      widget.familyMemberIndividualDataModel!.privateClinicServicesUsed,
+                      defaultValue: widget.familyMemberIndividualDataModel!
+                          .privateClinicServicesUsed,
                       options: [
                         ["Yes", "yes"],
                         ["No", "no"]
                       ],
                       onSaved: (val) {
                         print("Value recorded: $val");
-                        widget.familyMemberIndividualDataModel!.privateClinicServicesUsed =
-                            val;
+                        widget.familyMemberIndividualDataModel!
+                            .privateClinicServicesUsed = val;
                       },
                       conditionalPositiveValue: 'yes',
                       conditionalNegativeValue: 'no',
@@ -704,7 +711,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         title: 'Reasons for using a private clinic',
                         hint: 'Please choose a reason',
                         dataMap: widget.familyMemberIndividualDataModel!
-                            .privateServiceReason ??
+                                .privateServiceReason ??
                             privateClinicReasons,
                         singleOption: false,
                         context: context,
@@ -714,7 +721,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         },
                         errorField: "Please choose a reason",
                         autoValidateMode: AutovalidateMode.onUserInteraction,
-                      ), conditionalNegativeWidget: Container(),
+                      ),
+                      conditionalNegativeWidget: Container(),
                     ),
                   )
                 ],
@@ -727,7 +735,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     child: ConditionalRenderWidget(
                       title: 'Do you use any tobacco based products?',
                       defaultValue:
-                      widget.familyMemberIndividualDataModel!.useOfTobacco,
+                          widget.familyMemberIndividualDataModel!.useOfTobacco,
                       options: [
                         ["Yes", "yes"],
                         ["No", "no"]
@@ -739,17 +747,17 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       },
                       conditionalPositiveValue: 'yes',
                       conditionalNegativeValue: 'no',
-                      conditionalPositiveWidget:CheckBoxAddExtraAlertDialog(
+                      conditionalPositiveWidget: CheckBoxAddExtraAlertDialog(
                         title: 'Tobacco products',
                         hint: 'Choose applicable products',
-                        dataMap: widget
-                            .familyMemberIndividualDataModel!.tobaccoProducts ??
+                        dataMap: widget.familyMemberIndividualDataModel!
+                                .tobaccoProducts ??
                             tobaccoProducts,
                         context: context,
                         errorField: 'Please choose at least one',
                         onSaved: (map) {
-                          widget.familyMemberIndividualDataModel!.tobaccoProducts =
-                              map;
+                          widget.familyMemberIndividualDataModel!
+                              .tobaccoProducts = map;
                         },
                       ),
                       conditionalNegativeWidget: Container(),

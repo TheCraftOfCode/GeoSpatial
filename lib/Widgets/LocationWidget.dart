@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geolocator/geolocator.dart';

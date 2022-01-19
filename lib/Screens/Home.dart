@@ -7,7 +7,6 @@ import 'package:geo_spatial/Constants/Constants.dart';
 import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
 import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
-import 'package:geo_spatial/Utils/Globals.dart' as globals;
 import 'package:geo_spatial/Widgets/DataCard.dart';
 import 'package:geo_spatial/Widgets/NavigationDrawer.dart';
 import 'package:google_fonts/google_fonts.dart';

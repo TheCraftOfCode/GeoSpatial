@@ -33,7 +33,7 @@ class _IncomeWithTypeTextFieldState extends State<IncomeWithTypeTextField> {
 
   initState() {
     super.initState();
-    chosenOption = widget.initialDropdownValue ?? widget.listOfOptions[0];
+    chosenOption = widget.initialDropdownValue ?? widget.listOfOptions[widget.listOfOptions.length - 1];
   }
 
   @override
