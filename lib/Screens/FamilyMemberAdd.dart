@@ -305,24 +305,30 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   ),
                   //TODO: Occupation widget db functions update
                   NestedOptionWidgetFormField(
-                    nestedOptionData: [
-                      new NestedOptionData(subOptionDataMap: {
-                        "Occupation 1": false,
-                        "Occupation 2": false
-                      }, boxName: 'Category One'),
-                      new NestedOptionData(subOptionDataMap: {
-                        "Occupation 1": false,
-                        "Occupation 2": false
-                      }, boxName: 'Category Two'),
-                      new NestedOptionData(subOptionDataMap: {
-                        "Occupation 1": false,
-                        "Occupation 2": false
-                      }, boxName: 'Category Three'),
-                      new NestedOptionData(subOptionDataMap: {
-                        "Occupation 1": false,
-                        "Occupation 2": false
-                      }, boxName: 'Category Four')
-                    ],
+                    onSaved: (val) {
+                      widget.familyMemberIndividualDataModel!.occupationData =
+                          val;
+                    },
+                    nestedOptionData: widget
+                            .familyMemberIndividualDataModel!.occupationData ??
+                        [
+                          new NestedOptionData(subOptionDataMap: {
+                            "Occupation 1": false,
+                            "Occupation 2": false
+                          }, boxName: 'Category One'),
+                          new NestedOptionData(subOptionDataMap: {
+                            "Occupation 1": false,
+                            "Occupation 2": false
+                          }, boxName: 'Category Two'),
+                          new NestedOptionData(subOptionDataMap: {
+                            "Occupation 1": false,
+                            "Occupation 2": false
+                          }, boxName: 'Category Three'),
+                          new NestedOptionData(subOptionDataMap: {
+                            "Occupation 1": false,
+                            "Occupation 2": false
+                          }, boxName: 'Category Four')
+                        ],
                     title: 'Occupation',
                     context: context,
                   ),
@@ -444,8 +450,16 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           ),
                           //TODO: Make sure text field is enabled only after option is chosen
                           IncomeWithTypeTextField(
-                            onSaved: (textValue, option) {
-                              print(textValue! + " " + option!);
+                            initialDropdownValue: widget
+                                .familyMemberIndividualDataModel!.incomeType,
+                            initialValue:
+                                widget.familyMemberIndividualDataModel!.income,
+                            onSaved: (income, option) {
+                              widget.familyMemberIndividualDataModel!.income =
+                                  income;
+                              widget.familyMemberIndividualDataModel!
+                                  .incomeType = option;
+                              print(income! + " " + option!);
                             },
                             text: 'Income',
                             hintText: 'Enter income',

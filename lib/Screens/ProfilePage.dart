@@ -10,6 +10,7 @@ import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:oktoast/oktoast.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -30,8 +31,18 @@ Future<http.Response> _getUserDetails() async {
   var jwt = await jwtToken();
   String url = NETWORK_ADDRESS;
 
-  var res = await http.get(Uri.http(url, '/api/getUserData'),
-      headers: {"Content-Type": "application/json", 'user-auth-token': jwt});
+  var res = await http.get(Uri.http(url, '/api/getUserData'), headers: {
+    "Content-Type": "application/json",
+    'user-auth-token': jwt
+  }).timeout(
+    const Duration(seconds: 10),
+    onTimeout: () {
+      showToast("Server Timed out!");
+      // Time has run out, do what you wanted to do.
+      return http.Response(
+          'Error', 408); // Request Timeout response status code
+    },
+  );
   print("RES: ${res.body}");
 
   return res;
@@ -41,7 +52,7 @@ Future<String> get _getUserData async {
   var userData = await storage.read(key: USER_DATA_KEY);
   try {
     var res = await _getUserDetails();
-    if(res.statusCode == 200){
+    if (res.statusCode == 200) {
       userData = res.body;
       await storage.write(key: USER_DATA_KEY, value: userData);
     }

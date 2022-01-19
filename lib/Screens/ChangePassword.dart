@@ -52,9 +52,22 @@ class _ChangePasswordState extends State<ChangePassword> {
 
     String jwt = await jwtToken;
 
-    var res = await http.put(Uri.http(url, '/api/changeUserPassword'),
-        headers: {"Content-Type": "application/json", 'user-auth-token': jwt},
-        body: body);
+    var res = await http
+        .put(Uri.http(url, '/api/changeUserPassword'),
+            headers: {
+              "Content-Type": "application/json",
+              'user-auth-token': jwt
+            },
+            body: body)
+        .timeout(
+      const Duration(seconds: 10),
+      onTimeout: () {
+        showToast("Server Timed out!");
+        // Time has run out, do what you wanted to do.
+        return http.Response(
+            'Error', 408); // Request Timeout response status code
+      },
+    );
     print("RES: ${res.body}");
 
     return res;

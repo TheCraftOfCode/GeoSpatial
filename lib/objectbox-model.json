@@ -54,7 +54,7 @@
     },
     {
       "id": "2:4604626538020621410",
-      "lastPropertyId": "36:6440758785035669475",
+      "lastPropertyId": "45:8806096688498887024",
       "name": "FamilyMemberIndividualDataModel",
       "properties": [
         {
@@ -96,16 +96,6 @@
         {
           "id": "8:8202265740818534316",
           "name": "dailyWageWorker",
-          "type": 9
-        },
-        {
-          "id": "9:5611188519781040934",
-          "name": "incomePerDay",
-          "type": 9
-        },
-        {
-          "id": "10:1258910779661384685",
-          "name": "incomePerMonth",
           "type": 9
         },
         {
@@ -202,13 +192,58 @@
           "id": "36:6440758785035669475",
           "name": "privateClinicServicesUsed",
           "type": 9
+        },
+        {
+          "id": "37:3741391841915175758",
+          "name": "employed",
+          "type": 9
+        },
+        {
+          "id": "38:2451270514680374685",
+          "name": "income",
+          "type": 9
+        },
+        {
+          "id": "39:5436158745852723253",
+          "name": "incomeType",
+          "type": 9
+        },
+        {
+          "id": "40:4028603457625037657",
+          "name": "dbPrivateServiceReason",
+          "type": 9
+        },
+        {
+          "id": "41:3132879446055335430",
+          "name": "dbCommunicableDiseases",
+          "type": 9
+        },
+        {
+          "id": "42:7751946170395515723",
+          "name": "dbFrequentAilments",
+          "type": 9
+        },
+        {
+          "id": "43:4854856293984079980",
+          "name": "dbNonCommunicableDiseases",
+          "type": 9
+        },
+        {
+          "id": "44:558549105718785352",
+          "name": "dbTobaccoProducts",
+          "type": 9
+        },
+        {
+          "id": "45:8806096688498887024",
+          "name": "dbOccupationData",
+          "type": 9
         }
       ],
       "relations": []
     },
     {
       "id": "3:4555229639046191310",
-      "lastPropertyId": "34:938904163813263655",
+      "lastPropertyId": "37:8711686748126605615",
       "name": "FamilyMembersCommonDataModel",
       "properties": [
         {
@@ -371,6 +406,21 @@
           "id": "34:938904163813263655",
           "name": "savedTime",
           "type": 9
+        },
+        {
+          "id": "35:4854280675953919579",
+          "name": "dbNoToiletsWhy",
+          "type": 9
+        },
+        {
+          "id": "36:6442255301640644335",
+          "name": "dbCropsCultivated",
+          "type": 9
+        },
+        {
+          "id": "37:8711686748126605615",
+          "name": "headOfFamily",
+          "type": 9
         }
       ],
       "relations": [
@@ -399,7 +449,9 @@
     1321911158882624161,
     1780571115080959247,
     5383502869453245964,
-    2820386840249227222
+    2820386840249227222,
+    5611188519781040934,
+    1258910779661384685
   ],
   "retiredRelationUids": [],
   "version": 1

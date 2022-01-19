@@ -67,7 +67,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(2, 4604626538020621410),
       name: 'FamilyMemberIndividualDataModel',
-      lastPropertyId: const IdUid(36, 6440758785035669475),
+      lastPropertyId: const IdUid(45, 8806096688498887024),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -108,16 +108,6 @@ final _entities = <ModelEntity>[
         ModelProperty(
             id: const IdUid(8, 8202265740818534316),
             name: 'dailyWageWorker',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(9, 5611188519781040934),
-            name: 'incomePerDay',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(10, 1258910779661384685),
-            name: 'incomePerMonth',
             type: 9,
             flags: 0),
         ModelProperty(
@@ -214,6 +204,51 @@ final _entities = <ModelEntity>[
             id: const IdUid(36, 6440758785035669475),
             name: 'privateClinicServicesUsed',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(37, 3741391841915175758),
+            name: 'employed',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(38, 2451270514680374685),
+            name: 'income',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(39, 5436158745852723253),
+            name: 'incomeType',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(40, 4028603457625037657),
+            name: 'dbPrivateServiceReason',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(41, 3132879446055335430),
+            name: 'dbCommunicableDiseases',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(42, 7751946170395515723),
+            name: 'dbFrequentAilments',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(43, 4854856293984079980),
+            name: 'dbNonCommunicableDiseases',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(44, 558549105718785352),
+            name: 'dbTobaccoProducts',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(45, 8806096688498887024),
+            name: 'dbOccupationData',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -221,7 +256,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(3, 4555229639046191310),
       name: 'FamilyMembersCommonDataModel',
-      lastPropertyId: const IdUid(34, 938904163813263655),
+      lastPropertyId: const IdUid(37, 8711686748126605615),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -383,6 +418,21 @@ final _entities = <ModelEntity>[
             id: const IdUid(34, 938904163813263655),
             name: 'savedTime',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(35, 4854280675953919579),
+            name: 'dbNoToiletsWhy',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(36, 6442255301640644335),
+            name: 'dbCropsCultivated',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(37, 8711686748126605615),
+            name: 'headOfFamily',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[
@@ -429,7 +479,9 @@ ModelDefinition getObjectBoxModel() {
         1321911158882624161,
         1780571115080959247,
         5383502869453245964,
-        2820386840249227222
+        2820386840249227222,
+        5611188519781040934,
+        1258910779661384685
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -531,12 +583,6 @@ ModelDefinition getObjectBoxModel() {
           final dailyWageWorkerOffset = object.dailyWageWorker == null
               ? null
               : fbb.writeString(object.dailyWageWorker!);
-          final incomePerDayOffset = object.incomePerDay == null
-              ? null
-              : fbb.writeString(object.incomePerDay!);
-          final incomePerMonthOffset = object.incomePerMonth == null
-              ? null
-              : fbb.writeString(object.incomePerMonth!);
           final pensionOffset =
               object.pension == null ? null : fbb.writeString(object.pension!);
           final businessStatusOffset = object.businessStatus == null
@@ -600,7 +646,36 @@ ModelDefinition getObjectBoxModel() {
               object.privateClinicServicesUsed == null
                   ? null
                   : fbb.writeString(object.privateClinicServicesUsed!);
-          fbb.startTable(37);
+          final employedOffset = object.employed == null
+              ? null
+              : fbb.writeString(object.employed!);
+          final incomeOffset =
+              object.income == null ? null : fbb.writeString(object.income!);
+          final incomeTypeOffset = object.incomeType == null
+              ? null
+              : fbb.writeString(object.incomeType!);
+          final dbPrivateServiceReasonOffset =
+              object.dbPrivateServiceReason == null
+                  ? null
+                  : fbb.writeString(object.dbPrivateServiceReason!);
+          final dbCommunicableDiseasesOffset =
+              object.dbCommunicableDiseases == null
+                  ? null
+                  : fbb.writeString(object.dbCommunicableDiseases!);
+          final dbFrequentAilmentsOffset = object.dbFrequentAilments == null
+              ? null
+              : fbb.writeString(object.dbFrequentAilments!);
+          final dbNonCommunicableDiseasesOffset =
+              object.dbNonCommunicableDiseases == null
+                  ? null
+                  : fbb.writeString(object.dbNonCommunicableDiseases!);
+          final dbTobaccoProductsOffset = object.dbTobaccoProducts == null
+              ? null
+              : fbb.writeString(object.dbTobaccoProducts!);
+          final dbOccupationDataOffset = object.dbOccupationData == null
+              ? null
+              : fbb.writeString(object.dbOccupationData!);
+          fbb.startTable(46);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, userNameOffset);
           fbb.addInt64(2, object.dateOfBirth?.millisecondsSinceEpoch);
@@ -609,8 +684,6 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(5, educationQualificationOffset);
           fbb.addOffset(6, aadhaarNumberOffset);
           fbb.addOffset(7, dailyWageWorkerOffset);
-          fbb.addOffset(8, incomePerDayOffset);
-          fbb.addOffset(9, incomePerMonthOffset);
           fbb.addOffset(10, pensionOffset);
           fbb.addOffset(11, businessStatusOffset);
           fbb.addOffset(12, maritalStatusOffset);
@@ -630,6 +703,15 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(33, noOfDaysWorkingOffset);
           fbb.addOffset(34, PHCServicesUsedOffset);
           fbb.addOffset(35, privateClinicServicesUsedOffset);
+          fbb.addOffset(36, employedOffset);
+          fbb.addOffset(37, incomeOffset);
+          fbb.addOffset(38, incomeTypeOffset);
+          fbb.addOffset(39, dbPrivateServiceReasonOffset);
+          fbb.addOffset(40, dbCommunicableDiseasesOffset);
+          fbb.addOffset(41, dbFrequentAilmentsOffset);
+          fbb.addOffset(42, dbNonCommunicableDiseasesOffset);
+          fbb.addOffset(43, dbTobaccoProductsOffset);
+          fbb.addOffset(44, dbOccupationDataOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -655,10 +737,6 @@ ModelDefinition getObjectBoxModel() {
                 .vTableGetNullable(buffer, rootOffset, 16)
             ..dailyWageWorker = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 18)
-            ..incomePerDay = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 20)
-            ..incomePerMonth = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 22)
             ..pension = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 24)
             ..businessStatus = const fb.StringReader()
@@ -699,7 +777,25 @@ ModelDefinition getObjectBoxModel() {
             ..PHCServicesUsed = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 72)
             ..privateClinicServicesUsed = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 74);
+                .vTableGetNullable(buffer, rootOffset, 74)
+            ..employed = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 76)
+            ..income = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 78)
+            ..incomeType = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 80)
+            ..dbPrivateServiceReason = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 82)
+            ..dbCommunicableDiseases = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 84)
+            ..dbFrequentAilments = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 86)
+            ..dbNonCommunicableDiseases = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 88)
+            ..dbTobaccoProducts = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 90)
+            ..dbOccupationData = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 92);
 
           return object;
         }),
@@ -809,7 +905,16 @@ ModelDefinition getObjectBoxModel() {
           final savedTimeOffset = object.savedTime == null
               ? null
               : fbb.writeString(object.savedTime!);
-          fbb.startTable(35);
+          final dbNoToiletsWhyOffset = object.dbNoToiletsWhy == null
+              ? null
+              : fbb.writeString(object.dbNoToiletsWhy!);
+          final dbCropsCultivatedOffset = object.dbCropsCultivated == null
+              ? null
+              : fbb.writeString(object.dbCropsCultivated!);
+          final headOfFamilyOffset = object.headOfFamily == null
+              ? null
+              : fbb.writeString(object.headOfFamily!);
+          fbb.startTable(38);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, drinkingWaterOffset);
           fbb.addOffset(3, toiletFacilityOffset);
@@ -842,6 +947,9 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(31, dbSourceOfDrinkingWaterOffset);
           fbb.addOffset(32, villageCodeOffset);
           fbb.addOffset(33, savedTimeOffset);
+          fbb.addOffset(34, dbNoToiletsWhyOffset);
+          fbb.addOffset(35, dbCropsCultivatedOffset);
+          fbb.addOffset(36, headOfFamilyOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -912,7 +1020,13 @@ ModelDefinition getObjectBoxModel() {
             ..villageCode = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 68)
             ..savedTime = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 70);
+                .vTableGetNullable(buffer, rootOffset, 70)
+            ..dbNoToiletsWhy = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 72)
+            ..dbCropsCultivated = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 74)
+            ..headOfFamily = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 76);
           InternalToManyAccess.setRelInfo(
               object.individualDataList,
               store,
@@ -999,108 +1113,141 @@ class FamilyMemberIndividualDataModel_ {
       QueryStringProperty<FamilyMemberIndividualDataModel>(
           _entities[1].properties[7]);
 
-  /// see [FamilyMemberIndividualDataModel.incomePerDay]
-  static final incomePerDay =
-      QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[8]);
-
-  /// see [FamilyMemberIndividualDataModel.incomePerMonth]
-  static final incomePerMonth =
-      QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[9]);
-
   /// see [FamilyMemberIndividualDataModel.pension]
   static final pension = QueryStringProperty<FamilyMemberIndividualDataModel>(
-      _entities[1].properties[10]);
+      _entities[1].properties[8]);
 
   /// see [FamilyMemberIndividualDataModel.businessStatus]
   static final businessStatus =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[11]);
+          _entities[1].properties[9]);
 
   /// see [FamilyMemberIndividualDataModel.maritalStatus]
   static final maritalStatus =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[12]);
+          _entities[1].properties[10]);
 
   /// see [FamilyMemberIndividualDataModel.specialSkills]
   static final specialSkills =
       QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[13]);
+          _entities[1].properties[11]);
 
   /// see [FamilyMemberIndividualDataModel.surgeries]
   static final surgeries = QueryStringProperty<FamilyMemberIndividualDataModel>(
-      _entities[1].properties[14]);
+      _entities[1].properties[12]);
 
   /// see [FamilyMemberIndividualDataModel.anganwadiServicesAware]
   static final anganwadiServicesAware =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[15]);
+          _entities[1].properties[13]);
 
   /// see [FamilyMemberIndividualDataModel.anganwadiServicesUsing]
   static final anganwadiServicesUsing =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[16]);
+          _entities[1].properties[14]);
 
   /// see [FamilyMemberIndividualDataModel.anganwadiServicesUsedList]
   static final anganwadiServicesUsedList =
       QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[17]);
+          _entities[1].properties[15]);
 
   /// see [FamilyMemberIndividualDataModel.useOfTobacco]
   static final useOfTobacco =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[18]);
+          _entities[1].properties[16]);
 
   /// see [FamilyMemberIndividualDataModel.useOfAlcohol]
   static final useOfAlcohol =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[19]);
+          _entities[1].properties[17]);
 
   /// see [FamilyMemberIndividualDataModel.aarogyaSetuInstalled]
   static final aarogyaSetuInstalled =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[20]);
+          _entities[1].properties[18]);
 
   /// see [FamilyMemberIndividualDataModel.vizhithiruInstalled]
   static final vizhithiruInstalled =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[21]);
+          _entities[1].properties[19]);
 
   /// see [FamilyMemberIndividualDataModel.dataValid]
   static final dataValid =
       QueryBooleanProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[22]);
+          _entities[1].properties[20]);
 
   /// see [FamilyMemberIndividualDataModel.dbVulnerabilities]
   static final dbVulnerabilities =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[23]);
+          _entities[1].properties[21]);
 
   /// see [FamilyMemberIndividualDataModel.dbOccupation]
   static final dbOccupation =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[24]);
+          _entities[1].properties[22]);
 
   /// see [FamilyMemberIndividualDataModel.workTimings]
   static final workTimings =
       QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[25]);
+          _entities[1].properties[23]);
 
   /// see [FamilyMemberIndividualDataModel.noOfDaysWorking]
   static final noOfDaysWorking =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[26]);
+          _entities[1].properties[24]);
 
   /// see [FamilyMemberIndividualDataModel.PHCServicesUsed]
   static final PHCServicesUsed =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[27]);
+          _entities[1].properties[25]);
 
   /// see [FamilyMemberIndividualDataModel.privateClinicServicesUsed]
   static final privateClinicServicesUsed =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[28]);
+          _entities[1].properties[26]);
+
+  /// see [FamilyMemberIndividualDataModel.employed]
+  static final employed = QueryStringProperty<FamilyMemberIndividualDataModel>(
+      _entities[1].properties[27]);
+
+  /// see [FamilyMemberIndividualDataModel.income]
+  static final income = QueryStringProperty<FamilyMemberIndividualDataModel>(
+      _entities[1].properties[28]);
+
+  /// see [FamilyMemberIndividualDataModel.incomeType]
+  static final incomeType =
+      QueryStringProperty<FamilyMemberIndividualDataModel>(
+          _entities[1].properties[29]);
+
+  /// see [FamilyMemberIndividualDataModel.dbPrivateServiceReason]
+  static final dbPrivateServiceReason =
+      QueryStringProperty<FamilyMemberIndividualDataModel>(
+          _entities[1].properties[30]);
+
+  /// see [FamilyMemberIndividualDataModel.dbCommunicableDiseases]
+  static final dbCommunicableDiseases =
+      QueryStringProperty<FamilyMemberIndividualDataModel>(
+          _entities[1].properties[31]);
+
+  /// see [FamilyMemberIndividualDataModel.dbFrequentAilments]
+  static final dbFrequentAilments =
+      QueryStringProperty<FamilyMemberIndividualDataModel>(
+          _entities[1].properties[32]);
+
+  /// see [FamilyMemberIndividualDataModel.dbNonCommunicableDiseases]
+  static final dbNonCommunicableDiseases =
+      QueryStringProperty<FamilyMemberIndividualDataModel>(
+          _entities[1].properties[33]);
+
+  /// see [FamilyMemberIndividualDataModel.dbTobaccoProducts]
+  static final dbTobaccoProducts =
+      QueryStringProperty<FamilyMemberIndividualDataModel>(
+          _entities[1].properties[34]);
+
+  /// see [FamilyMemberIndividualDataModel.dbOccupationData]
+  static final dbOccupationData =
+      QueryStringProperty<FamilyMemberIndividualDataModel>(
+          _entities[1].properties[35]);
 }
 
 /// [FamilyMembersCommonDataModel] entity fields to define ObjectBox queries.
@@ -1258,6 +1405,20 @@ class FamilyMembersCommonDataModel_ {
   /// see [FamilyMembersCommonDataModel.savedTime]
   static final savedTime = QueryStringProperty<FamilyMembersCommonDataModel>(
       _entities[2].properties[31]);
+
+  /// see [FamilyMembersCommonDataModel.dbNoToiletsWhy]
+  static final dbNoToiletsWhy =
+      QueryStringProperty<FamilyMembersCommonDataModel>(
+          _entities[2].properties[32]);
+
+  /// see [FamilyMembersCommonDataModel.dbCropsCultivated]
+  static final dbCropsCultivated =
+      QueryStringProperty<FamilyMembersCommonDataModel>(
+          _entities[2].properties[33]);
+
+  /// see [FamilyMembersCommonDataModel.headOfFamily]
+  static final headOfFamily = QueryStringProperty<FamilyMembersCommonDataModel>(
+      _entities[2].properties[34]);
 
   /// see [FamilyMembersCommonDataModel.individualDataList]
   static final individualDataList = QueryRelationToMany<

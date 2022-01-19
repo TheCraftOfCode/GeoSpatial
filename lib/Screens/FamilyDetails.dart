@@ -128,9 +128,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     'Lorry/Van': false
   };
 
-  var incomeFromCattleEnabled = false;
-  var toiletFacility = false;
-
   _getUserNameList() {
     var list = [];
     widget.modelData!.individualDataListTransient.forEach((element) {
@@ -200,12 +197,15 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                     Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: DropDownFormField(
+                          defaultValue: widget.modelData!.headOfFamily,
                           //TODO: Fetch names from family member add saved objects and populate list
+                          onSaved: (value) {
+                            widget.modelData!.headOfFamily = value;
+                          },
                           title: 'Head of family',
                           hint: 'Choose the head of family',
                           errorField: 'Please choose a head of family',
                           autoValidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (val) {},
                           list: _getUserNameList(),
                         )),
                     OptionsWidget(
@@ -233,7 +233,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       context: context,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(20),
+                      padding: const EdgeInsets.symmetric(vertical: 20),
                       child: ConditionalRenderWidget(
                         title: "Do you have toilet facilities?",
                         defaultValue: widget.modelData!.toiletFacility,

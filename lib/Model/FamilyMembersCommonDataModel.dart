@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:geo_spatial/Widgets/NestedOptionsWidget.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:objectbox/objectbox.dart';
@@ -16,6 +17,32 @@ List<String> buildListForOptionWidget(Map<String, bool> mapData) {
 
 @Entity()
 class FamilyMemberIndividualDataModel {
+  parseOccupationJson(List<NestedOptionData> occupationData) {
+    var list = [];
+    for (var i in occupationData) {
+      print("ENC: ${i.toJsonString()}");
+      list.add(i.toJsonString());
+    }
+
+    for (var i in list) {
+      print("ENC AF: ${i}");
+    }
+
+    print("ENCODED VAL: ${json.encode(list)}");
+    return json.encode(list);
+  }
+
+  parseOccupationObject(String occupationData) {
+    List<dynamic> occupationStringList = json.decode(occupationData);
+    List<NestedOptionData> list = [];
+
+    for (var i in occupationStringList) {
+      list.add(NestedOptionData.fromJson(i));
+    }
+
+    return list;
+  }
+
   int id = 0;
   String? userName;
   @Property(type: PropertyType.date)
@@ -30,30 +57,29 @@ class FamilyMemberIndividualDataModel {
   String? employed;
   String? income;
   String? incomeType;
-  String? incomePerDay; //TODO: Remove field
-  String? incomePerMonth; //TODO: Remove field
   String? pension;
   String? businessStatus;
   String? maritalStatus;
-  String? noOfDaysWorking;      //TODO: Inform Change
+  String? noOfDaysWorking; //TODO: Confirm update in JSON
   List<String>? specialSkills;
   List<String>? workTimings;
   String? surgeries;
   String? anganwadiServicesAware;
   String? anganwadiServicesUsing;
   List<String>? anganwadiServicesUsedList;
-  String? PHCServicesUsed;             //TODO: Inform Change
-  String? privateClinicServicesUsed; //TODO: Inform Change
-  Map<String,bool>? privateServiceReason;  //TODO: Inform Change, write get set functions
-  Map<String,bool>? communicableDiseases; //TODO: Write get set functions
-  Map<String,bool>? frequentAilments;     //TODO: Inform change, write functions
-  Map<String,bool>? nonCommunicableDiseases;   //TODO: Inform change, write functions
-  Map<String,bool>? tobaccoProducts;        //TODO: Inform change, write functions
+  String? PHCServicesUsed; //TODO: Confirm update in JSON
+  String? privateClinicServicesUsed; //TODO: Confirm update in JSON
+  Map<String, bool>? privateServiceReason; //TODO: Confirm update in JSON
+  Map<String, bool>? communicableDiseases; //TODO: Confirm update in JSON
+  Map<String, bool>? frequentAilments; //TODO: Confirm update in JSON
+  Map<String, bool>? nonCommunicableDiseases; //TODO: Confirm update in JSON
+  Map<String, bool>? tobaccoProducts; //TODO: Confirm update in JSON
   String? useOfTobacco;
   String? useOfAlcohol;
   String? aarogyaSetuInstalled;
   String? vizhithiruInstalled;
   bool? dataValid = false;
+  List<NestedOptionData>? occupationData;
 
   //String? savedTime = DateFormat('hh:mm a').format(DateTime.now());
 
@@ -75,23 +101,29 @@ class FamilyMemberIndividualDataModel {
           occupation != null ? buildListForOptionWidget(occupation!) : ['None'],
       "noOfDaysWorking": noOfDaysWorking,
       "isADailyWageWorker": dailyWageWorker,
-      "incomePerDay": incomePerDay,
-      "incomePerMonth": incomePerMonth,
       "workTimings": workTimings,
       "maritalStatus": maritalStatus,
       "specialSkills": specialSkills,
-      "frequentHealthAilments": frequentAilments!= null ? buildListForOptionWidget(frequentAilments!) : [],
-      "communicableDiseases": communicableDiseases!= null ? buildListForOptionWidget(communicableDiseases!) : [],
-      "nonCommunicableDiseases": nonCommunicableDiseases!=null ? buildListForOptionWidget(nonCommunicableDiseases!) : [],
+      "frequentHealthAilments": frequentAilments != null
+          ? buildListForOptionWidget(frequentAilments!)
+          : [],
+      "communicableDiseases": communicableDiseases != null
+          ? buildListForOptionWidget(communicableDiseases!)
+          : [],
+      "nonCommunicableDiseases": nonCommunicableDiseases != null
+          ? buildListForOptionWidget(nonCommunicableDiseases!)
+          : [],
       "surgeriesUndergone": surgeries,
       "anganwadiServicesAware": anganwadiServicesAware,
       "anganwadiServicesUsed": anganwadiServicesUsing,
       "anganwadiServicesUtilised": anganwadiServicesUsedList,
       "phcServicesUtilised": PHCServicesUsed,
       "privateHealthClinicFacilitiesUsed": privateClinicServicesUsed,
-      "reasonsForVisitingPrivateHealthClinic": privateServiceReason!= null ? buildListForOptionWidget(privateServiceReason!) : [],
+      "reasonsForVisitingPrivateHealthClinic": privateServiceReason != null
+          ? buildListForOptionWidget(privateServiceReason!)
+          : [],
       "tobaccoBasedProductsUsage": useOfTobacco,
-      "tobaccoProductsUsed" : tobaccoProducts,
+      "tobaccoProductsUsed": tobaccoProducts,
       "alcoholConsumption": useOfAlcohol,
       "businessStatus": businessStatus,
       "arogyaSethuAppInstallationStatus": aarogyaSetuInstalled,
@@ -113,6 +145,22 @@ class FamilyMemberIndividualDataModel {
     }
   }
 
+  String? get dbOccupationData =>
+      occupationData == null ? null : parseOccupationJson(occupationData!);
+
+  set dbOccupationData(String? value) {
+    if (value == null) {
+      occupationData = null;
+    } else {
+      var data = parseOccupationObject(value);
+      if (data.isEmpty) {
+        occupationData = null;
+      } else {
+        occupationData = data;
+      }
+    }
+  }
+
   String? get dbOccupation =>
       occupation == null ? null : json.encode(occupation);
 
@@ -121,6 +169,67 @@ class FamilyMemberIndividualDataModel {
       occupation = null;
     } else {
       occupation = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
+
+  String? get dbPrivateServiceReason =>
+      privateServiceReason == null ? null : json.encode(privateServiceReason);
+
+  set dbPrivateServiceReason(String? value) {
+    if (value == null) {
+      privateServiceReason = null;
+    } else {
+      privateServiceReason = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
+
+  String? get dbCommunicableDiseases =>
+      communicableDiseases == null ? null : json.encode(communicableDiseases);
+
+  set dbCommunicableDiseases(String? value) {
+    if (value == null) {
+      communicableDiseases = null;
+    } else {
+      communicableDiseases = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
+
+  String? get dbFrequentAilments =>
+      frequentAilments == null ? null : json.encode(frequentAilments);
+
+  set dbFrequentAilments(String? value) {
+    if (value == null) {
+      frequentAilments = null;
+    } else {
+      frequentAilments = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
+
+  String? get dbNonCommunicableDiseases => nonCommunicableDiseases == null
+      ? null
+      : json.encode(nonCommunicableDiseases);
+
+  set dbNonCommunicableDiseases(String? value) {
+    if (value == null) {
+      nonCommunicableDiseases = null;
+    } else {
+      nonCommunicableDiseases = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
+
+  String? get dbTobaccoProducts =>
+      tobaccoProducts == null ? null : json.encode(tobaccoProducts);
+
+  set dbTobaccoProducts(String? value) {
+    if (value == null) {
+      tobaccoProducts = null;
+    } else {
+      tobaccoProducts = Map.from(
           json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
     }
   }
@@ -134,6 +243,7 @@ class FamilyMembersCommonDataModel {
   Position? locationBottomLeft;
   Position? locationBottomRight;
 
+  String? headOfFamily;
   String? drinkingWater;
   Map<String, bool>? sourceOfDrinkingWater;
   String? toiletFacility;
@@ -146,12 +256,12 @@ class FamilyMembersCommonDataModel {
   Map<String, bool>? twoThreeWheelManufacturer;
   Map<String, bool>? twoFourManufacturer;
   Map<String, bool>? localFoodMap;
-  Map<String,bool>? noToiletsWhy;     //TODO: Write set get functions
+  Map<String, bool>? noToiletsWhy; //TODO: Update JSON
   String? isCattleOwned;
   String? incomeFromCattle;
   String? isFarmLandOwned;
   String? isSeedsPreserved;
-  Map<String, bool>? cropsCultivated;
+  Map<String, bool>? cropsCultivated; //TODO: Update JSON
   Map<String, bool>? preservedSeedsMap;
   Map<String, bool>? treesOwnedMap;
   String? isKitchenGardenOwned;
@@ -171,7 +281,7 @@ class FamilyMembersCommonDataModel {
   Map<String, dynamic> toJson() {
     return {
       'familyMemberData':
-      individualDataListTransient.map((item) => item.toJson()).toList(),
+          individualDataListTransient.map((item) => item.toJson()).toList(),
       'locationTopLeft': [
         locationTopLeft!.latitude,
         locationTopLeft!.longitude
@@ -196,7 +306,9 @@ class FamilyMembersCommonDataModel {
 
       "areToiletsAvailableInHouse": toiletFacility,
 
-      "noToiletsWhy" : noToiletsWhy != null ? buildListForOptionWidget(noToiletsWhy!) : [],    //TODO: Inform change
+      "noToiletsWhy": noToiletsWhy != null
+          ? buildListForOptionWidget(noToiletsWhy!)
+          : [], //TODO: Inform change
 
       "availabilityOfWaterInToilets": String,
 
@@ -212,7 +324,6 @@ class FamilyMembersCommonDataModel {
 
       "numberOfThreeWheelers": noOfThreeWheelers,
 
-
       "numberOfFourWheelers": noOfFourWheelers,
 
       "brandsOfFourWheelers": twoFourManufacturer != null
@@ -225,7 +336,9 @@ class FamilyMembersCommonDataModel {
 
       "doYouOwnFarmLand": isFarmLandOwned,
 
-      "cropsCultivated":  cropsCultivated != null ? buildListForOptionWidget(cropsCultivated!) : [],
+      "cropsCultivated": cropsCultivated != null
+          ? buildListForOptionWidget(cropsCultivated!)
+          : [],
 
       "doYouPreserveSeeds": isSeedsPreserved,
 
@@ -419,6 +532,30 @@ class FamilyMembersCommonDataModel {
       preservedSeedsMap = null;
     } else {
       preservedSeedsMap = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
+
+  String? get dbNoToiletsWhy =>
+      noToiletsWhy == null ? null : json.encode(noToiletsWhy);
+
+  set dbNoToiletsWhy(String? value) {
+    if (value == null) {
+      noToiletsWhy = null;
+    } else {
+      noToiletsWhy = Map.from(
+          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
+    }
+  }
+
+  String? get dbCropsCultivated =>
+      cropsCultivated == null ? null : json.encode(cropsCultivated);
+
+  set dbCropsCultivated(String? value) {
+    if (value == null) {
+      cropsCultivated = null;
+    } else {
+      cropsCultivated = Map.from(
           json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
     }
   }

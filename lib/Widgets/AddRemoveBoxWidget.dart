@@ -44,6 +44,7 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                           fontSize: 18, color: colors.darkAccentColor)),
                 ),
                 IconButton(
+                  splashRadius: 20,
                     onPressed: () {
                       setState(() {
                         widget.modelData?.individualDataListTransient
@@ -114,6 +115,7 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                                         fontSize: 20),
                                   ),
                                   trailing: IconButton(
+                                      splashRadius: 20,
                                       color: colors.darkSecondAccentColor,
                                       icon: Icon(Icons.close),
                                       onPressed: () async {
