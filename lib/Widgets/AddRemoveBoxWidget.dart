@@ -19,17 +19,7 @@ class AddRemoveBoxWidget extends StatefulWidget {
   _AddRemoveBoxWidgetState createState() => _AddRemoveBoxWidgetState();
 }
 
-class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget>
-    with WidgetsBindingObserver {
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-
-    if (state == AppLifecycleState.resumed) {
-      setState(() {});
-    }
-  }
-
+class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -77,14 +67,14 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget>
                         itemBuilder: (BuildContext context, int index) {
                           return Card(
                             color: colors.darkSecondBackgroundColor,
+                         /**
+                         * Re-renders tiles whenever visibility changed
+                         * i.e, when user comes back from user page,
+                         * page re rendered and user name is reflected
+                         */
                             child: VisibilityDetector(
-                              /**
-                           * Re-renders tiles whenever visibility changed
-                           * i.e, when user comes back from user page,
-                           * page re rendered and user name is reflected
-                           */
                               onVisibilityChanged: (VisibilityInfo info) {
-                                setState(() {});
+                                setState(() {}); //Re-renders page
                               },
                               key: Key('add-remove-widget-key'),
                               child: ListTile(
@@ -99,10 +89,20 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget>
                                   leading: Icon(Icons.person),
                                   title: Text(
                                     widget.modelData!
+                                                    .individualDataListTransient
+                                                    .elementAt(index)
+                                                    .userName !=
+                                                null &&
+                                            widget.modelData!
+                                                    .individualDataListTransient
+                                                    .elementAt(index)
+                                                    .userName !=
+                                                ''
+                                        ? widget.modelData!
                                             .individualDataListTransient
                                             .elementAt(index)
-                                            .userName ??
-                                        "User ${index + 1}",
+                                            .userName!
+                                        : "User ${index + 1}",
                                     style: GoogleFonts.poppins(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w400,
