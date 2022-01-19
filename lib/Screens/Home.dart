@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:geo_spatial/Constants/Constants.dart';
 import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
 import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
@@ -24,7 +25,7 @@ class Home extends StatefulWidget {
 final storage = FlutterSecureStorage();
 
 Future<String> get _getUserName async {
-  var userName = await storage.read(key: "userData");
+  var userName = await storage.read(key: USER_DATA_KEY);
   print("userData " + userName.toString());
 
   if (userName == null) return "";

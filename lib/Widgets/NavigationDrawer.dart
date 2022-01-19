@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:geo_spatial/Constants/Constants.dart';
 import 'package:geo_spatial/Screens/Login.dart';
 import 'package:geo_spatial/Screens/ProfilePage.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
@@ -10,7 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 final storage = FlutterSecureStorage();
 
 Future<String> get _getUserData async {
-  var userData = await storage.read(key: "userData");
+  var userData = await storage.read(key: USER_DATA_KEY);
   print("userData " + userData.toString());
 
   if (userData == null) return "";
@@ -125,7 +126,7 @@ class NavigationDrawer extends StatelessWidget {
                                       style: TextStyle(
                                           color: colors.darkPrimaryTextColor)),
                                   onPressed: () async {
-                                    await storage.delete(key: 'jwt');
+                                    await storage.delete(key: JWT_STORAGE_KEY);
                                     Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
                                             builder: (context) => Login()),

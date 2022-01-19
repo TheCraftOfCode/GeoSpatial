@@ -47,7 +47,8 @@ class LoadValidPageWidget extends StatelessWidget {
     try {
       var res = await _validateToken(jwt);
       if (res.statusCode != 200) {
-        showToast(res.body);
+        await storage.delete(key: JWT_STORAGE_KEY);
+        showToast("Token could not be validated, logging out");
         return "";
       }
     } catch (e) {
@@ -62,7 +63,11 @@ class LoadValidPageWidget extends StatelessWidget {
         future: jwtToken(context),
         builder: (context, data) {
           if (!data.hasData)
-            return CircularProgressIndicator();
+            return Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
           else if (data.hasData && data.data == '')
             return DefaultPage;
           else

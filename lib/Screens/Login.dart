@@ -116,8 +116,9 @@ class _MyAppState extends State<Login> {
                   position: ToastPosition.center,
                   backgroundColor: colors.darkAccentColor);
             } else {
-              storage.write(key: "userData", value: userData.body);
-              storage.write(key: "jwt", value: loginResponse.body);
+              storage.write(key: USER_DATA_KEY, value: userData.body);
+              storage.write(key: JWT_STORAGE_KEY, value: loginResponse.body);
+              storage.write(key: USER_ID_KEY, value: username);
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => Home()),
                   (Route<dynamic> route) => false);

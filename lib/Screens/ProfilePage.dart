@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geo_spatial/Constants/Constants.dart';
 import 'package:geo_spatial/Screens/ChangePassword.dart';
 import 'package:geo_spatial/Screens/Login.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
@@ -17,7 +18,7 @@ class ProfilePage extends StatefulWidget {
 final storage = FlutterSecureStorage();
 
 Future<String> get _getUserData async {
-  var userData = await storage.read(key: "userData");
+  var userData = await storage.read(key: USER_DATA_KEY);
   print("userData " + userData.toString());
 
   if (userData == null) return "";
@@ -75,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     style: TextStyle(
                                         color: colors.darkPrimaryTextColor)),
                                 onPressed: () async {
-                                  await storage.delete(key: 'jwt');
+                                  await storage.delete(key: JWT_STORAGE_KEY);
                                   Navigator.of(context).pushAndRemoveUntil(
                                       MaterialPageRoute(
                                           builder: (context) => Login()),

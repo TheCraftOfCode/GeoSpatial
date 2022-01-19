@@ -3,7 +3,6 @@ import 'package:geo_spatial/Widgets/NestedOptionsWidget.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:google_fonts/google_fonts.dart';
 
-
 class NestedOptionWidgetFormField extends FormField<List<NestedOptionData>> {
   NestedOptionWidgetFormField(
       {FormFieldSetter<List<NestedOptionData>>? onSaved,
@@ -44,6 +43,8 @@ class NestedOptionWidgetFormField extends FormField<List<NestedOptionData>> {
                   if (selectedOptions.isNotEmpty) {
                     return Text(
                       selectedOptions.join(", "),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.poppins(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,
@@ -84,9 +85,10 @@ class NestedOptionWidgetFormField extends FormField<List<NestedOptionData>> {
                               builder: (context) => NestedOptionWidget(
                                 title: title,
                                 onChanged: (val) {
-                                  for(var i in val){
+                                  for (var i in val) {
                                     print(i.toJsonString());
-                                    var decodedVal = NestedOptionData.fromJson(i.toJsonString());
+                                    var decodedVal = NestedOptionData.fromJson(
+                                        i.toJsonString());
                                   }
                                   state.didChange(val);
                                   state.validate();
