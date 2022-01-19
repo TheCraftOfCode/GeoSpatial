@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Model/CommunityDataModel.dart';
-import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
+import 'package:geo_spatial/Model/FamilyDataModels.dart';
 import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
 import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
 import 'package:geo_spatial/Utils/StoreInstance.dart';

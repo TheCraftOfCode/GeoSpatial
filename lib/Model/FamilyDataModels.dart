@@ -80,7 +80,6 @@ class FamilyMemberIndividualDataModel {
   String? vizhithiruInstalled;
   bool? dataValid = false;
   List<NestedOptionData>? occupationData;
-
   //String? savedTime = DateFormat('hh:mm a').format(DateTime.now());
 
   Map<String, dynamic> toJson() {

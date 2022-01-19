@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
+import 'package:geo_spatial/Model/FamilyDataModels.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
