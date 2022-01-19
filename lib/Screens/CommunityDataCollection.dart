@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:geo_spatial/Constants/Constants.dart';
+import 'package:geo_spatial/Utils/Constants.dart';
 import 'package:geo_spatial/Model/CommunityDataModel.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/StoreInstance.dart';
