@@ -80,6 +80,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
     'Elementary occupations': false,
     'Armed Forces occupations': false,
     'Unemployed': false,
+    'Studying' : false,
   };
 
   var privateClinicReasons = <String, bool>{

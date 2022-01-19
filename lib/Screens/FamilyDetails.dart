@@ -302,7 +302,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     DropDownFormField(
-                      list: ['1', '2', '3', '4', '5', 'More'],
+                      list: ['0','1', '2', '3', '4', '5', 'More'],
                       hint: "Select the highest",
                       title: "No. of two wheelers",
                       defaultValue: widget.modelData!.noOfTwoWheelers,
@@ -313,7 +313,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       errorField: "Please choose a valid number",
                     ),
                     DropDownFormField(
-                      list: ['1', '2', '3', '4', '5', 'More'],
+                      list: ['0','1', '2', '3', '4', '5', 'More'],
                       hint: "Select the highest",
                       title: "No. of three wheelers",
                       defaultValue: widget.modelData!.noOfThreeWheelers,
@@ -338,7 +338,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                     ),
                     DropDownFormField(
-                      list: ['1', '2', '3', '4', '5', 'More'],
+                      list: ['0','1', '2', '3', '4', '5', 'More'],
                       hint: "Select the highest",
                       title: "No. of four wheelers",
                       errorField: "Please choose a valid number",
@@ -354,10 +354,10 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       singleOption: false,
                       context: context,
                       dataMap:
-                          widget.modelData!.twoFourManufacturer ?? four_mfg,
+                          widget.modelData!.fourWheelManufacturer ?? four_mfg,
                       onSaved: (val) {
                         print("Value recorded: $val");
-                        widget.modelData?.twoFourManufacturer = val;
+                        widget.modelData?.fourWheelManufacturer = val;
                       },
                       errorField: "Please choose a brand",
                       autoValidateMode: AutovalidateMode.onUserInteraction,

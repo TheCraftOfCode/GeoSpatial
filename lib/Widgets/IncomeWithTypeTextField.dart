@@ -3,6 +3,8 @@ import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
+
+//TODO: Check for 0 (or lower)
 class IncomeWithTypeTextField extends StatefulWidget {
   IncomeWithTypeTextField({
     Key? key,
