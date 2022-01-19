@@ -91,12 +91,14 @@ class FamilyMemberIndividualDataModel {
       "gender": gender,
       "educationalQualification": educationQualification,
       "phoneNumber": phoneNumber,
-      "aadharNumber": aadhaarNumber,
+      "aadhaarNumber": aadhaarNumber,
       "Vulnerabilities": vulnerabilities != null
           ? buildListForOptionWidget(vulnerabilities!)
           : ['None'],
       "oldAgePension": pension,
-      "occupation":
+      "income" : income,
+      "incomeType" : incomeType,
+      "occupation":  //TODO: Convert to list after passing through function
           occupation != null ? buildListForOptionWidget(occupation!) : ['None'],
       "noOfDaysWorking": noOfDaysWorking,
       "isADailyWageWorker": dailyWageWorker,
@@ -253,7 +255,7 @@ class FamilyMembersCommonDataModel {
   String? noOfThreeWheelers;
   String? noOfFourWheelers;
   Map<String, bool>? twoThreeWheelManufacturer;
-  Map<String, bool>? twoFourManufacturer;
+  Map<String, bool>? fourWheelManufacturer;
   Map<String, bool>? localFoodMap;
   Map<String, bool>? noToiletsWhy; //TODO: Update JSON
   String? isCattleOwned;
@@ -297,7 +299,8 @@ class FamilyMembersCommonDataModel {
         locationBottomRight!.latitude,
         locationBottomRight!.longitude
       ],
-      "availabilityOfDrinkingWater": runningWaterAvailable,
+      "headOfFamily" : headOfFamily,
+      "availabilityOfDrinkingWater": drinkingWater,
 
       "drinkingWaterSource": sourceOfDrinkingWater != null
           ? buildListForOptionWidget(sourceOfDrinkingWater!)
@@ -309,9 +312,9 @@ class FamilyMembersCommonDataModel {
           ? buildListForOptionWidget(noToiletsWhy!)
           : [], //TODO: Inform change
 
-      "availabilityOfWaterInToilets": String,
+      "availabilityOfWaterInToilets": runningWaterAvailable,
 
-      "alternativeForHouseholdToilet": String,
+      "alternativeForHouseholdToilet": communityToilet,
 
       "statusOfEnvironmentalSanitation": environmentSanitationLevel,
 
@@ -325,8 +328,8 @@ class FamilyMembersCommonDataModel {
 
       "numberOfFourWheelers": noOfFourWheelers,
 
-      "brandsOfFourWheelers": twoFourManufacturer != null
-          ? buildListForOptionWidget(twoFourManufacturer!)
+      "brandsOfFourWheelers": fourWheelManufacturer != null
+          ? buildListForOptionWidget(fourWheelManufacturer!)
           : [],
 
       "doYouOwnCattle": isCattleOwned,
@@ -500,13 +503,13 @@ class FamilyMembersCommonDataModel {
   }
 
   String? get dbTwoFourManufacturer =>
-      twoFourManufacturer == null ? null : json.encode(twoFourManufacturer);
+      fourWheelManufacturer == null ? null : json.encode(fourWheelManufacturer);
 
   set dbTwoFourManufacturer(String? value) {
     if (value == null) {
-      twoFourManufacturer = null;
+      fourWheelManufacturer = null;
     } else {
-      twoFourManufacturer = Map.from(
+      fourWheelManufacturer = Map.from(
           json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
     }
   }
