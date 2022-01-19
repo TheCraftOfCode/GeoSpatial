@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:geo_spatial/Widgets/LoadValidPageWidget.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
 final storage = FlutterSecureStorage();
 
@@ -14,13 +15,12 @@ void main() {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-    runApp(OKToast(
-      child: MaterialApp(
-          home: LoadValidPageWidget(Login(), Home()),
-          debugShowCheckedModeBanner: false,
-          theme: darkTheme.DarkTheme
-      ),
-    ));
-  }
-
-
+  runApp(OKToast(
+    position: ToastPosition.center,
+    backgroundColor: colors.darkAccentColor,
+    child: MaterialApp(
+        home: LoadValidPageWidget(Login(), Home()),
+        debugShowCheckedModeBanner: false,
+        theme: darkTheme.DarkTheme),
+  ));
+}

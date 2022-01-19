@@ -58,7 +58,7 @@ class _MyAppState extends State<Login> {
     String url = NETWORK_ADDRESS;
     var body = json.encode({"username": username, "password": password});
 
-    var res = await http.post(Uri.https(url, '/api/login'),
+    var res = await http.post(Uri.http(url, '/api/login'),
         headers: {"Content-Type": "application/json"}, body: body);
     print("RES: ${res.body}");
 
@@ -68,7 +68,7 @@ class _MyAppState extends State<Login> {
   Future<http.Response> _getUserDetails(String JWT) async {
     String url = NETWORK_ADDRESS;
 
-    var res = await http.get(Uri.https(url, '/api/getUserData'),
+    var res = await http.get(Uri.http(url, '/api/getUserData'),
         headers: {"Content-Type": "application/json", 'user-auth-token': JWT});
     print("RES: ${res.body}");
 
@@ -133,9 +133,7 @@ class _MyAppState extends State<Login> {
       } catch (e) {
         print(e);
         showToast(
-            "Something went wrong, please check your network connection or try again later",
-            position: ToastPosition.center,
-            backgroundColor: colors.darkAccentColor);
+            "Something went wrong, please check your network connection or try again later");
       }
     }
     setState(() {

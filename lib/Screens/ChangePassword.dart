@@ -8,6 +8,7 @@ import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:oktoast/oktoast.dart';
 
 final storage = FlutterSecureStorage();
 
@@ -27,32 +28,38 @@ Future<String> get jwtToken async {
   return jwt;
 }
 
-Future<http.Response> _makeLoginRequest(
-    String username, String currentPassword, String newPassword) async {
-  String url = NETWORK_ADDRESS;
-  var body = json
-      .encode({"password": newPassword, "currentPassword": currentPassword});
-
-  String jwt = await jwtToken;
-
-  var res = await http.post(
-      Uri.https(url, '/api/changeUserPassword/${username}'),
-      headers: {"Content-Type": "application/json", 'user-auth-token': jwt},
-      body: body);
-  print("RES: ${res.body}");
-
-  return res;
-}
-
 class _ChangePasswordState extends State<ChangePassword> {
-  var passwordOld = "";
-  var passwordNew = "";
   final _oldPasswordKey = GlobalKey<FormFieldState>();
   final _newPasswordKey = GlobalKey<FormFieldState>();
   final _newPasswordKeyRepeat = GlobalKey<FormFieldState>();
 
+  var _showPasswordOld = false;
+  var _showPasswordNew = false;
+  var _showPasswordNewRepeat = false;
+
+  var _showProgressBar = false;
+
   final TextEditingController _oldPasswordController = TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
+  final TextEditingController _newPasswordControllerRepeat =
+      TextEditingController();
+
+  Future<http.Response> _makeLoginRequest(
+      String username, String currentPassword, String newPassword) async {
+    String url = NETWORK_ADDRESS;
+    var body = json
+        .encode({"password": newPassword, "currentPassword": currentPassword});
+
+    String jwt = await jwtToken;
+
+    var res = await http.put(
+        Uri.http(url, '/api/changeUserPassword/${username}'),
+        headers: {"Content-Type": "application/json", 'user-auth-token': jwt},
+        body: body);
+    print("RES: ${res.body}");
+
+    return res;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,12 +92,26 @@ class _ChangePasswordState extends State<ChangePassword> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextFormField(
+                          obscureText: !_showPasswordOld,
                           key: _oldPasswordKey,
                           controller: _oldPasswordController,
                           style: GoogleFonts.poppins(
                               color: colors.darkPrimaryTextColor),
                           keyboardType: TextInputType.visiblePassword,
                           decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _showPasswordOld = !_showPasswordOld;
+                                });
+                              },
+                              icon: Icon(
+                                _showPasswordOld
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: colors.darkAccentColor,
+                              ),
+                            ),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: colors.darkSecondaryTextColor,
@@ -127,12 +148,26 @@ class _ChangePasswordState extends State<ChangePassword> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextFormField(
+                          obscureText: !_showPasswordNew,
                           controller: _newPasswordController,
                           key: _newPasswordKey,
                           style: GoogleFonts.poppins(
                               color: colors.darkPrimaryTextColor),
                           keyboardType: TextInputType.visiblePassword,
                           decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _showPasswordNew = !_showPasswordNew;
+                                });
+                              },
+                              icon: Icon(
+                                _showPasswordNew
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: colors.darkAccentColor,
+                              ),
+                            ),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: colors.darkSecondaryTextColor,
@@ -154,6 +189,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                             if (value!.isNotEmpty) {
                               if (value.length <= 7) {
                                 return "Password too small";
+                              } else if (value !=
+                                  _newPasswordControllerRepeat.text) {
+                                return "Password does not match";
                               } else {
                                 return null;
                               }
@@ -169,11 +207,27 @@ class _ChangePasswordState extends State<ChangePassword> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextFormField(
+                          obscureText: !_showPasswordNewRepeat,
+                          controller: _newPasswordControllerRepeat,
                           key: _newPasswordKeyRepeat,
                           style: GoogleFonts.poppins(
                               color: colors.darkPrimaryTextColor),
                           keyboardType: TextInputType.visiblePassword,
                           decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _showPasswordNewRepeat =
+                                      !_showPasswordNewRepeat;
+                                });
+                              },
+                              icon: Icon(
+                                _showPasswordNewRepeat
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: colors.darkAccentColor,
+                              ),
+                            ),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: colors.darkSecondaryTextColor,
@@ -195,7 +249,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                             if (value!.isNotEmpty) {
                               if (value.length <= 7) {
                                 return "Password too small";
-                              } else if (true) {
+                              } else if (value != _newPasswordController.text) {
+                                return "Password does not match";
                               } else {
                                 return null;
                               }
@@ -210,39 +265,75 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                        child: SizedBox(
-                          width: double.infinity,
-                          height: 55,
-                          child: ElevatedButton(
-                            child: Text("Change Password",
-                                style: TextStyle(fontSize: 16)),
-                            style: ButtonStyle(
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        colors.lightPrimaryTextColor),
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        colors.darkPrimaryTextColor),
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        side: BorderSide(
-                                            color: colors
-                                                .darkSecondBackgroundColor)))),
-                            onPressed: () {
-                              if (_oldPasswordKey.currentState!.validate() &&
-                                  _newPasswordKey.currentState!.validate() &&
-                                  _newPasswordKeyRepeat.currentState!
-                                      .validate()) {
-                                _makeLoginRequest(
-                                    "",
-                                    _oldPasswordController.text,
-                                    _newPasswordController.text);
-                              }
-                            },
-                          ),
-                        ),
+                        child: _showProgressBar
+                            ? CircularProgressIndicator()
+                            : SizedBox(
+                                width: double.infinity,
+                                height: 55,
+                                child: ElevatedButton(
+                                  child: Text("Change Password",
+                                      style: TextStyle(fontSize: 16)),
+                                  style: ButtonStyle(
+                                      foregroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              colors.lightPrimaryTextColor),
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              colors.darkPrimaryTextColor),
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              side: BorderSide(
+                                                  color:
+                                                      colors.darkSecondBackgroundColor)))),
+                                  onPressed: () async {
+                                    bool oldPassword = _oldPasswordKey
+                                        .currentState!
+                                        .validate();
+                                    bool newPassword = _newPasswordKey
+                                        .currentState!
+                                        .validate();
+                                    bool newPasswordRepeat =
+                                        _newPasswordKeyRepeat.currentState!
+                                            .validate();
+                                    if (oldPassword &&
+                                        newPassword &&
+                                        newPasswordRepeat) {
+                                      try {
+                                        setState(() {
+                                          _showProgressBar = true;
+                                        });
+                                        http.Response res =
+                                            await _makeLoginRequest(
+                                                widget.userName,
+                                                _oldPasswordController.text,
+                                                _newPasswordController.text);
+
+                                        if (res.statusCode != 200) {
+                                          showToast(res.body);
+                                        } else {
+                                          showToast(
+                                              "Password changed successfully!");
+                                          Navigator.pop(context);
+                                        }
+
+                                        setState(() {
+                                          _showProgressBar = false;
+                                        });
+                                      } catch (e) {
+                                        setState(() {
+                                          _showProgressBar = false;
+                                        });
+                                        showToast(
+                                          "Something went wrong, please check your network connection or try again later",
+                                        );
+                                      }
+                                    }
+                                  },
+                                ),
+                              ),
                       )
                     ],
                   ),
