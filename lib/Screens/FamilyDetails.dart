@@ -4,6 +4,7 @@ import 'package:geo_spatial/Model/FamilyMembersCommonDataModel.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/CheckBoxAddExtraDialog.dart';
+import 'package:geo_spatial/Widgets/ConditionalRenderWidget.dart';
 import 'package:geo_spatial/Widgets/DropDownFormField.dart';
 import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
@@ -241,34 +242,60 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 });
                               },
                               title: "Do you have toilet facilities?"),
-                          if(!toiletFacility)
-                          CheckBoxAddExtraAlertDialog(
-                            title: 'Why do you not have a toilet?',
-                            hint: 'Please choose reason',
-                            singleOption: false,
-                            context: context,
-                            dataMap:
-                            widget.modelData!.noToiletsWhy ??
-                                noToiletsWhy,
-                            onSaved: (val) {
-                              print("Value recorded: $val");
-                              widget.modelData?.noToiletsWhy = val;
-                            },
-                            errorField: "Please choose a reason",
-                            autoValidateMode:
-                            AutovalidateMode.onUserInteraction,
-                          ),
-                          OptionsWidget(
+                          Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: ConditionalRenderWidget(
+                              title: "Source of Water",
+                              defaultValue:
+                              widget.modelData!.toiletFacility,
                               options: [
-                                ['Yes', 'yes'],
-                                ['No', 'no']
+                                ["Yes", "yes"],
+                                ["No", "no"]
                               ],
-                              defaultValue: widget.modelData!.communityToilet,
                               onSaved: (val) {
                                 print("Value recorded: $val");
-                                widget.modelData!.communityToilet = val;
+                                widget.modelData!.toiletFacility =
+                                    val;
                               },
-                              title: "If not toilet, community toilet?"),
+                              conditionalPositiveValue: 'yes',
+                              conditionalNegativeValue: 'no',
+                              conditionalPositiveWidget: Container(),
+                              conditionalNegativeWidget: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 25.0),
+                                    child: CheckBoxAddExtraAlertDialog(
+                                      title: 'Why do you not have a toilet?',
+                                      hint: 'Please choose reason',
+                                      singleOption: false,
+                                      context: context,
+                                      dataMap:
+                                      widget.modelData!.noToiletsWhy ??
+                                          noToiletsWhy,
+                                      onSaved: (val) {
+                                        print("Value recorded: $val");
+                                        widget.modelData?.noToiletsWhy = val;
+                                      },
+                                      errorField: "Please choose a reason",
+                                      autoValidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                    ),
+                                  ),
+                                  OptionsWidget(
+                                      options: [
+                                        ['Yes', 'yes'],
+                                        ['No', 'no']
+                                      ],
+                                      defaultValue: widget.modelData!.communityToilet,
+                                      onSaved: (val) {
+                                        print("Value recorded: $val");
+                                        widget.modelData!.communityToilet = val;
+                                      },
+                                      title: "Community toilet?"),
+                                ],
+                              ),
+                            ),
+                          ),
                           OptionsWidget(
                               options: [
                                 ['Clean', 'clean'],
@@ -379,30 +406,46 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 widget.modelData!.isCattleOwned = val;
                               },
                               title: "Do you own cattle?"),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10.0, right: 10.0, top: 20.0),
-                            child: TextFormField(
-                              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-                              initialValue: widget.modelData!.incomeFromCattle,
-                              onSaved: (val) {
-                                print("Value recorded: $val");
-                                widget.modelData!.incomeFromCattle = val;
-                              },
-                              decoration: InputDecoration(
-                                  hintStyle: GoogleFonts.poppins(
-                                      color: colors.darkSecondaryTextColor),
-                                  contentPadding: EdgeInsets.all(7.0),
-                                  hintText: "Enter income in Rupees",
-                                  label: AutoSizeText(
-                                    'Income from cattle/month',
-                                    style: GoogleFonts.poppins(
+                          ConditionalRenderWidget(
+                            title: "Do you own cattle?",
+                            defaultValue:
+                            widget.modelData!.isCattleOwned,
+                            options: [
+                              ["Yes", "yes"],
+                              ["No", "no"]
+                            ],
+                            onSaved: (val) {
+                              print("Value recorded: $val");
+                              widget.modelData!.isCattleOwned =
+                                  val;
+                            },
+                            conditionalPositiveValue: 'yes',
+                            conditionalNegativeValue: 'no',
+                            conditionalPositiveWidget: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10.0, right: 10.0, top: 20.0),
+                              child: TextFormField(
+                                style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                                initialValue: widget.modelData!.incomeFromCattle,
+                                onSaved: (val) {
+                                  print("Value recorded: $val");
+                                  widget.modelData!.incomeFromCattle = val;
+                                },
+                                decoration: InputDecoration(
+                                    hintStyle: GoogleFonts.poppins(
                                         color: colors.darkSecondaryTextColor),
-                                  )),
-                              autovalidateMode: AutovalidateMode.always,
-                              keyboardType: TextInputType.number,
+                                    contentPadding: EdgeInsets.all(7.0),
+                                    hintText: "Enter income in Rupees",
+                                    label: AutoSizeText(
+                                      'Income from cattle/month',
+                                      style: GoogleFonts.poppins(
+                                          color: colors.darkSecondaryTextColor),
+                                    )),
+                                autovalidateMode: AutovalidateMode.always,
+                                keyboardType: TextInputType.number,
+                              ),
                             ),
-                          ),
+                            conditionalNegativeWidget: Container()),
                           OptionsWidget(
                             options: [
                               ['Yes', 'yes'],
@@ -482,9 +525,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                             singleOption: false,
                             context: context,
                           ),
-
-                          //TODO: Add autosuggest AutoSizeText widget for locally consumed food
-                          //TODO: Add autosuggest AutoSizeText widget for trees owned
                           OptionsWidget(
                             options: [
                               ['Yes', 'yes'],
@@ -515,7 +555,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                               widget.modelData!.kitchenGardenPlants = val;
                             },
                           ),
-                          //TODO: Add autosuggest AutoSizeText widget for kitchen garden crops
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -625,8 +664,5 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     );
   }
 }
-
-
-//TODO: Insert values to checkboxalertdialogs
 
 
