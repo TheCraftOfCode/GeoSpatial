@@ -121,9 +121,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (!isPageValid) {
-          return true;
-        }
         final result = await showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -217,7 +214,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       print(data);
                     },
                     validator: (val) {
-                      if (val!.isAfter(DateTime.now())) {
+                      if (val != null) if (val.isAfter(DateTime.now())) {
                         return 'Please choose a valid date';
                       }
                     },
@@ -291,7 +288,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                        left: 10.0, right: 10.0, bottom: 20.0),
+                        left: 10.0, right: 10.0, bottom: 20.0, top: 20.0),
                     child: TextFormField(
                       initialValue:
                           widget.familyMemberIndividualDataModel?.aadhaarNumber,
@@ -371,8 +368,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       widget.familyMemberIndividualDataModel!.dailyWageWorker =
                           val;
                     },
-                    conditionalValue: 'yes',
-                    conditionalWidget: NestedOptionWidgetFormField(
+                    conditionalPositiveValue: 'yes',
+                    conditionalNegativeValue: 'no',
+                    conditionalPositiveWidget: NestedOptionWidgetFormField(
                       nestedOptionData: [
                         new NestedOptionData(
                             subOptionDataMap: {"yes": true, "no": true},
@@ -389,6 +387,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       ],
                       title: 'Select some options',
                       context: context,
+                    ),
+                    conditionalNegativeWidget: Column(
+                      children: [Text("NOPE"), Text("NOPE"), Text("NOPE")],
                     ),
                   ),
                   /**
@@ -789,14 +790,14 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                   CheckBoxAddExtraAlertDialog(
                     title: 'Tobacco products',
                     hint: 'Choose applicable products',
-                    dataMap: widget.familyMemberIndividualDataModel!
-                        .tobaccoProducts ??
+                    dataMap: widget
+                            .familyMemberIndividualDataModel!.tobaccoProducts ??
                         tobaccoProducts,
                     context: context,
                     errorField: 'Please choose at least one',
                     onSaved: (map) {
-                      widget.familyMemberIndividualDataModel!
-                          .tobaccoProducts = map;
+                      widget.familyMemberIndividualDataModel!.tobaccoProducts =
+                          map;
                     },
                   ),
                   OptionsWidget(
@@ -857,5 +858,3 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
     );
   }
 }
-
-

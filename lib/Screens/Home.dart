@@ -65,7 +65,7 @@ class _HomeWidgetState extends State<Home> {
                         )),
                     TextButton(
                         onPressed: () {
-                          Navigator.pop(context, true);
+                          Navigator.of(context).pop();
                         },
                         child: Text(
                           'No',

@@ -36,25 +36,40 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
       onWillPop: () async {
         final result = await showDialog(
           context: context,
-          builder: (context) =>
-              AlertDialog(
-                title: Text("Are you sure?"),
-                content: Text("All unsaved changes will be lost."),
-                actions: <Widget>[
-                  TextButton(
-                    child:Text('No'),
-                    onPressed: () {
-                      Navigator.pop(context, false);
-                    },
-                  ),
-                  TextButton(
-                    child: Text('Yes', style: TextStyle(color: Colors.red)),
-                    onPressed: () {
-                      Navigator.pop(context, true);
-                    },
-                  ),
-                ],
+          builder: (context) => AlertDialog(
+            backgroundColor: colors.darkScaffoldColor,
+            title: Text(
+              "Are you sure?",
+              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+            ),
+            content: Text(
+              "All unsaved changes will be lost.",
+              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text(
+                  'No',
+                  style:
+                  GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
+                ),
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
               ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: colors.darkAccentColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)))),
+                child: Text('Yes',
+                    style: TextStyle(color: colors.darkPrimaryTextColor)),
+                onPressed: () async {
+                  Navigator.pop(context, true);
+                },
+              ),
+            ],
+          ),
         );
         return result;
       },

@@ -7,17 +7,21 @@ class ConditionalRenderWidget extends StatefulWidget {
       this.defaultValue,
       this.onSaved,
       required this.title,
-      required this.conditionalWidget,
+      required this.conditionalPositiveWidget,
       required this.options,
-      required this.conditionalValue})
+      required this.conditionalPositiveValue,
+      required this.conditionalNegativeValue,
+      required this.conditionalNegativeWidget})
       : super(key: key);
 
   final defaultValue;
-  final String conditionalValue;
+  final String conditionalPositiveValue;
+  final String conditionalNegativeValue;
   final String title;
   final List<dynamic> options;
   final Function(dynamic)? onSaved;
-  final Widget conditionalWidget;
+  final Widget conditionalPositiveWidget;
+  final Widget conditionalNegativeWidget;
 
   @override
   _ConditionalRenderWidgetState createState() =>
@@ -25,9 +29,23 @@ class ConditionalRenderWidget extends StatefulWidget {
 }
 
 class _ConditionalRenderWidgetState extends State<ConditionalRenderWidget> {
-  //(widget.defaultValue == widget.conditionalValue)
-  //TODO: Add a check condition to see if default value equals conditional value and update isVisible
-  bool isVisible = false;
+  bool isPositiveVisible = false;
+  bool isNegativeVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    initData();
+  }
+
+  initData() {
+    if (widget.defaultValue != null) {
+      isPositiveVisible =
+          (widget.defaultValue == widget.conditionalPositiveValue);
+      isNegativeVisible =
+          (widget.defaultValue == widget.conditionalNegativeValue);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +57,20 @@ class _ConditionalRenderWidgetState extends State<ConditionalRenderWidget> {
           options: widget.options,
           onChanged: (val) {
             setState(() {
-              isVisible = (val == widget.conditionalValue);
+              isPositiveVisible = (val == widget.conditionalPositiveValue);
+              isNegativeVisible = (val == widget.conditionalNegativeValue);
             });
           },
           title: widget.title,
           onSaved: widget.onSaved,
         ),
         Visibility(
-          child: widget.conditionalWidget,
-          visible: isVisible,
+          child: widget.conditionalPositiveWidget,
+          visible: isPositiveVisible,
+        ),
+        Visibility(
+          child: widget.conditionalNegativeWidget,
+          visible: isNegativeVisible,
         )
       ],
     );

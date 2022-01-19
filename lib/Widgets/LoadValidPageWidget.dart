@@ -62,7 +62,7 @@ class LoadValidPageWidget extends StatelessWidget {
         future: jwtToken(context),
         builder: (context, data) {
           if (!data.hasData)
-            return DefaultPage;
+            return CircularProgressIndicator();
           else if (data.hasData && data.data == '')
             return DefaultPage;
           else

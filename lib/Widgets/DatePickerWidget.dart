@@ -27,6 +27,7 @@ class DatePickerWidget extends FormField<DateTime> {
                 await CupertinoRoundedDatePicker.show(context,
                     background: colors.darkSecondBackgroundColor,
                     textColor: colors.darkAccentColor,
+                    initialDate: state.value ?? DateTime.now(),
                     minimumYear: 1900,
                     maximumDate: DateTime.now(),
                     maximumYear: DateTime.now().year,
