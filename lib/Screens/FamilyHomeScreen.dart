@@ -157,7 +157,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                                 print("FINAL DATA: ${modelData!.toJson()}");
                                 http.Response res = await _makeRequest(
                                     modelData!.toJson(), "/api/IndividualData");
-                                if (res.statusCode != 20) {
+                                if (res.statusCode != 201) {
                                   showToast(res.body);
                                 } else {
                                   Navigator.pop(context);
