@@ -55,6 +55,17 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     'None': false
   };
 
+  final List<String> _villageCodeName = [
+    'THC',
+    'PGP',
+    'AMC',
+    'KUP',
+    'KAP',
+    'NEP',
+    'CGP',
+    'JJN'
+  ];
+
   var four_mfg = <String, bool>{
     'Maruti Suzuki': false,
     'Hyundai': false,
@@ -198,7 +209,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: DropDownFormField(
                           defaultValue: widget.modelData!.headOfFamily,
-                          //TODO: Fetch names from family member add saved objects and populate list
                           onSaved: (value) {
                             widget.modelData!.headOfFamily = value;
                           },
@@ -208,6 +218,16 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           autoValidateMode: AutovalidateMode.onUserInteraction,
                           list: _getUserNameList(),
                         )),
+                    DropDownFormField(
+                        defaultValue: widget.modelData!.villageCode,
+                        list: _villageCodeName,
+                        onSaved: (data) {
+                          print(data);
+                          widget.modelData!.villageCode = data;
+                        },
+                        title: "Choose Village Code",
+                        hint: "Select Village Code",
+                        errorField: "Please choose a village code"),
                     OptionsWidget(
                         options: [
                           ['Yes', 'yes'],
@@ -302,7 +322,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     DropDownFormField(
-                      list: ['0','1', '2', '3', '4', '5', 'More'],
+                      list: ['0', '1', '2', '3', '4', '5', 'More'],
                       hint: "Select the highest",
                       title: "No. of two wheelers",
                       defaultValue: widget.modelData!.noOfTwoWheelers,
@@ -313,7 +333,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       errorField: "Please choose a valid number",
                     ),
                     DropDownFormField(
-                      list: ['0','1', '2', '3', '4', '5', 'More'],
+                      list: ['0', '1', '2', '3', '4', '5', 'More'],
                       hint: "Select the highest",
                       title: "No. of three wheelers",
                       defaultValue: widget.modelData!.noOfThreeWheelers,
@@ -338,7 +358,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                     ),
                     DropDownFormField(
-                      list: ['0','1', '2', '3', '4', '5', 'More'],
+                      list: ['0', '1', '2', '3', '4', '5', 'More'],
                       hint: "Select the highest",
                       title: "No. of four wheelers",
                       errorField: "Please choose a valid number",
