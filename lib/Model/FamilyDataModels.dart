@@ -4,6 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:objectbox/objectbox.dart';
 
+//TODO: Add condition to set empty, <NA> value to dependent fields
 
 List<String> buildListForOptionWidget(Map<String, bool> mapData) {
   var listData = <String>[];
@@ -53,84 +54,84 @@ class FamilyMemberIndividualDataModel {
   String? educationQualification;
   String? aadhaarNumber;
   Map<String, bool>? vulnerabilities;
-  Map<String, bool>? occupation;
   String? dailyWageWorker;
+  List<NestedOptionData>? occupationData;
   String? employed;
   String? income;
   String? incomeType;
   String? pension;
   String? businessStatus;
   String? maritalStatus;
-  String? noOfDaysWorking; //TODO: Confirm update in JSON
+  String? noOfDaysWorking;
   List<String>? specialSkills;
   List<String>? workTimings;
   String? surgeries;
   String? anganwadiServicesAware;
   String? anganwadiServicesUsing;
   List<String>? anganwadiServicesUsedList;
-  String? PHCServicesUsed; //TODO: Confirm update in JSON
-  String? privateClinicServicesUsed; //TODO: Confirm update in JSON
-  Map<String, bool>? privateServiceReason; //TODO: Confirm update in JSON
-  Map<String, bool>? communicableDiseases; //TODO: Confirm update in JSON
-  Map<String, bool>? frequentAilments; //TODO: Confirm update in JSON
-  Map<String, bool>? nonCommunicableDiseases; //TODO: Confirm update in JSON
-  Map<String, bool>? tobaccoProducts; //TODO: Confirm update in JSON
+  String? PHCServicesUsed;
+  String? privateClinicServicesUsed;
+  Map<String, bool>? privateServiceReason;
+  Map<String, bool>? communicableDiseases;
+  Map<String, bool>? frequentAilments;
+  Map<String, bool>? nonCommunicableDiseases;
   String? useOfTobacco;
+  Map<String, bool>? tobaccoProducts;
   String? useOfAlcohol;
   String? aarogyaSetuInstalled;
   String? vizhithiruInstalled;
   bool? dataValid = false;
-  List<NestedOptionData>? occupationData;
 
   //String? savedTime = DateFormat('hh:mm a').format(DateTime.now());
 
   Map<String, dynamic> toJson() {
     return {
-      "UIN": "",
-      "username": "",
-      "name": userName,
-      "date": "${dateOfBirth!.day}-${dateOfBirth!.month}-${dateOfBirth!.year}",
-      "gender": gender,
-      "educationalQualification": educationQualification,
-      "phoneNumber": phoneNumber,
-      "aadhaarNumber": aadhaarNumber,
+      "name": userName ?? "<NA>",
+      "dateOfBirth":
+          "${dateOfBirth!.day}-${dateOfBirth!.month}-${dateOfBirth!.year}",
+      "gender": gender ?? "<NA>",
+      "phoneNumber": phoneNumber ?? "<NA>",
+      "educationalQualification": educationQualification ?? "<NA>",
+      "aadhaarNumber": aadhaarNumber ?? "<NA>",
       "Vulnerabilities": vulnerabilities != null
           ? buildListForOptionWidget(vulnerabilities!)
           : ['None'],
-      "oldAgePension": pension,
-      "income": income,
-      "incomeType": incomeType,
-      "occupation": //TODO: Convert to list after passing through function
-          occupation != null ? buildListForOptionWidget(occupation!) : ['None'],
-      "noOfDaysWorking": noOfDaysWorking,
-      "isADailyWageWorker": dailyWageWorker,
-      "workTimings": workTimings,
-      "maritalStatus": maritalStatus,
-      "specialSkills": specialSkills,
-      "frequentHealthAilments": frequentAilments != null
-          ? buildListForOptionWidget(frequentAilments!)
+      "isADailyWageWorker": dailyWageWorker ?? "<NA>",
+      "occupationData": occupationData == null
+          ? ["<NA>"]
+          : parseOccupationJson(occupationData!),
+      "employed": employed ?? "<NA>",
+      "income": income ?? "<NA>",
+      "incomeType": incomeType ?? "<NA>",
+      "oldAgePension": pension ?? "<NA>",
+      "businessStatus": businessStatus ?? "<NA>",
+      "maritalStatus": maritalStatus ?? "<NA>",
+      "noOfDaysWorking": noOfDaysWorking ?? "<NA>",
+      "specialSkills": specialSkills ?? "<NA>",
+      "workTimings": workTimings ?? "<NA>",
+      "surgeriesUndergone": surgeries ?? "<NA>",
+      "anganwadiServicesAware": anganwadiServicesAware ?? "<NA>",
+      "anganwadiServicesUsed": anganwadiServicesUsing ?? "<NA>",
+      "anganwadiServicesUtilised": anganwadiServicesUsedList ?? "<NA>",
+      "phcServicesUtilised": PHCServicesUsed ?? "<NA>",
+      "privateHealthClinicFacilitiesUsed": privateClinicServicesUsed ?? "<NA>",
+      "reasonsForVisitingPrivateHealthClinic": privateServiceReason != null
+          ? buildListForOptionWidget(privateServiceReason!)
           : [],
       "communicableDiseases": communicableDiseases != null
           ? buildListForOptionWidget(communicableDiseases!)
           : [],
+      "frequentHealthAilments": frequentAilments != null
+          ? buildListForOptionWidget(frequentAilments!)
+          : [],
       "nonCommunicableDiseases": nonCommunicableDiseases != null
           ? buildListForOptionWidget(nonCommunicableDiseases!)
           : [],
-      "surgeriesUndergone": surgeries,
-      "anganwadiServicesAware": anganwadiServicesAware,
-      "anganwadiServicesUsed": anganwadiServicesUsing,
-      "anganwadiServicesUtilised": anganwadiServicesUsedList,
-      "phcServicesUtilised": PHCServicesUsed,
-      "privateHealthClinicFacilitiesUsed": privateClinicServicesUsed,
-      "reasonsForVisitingPrivateHealthClinic": privateServiceReason != null
-          ? buildListForOptionWidget(privateServiceReason!)
-          : [],
-      "tobaccoBasedProductsUsage": useOfTobacco,
-      "tobaccoProductsUsed": tobaccoProducts,
-      "alcoholConsumption": useOfAlcohol,
-      "businessStatus": businessStatus,
-      "arogyaSethuAppInstallationStatus": aarogyaSetuInstalled,
-      "vizhithiruAppInstallationStatus": vizhithiruInstalled
+      "tobaccoBasedProductsUsage": useOfTobacco ?? "<NA>",
+      "tobaccoProductsUsed": tobaccoProducts ?? "<NA>",
+      "alcoholConsumption": useOfAlcohol ?? "<NA>",
+      "arogyaSethuAppInstallationStatus": aarogyaSetuInstalled ?? "<NA>",
+      "vizhithiruAppInstallationStatus": vizhithiruInstalled ?? "<NA>"
     };
   }
 
@@ -161,18 +162,6 @@ class FamilyMemberIndividualDataModel {
       } else {
         occupationData = data;
       }
-    }
-  }
-
-  String? get dbOccupation =>
-      occupation == null ? null : json.encode(occupation);
-
-  set dbOccupation(String? value) {
-    if (value == null) {
-      occupation = null;
-    } else {
-      occupation = Map.from(
-          json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
     }
   }
 
@@ -240,7 +229,6 @@ class FamilyMemberIndividualDataModel {
 
 @Entity()
 class FamilyMembersCommonDataModel {
-
   int id = 0;
   String? recordCollectingUserId;
 
@@ -253,6 +241,7 @@ class FamilyMembersCommonDataModel {
   String? drinkingWater;
   Map<String, bool>? sourceOfDrinkingWater;
   String? toiletFacility;
+  Map<String, bool>? noToiletsWhy;
   String? communityToilet;
   String? environmentSanitationLevel;
   String? runningWaterAvailable;
@@ -262,12 +251,11 @@ class FamilyMembersCommonDataModel {
   Map<String, bool>? twoThreeWheelManufacturer;
   Map<String, bool>? fourWheelManufacturer;
   Map<String, bool>? localFoodMap;
-  Map<String, bool>? noToiletsWhy; //TODO: Update JSON
   String? isCattleOwned;
   String? incomeFromCattle;
   String? isFarmLandOwned;
   String? isSeedsPreserved;
-  Map<String, bool>? cropsCultivated; //TODO: Update JSON
+  Map<String, bool>? cropsCultivated;
   Map<String, bool>? preservedSeedsMap;
   Map<String, bool>? treesOwnedMap;
   String? isKitchenGardenOwned;
@@ -283,9 +271,9 @@ class FamilyMembersCommonDataModel {
   final individualDataListTransient = <FamilyMemberIndividualDataModel>[];
   final individualDataList = ToMany<FamilyMemberIndividualDataModel>();
 
-  //TODO: Add condition to set empty value to dependent fields
   Map<String, dynamic> toJson() {
     return {
+      'volunteerUserId': recordCollectingUserId,
       'familyMemberData':
           individualDataListTransient.map((item) => item.toJson()).toList(),
       'locationTopLeft': [
@@ -305,69 +293,45 @@ class FamilyMembersCommonDataModel {
         locationBottomRight!.longitude
       ],
       "headOfFamily": headOfFamily,
-      "availabilityOfDrinkingWater": drinkingWater,
-
+      "availabilityOfDrinkingWater": drinkingWater ?? "<NA>",
       "drinkingWaterSource": sourceOfDrinkingWater != null
           ? buildListForOptionWidget(sourceOfDrinkingWater!)
           : [],
-
-      "areToiletsAvailableInHouse": toiletFacility,
-
-      "noToiletsWhy": noToiletsWhy != null
-          ? buildListForOptionWidget(noToiletsWhy!)
-          : [], //TODO: Inform change
-
-      "availabilityOfWaterInToilets": runningWaterAvailable,
-
-      "alternativeForHouseholdToilet": communityToilet,
-
-      "statusOfEnvironmentalSanitation": environmentSanitationLevel,
-
-      "numberOfTwoWheelers": noOfTwoWheelers,
-
+      "areToiletsAvailableInHouse": toiletFacility ?? "<NA>",
+      "noToiletsWhy":
+          noToiletsWhy != null ? buildListForOptionWidget(noToiletsWhy!) : [],
+      "alternativeForHouseholdToilet": communityToilet ?? "<NA>",
+      "statusOfEnvironmentalSanitation": environmentSanitationLevel ?? "<NA>",
+      "availabilityOfWaterInToilets": runningWaterAvailable ?? "<NA>",
+      "numberOfTwoWheelers": noOfTwoWheelers ?? "<NA>",
+      "numberOfThreeWheelers": noOfThreeWheelers ?? "<NA>",
+      "numberOfFourWheelers": noOfFourWheelers ?? "<NA>",
       "brandsOfTwoThreeWheelers": twoThreeWheelManufacturer != null
           ? buildListForOptionWidget(twoThreeWheelManufacturer!)
           : [],
-
-      "numberOfThreeWheelers": noOfThreeWheelers,
-
-      "numberOfFourWheelers": noOfFourWheelers,
-
       "brandsOfFourWheelers": fourWheelManufacturer != null
           ? buildListForOptionWidget(fourWheelManufacturer!)
           : [],
-
+      "locallyAvailableFoodsConsumed":
+          localFoodMap != null ? buildListForOptionWidget(localFoodMap!) : [],
       "doYouOwnCattle": isCattleOwned,
-
-      "incomeFromCattle": isCattleOwned == 'yes' ? incomeFromCattle : '',
-
-      "doYouOwnFarmLand": isFarmLandOwned,
-
+      "incomeFromCattle": isCattleOwned == 'yes' ? incomeFromCattle : '<NA>',
+      "doYouOwnFarmLand": isFarmLandOwned ?? "<NA>",
+      "doYouPreserveSeeds": isSeedsPreserved ?? "<NA>",
       "cropsCultivated": cropsCultivated != null
           ? buildListForOptionWidget(cropsCultivated!)
           : [],
-
-      "doYouPreserveSeeds": isSeedsPreserved,
-
       "typesOfSeedsPreserved": preservedSeedsMap != null
           ? buildListForOptionWidget(preservedSeedsMap!)
           : [],
-
-      "locallyAvailableFoodsConsumed":
-          localFoodMap != null ? buildListForOptionWidget(localFoodMap!) : [],
-
       "treesOwnedIfAny":
           treesOwnedMap != null ? buildListForOptionWidget(treesOwnedMap!) : [],
-
-      "isKitchenGardenAvailable": isKitchenGardenOwned,
-
+      "isKitchenGardenAvailable": isKitchenGardenOwned ?? "<NA>",
       "cropsInKitchenGarden": kitchenGardenPlants != null
           ? buildListForOptionWidget(kitchenGardenPlants!)
           : [],
-
       "address": "$addressOne\n$addressTwo\n$city",
-
-      "villageCode": villageCode ?? ""
+      "villageCode": villageCode ?? "<NA>"
     };
   }
 

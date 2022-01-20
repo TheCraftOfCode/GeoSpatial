@@ -142,6 +142,7 @@ class CommunityDataModel {
       this.villageCode});
 
   Map<String, dynamic> toJson() => {
+        'userId': recordCollectingUserId,
         'resourceType': resourceType,
         'villageCode': villageCode,
         'locationTopLeft': [
