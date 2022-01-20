@@ -56,7 +56,7 @@ class _MyAppState extends State<Login> {
     String url = NETWORK_ADDRESS;
     var body = json.encode({"username": username, "password": password});
 
-    var res = await http.post(Uri.http(url, '/api/login'),
+    var res = await http.post(Uri.https(url, '/api/login'),
         headers: {"Content-Type": "application/json"}, body: body);
     print("RES: ${res.body}");
 
@@ -66,7 +66,7 @@ class _MyAppState extends State<Login> {
   Future<http.Response> _getUserDetails(String JWT) async {
     String url = NETWORK_ADDRESS;
 
-    var res = await http.get(Uri.http(url, '/api/getUserData'),
+    var res = await http.get(Uri.https(url, '/api/getUserData'),
         headers: {"Content-Type": "application/json", 'user-auth-token': JWT});
     print("RES: ${res.body}");
 
@@ -99,6 +99,7 @@ class _MyAppState extends State<Login> {
       try {
         http.Response loginResponse =
             await _makeLoginRequest(username, password);
+        print("LOGIN RESPONSE ${loginResponse.body}");
         if (loginResponse.statusCode != 200) {
           setState(() {
             _nameError = loginResponse.body;

@@ -53,7 +53,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     String jwt = await jwtToken;
 
     var res = await http
-        .put(Uri.http(url, '/api/changeUserPassword'),
+        .put(Uri.https(url, '/api/changeUserPassword'),
             headers: {
               "Content-Type": "application/json",
               'user-auth-token': jwt

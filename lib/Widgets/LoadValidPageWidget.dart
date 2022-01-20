@@ -31,7 +31,7 @@ class LoadValidPageWidget extends StatelessWidget {
   Future<http.Response> _validateToken(String JWT) async {
     String url = NETWORK_ADDRESS;
 
-    var res = await http.get(Uri.http(url, '/api/validateToken'), headers: {
+    var res = await http.get(Uri.https(url, '/api/validateToken'), headers: {
       "Content-Type": "application/json",
       'user-auth-token': JWT
     }).timeout(Duration(seconds: 10));
