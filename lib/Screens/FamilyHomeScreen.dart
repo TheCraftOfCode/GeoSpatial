@@ -12,6 +12,7 @@ import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
 import 'package:geo_spatial/objectbox.g.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oktoast/oktoast.dart';
 import 'CollectLocationWidget.dart';
 import 'package:http/http.dart' as http;
 
@@ -54,12 +55,36 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
     });
   }
 
+  Future<String> jwtToken() async {
+    var jwt = await storage.read(key: JWT_STORAGE_KEY);
+    print(JWT_STORAGE_KEY + jwt.toString());
+
+    if (jwt == null) return "";
+    return jwt;
+  }
+
   Future<http.Response> _makeRequest(var data, String node) async {
     String url = NETWORK_ADDRESS;
     var body = json.encode(data);
 
-    var res = await http.post(Uri.https(url, '/api/$node'),
-        headers: {"Content-Type": "application/json"}, body: body);
+    var jwt = await jwtToken();
+
+    var res = await http
+        .post(Uri.http(url, node),
+            headers: {
+              "Content-Type": "application/json",
+              "user-auth-token": jwt
+            },
+            body: body)
+        .timeout(
+      const Duration(seconds: 10),
+      onTimeout: () {
+        showToast("Server Timed out!");
+        // Time has run out, do what you wanted to do.
+        return http.Response(
+            'Error', 408); // Request Timeout response status code
+      },
+    );
     return res;
   }
 
@@ -128,11 +153,26 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
 
                             //TODO: Change end point and check res for errors
                             if (isValid) {
-                              print("MODEL JSON: ${widget.modelData.toJson()}");
-                              http.Response res = await _makeRequest(
-                                  modelData!.toJson(), "familyData");
+                              try {
+                                print("FINAL DATA: ${modelData!.toJson()}");
+                                http.Response res = await _makeRequest(
+                                    modelData!.toJson(), "/api/IndividualData");
+                                if (res.statusCode != 20) {
+                                  showToast(res.body);
+                                } else {
+                                  Navigator.pop(context);
+                                  showToast("Data entered successfully!");
+                                }
+                              } catch (e) {
+                                print(e);
+                                showToast(
+                                    "Something went wrong, please check your network connection or save your records to upload later",
+                                    position: ToastPosition.center,
+                                    backgroundColor: colors.darkAccentColor);
+                              }
+                            } else {
+                              showToast("Please fill all fields!");
                             }
-
                             print("Is Valid: $isValid");
                           }),
                     ),

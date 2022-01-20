@@ -22,16 +22,27 @@ class FamilyMemberIndividualDataModel {
   parseOccupationJson(List<NestedOptionData> occupationData) {
     var list = [];
     for (var i in occupationData) {
-      print("ENC: ${i.toJsonString()}");
       list.add(i.toJsonString());
     }
 
-    for (var i in list) {
-      print("ENC AF: ${i}");
-    }
-
-    print("ENCODED VAL: ${json.encode(list)}");
     return json.encode(list);
+  }
+
+  parseOccupationServerResultJSON(List<NestedOptionData> occupationData) {
+    var list = [];
+    for (var i in occupationData) {
+      if (i.isSelected == true) {
+        var job = [];
+        i.subOptionDataMap!.forEach((key, value) {
+          if (value == true) {
+            job.add(key);
+          }
+        });
+        list.add({"category: ": i.boxName, "job: ": job});
+      }
+    }
+    print("ENC: ${json.encode(list)}");
+    return list;
   }
 
   parseOccupationObject(String occupationData) {
@@ -99,7 +110,7 @@ class FamilyMemberIndividualDataModel {
       "isADailyWageWorker": dailyWageWorker ?? "<NA>",
       "occupationData": occupationData == null
           ? ["<NA>"]
-          : parseOccupationJson(occupationData!),
+          : parseOccupationServerResultJSON(occupationData!),
       "employed": employed ?? "<NA>",
       "income": income ?? "<NA>",
       "incomeType": incomeType ?? "<NA>",
@@ -128,7 +139,9 @@ class FamilyMemberIndividualDataModel {
           ? buildListForOptionWidget(nonCommunicableDiseases!)
           : [],
       "tobaccoBasedProductsUsage": useOfTobacco ?? "<NA>",
-      "tobaccoProductsUsed": tobaccoProducts ?? "<NA>",
+      "tobaccoProductsUsed": tobaccoProducts != null
+          ? buildListForOptionWidget(tobaccoProducts!)
+          : [],
       "alcoholConsumption": useOfAlcohol ?? "<NA>",
       "arogyaSethuAppInstallationStatus": aarogyaSetuInstalled ?? "<NA>",
       "vizhithiruAppInstallationStatus": vizhithiruInstalled ?? "<NA>"
@@ -273,7 +286,6 @@ class FamilyMembersCommonDataModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'volunteerUserId': recordCollectingUserId,
       'familyMemberData':
           individualDataListTransient.map((item) => item.toJson()).toList(),
       'locationTopLeft': [
