@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Utils/Constants.dart';
 import 'package:geo_spatial/Model/FamilyDataModels.dart';
 import 'package:geo_spatial/Screens/FamilyDetails.dart';
@@ -14,12 +15,23 @@ import 'package:google_fonts/google_fonts.dart';
 import 'CollectLocationWidget.dart';
 import 'package:http/http.dart' as http;
 
+final storage = FlutterSecureStorage();
+
 class FamilyHomeScreen extends StatefulWidget {
   FamilyHomeScreen({Key? key, this.modelData}) : super(key: key);
 
   @override
   State<FamilyHomeScreen> createState() => _FamilyHomeScreenState();
   final modelData;
+}
+
+_getUserID() async {
+  var userData = await storage.read(key: USER_DATA_KEY);
+  if (userData == null) return "";
+
+  var dataJson = json.decode(userData);
+  print("dataJson ${dataJson} ${userData}");
+  return dataJson[0]["username"];
 }
 
 FamilyMembersCommonDataModel? modelData;
@@ -144,6 +156,8 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                                       borderRadius: BorderRadius.circular(20),
                                       side: BorderSide(color: Colors.white)))),
                           onPressed: () async {
+                            var userId = await _getUserID();
+                            modelData!.recordCollectingUserId = userId;
                             var store = await StoreInstance.getInstance();
                             Box individualDataBox =
                                 store.box<FamilyMemberIndividualDataModel>();

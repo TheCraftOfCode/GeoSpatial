@@ -18,7 +18,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 6144760902505378968),
       name: 'CommunityDataModel',
-      lastPropertyId: const IdUid(8, 1374390598853638581),
+      lastPropertyId: const IdUid(9, 1160256595193105843),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -59,6 +59,11 @@ final _entities = <ModelEntity>[
         ModelProperty(
             id: const IdUid(8, 1374390598853638581),
             name: 'dbLocationBottomRight',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(9, 1160256595193105843),
+            name: 'recordCollectingUserId',
             type: 9,
             flags: 0)
       ],
@@ -256,7 +261,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(3, 4555229639046191310),
       name: 'FamilyMembersCommonDataModel',
-      lastPropertyId: const IdUid(37, 8711686748126605615),
+      lastPropertyId: const IdUid(38, 7524624993274240071),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -433,6 +438,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(37, 8711686748126605615),
             name: 'headOfFamily',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(38, 7524624993274240071),
+            name: 'recordCollectingUserId',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[
@@ -520,7 +530,11 @@ ModelDefinition getObjectBoxModel() {
               object.dbLocationBottomRight == null
                   ? null
                   : fbb.writeString(object.dbLocationBottomRight!);
-          fbb.startTable(9);
+          final recordCollectingUserIdOffset =
+              object.recordCollectingUserId == null
+                  ? null
+                  : fbb.writeString(object.recordCollectingUserId!);
+          fbb.startTable(10);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, resourceTypeOffset);
           fbb.addOffset(2, villageCodeOffset);
@@ -529,6 +543,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(5, dbLocationTopRightOffset);
           fbb.addOffset(6, dbLocationBottomLeftOffset);
           fbb.addOffset(7, dbLocationBottomRightOffset);
+          fbb.addOffset(8, recordCollectingUserIdOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -551,7 +566,9 @@ ModelDefinition getObjectBoxModel() {
             ..dbLocationBottomLeft = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 16)
             ..dbLocationBottomRight = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 18);
+                .vTableGetNullable(buffer, rootOffset, 18)
+            ..recordCollectingUserId = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 20);
 
           return object;
         }),
@@ -914,7 +931,11 @@ ModelDefinition getObjectBoxModel() {
           final headOfFamilyOffset = object.headOfFamily == null
               ? null
               : fbb.writeString(object.headOfFamily!);
-          fbb.startTable(38);
+          final recordCollectingUserIdOffset =
+              object.recordCollectingUserId == null
+                  ? null
+                  : fbb.writeString(object.recordCollectingUserId!);
+          fbb.startTable(39);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, drinkingWaterOffset);
           fbb.addOffset(3, toiletFacilityOffset);
@@ -950,6 +971,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(34, dbNoToiletsWhyOffset);
           fbb.addOffset(35, dbCropsCultivatedOffset);
           fbb.addOffset(36, headOfFamilyOffset);
+          fbb.addOffset(37, recordCollectingUserIdOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -1026,7 +1048,9 @@ ModelDefinition getObjectBoxModel() {
             ..dbCropsCultivated = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 74)
             ..headOfFamily = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 76);
+                .vTableGetNullable(buffer, rootOffset, 76)
+            ..recordCollectingUserId = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 78);
           InternalToManyAccess.setRelInfo(
               object.individualDataList,
               store,
@@ -1072,6 +1096,10 @@ class CommunityDataModel_ {
   /// see [CommunityDataModel.dbLocationBottomRight]
   static final dbLocationBottomRight =
       QueryStringProperty<CommunityDataModel>(_entities[0].properties[7]);
+
+  /// see [CommunityDataModel.recordCollectingUserId]
+  static final recordCollectingUserId =
+      QueryStringProperty<CommunityDataModel>(_entities[0].properties[8]);
 }
 
 /// [FamilyMemberIndividualDataModel] entity fields to define ObjectBox queries.
@@ -1419,6 +1447,11 @@ class FamilyMembersCommonDataModel_ {
   /// see [FamilyMembersCommonDataModel.headOfFamily]
   static final headOfFamily = QueryStringProperty<FamilyMembersCommonDataModel>(
       _entities[2].properties[34]);
+
+  /// see [FamilyMembersCommonDataModel.recordCollectingUserId]
+  static final recordCollectingUserId =
+      QueryStringProperty<FamilyMembersCommonDataModel>(
+          _entities[2].properties[35]);
 
   /// see [FamilyMembersCommonDataModel.individualDataList]
   static final individualDataList = QueryRelationToMany<

@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:6144760902505378968",
-      "lastPropertyId": "8:1374390598853638581",
+      "lastPropertyId": "9:1160256595193105843",
       "name": "CommunityDataModel",
       "properties": [
         {
@@ -47,6 +47,11 @@
         {
           "id": "8:1374390598853638581",
           "name": "dbLocationBottomRight",
+          "type": 9
+        },
+        {
+          "id": "9:1160256595193105843",
+          "name": "recordCollectingUserId",
           "type": 9
         }
       ],
@@ -243,7 +248,7 @@
     },
     {
       "id": "3:4555229639046191310",
-      "lastPropertyId": "37:8711686748126605615",
+      "lastPropertyId": "38:7524624993274240071",
       "name": "FamilyMembersCommonDataModel",
       "properties": [
         {
@@ -420,6 +425,11 @@
         {
           "id": "37:8711686748126605615",
           "name": "headOfFamily",
+          "type": 9
+        },
+        {
+          "id": "38:7524624993274240071",
+          "name": "recordCollectingUserId",
           "type": 9
         }
       ],

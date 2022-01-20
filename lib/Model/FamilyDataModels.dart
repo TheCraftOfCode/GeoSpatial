@@ -4,6 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:objectbox/objectbox.dart';
 
+
 List<String> buildListForOptionWidget(Map<String, bool> mapData) {
   var listData = <String>[];
 
@@ -80,6 +81,7 @@ class FamilyMemberIndividualDataModel {
   String? vizhithiruInstalled;
   bool? dataValid = false;
   List<NestedOptionData>? occupationData;
+
   //String? savedTime = DateFormat('hh:mm a').format(DateTime.now());
 
   Map<String, dynamic> toJson() {
@@ -96,9 +98,9 @@ class FamilyMemberIndividualDataModel {
           ? buildListForOptionWidget(vulnerabilities!)
           : ['None'],
       "oldAgePension": pension,
-      "income" : income,
-      "incomeType" : incomeType,
-      "occupation":  //TODO: Convert to list after passing through function
+      "income": income,
+      "incomeType": incomeType,
+      "occupation": //TODO: Convert to list after passing through function
           occupation != null ? buildListForOptionWidget(occupation!) : ['None'],
       "noOfDaysWorking": noOfDaysWorking,
       "isADailyWageWorker": dailyWageWorker,
@@ -238,7 +240,10 @@ class FamilyMemberIndividualDataModel {
 
 @Entity()
 class FamilyMembersCommonDataModel {
+
   int id = 0;
+  String? recordCollectingUserId;
+
   Position? locationTopLeft;
   Position? locationTopRight;
   Position? locationBottomLeft;
@@ -299,7 +304,7 @@ class FamilyMembersCommonDataModel {
         locationBottomRight!.latitude,
         locationBottomRight!.longitude
       ],
-      "headOfFamily" : headOfFamily,
+      "headOfFamily": headOfFamily,
       "availabilityOfDrinkingWater": drinkingWater,
 
       "drinkingWaterSource": sourceOfDrinkingWater != null
@@ -585,12 +590,4 @@ class FamilyMembersCommonDataModel {
           json.decode(value).map((k, v) => MapEntry(k as String, v as bool)));
     }
   }
-
-  FamilyMembersCommonDataModel({
-    //this.keys,
-    this.locationBottomLeft,
-    this.locationBottomRight,
-    this.locationTopLeft,
-    this.locationTopRight,
-  });
 }

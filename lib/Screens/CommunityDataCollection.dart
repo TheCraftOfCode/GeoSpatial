@@ -16,6 +16,15 @@ import 'package:oktoast/oktoast.dart';
 
 final storage = FlutterSecureStorage();
 
+_getUserID() async {
+  var userData = await storage.read(key: USER_DATA_KEY);
+  if (userData == null) return "";
+
+  var dataJson = json.decode(userData);
+  print("dataJson ${dataJson} ${userData}");
+  return dataJson[0]["username"];
+}
+
 class CommunityDataCollection extends StatefulWidget {
   CommunityDataCollection({Key? key, CommunityDataModel? this.modelData})
       : super(key: key);
@@ -131,6 +140,9 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
 
     _onSave() async {
       print("CLICKED");
+      var userId = await _getUserID();
+      modelData.recordCollectingUserId = userId;
+
       store = await StoreInstance.getInstance();
       final box = store.box<CommunityDataModel>();
       int id = await box.putAsync(modelData);

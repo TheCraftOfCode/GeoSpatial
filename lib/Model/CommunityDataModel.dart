@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 @Entity()
 class CommunityDataModel {
   int id = 0;
+  String? recordCollectingUserId;
   String? resourceType;
   Position? locationTopLeft;
   Position? locationTopRight;
