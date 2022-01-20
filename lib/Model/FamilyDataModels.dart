@@ -97,6 +97,7 @@ class FamilyMemberIndividualDataModel {
 
   Map<String, dynamic> toJson() {
     return {
+      "UIN": "",
       "name": userName ?? "<NA>",
       "dateOfBirth":
           "${dateOfBirth!.day}-${dateOfBirth!.month}-${dateOfBirth!.year}",
