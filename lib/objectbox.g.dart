@@ -186,11 +186,6 @@ final _entities = <ModelEntity>[
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(32, 1328642062638523745),
-            name: 'dbOccupation',
-            type: 9,
-            flags: 0),
-        ModelProperty(
             id: const IdUid(33, 5419770240499089417),
             name: 'workTimings',
             type: 30,
@@ -491,7 +486,8 @@ ModelDefinition getObjectBoxModel() {
         5383502869453245964,
         2820386840249227222,
         5611188519781040934,
-        1258910779661384685
+        1258910779661384685,
+        1328642062638523745
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -645,9 +641,6 @@ ModelDefinition getObjectBoxModel() {
           final dbVulnerabilitiesOffset = object.dbVulnerabilities == null
               ? null
               : fbb.writeString(object.dbVulnerabilities!);
-          final dbOccupationOffset = object.dbOccupation == null
-              ? null
-              : fbb.writeString(object.dbOccupation!);
           final workTimingsOffset = object.workTimings == null
               ? null
               : fbb.writeList(object.workTimings!
@@ -715,7 +708,6 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(27, vizhithiruInstalledOffset);
           fbb.addBool(28, object.dataValid);
           fbb.addOffset(30, dbVulnerabilitiesOffset);
-          fbb.addOffset(31, dbOccupationOffset);
           fbb.addOffset(32, workTimingsOffset);
           fbb.addOffset(33, noOfDaysWorkingOffset);
           fbb.addOffset(34, PHCServicesUsedOffset);
@@ -784,8 +776,6 @@ ModelDefinition getObjectBoxModel() {
                 const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 60)
             ..dbVulnerabilities = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 64)
-            ..dbOccupation = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 66)
             ..workTimings =
                 const fb.ListReader<String>(fb.StringReader(), lazy: false)
                     .vTableGetNullable(buffer, rootOffset, 68)
@@ -1209,73 +1199,68 @@ class FamilyMemberIndividualDataModel_ {
       QueryStringProperty<FamilyMemberIndividualDataModel>(
           _entities[1].properties[21]);
 
-  /// see [FamilyMemberIndividualDataModel.dbOccupation]
-  static final dbOccupation =
-      QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[22]);
-
   /// see [FamilyMemberIndividualDataModel.workTimings]
   static final workTimings =
       QueryStringVectorProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[23]);
+          _entities[1].properties[22]);
 
   /// see [FamilyMemberIndividualDataModel.noOfDaysWorking]
   static final noOfDaysWorking =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[24]);
+          _entities[1].properties[23]);
 
   /// see [FamilyMemberIndividualDataModel.PHCServicesUsed]
   static final PHCServicesUsed =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[25]);
+          _entities[1].properties[24]);
 
   /// see [FamilyMemberIndividualDataModel.privateClinicServicesUsed]
   static final privateClinicServicesUsed =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[26]);
+          _entities[1].properties[25]);
 
   /// see [FamilyMemberIndividualDataModel.employed]
   static final employed = QueryStringProperty<FamilyMemberIndividualDataModel>(
-      _entities[1].properties[27]);
+      _entities[1].properties[26]);
 
   /// see [FamilyMemberIndividualDataModel.income]
   static final income = QueryStringProperty<FamilyMemberIndividualDataModel>(
-      _entities[1].properties[28]);
+      _entities[1].properties[27]);
 
   /// see [FamilyMemberIndividualDataModel.incomeType]
   static final incomeType =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[29]);
+          _entities[1].properties[28]);
 
   /// see [FamilyMemberIndividualDataModel.dbPrivateServiceReason]
   static final dbPrivateServiceReason =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[30]);
+          _entities[1].properties[29]);
 
   /// see [FamilyMemberIndividualDataModel.dbCommunicableDiseases]
   static final dbCommunicableDiseases =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[31]);
+          _entities[1].properties[30]);
 
   /// see [FamilyMemberIndividualDataModel.dbFrequentAilments]
   static final dbFrequentAilments =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[32]);
+          _entities[1].properties[31]);
 
   /// see [FamilyMemberIndividualDataModel.dbNonCommunicableDiseases]
   static final dbNonCommunicableDiseases =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[33]);
+          _entities[1].properties[32]);
 
   /// see [FamilyMemberIndividualDataModel.dbTobaccoProducts]
   static final dbTobaccoProducts =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[34]);
+          _entities[1].properties[33]);
 
   /// see [FamilyMemberIndividualDataModel.dbOccupationData]
   static final dbOccupationData =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
-          _entities[1].properties[35]);
+          _entities[1].properties[34]);
 }
 
 /// [FamilyMembersCommonDataModel] entity fields to define ObjectBox queries.
