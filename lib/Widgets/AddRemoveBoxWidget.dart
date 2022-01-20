@@ -44,7 +44,7 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                           fontSize: 18, color: colors.darkAccentColor)),
                 ),
                 IconButton(
-                  splashRadius: 20,
+                    splashRadius: 20,
                     onPressed: () {
                       setState(() {
                         widget.modelData?.individualDataListTransient
@@ -68,25 +68,23 @@ class _AddRemoveBoxWidgetState extends State<AddRemoveBoxWidget> {
                         itemBuilder: (BuildContext context, int index) {
                           return Card(
                             color: colors.darkSecondBackgroundColor,
-                         /**
+                            /**
                          * Re-renders tiles whenever visibility changed
                          * i.e, when user comes back from user page,
                          * page re rendered and user name is reflected
                          */
                             child: VisibilityDetector(
                               onVisibilityChanged: (VisibilityInfo info) {
-                                try{
+                                try {
                                   setState(() {}); //Re-renders page
-                                }
-                                catch(e){
-
-                                }
+                                } catch (e) {}
                               },
                               key: Key('add-remove-widget-key'),
                               child: ListTile(
                                   onTap: () {
                                     Navigator.of(context).push(MaterialPageRoute(
                                         builder: (context) => FamilyMemberAdd(
+                                            dataModel: widget.modelData,
                                             familyMemberIndividualDataModel:
                                                 widget.modelData!
                                                     .individualDataListTransient

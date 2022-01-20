@@ -80,7 +80,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
     'Elementary occupations': false,
     'Armed Forces occupations': false,
     'Unemployed': false,
-    'Studying' : false,
+    'Studying': false,
   };
 
   var privateClinicReasons = <String, bool>{
@@ -178,6 +178,17 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       initialValue:
                           widget.familyMemberIndividualDataModel?.userName,
                       onSaved: (String? data) async {
+                        /**
+                         * If condition to check if user name is equal to the HeadofFamily
+                         * HeadOfFamily value updated as well
+                         */
+                        if (widget.dataModel!.headOfFamily != null) {
+                          if (widget.dataModel!.headOfFamily ==
+                              widget
+                                  .familyMemberIndividualDataModel!.userName) {
+                            widget.dataModel!.headOfFamily = data;
+                          }
+                        }
                         widget.familyMemberIndividualDataModel!.userName = data;
                       },
                       style: darkTheme.DarkTheme.textTheme.bodyText2,
