@@ -6,6 +6,13 @@ import 'package:objectbox/objectbox.dart';
 
 //TODO: Add condition to set empty, <NA> value to dependent fields
 
+String parseStringFields(String? val) {
+  if (val == null || val == "")
+    return "<NA>";
+  else
+    return val;
+}
+
 List<String> buildListForOptionWidget(Map<String, bool> mapData) {
   var listData = <String>[];
 
@@ -14,6 +21,9 @@ List<String> buildListForOptionWidget(Map<String, bool> mapData) {
       listData.add(key);
     }
   });
+  if (listData.isEmpty) {
+    return ["<NA>"];
+  }
   return listData;
 }
 
@@ -98,54 +108,56 @@ class FamilyMemberIndividualDataModel {
   Map<String, dynamic> toJson() {
     return {
       "UIN": "",
-      "name": userName ?? "<NA>",
+      "name": parseStringFields(userName),
       "dateOfBirth":
           "${dateOfBirth!.day}-${dateOfBirth!.month}-${dateOfBirth!.year}",
-      "gender": gender ?? "<NA>",
-      "phoneNumber": phoneNumber ?? "<NA>",
-      "educationalQualification": educationQualification ?? "<NA>",
-      "aadhaarNumber": aadhaarNumber ?? "<NA>",
+      "gender": parseStringFields(gender),
+      "phoneNumber": parseStringFields(phoneNumber),
+      "educationalQualification": parseStringFields(educationQualification),
+      "aadhaarNumber": parseStringFields(aadhaarNumber),
       "Vulnerabilities": vulnerabilities != null
           ? buildListForOptionWidget(vulnerabilities!)
           : ['None'],
-      "isADailyWageWorker": dailyWageWorker ?? "<NA>",
+      "isADailyWageWorker": parseStringFields(dailyWageWorker),
       "occupationData": occupationData == null
           ? ["<NA>"]
           : parseOccupationServerResultJSON(occupationData!),
-      "employed": employed ?? "<NA>",
-      "income": income ?? "<NA>",
-      "incomeType": incomeType ?? "<NA>",
-      "oldAgePension": pension ?? "<NA>",
-      "businessStatus": businessStatus ?? "<NA>",
-      "maritalStatus": maritalStatus ?? "<NA>",
-      "noOfDaysWorking": noOfDaysWorking ?? "<NA>",
+      "employed": parseStringFields(employed),
+      "income": parseStringFields(income),
+      "incomeType": parseStringFields(incomeType),
+      "oldAgePension": parseStringFields(pension),
+      "businessStatus": parseStringFields(businessStatus),
+      "maritalStatus": parseStringFields(maritalStatus),
+      "noOfDaysWorking": parseStringFields(noOfDaysWorking),
       "specialSkills": specialSkills ?? "<NA>",
       "workTimings": workTimings ?? "<NA>",
-      "surgeriesUndergone": surgeries ?? "<NA>",
-      "anganwadiServicesAware": anganwadiServicesAware ?? "<NA>",
-      "anganwadiServicesUsed": anganwadiServicesUsing ?? "<NA>",
+      "surgeriesUndergone": parseStringFields(surgeries),
+      "anganwadiServicesAware": parseStringFields(anganwadiServicesAware),
+      "anganwadiServicesUsed": parseStringFields(anganwadiServicesUsing),
       "anganwadiServicesUtilised": anganwadiServicesUsedList ?? "<NA>",
-      "phcServicesUtilised": PHCServicesUsed ?? "<NA>",
-      "privateHealthClinicFacilitiesUsed": privateClinicServicesUsed ?? "<NA>",
+      "phcServicesUtilised": parseStringFields(PHCServicesUsed),
+      "privateHealthClinicFacilitiesUsed":
+          parseStringFields(privateClinicServicesUsed),
       "reasonsForVisitingPrivateHealthClinic": privateServiceReason != null
           ? buildListForOptionWidget(privateServiceReason!)
-          : [],
+          : ["<NA>"],
       "communicableDiseases": communicableDiseases != null
           ? buildListForOptionWidget(communicableDiseases!)
-          : [],
+          : ["<NA>"],
       "frequentHealthAilments": frequentAilments != null
           ? buildListForOptionWidget(frequentAilments!)
-          : [],
+          : ["<NA>"],
       "nonCommunicableDiseases": nonCommunicableDiseases != null
           ? buildListForOptionWidget(nonCommunicableDiseases!)
-          : [],
+          : ["<NA>"],
       "tobaccoBasedProductsUsage": useOfTobacco ?? "<NA>",
       "tobaccoProductsUsed": tobaccoProducts != null
           ? buildListForOptionWidget(tobaccoProducts!)
-          : [],
-      "alcoholConsumption": useOfAlcohol ?? "<NA>",
-      "arogyaSethuAppInstallationStatus": aarogyaSetuInstalled ?? "<NA>",
-      "vizhithiruAppInstallationStatus": vizhithiruInstalled ?? "<NA>"
+          : ["<NA>"],
+      "alcoholConsumption": parseStringFields(useOfAlcohol),
+      "arogyaSethuAppInstallationStatus":
+          parseStringFields(aarogyaSetuInstalled),
+      "vizhithiruAppInstallationStatus": parseStringFields(vizhithiruInstalled)
     };
   }
 
@@ -305,46 +317,51 @@ class FamilyMembersCommonDataModel {
         locationBottomRight!.latitude,
         locationBottomRight!.longitude
       ],
-      "headOfFamily": headOfFamily,
-      "availabilityOfDrinkingWater": drinkingWater ?? "<NA>",
+      "headOfFamily": parseStringFields(headOfFamily),
+      "availabilityOfDrinkingWater": parseStringFields(drinkingWater),
       "drinkingWaterSource": sourceOfDrinkingWater != null
           ? buildListForOptionWidget(sourceOfDrinkingWater!)
-          : [],
-      "areToiletsAvailableInHouse": toiletFacility ?? "<NA>",
-      "noToiletsWhy":
-          noToiletsWhy != null ? buildListForOptionWidget(noToiletsWhy!) : [],
-      "alternativeForHouseholdToilet": communityToilet ?? "<NA>",
-      "statusOfEnvironmentalSanitation": environmentSanitationLevel ?? "<NA>",
-      "availabilityOfWaterInToilets": runningWaterAvailable ?? "<NA>",
-      "numberOfTwoWheelers": noOfTwoWheelers ?? "<NA>",
-      "numberOfThreeWheelers": noOfThreeWheelers ?? "<NA>",
-      "numberOfFourWheelers": noOfFourWheelers ?? "<NA>",
+          : ["<NA>"],
+      "areToiletsAvailableInHouse": parseStringFields(toiletFacility),
+      "noToiletsWhy": noToiletsWhy != null
+          ? buildListForOptionWidget(noToiletsWhy!)
+          : ["<NA>"],
+      "alternativeForHouseholdToilet": parseStringFields(communityToilet),
+      "statusOfEnvironmentalSanitation":
+          parseStringFields(environmentSanitationLevel),
+      "availabilityOfWaterInToilets": parseStringFields(runningWaterAvailable),
+      "numberOfTwoWheelers": parseStringFields(noOfTwoWheelers),
+      "numberOfThreeWheelers": parseStringFields(noOfThreeWheelers),
+      "numberOfFourWheelers": parseStringFields(noOfFourWheelers),
       "brandsOfTwoThreeWheelers": twoThreeWheelManufacturer != null
           ? buildListForOptionWidget(twoThreeWheelManufacturer!)
-          : [],
+          : ["<NA>"],
       "brandsOfFourWheelers": fourWheelManufacturer != null
           ? buildListForOptionWidget(fourWheelManufacturer!)
-          : [],
-      "locallyAvailableFoodsConsumed":
-          localFoodMap != null ? buildListForOptionWidget(localFoodMap!) : [],
+          : ["<NA>"],
+      "locallyAvailableFoodsConsumed": localFoodMap != null
+          ? buildListForOptionWidget(localFoodMap!)
+          : ["<NA>"],
       "doYouOwnCattle": isCattleOwned,
       "incomeFromCattle": isCattleOwned == 'yes' ? incomeFromCattle : '<NA>',
-      "doYouOwnFarmLand": isFarmLandOwned ?? "<NA>",
-      "doYouPreserveSeeds": isSeedsPreserved ?? "<NA>",
+      "doYouOwnFarmLand": parseStringFields(isFarmLandOwned),
+      "doYouPreserveSeeds": parseStringFields(isSeedsPreserved),
       "cropsCultivated": cropsCultivated != null
           ? buildListForOptionWidget(cropsCultivated!)
-          : [],
+          : ["<NA>"],
       "typesOfSeedsPreserved": preservedSeedsMap != null
           ? buildListForOptionWidget(preservedSeedsMap!)
-          : [],
-      "treesOwnedIfAny":
-          treesOwnedMap != null ? buildListForOptionWidget(treesOwnedMap!) : [],
-      "isKitchenGardenAvailable": isKitchenGardenOwned ?? "<NA>",
+          : ["<NA>"],
+      "treesOwnedIfAny": treesOwnedMap != null
+          ? buildListForOptionWidget(treesOwnedMap!)
+          : ["<NA>"],
+      "isKitchenGardenAvailable": parseStringFields(isKitchenGardenOwned),
       "cropsInKitchenGarden": kitchenGardenPlants != null
           ? buildListForOptionWidget(kitchenGardenPlants!)
-          : [],
-      "address": "$addressOne\n$addressTwo\n$city",
-      "villageCode": villageCode ?? "<NA>"
+          : ["<NA>"],
+      "address":
+          "$addressOne${addressTwo != null && addressTwo != "" ? "\n$addressTwo" : ""}\n$city",
+      "villageCode": parseStringFields(villageCode)
     };
   }
 
