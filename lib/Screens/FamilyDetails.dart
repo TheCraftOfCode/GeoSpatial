@@ -98,8 +98,15 @@ class _FamilyDetailsState extends State<FamilyDetails> {
   };
 
   var local_food = {
-    'yes': false,
-    'no': false,
+    'brinjal': false,
+    'tomato': false,
+    'drumstick': false,
+    'ladies finger': false,
+    'banana': false,
+    'potato': false,
+    'drumstick leaves': false,
+    'beans': false,
+    'long beans': false,
   };
 
   var trees_owned = {
@@ -317,7 +324,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         title: "Environmental sanitation level: "),
                   ],
                 ),
-                //TODO: Add limit in multi option dropdown based on the no of vehicles selected?
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -355,6 +361,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         widget.modelData?.twoThreeWheelManufacturer = val;
                       },
                       errorField: "Please choose a brand",
+                      validator: (val){},
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                     ),
                     DropDownFormField(
@@ -379,6 +386,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         print("Value recorded: $val");
                         widget.modelData?.fourWheelManufacturer = val;
                       },
+                      validator: (val){},
                       errorField: "Please choose a brand",
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                     ),
@@ -507,6 +515,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       hint: 'Choose trees owned',
                       singleOption: false,
                       context: context,
+                      validator: (val){},
                       dataMap: widget.modelData!.treesOwnedMap ?? trees_owned,
                       onSaved: (val) {
                         print("Value recorded: $val");
@@ -517,7 +526,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       title: 'Local foods consumed',
                       hint: 'Choose your resource',
                       //TODO: Change variable to local food
-
+                      validator: (val){},
                       dataMap: widget.modelData!.localFoodMap ?? local_food,
                       onSaved: (val) {
                         print("Value recorded: $val");
