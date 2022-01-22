@@ -313,7 +313,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       widget.familyMemberIndividualDataModel!.vulnerabilities =
                           map;
                     },
-                    validator: (val){},
+                    validator: (val) {},
                     errorField: "Please choose a vulnerability / None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
@@ -326,21 +326,99 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                             .familyMemberIndividualDataModel!.occupationData ??
                         [
                           new NestedOptionData(subOptionDataMap: {
-                            "Occupation 1": false,
-                            "Occupation 2": false
-                          }, boxName: 'Category One'),
+                            "Administrative and Commercial Managers": false,
+                            "Chief Executives, Senior Officials and Legislators":
+                                false,
+                            "Production and Specialized Services Managers":
+                                false,
+                            "Hospitality, Retail and Other Services Managers":
+                                false
+                          }, boxName: 'Managers'),
                           new NestedOptionData(subOptionDataMap: {
-                            "Occupation 1": false,
-                            "Occupation 2": false
-                          }, boxName: 'Category Two'),
+                            "Science and Engineering Professionals": false,
+                            "Health Professionals": false,
+                            "Teaching Professionals": false,
+                            "Business and Administration Professionals": false,
+                            "Information and Communications Technology Professionals":
+                                false,
+                            "Legal, Social and Cultural Professionals": false
+                          }, boxName: 'Professionals'),
+                          new NestedOptionData(
+                              subOptionDataMap: {
+                                "Science and Engineering Associate Professionals":
+                                    false,
+                                "Health Associate Professionals": false,
+                                "Business and Administration Associate Professionals":
+                                    false,
+                                "Legal, Social, Cultural and Related Associate Professionals":
+                                    false,
+                                "Information and Communications Technicians":
+                                    false
+                              },
+                              boxName:
+                                  'Technicians and Associate Professionals'),
                           new NestedOptionData(subOptionDataMap: {
-                            "Occupation 1": false,
-                            "Occupation 2": false
-                          }, boxName: 'Category Three'),
+                            "General and Keyboard Clerks": false,
+                            "Customer Services Clerks": false,
+                            "Numerical and Material Recording Clerks": false,
+                            "Other Clerical Support Workers": false
+                          }, boxName: 'Clerical Support Workers'),
                           new NestedOptionData(subOptionDataMap: {
-                            "Occupation 1": false,
-                            "Occupation 2": false
-                          }, boxName: 'Category Four')
+                            "Personal Services Workers": false,
+                            "Sales Workers": false,
+                            "Personal Care Workers": false,
+                            "Protective Services Workers": false
+                          }, boxName: 'Services and Sales Workers'),
+                          new NestedOptionData(
+                              subOptionDataMap: {
+                                "Market-oriented Skilled Agricultural Workers":
+                                    false,
+                                "Market-oriented Skilled Forestry, Fishery and Hunting Workers":
+                                    false,
+                                "Subsistence Farmers, Fishers, Hunters and Gatherers":
+                                    false
+                              },
+                              boxName:
+                                  'Skilled Agricultural, Forestry and Fishery Workers'),
+                          new NestedOptionData(subOptionDataMap: {
+                            "Building and Related Trades Workers (excluding Electricians)":
+                                false,
+                            "Metal, Machinery and Related Trades Workers":
+                                false,
+                            "Handicraft and Printing Workers": false,
+                            "Electrical and Electronic Trades Workers": false,
+                            "Food Processing, Woodworking, Garment and Other Craft and Related Trades Workers":
+                                false
+                          }, boxName: 'Craft and Related Trades Workers'),
+                          new NestedOptionData(
+                              subOptionDataMap: {
+                                "Stationary Plant and Machine Operators": false,
+                                "Assemblers": false,
+                                "Drivers and Mobile Plant Operators": false
+                              },
+                              boxName:
+                                  'Plant and Machine Operators and Assemblers'),
+                          new NestedOptionData(subOptionDataMap: {
+                            "Cleaners and Helpers": false,
+                            "Agricultural, Forestry and Fishery Labourers":
+                                false,
+                            "Labourers in Mining, Construction, Manufacturing and Transport":
+                                false,
+                            "Food Preparation Assistants": false,
+                            "Street and Related Sales and Services Workers":
+                                false,
+                            "Refuse Workers and Other Elementary Workers": false
+                          }, boxName: 'Elementary Occupations'),
+                          new NestedOptionData(subOptionDataMap: {
+                            "Commissioned Armed Forces Officers": false,
+                            "Non-commissioned Armed Forces Officers": false,
+                            "Armed Forces Occupations, Other Ranks": false
+                          }, boxName: 'Armed Forces Occupations'),
+                          new NestedOptionData(subOptionDataMap: {
+                            "School": false,
+                            "College": false,
+                            "Vocational": false
+                          }, boxName: 'Student')
                         ],
                     title: 'Occupation',
                     context: context,
@@ -619,7 +697,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       widget.familyMemberIndividualDataModel!.frequentAilments =
                           map;
                     },
-                    validator: (val){},
+                    validator: (val) {},
                     errorField: "Please choose ailments/None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
@@ -638,7 +716,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       widget.familyMemberIndividualDataModel!
                           .communicableDiseases = map;
                     },
-                    validator: (val){},
+                    validator: (val) {},
                     errorField: "Please choose diseases/None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
@@ -657,7 +735,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       widget.familyMemberIndividualDataModel!
                           .nonCommunicableDiseases = map;
                     },
-                    validator: (val){},
+                    validator: (val) {},
                     errorField: "Please choose diseases/None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),

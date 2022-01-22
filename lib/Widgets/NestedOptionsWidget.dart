@@ -111,7 +111,7 @@ class _NestedOptionWidgetState extends State<NestedOptionWidget> {
                                           bottomLeft: Radius.circular(10),
                                           bottomRight: Radius.circular(10))),
                                   child: CheckBoxAddExtraAlertDialog(
-                                      hint: "hint",
+                                      hint: "Choose job",
                                       autoSave: true,
                                       onSaved: (map) {
                                         widget.nestedOptionData[index]
