@@ -13,6 +13,17 @@ String parseStringFields(String? val) {
     return val;
 }
 
+parseDependentField(
+    String? dependentFieldVal, var returnVal, String requiredValue) {
+  if (dependentFieldVal == null || dependentFieldVal == "") {
+    return "<NA>";
+  } else if (dependentFieldVal == requiredValue) {
+    return returnVal;
+  } else {
+    return "<NA>";
+  }
+}
+
 List<String> buildListForOptionWidget(Map<String, bool> mapData) {
   var listData = <String>[];
 
@@ -123,24 +134,30 @@ class FamilyMemberIndividualDataModel {
           ? ["<NA>"]
           : parseOccupationServerResultJSON(occupationData!),
       "employed": parseStringFields(employed),
-      "income": parseStringFields(income),
-      "incomeType": parseStringFields(incomeType),
+      "income": parseDependentField(employed, parseStringFields(income), "yes"),
+      "incomeType":
+          parseDependentField(employed, parseStringFields(incomeType), "yes"),
       "oldAgePension": parseStringFields(pension),
       "businessStatus": parseStringFields(businessStatus),
       "maritalStatus": parseStringFields(maritalStatus),
-      "noOfDaysWorking": parseStringFields(noOfDaysWorking),
+      "noOfDaysWorking": parseDependentField(
+          employed, parseStringFields(noOfDaysWorking), "yes"),
       "specialSkills": specialSkills ?? "<NA>",
-      "workTimings": workTimings ?? "<NA>",
+      "workTimings": parseDependentField(employed, workTimings, "yes"),
       "surgeriesUndergone": parseStringFields(surgeries),
       "anganwadiServicesAware": parseStringFields(anganwadiServicesAware),
       "anganwadiServicesUsed": parseStringFields(anganwadiServicesUsing),
-      "anganwadiServicesUtilised": anganwadiServicesUsedList ?? "<NA>",
+      "anganwadiServicesUtilised": parseDependentField(
+          anganwadiServicesUsing, anganwadiServicesUsedList, "yes"),
       "phcServicesUtilised": parseStringFields(PHCServicesUsed),
       "privateHealthClinicFacilitiesUsed":
           parseStringFields(privateClinicServicesUsed),
-      "reasonsForVisitingPrivateHealthClinic": privateServiceReason != null
-          ? buildListForOptionWidget(privateServiceReason!)
-          : ["<NA>"],
+      "reasonsForVisitingPrivateHealthClinic": parseDependentField(
+          privateClinicServicesUsed,
+          privateServiceReason != null
+              ? buildListForOptionWidget(privateServiceReason!)
+              : ["<NA>"],
+          "yes"),
       "communicableDiseases": communicableDiseases != null
           ? buildListForOptionWidget(communicableDiseases!)
           : ["<NA>"],
@@ -150,10 +167,13 @@ class FamilyMemberIndividualDataModel {
       "nonCommunicableDiseases": nonCommunicableDiseases != null
           ? buildListForOptionWidget(nonCommunicableDiseases!)
           : ["<NA>"],
-      "tobaccoBasedProductsUsage": useOfTobacco ?? "<NA>",
-      "tobaccoProductsUsed": tobaccoProducts != null
-          ? buildListForOptionWidget(tobaccoProducts!)
-          : ["<NA>"],
+      "tobaccoBasedProductsUsage": parseStringFields(useOfTobacco),
+      "tobaccoProductsUsed": parseDependentField(
+          useOfTobacco,
+          tobaccoProducts != null
+              ? buildListForOptionWidget(tobaccoProducts!)
+              : ["<NA>"],
+          "yes"),
       "alcoholConsumption": parseStringFields(useOfAlcohol),
       "arogyaSethuAppInstallationStatus":
           parseStringFields(aarogyaSetuInstalled),
@@ -323,10 +343,14 @@ class FamilyMembersCommonDataModel {
           ? buildListForOptionWidget(sourceOfDrinkingWater!)
           : ["<NA>"],
       "areToiletsAvailableInHouse": parseStringFields(toiletFacility),
-      "noToiletsWhy": noToiletsWhy != null
-          ? buildListForOptionWidget(noToiletsWhy!)
-          : ["<NA>"],
-      "alternativeForHouseholdToilet": parseStringFields(communityToilet),
+      "noToiletsWhy": parseDependentField(
+          toiletFacility,
+          noToiletsWhy != null
+              ? buildListForOptionWidget(noToiletsWhy!)
+              : ["<NA>"],
+          "no"),
+      "alternativeForHouseholdToilet": parseDependentField(
+          toiletFacility, parseStringFields(communityToilet), "no"),
       "statusOfEnvironmentalSanitation":
           parseStringFields(environmentSanitationLevel),
       "availabilityOfWaterInToilets": parseStringFields(runningWaterAvailable),
@@ -343,22 +367,32 @@ class FamilyMembersCommonDataModel {
           ? buildListForOptionWidget(localFoodMap!)
           : ["<NA>"],
       "doYouOwnCattle": isCattleOwned,
-      "incomeFromCattle": isCattleOwned == 'yes' ? incomeFromCattle : '<NA>',
+      "incomeFromCattle":
+          parseDependentField(isCattleOwned, incomeFromCattle, "yes"),
       "doYouOwnFarmLand": parseStringFields(isFarmLandOwned),
+      "cropsCultivated": parseDependentField(
+          isFarmLandOwned,
+          cropsCultivated != null
+              ? buildListForOptionWidget(cropsCultivated!)
+              : ["<NA>"],
+          "yes"),
       "doYouPreserveSeeds": parseStringFields(isSeedsPreserved),
-      "cropsCultivated": cropsCultivated != null
-          ? buildListForOptionWidget(cropsCultivated!)
-          : ["<NA>"],
-      "typesOfSeedsPreserved": preservedSeedsMap != null
-          ? buildListForOptionWidget(preservedSeedsMap!)
-          : ["<NA>"],
+      "typesOfSeedsPreserved": parseDependentField(
+          isSeedsPreserved,
+          preservedSeedsMap != null
+              ? buildListForOptionWidget(preservedSeedsMap!)
+              : ["<NA>"],
+          "yes`"),
       "treesOwnedIfAny": treesOwnedMap != null
           ? buildListForOptionWidget(treesOwnedMap!)
           : ["<NA>"],
       "isKitchenGardenAvailable": parseStringFields(isKitchenGardenOwned),
-      "cropsInKitchenGarden": kitchenGardenPlants != null
-          ? buildListForOptionWidget(kitchenGardenPlants!)
-          : ["<NA>"],
+      "cropsInKitchenGarden": parseDependentField(
+          isKitchenGardenOwned,
+          kitchenGardenPlants != null
+              ? buildListForOptionWidget(kitchenGardenPlants!)
+              : ["<NA>"],
+          "yes"),
       "address":
           "$addressOne${addressTwo != null && addressTwo != "" ? "\n$addressTwo" : ""}\n$city",
       "villageCode": parseStringFields(villageCode)
