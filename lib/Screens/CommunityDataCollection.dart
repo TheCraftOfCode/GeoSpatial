@@ -114,6 +114,8 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
       print(isValid.toString());
 
       if (isValid) {
+        var userId = await _getUserID();
+        modelData.recordCollectingUserId = userId;
         var progressContext;
         showDialog(
           context: context,

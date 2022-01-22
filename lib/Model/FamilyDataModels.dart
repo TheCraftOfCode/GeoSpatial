@@ -13,7 +13,7 @@ String parseStringFields(String? val) {
 
 parseDependentField(
     String? dependentFieldVal, var returnVal, String requiredValue) {
-  if (dependentFieldVal == null || dependentFieldVal == "") {
+   if (dependentFieldVal == null || dependentFieldVal == "") {
     return "<NA>";
   } else if (dependentFieldVal == requiredValue) {
     return returnVal;
@@ -22,7 +22,7 @@ parseDependentField(
   }
 }
 
-List<String> buildListForOptionWidget(Map<String, bool> mapData) {
+buildListForOptionWidget(Map<String, bool> mapData) {
   var listData = <String>[];
 
   mapData.forEach((key, value) {
@@ -31,7 +31,7 @@ List<String> buildListForOptionWidget(Map<String, bool> mapData) {
     }
   });
   if (listData.isEmpty) {
-    return ["<NA>"];
+    return "<NA>";
   }
   return listData;
 }
@@ -129,7 +129,7 @@ class FamilyMemberIndividualDataModel {
           : ['None'],
       "isADailyWageWorker": parseStringFields(dailyWageWorker),
       "occupationData": occupationData == null
-          ? ["<NA>"]
+          ? "<NA>"
           : parseOccupationServerResultJSON(occupationData!),
       "employed": parseStringFields(employed),
       "income": parseDependentField(employed, parseStringFields(income), "yes"),
@@ -154,23 +154,23 @@ class FamilyMemberIndividualDataModel {
           privateClinicServicesUsed,
           privateServiceReason != null
               ? buildListForOptionWidget(privateServiceReason!)
-              : ["<NA>"],
+              : "<NA>",
           "yes"),
       "communicableDiseases": communicableDiseases != null
           ? buildListForOptionWidget(communicableDiseases!)
-          : ["<NA>"],
+          : "<NA>",
       "frequentHealthAilments": frequentAilments != null
           ? buildListForOptionWidget(frequentAilments!)
-          : ["<NA>"],
+          : "<NA>",
       "nonCommunicableDiseases": nonCommunicableDiseases != null
           ? buildListForOptionWidget(nonCommunicableDiseases!)
-          : ["<NA>"],
+          : "<NA>",
       "tobaccoBasedProductsUsage": parseStringFields(useOfTobacco),
       "tobaccoProductsUsed": parseDependentField(
           useOfTobacco,
           tobaccoProducts != null
               ? buildListForOptionWidget(tobaccoProducts!)
-              : ["<NA>"],
+              : "<NA>",
           "yes"),
       "alcoholConsumption": parseStringFields(useOfAlcohol),
       "arogyaSethuAppInstallationStatus":
@@ -317,7 +317,7 @@ class FamilyMembersCommonDataModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'volunteerUserId':recordCollectingUserId,
+      'volunteerUserId': recordCollectingUserId,
       'familyMemberData':
           individualDataListTransient.map((item) => item.toJson()).toList(),
       'locationTopLeft': [
@@ -340,13 +340,13 @@ class FamilyMembersCommonDataModel {
       "availabilityOfDrinkingWater": parseStringFields(drinkingWater),
       "drinkingWaterSource": sourceOfDrinkingWater != null
           ? buildListForOptionWidget(sourceOfDrinkingWater!)
-          : ["<NA>"],
+          : "<NA>",
       "areToiletsAvailableInHouse": parseStringFields(toiletFacility),
       "noToiletsWhy": parseDependentField(
           toiletFacility,
           noToiletsWhy != null
               ? buildListForOptionWidget(noToiletsWhy!)
-              : ["<NA>"],
+              : "<NA>",
           "no"),
       "alternativeForHouseholdToilet": parseDependentField(
           toiletFacility, parseStringFields(communityToilet), "no"),
@@ -358,13 +358,13 @@ class FamilyMembersCommonDataModel {
       "numberOfFourWheelers": parseStringFields(noOfFourWheelers),
       "brandsOfTwoThreeWheelers": twoThreeWheelManufacturer != null
           ? buildListForOptionWidget(twoThreeWheelManufacturer!)
-          : ["<NA>"],
+          : "<NA>",
       "brandsOfFourWheelers": fourWheelManufacturer != null
           ? buildListForOptionWidget(fourWheelManufacturer!)
-          : ["<NA>"],
+          : "<NA>",
       "locallyAvailableFoodsConsumed": localFoodMap != null
           ? buildListForOptionWidget(localFoodMap!)
-          : ["<NA>"],
+          : "<NA>",
       "doYouOwnCattle": isCattleOwned,
       "incomeFromCattle":
           parseDependentField(isCattleOwned, incomeFromCattle, "yes"),
@@ -373,24 +373,24 @@ class FamilyMembersCommonDataModel {
           isFarmLandOwned,
           cropsCultivated != null
               ? buildListForOptionWidget(cropsCultivated!)
-              : ["<NA>"],
+              : "<NA>",
           "yes"),
       "doYouPreserveSeeds": parseStringFields(isSeedsPreserved),
       "typesOfSeedsPreserved": parseDependentField(
           isSeedsPreserved,
           preservedSeedsMap != null
               ? buildListForOptionWidget(preservedSeedsMap!)
-              : ["<NA>"],
-          "yes`"),
+              : "<NA>",
+          "yes"),
       "treesOwnedIfAny": treesOwnedMap != null
           ? buildListForOptionWidget(treesOwnedMap!)
-          : ["<NA>"],
+          : "<NA>",
       "isKitchenGardenAvailable": parseStringFields(isKitchenGardenOwned),
       "cropsInKitchenGarden": parseDependentField(
           isKitchenGardenOwned,
           kitchenGardenPlants != null
               ? buildListForOptionWidget(kitchenGardenPlants!)
-              : ["<NA>"],
+              : "<NA>",
           "yes"),
       "address":
           "$addressOne${addressTwo != null && addressTwo != "" ? "\n$addressTwo" : ""}\n$city",

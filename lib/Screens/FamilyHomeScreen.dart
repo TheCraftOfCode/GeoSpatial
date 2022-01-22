@@ -152,6 +152,8 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                             }
 
                             if (isValid) {
+                              var userId = await _getUserID();
+                              modelData!.recordCollectingUserId = userId;
                               var progressContext;
                               showDialog(
                                 context: context,
