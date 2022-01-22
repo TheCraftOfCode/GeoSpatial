@@ -317,6 +317,7 @@ class FamilyMembersCommonDataModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'volunteerUserId':recordCollectingUserId,
       'familyMemberData':
           individualDataListTransient.map((item) => item.toJson()).toList(),
       'locationTopLeft': [
