@@ -68,7 +68,7 @@ class _IncomeWithTypeTextFieldState extends State<IncomeWithTypeTextField> {
                     if (value == "" || value == null) {
                       return "Enter Income";
                     }
-                    if (int.tryParse(value) != null) {
+                    else if (int.tryParse(value) != null) {
                       if (double.parse(value) <= 0)
                         return "Income can't be less than or equal to 0";
                     } else {

@@ -433,6 +433,14 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                   style: GoogleFonts.poppins(
                                       color: colors.darkSecondaryTextColor),
                                 )),
+                            validator: (value) {
+                              if (value == null || value == "") {
+                                return "Please enter cattle income";
+                              }
+                              if (int.tryParse(value) == null) {
+                                return "Income can only have numbers";
+                              }
+                            },
                             autovalidateMode: AutovalidateMode.always,
                             keyboardType: TextInputType.number,
                           ),

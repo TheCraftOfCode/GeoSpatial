@@ -263,7 +263,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       validator: (value) {
                         if (value == "" || value == null)
                           return null;
-                        else if (value.length != 10) {
+                        else if (int.tryParse(value) == null) {
+                          return "Phone number can only have numbers";
+                        } else if (value.length != 10) {
                           return "Enter a valid Phone Number";
                         } else
                           return null;
@@ -446,7 +448,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                                 print("value");
                                 if (value == null || value == "")
                                   return "Please enter number of work days";
-                                else if (int.parse(value) < 1) {
+                                else if (int.tryParse(value) == null) {
+                                  return "Field can only have numbers";
+                                } else if (int.parse(value) < 1) {
                                   return "Enter number of work days";
                                 } else if (int.parse(value) > 31) {
                                   return "Enter a valid number of work days";
@@ -517,7 +521,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         validator: (value) {
                           if (value == "" || value == null)
                             return null;
-                          else if (value.length != 12) {
+                          else if (int.tryParse(value) == null) {
+                            return "Aadhaar number can only have numbers";
+                          } else if (value.length != 12) {
                             return "Enter a valid Aadhaar";
                           } else
                             return null;
