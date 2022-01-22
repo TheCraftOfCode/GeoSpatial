@@ -52,8 +52,6 @@ class CommunityDataCollection extends StatefulWidget {
     'Food processing units'
   ];
 
-  //TODO: Replace with list of village codes
-
   final List<String> _villageCodeName = [
     'THC',
     'PGP',

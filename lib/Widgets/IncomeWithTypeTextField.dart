@@ -3,8 +3,6 @@ import 'package:geo_spatial/Utils/DarkTheme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
-
-//TODO: Check for 0 (or lower)
 class IncomeWithTypeTextField extends StatefulWidget {
   IncomeWithTypeTextField({
     Key? key,
@@ -35,7 +33,8 @@ class _IncomeWithTypeTextFieldState extends State<IncomeWithTypeTextField> {
 
   initState() {
     super.initState();
-    chosenOption = widget.initialDropdownValue ?? widget.listOfOptions[widget.listOfOptions.length - 1];
+    chosenOption = widget.initialDropdownValue ??
+        widget.listOfOptions[widget.listOfOptions.length - 1];
   }
 
   @override
@@ -65,8 +64,15 @@ class _IncomeWithTypeTextFieldState extends State<IncomeWithTypeTextField> {
               ),
               validator: widget.validate ??
                   (value) {
-                    if (value == "") {
+                    print(value);
+                    if (value == "" || value == null) {
                       return "Enter Income";
+                    }
+                    if (int.tryParse(value) != null) {
+                      if (double.parse(value) <= 0)
+                        return "Income can't be less than or equal to 0";
+                    } else {
+                      return "Income has to be a numeric value";
                     }
                   },
               onSaved: (value) {

@@ -10,6 +10,7 @@ import 'package:geo_spatial/Widgets/FormPageView.dart';
 import 'package:geo_spatial/Widgets/OptionsFormWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+//TODO: Add validation to check if entered value is numeric before parsing or submitting
 class FamilyDetails extends StatefulWidget {
   const FamilyDetails({Key? key, this.modelData}) : super(key: key);
   final FamilyMembersCommonDataModel? modelData;
@@ -148,7 +149,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     return list;
   }
 
-  //TODO: Add village code
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -318,6 +318,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         title: "Environmental sanitation level: "),
                   ],
                 ),
+                //TODO: Add limit in multi option dropdown based on the no of vehicles selected?
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

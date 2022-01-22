@@ -315,7 +315,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     errorField: "Please choose a vulnerability / None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
-                  //TODO: Occupation widget db functions update
                   NestedOptionWidgetFormField(
                     onSaved: (val) {
                       widget.familyMemberIndividualDataModel!.occupationData =
