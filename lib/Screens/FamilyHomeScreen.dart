@@ -151,8 +151,38 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                               print("Indv ${i.dataValid}");
                             }
 
-                            //TODO: Change end point and check res for errors
                             if (isValid) {
+                              var progressContext;
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  progressContext = context;
+                                  return WillPopScope(
+                                      child: Dialog(
+                                        child: Padding(
+                                          padding: EdgeInsets.all(20),
+                                          child: new Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 20),
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                              new Text(
+                                                "Uploading data",
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      onWillPop: () async => false);
+                                },
+                              );
                               try {
                                 print("FINAL DATA: ${modelData!.toJson()}");
                                 http.Response res = await _makeRequest(
@@ -170,6 +200,9 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                                     position: ToastPosition.center,
                                     backgroundColor: colors.darkAccentColor);
                               }
+                              Navigator.of(progressContext!,
+                                      rootNavigator: true)
+                                  .pop();
                             } else {
                               showToast("Please fill all fields!");
                             }
@@ -268,4 +301,3 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
     modelData = null;
   }
 }
-
