@@ -35,7 +35,7 @@ Future<http.Response> _getUserDetails() async {
     "Content-Type": "application/json",
     'user-auth-token': jwt
   }).timeout(
-    const Duration(seconds: 10),
+    const Duration(seconds: 30),
     onTimeout: () {
       showToast("Server Timed out!");
       // Time has run out, do what you wanted to do.

@@ -1,8 +1,11 @@
 import 'dart:convert';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:geo_spatial/Screens/Login.dart';
+import 'package:geo_spatial/Utils/CheckNetworkConnectivity.dart';
 import 'package:geo_spatial/Utils/Constants.dart';
 import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
 import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
@@ -10,6 +13,8 @@ import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Widgets/DataCard.dart';
 import 'package:geo_spatial/Widgets/NavigationDrawer.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oktoast/oktoast.dart';
+import 'package:http/http.dart' as http;
 
 import 'EditExistingRecordsPage.dart';
 import 'SavedData.dart';
@@ -32,6 +37,37 @@ Future<String> get _getUserName async {
 }
 
 class _HomeWidgetState extends State<Home> {
+  final NetworkConnectivity _connectivity = NetworkConnectivity.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    _connectivity.initialise();
+    _connectivity.myStream.listen((source) async {
+      if (source == ConnectivityResult.none) {
+        showToast(
+            "Offline mode, data cannot be uploaded until device is connected to the internet");
+      } else {
+        var jwt = await storage.read(key: JWT_STORAGE_KEY);
+        if (jwt != null) {
+          var res = await http
+              .get(Uri.https(NETWORK_ADDRESS, '/api/validateToken'), headers: {
+            "Content-Type": "application/json",
+            'user-auth-token': jwt
+          }).timeout(Duration(seconds: 30));
+          if (res.statusCode == 401) {
+            await storage.delete(key: JWT_STORAGE_KEY);
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => Login()),
+                (Route<dynamic> route) => false);
+            showToast("Invalid token or token not found, logging out");
+          }
+        }
+      }
+      print("CONNECTED: ${source}");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -92,7 +128,7 @@ class _HomeWidgetState extends State<Home> {
                   style: GoogleFonts.montserrat(
                       fontSize: 18, color: colors.darkPrimaryTextColor),
                 );
-              } else{
+              } else {
                 return Text(
                   'Geo Spatial Api!',
                   style: GoogleFonts.montserrat(

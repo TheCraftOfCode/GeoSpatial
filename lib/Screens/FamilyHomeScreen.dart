@@ -77,7 +77,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
             },
             body: body)
         .timeout(
-      const Duration(seconds: 10),
+      const Duration(seconds: 30),
       onTimeout: () {
         showToast("Server Timed out!");
         // Time has run out, do what you wanted to do.

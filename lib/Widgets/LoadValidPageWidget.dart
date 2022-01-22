@@ -34,7 +34,15 @@ class LoadValidPageWidget extends StatelessWidget {
     var res = await http.get(Uri.https(url, '/api/validateToken'), headers: {
       "Content-Type": "application/json",
       'user-auth-token': JWT
-    }).timeout(Duration(seconds: 10));
+    }).timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        showToast("Server Timed out!");
+        // Time has run out, do what you wanted to do.
+        return http.Response(
+            'Error', 408); // Request Timeout response status code
+      },
+    );
     print("RES: ${res.body}");
 
     return res;
@@ -47,7 +55,7 @@ class LoadValidPageWidget extends StatelessWidget {
     if (jwt == null) return "";
     try {
       var res = await _validateToken(jwt);
-      if (res.statusCode != 200) {
+      if (res.statusCode == 401) {
         await storage.delete(key: JWT_STORAGE_KEY);
         showToast("Token could not be validated, logging out");
         return "";

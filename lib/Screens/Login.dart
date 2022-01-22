@@ -23,18 +23,28 @@ class _MyAppState extends State<Login> {
 
   var _nameError = null;
   var _passwordError = null;
-  bool _isSelected = false;
+  bool _isSelected = true;
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
+    data() async {
+      var data = await storage.read(key: REMEMBER_ME_KEY);
+      if (data != null) {
+        _isSelected = data == "true";
+      }
+      setState(() {});
+    }
+
+    data();
   }
 
   void _radio() {
     setState(() {
       _isSelected = !_isSelected;
     });
+    storage.write(key: REMEMBER_ME_KEY, value: _isSelected.toString());
   }
 
   String _validateUserName(String username) {
@@ -56,8 +66,17 @@ class _MyAppState extends State<Login> {
     String url = NETWORK_ADDRESS;
     var body = json.encode({"username": username, "password": password});
 
-    var res = await http.post(Uri.https(url, '/api/login'),
-        headers: {"Content-Type": "application/json"}, body: body);
+    var res = await http
+        .post(Uri.https(url, '/api/login'),
+            headers: {"Content-Type": "application/json"}, body: body)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        // Time has run out, do what you wanted to do.
+        return http.Response(
+            'Server Timed out!', 408); // Request Timeout response status code
+      },
+    );
     print("RES: ${res.body}");
 
     return res;
@@ -66,8 +85,18 @@ class _MyAppState extends State<Login> {
   Future<http.Response> _getUserDetails(String JWT) async {
     String url = NETWORK_ADDRESS;
 
-    var res = await http.get(Uri.https(url, '/api/getUserData'),
-        headers: {"Content-Type": "application/json", 'user-auth-token': JWT});
+    var res = await http.get(Uri.https(url, '/api/getUserData'), headers: {
+      "Content-Type": "application/json",
+      'user-auth-token': JWT
+    }).timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        showToast("Server Timed out!");
+        // Time has run out, do what you wanted to do.
+        return http.Response(
+            'Error', 408); // Request Timeout response status code
+      },
+    );
     print("RES: ${res.body}");
 
     return res;
