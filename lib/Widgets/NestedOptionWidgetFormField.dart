@@ -117,6 +117,5 @@ class NestedOptionWidgetFormField extends FormField<List<NestedOptionData>> {
                   ],
                 ),
               );
-              ;
             });
 }
