@@ -45,42 +45,6 @@ class _IncomeWithTypeTextFieldState extends State<IncomeWithTypeTextField> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            flex: 3,
-            child: TextFormField(
-              initialValue: widget.initialValue,
-              keyboardType: TextInputType.number,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              style: darkTheme.DarkTheme.textTheme.bodyText2,
-              decoration: InputDecoration(
-                label: Text(
-                  widget.text,
-                  style:
-                      GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
-                ),
-                hintText: widget.hintText,
-                hintStyle:
-                    GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
-                contentPadding: EdgeInsets.all(7.0),
-              ),
-              validator: widget.validate ??
-                  (value) {
-                    print(value);
-                    if (value == "" || value == null) {
-                      return "Enter Income";
-                    }
-                    else if (int.tryParse(value) != null) {
-                      if (double.parse(value) <= 0)
-                        return "Income can't be less than or equal to 0";
-                    } else {
-                      return "Income has to be a numeric value";
-                    }
-                  },
-              onSaved: (value) {
-                widget.onSaved(value, chosenOption);
-              },
-            ),
-          ),
-          Expanded(
             flex: 2,
             child: Card(
               color: colors.darkScaffoldColor,
@@ -118,6 +82,43 @@ class _IncomeWithTypeTextFieldState extends State<IncomeWithTypeTextField> {
               ),
             ),
           ),
+          Expanded(
+            flex: 3,
+            child: TextFormField(
+              initialValue: widget.initialValue,
+              keyboardType: TextInputType.number,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              style: darkTheme.DarkTheme.textTheme.bodyText2,
+              decoration: InputDecoration(
+                label: Text(
+                  widget.text,
+                  style:
+                      GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
+                ),
+                hintText: widget.hintText,
+                hintStyle:
+                    GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
+                contentPadding: EdgeInsets.all(7.0),
+              ),
+              validator: widget.validate ??
+                  (value) {
+                    print(value);
+                    if (value == "" || value == null) {
+                      return "Enter Income";
+                    }
+                    else if (int.tryParse(value) != null) {
+                      if (double.parse(value) <= 0)
+                        return "Income can't be less than or equal to 0";
+                    } else {
+                      return "Income has to be a numeric value";
+                    }
+                  },
+              onSaved: (value) {
+                widget.onSaved(value, chosenOption);
+              },
+            ),
+          ),
+
         ],
       ),
     );

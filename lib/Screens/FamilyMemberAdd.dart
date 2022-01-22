@@ -66,7 +66,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
     'Lactating Mother': false,
     'Elderly (>60 years)': false,
     'Children below 2 years': false,
-    'None': false
   };
 
   var occupations = <String, bool>{
@@ -314,6 +313,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       widget.familyMemberIndividualDataModel!.vulnerabilities =
                           map;
                     },
+                    validator: (val){},
                     errorField: "Please choose a vulnerability / None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
@@ -463,7 +463,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                               },
                             ),
                           ),
-                          //TODO: Make sure text field is enabled only after option is chosen
                           IncomeWithTypeTextField(
                             initialDropdownValue: widget
                                 .familyMemberIndividualDataModel!.incomeType,
@@ -605,12 +604,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         widget.familyMemberIndividualDataModel!.specialSkills =
                             data;
                       },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Enter a value / NA";
-                        } else
-                          return null;
-                      },
+                      validator: (value) {},
                     ),
                   ),
                   CheckBoxAddExtraAlertDialog(
@@ -625,6 +619,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       widget.familyMemberIndividualDataModel!.frequentAilments =
                           map;
                     },
+                    validator: (val){},
                     errorField: "Please choose ailments/None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
@@ -643,6 +638,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       widget.familyMemberIndividualDataModel!
                           .communicableDiseases = map;
                     },
+                    validator: (val){},
                     errorField: "Please choose diseases/None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
@@ -661,6 +657,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       widget.familyMemberIndividualDataModel!
                           .nonCommunicableDiseases = map;
                     },
+                    validator: (val){},
                     errorField: "Please choose diseases/None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
