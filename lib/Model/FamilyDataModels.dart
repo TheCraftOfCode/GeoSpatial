@@ -4,8 +4,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:objectbox/objectbox.dart';
 
-//TODO: Add condition to set empty, <NA> value to dependent fields
-
 String parseStringFields(String? val) {
   if (val == null || val == "")
     return "<NA>";
