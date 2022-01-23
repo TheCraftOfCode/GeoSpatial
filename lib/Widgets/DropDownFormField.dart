@@ -50,13 +50,9 @@ class DropDownFormField extends FormField<dynamic> {
                             items: list.map<DropdownMenuItem>((value) {
                               return DropdownMenuItem(
                                 value: value,
-                                child: Container(
-                                  color: colors.darkScaffoldColor,
-                                  child: Text(
-                                    value,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  padding: EdgeInsets.only(left: 8),
+                                child: Text(
+                                  value,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               );
                             }).toList(),
