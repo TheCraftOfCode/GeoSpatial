@@ -254,6 +254,10 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           style: GoogleFonts.poppins(
                               color: colors.darkSecondaryTextColor),
                         ),
+                        helperText:
+                        "Leave empty if person is not willing to share",
+                        helperStyle: GoogleFonts.poppins(
+                            color: colors.darkSecondaryTextColor),
                         hintText: "Please enter 10 digit phone",
                         hintStyle: GoogleFonts.poppins(
                             color: colors.darkSecondaryTextColor),

@@ -37,20 +37,17 @@ class LoadValidPageWidget extends StatelessWidget {
     }).timeout(
       const Duration(seconds: 30),
       onTimeout: () {
-        showToast("Server Timed out!");
-        // Time has run out, do what you wanted to do.
         return http.Response(
-            'Error', 408); // Request Timeout response status code
+            'Server Timed out!', 408); // Request Timeout response status code
       },
     );
-    print("RES: ${res.body}");
 
     return res;
   }
 
   Future<String> jwtToken(context) async {
     var jwt = await storage.read(key: JWT_STORAGE_KEY);
-    print(JWT_STORAGE_KEY + jwt.toString());
+    print(JWT_STORAGE_KEY + " : " + jwt.toString());
 
     if (jwt == null) return "";
     try {
@@ -59,6 +56,8 @@ class LoadValidPageWidget extends StatelessWidget {
         await storage.delete(key: JWT_STORAGE_KEY);
         showToast("Token could not be validated, logging out");
         return "";
+      } else if (res.statusCode != 200) {
+        showToast("Couldn't validate token, continuing in offline mode!");
       }
     } catch (e) {
       showToast("Couldn't validate token, continuing in offline mode!");

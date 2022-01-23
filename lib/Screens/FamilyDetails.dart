@@ -245,6 +245,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           widget.modelData!.drinkingWater = val;
                         },
                         title: "Do you have drinking water available?"),
+                    //TODO: DO we remove None from water source and make field non-mandatory?
                     CheckBoxAddExtraAlertDialog(
                       singleOption: false,
                       dataMap: widget.modelData!.sourceOfDrinkingWater ??
@@ -361,7 +362,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         widget.modelData?.twoThreeWheelManufacturer = val;
                       },
                       errorField: "Please choose a brand",
-                      validator: (val){},
+                      validator: (val) {},
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                     ),
                     DropDownFormField(
@@ -386,7 +387,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         print("Value recorded: $val");
                         widget.modelData?.fourWheelManufacturer = val;
                       },
-                      validator: (val){},
+                      validator: (val) {},
                       errorField: "Please choose a brand",
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                     ),
@@ -515,7 +516,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       hint: 'Choose trees owned',
                       singleOption: false,
                       context: context,
-                      validator: (val){},
+                      validator: (val) {},
                       dataMap: widget.modelData!.treesOwnedMap ?? trees_owned,
                       onSaved: (val) {
                         print("Value recorded: $val");
@@ -526,7 +527,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       title: 'Local foods consumed',
                       hint: 'Choose your resource',
                       //TODO: Change variable to local food
-                      validator: (val){},
+                      validator: (val) {},
                       dataMap: widget.modelData!.localFoodMap ?? local_food,
                       onSaved: (val) {
                         print("Value recorded: $val");
