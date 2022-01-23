@@ -126,7 +126,7 @@ class FamilyMemberIndividualDataModel {
       "aadhaarNumber": parseStringFields(aadhaarNumber),
       "Vulnerabilities": vulnerabilities != null
           ? buildListForOptionWidget(vulnerabilities!)
-          : ['None'],
+          : "<NA>",
       "isADailyWageWorker": parseStringFields(dailyWageWorker),
       "occupationData": occupationData == null
           ? "<NA>"
@@ -140,7 +140,7 @@ class FamilyMemberIndividualDataModel {
       "maritalStatus": parseStringFields(maritalStatus),
       "noOfDaysWorking": parseDependentField(
           employed, parseStringFields(noOfDaysWorking), "yes"),
-      "specialSkills": specialSkills ?? "<NA>",
+      "specialSkills": specialSkills != null ? (specialSkills!.isNotEmpty ? specialSkills : "<NA>") : "<NA>",
       "workTimings": parseDependentField(employed, workTimings, "yes"),
       "surgeriesUndergone": parseStringFields(surgeries),
       "anganwadiServicesAware": parseStringFields(anganwadiServicesAware),
