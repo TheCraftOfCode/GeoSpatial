@@ -13,7 +13,7 @@ String parseStringFields(String? val) {
 
 parseDependentField(
     String? dependentFieldVal, var returnVal, String requiredValue) {
-   if (dependentFieldVal == null || dependentFieldVal == "") {
+  if (dependentFieldVal == null || dependentFieldVal == "") {
     return "<NA>";
   } else if (dependentFieldVal == requiredValue) {
     return returnVal;
@@ -57,7 +57,7 @@ class FamilyMemberIndividualDataModel {
             job.add(key);
           }
         });
-        list.add({"category: ": i.boxName, "job: ": job});
+        list.add({"category": i.boxName, "occupation": job});
       }
     }
     print("ENC: ${json.encode(list)}");
