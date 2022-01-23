@@ -17,10 +17,23 @@ class NestedOptionWidgetFormField extends FormField<List<NestedOptionData>> {
             onSaved: onSaved,
             validator: validator ??
                 (data) {
+                  areSubOptionsChosen(i) {
+                    int flag = 0;
+                    i.subOptionDataMap!.forEach((key, value) {
+                      if (value) {
+                        flag++;
+                      }
+                    });
+                    return flag != 0;
+                  }
+
                   bool isSelected = false;
                   for (var i in data!) {
-                    print(i.boxName);
-                    print(i.isSelected);
+                    if (i.isSelected) {
+                      if (!areSubOptionsChosen(i)) {
+                        return "Please choose occupation under selected categories";
+                      }
+                    }
                     isSelected |= i.isSelected;
                   }
                   if (!isSelected) {
@@ -30,16 +43,24 @@ class NestedOptionWidgetFormField extends FormField<List<NestedOptionData>> {
                 },
             builder: (state) {
               getDisplayData() {
+                var selectedOptions = [];
+                for (var i in state.value!) {
+                  if (i.isSelected) selectedOptions.add(i.boxName);
+                }
                 if (state.hasError) {
+                  if (selectedOptions.isNotEmpty) {
+                    return Text(
+                      selectedOptions.join(", "),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.poppins(color: colors.errorColor),
+                    );
+                  }
                   return Text(
                     state.errorText ?? "Please choose a value",
                     style: GoogleFonts.poppins(color: colors.errorColor),
                   );
                 } else {
-                  var selectedOptions = [];
-                  for (var i in state.value!) {
-                    if (i.isSelected) selectedOptions.add(i.boxName);
-                  }
                   if (selectedOptions.isNotEmpty) {
                     return Text(
                       selectedOptions.join(", "),
@@ -80,29 +101,25 @@ class NestedOptionWidgetFormField extends FormField<List<NestedOptionData>> {
                       margin: EdgeInsets.only(top: 3, bottom: 3),
                       color: colors.darkScaffoldColor,
                       child: ListTile(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => NestedOptionWidget(
-                                title: title,
-                                onChanged: (val) {
-                                  for (var i in val) {
-                                    print(i.toJsonString());
-                                    var decodedVal = NestedOptionData.fromJson(
-                                        i.toJsonString());
-                                  }
-                                  state.didChange(val);
-                                  state.validate();
-                                },
-                                nestedOptionData: state.value!,
-                              ),
-                            ));
-                          },
-                          //Pass a function which is called onSaved in the next page and add data to the class object
-                          trailing: Icon(
-                            Icons.arrow_right,
-                            color: colors.darkSecondaryTextColor,
-                          ),
-                          title: getDisplayData()),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => NestedOptionWidget(
+                              title: title,
+                              onChanged: (val) {
+                                state.didChange(val);
+                                state.validate();
+                              },
+                              nestedOptionData: state.value!,
+                            ),
+                          ));
+                        },
+                        //Pass a function which is called onSaved in the next page and add data to the class object
+                        trailing: Icon(
+                          Icons.arrow_right,
+                          color: colors.darkSecondaryTextColor,
+                        ),
+                        title: getDisplayData(),
+                      ),
                     ),
                     state.hasError
                         ? Container(

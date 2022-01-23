@@ -92,6 +92,7 @@ class _NestedOptionWidgetState extends State<NestedOptionWidget> {
                                 ),
                                 onChanged: (val) {
                                   setState(() {
+                                    //Enable the below commented if only one category can be chosen at a time
                                     // for (var i in widget.nestedOptionData) {
                                     //   i.isSelected = false;
                                     // }
@@ -112,6 +113,7 @@ class _NestedOptionWidgetState extends State<NestedOptionWidget> {
                                           bottomRight: Radius.circular(10))),
                                   child: CheckBoxAddExtraAlertDialog(
                                       hint: "Choose job",
+                                      autoValidateMode: AutovalidateMode.always,
                                       autoSave: true,
                                       onSaved: (map) {
                                         widget.nestedOptionData[index]
