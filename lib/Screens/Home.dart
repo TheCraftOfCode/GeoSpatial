@@ -156,48 +156,7 @@ class _HomeWidgetState extends State<Home> {
                   'Community Details',
                   'Data entry for communities',
                   'assets/svg/house.svg',
-                  CommunityDataCollection(
-                      /*
-                      modelData: new CommunityDataModel(
-                          resourceType: "Bakeries",
-                          locationBottomLeft: new Position(
-                              latitude: 1.2,
-                              longitude: 2.4,
-                              accuracy: 32,
-                              heading: 21,
-                              speedAccuracy: 32,
-                              altitude: 23,
-                              speed: 32,
-                              timestamp: null),
-                      locationBottomRight: new Position(
-                          latitude: 1.2,
-                          longitude: 2.4,
-                          accuracy: 32,
-                          heading: 21,
-                          speedAccuracy: 32,
-                          altitude: 23,
-                          speed: 32,
-                          timestamp: null),
-                      locationTopRight: new Position(
-                          latitude: 1.2,
-                          longitude: 2.4,
-                          accuracy: 32,
-                          heading: 21,
-                          speedAccuracy: 32,
-                          altitude: 23,
-                          speed: 32,
-                          timestamp: null),
-                      locationTopLeft: new Position(
-                          latitude: 1.2,
-                          longitude: 2.4,
-                          accuracy: 32,
-                          heading: 21,
-                          speedAccuracy: 32,
-                          altitude: 23,
-                          speed: 32,
-                          timestamp: null),
-                      villageCode: "Temple")*/
-                      ),
+                  CommunityDataCollection(),
                   Color(0xfff54b64),
                   Color(0xfff78361)),
               DataCard(
