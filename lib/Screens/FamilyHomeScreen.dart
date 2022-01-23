@@ -31,7 +31,6 @@ _getUserID() async {
   if (userData == null) return "";
 
   var dataJson = json.decode(userData);
-  print("dataJson ${dataJson} ${userData}");
   return dataJson[0]["username"];
 }
 
@@ -45,11 +44,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
     setState(() {
       if (modelData == null)
         modelData = widget.modelData ?? new FamilyMembersCommonDataModel();
-      else {
-        modelData!.individualDataListTransient.clear();
-      }
       for (var i in modelData!.individualDataList) {
-        print("INDIVIDUAL DATA ${i.userName}");
         modelData!.individualDataListTransient.add(i);
       }
     });
@@ -186,7 +181,6 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                                 },
                               );
                               try {
-                                print("FINAL DATA: ${modelData!.toJson()}");
                                 http.Response res = await _makeRequest(
                                     modelData!.toJson(), "/api/IndividualData");
                                 if (res.statusCode != 201) {
@@ -298,8 +292,6 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
   @override
   void dispose() {
     super.dispose();
-    print("DISPOSED");
     modelData!.individualDataListTransient.clear();
-    modelData = null;
   }
 }
