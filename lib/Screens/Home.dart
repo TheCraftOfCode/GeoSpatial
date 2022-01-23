@@ -116,6 +116,7 @@ class _HomeWidgetState extends State<Home> {
         drawer: NavigationDrawer(),
         backgroundColor: colors.darkScaffoldColor,
         appBar: AppBar(
+          iconTheme: IconThemeData(color: colors.darkAccentColor),
           elevation: 40,
           title: FutureBuilder(
             future: _getUserName,
