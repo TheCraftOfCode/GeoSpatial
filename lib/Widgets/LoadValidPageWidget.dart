@@ -58,6 +58,7 @@ class LoadValidPageWidget extends StatelessWidget {
         return "";
       } else if (res.statusCode != 200) {
         showToast("Couldn't validate token, continuing in offline mode!");
+        return jwt;
       }
     } catch (e) {
       showToast("Couldn't validate token, continuing in offline mode!");

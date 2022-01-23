@@ -37,7 +37,7 @@ Future<http.Response> _getUserDetails() async {
   }).timeout(
     const Duration(seconds: 30),
     onTimeout: () {
-      showToast("Server Timed out!");
+      showToast("Server Timed out! Showing last updated data");
       // Time has run out, do what you wanted to do.
       return http.Response(
           'Error', 408); // Request Timeout response status code
