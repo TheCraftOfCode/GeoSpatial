@@ -73,6 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
             var dataJson = json.decode(snapshot.requireData);
             var gender = dataJson[0]["gender"];
             return Scaffold(
+              backgroundColor: Color.fromRGBO(36, 37, 56, 1),
               appBar: AppBarBackButton(
                 'Profile',
                 actions: [
