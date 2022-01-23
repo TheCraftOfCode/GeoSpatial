@@ -5,6 +5,15 @@ import 'package:geo_spatial/Utils/Colors.dart' as colors;
 class darkTheme{
   static ThemeData get DarkTheme{
     return ThemeData(
+      timePickerTheme: TimePickerThemeData(
+        backgroundColor: colors.darkScaffoldColor,
+        dialHandColor: colors.darkAccentColor,
+        dialTextColor: Colors.white,
+        entryModeIconColor: Colors.white,
+        hourMinuteTextColor: Colors.white,
+        dayPeriodTextColor: colors.darkAccentColor
+
+      ),
       fontFamily: 'Poppins',
         primaryColor: Colors.white,
         scaffoldBackgroundColor: colors.darkScaffoldColor,
