@@ -77,10 +77,19 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
               );
             }
 
-            var dataJson = json.decode(snapshot.requireData.body);
-            for (var i in dataJson) {
-              print(i["FamilyUIN"]);
-              _dataList.add(i["FamilyUIN"]);
+            try {
+              var dataJson = json.decode(snapshot.requireData.body);
+              for (var i in dataJson) {
+                print(i["FamilyUIN"]);
+                _dataList.add(i["FamilyUIN"]);
+              }
+            } catch (e) {
+              return Scaffold(
+                appBar: AppBarBackButton("Edit Records"),
+                body: Center(
+                  child: Text("Could not fetch data from server at this time"),
+                ),
+              );
             }
 
             return Scaffold(
