@@ -35,8 +35,7 @@ class NavigationDrawer extends StatelessWidget {
               return Drawer(
                 child: Material(
                   color: colors.darkScaffoldColor,
-                  child: ListView(
-                    padding: EdgeInsets.zero,
+                  child: Column(
                     children: [
                       UserAccountsDrawerHeader(
                         currentAccountPicture: CircleAvatar(
@@ -76,6 +75,7 @@ class NavigationDrawer extends StatelessWidget {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => ProfilePage()));
                           }),
+                      Expanded(child: Container()),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: Container(
@@ -157,12 +157,15 @@ class NavigationDrawer extends StatelessWidget {
     VoidCallback? onTap,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: ListTile(
         selectedTileColor: colors.darkAccentColor,
-        leading: Icon(
-          icon,
-          color: colors.darkPrimaryTextColor,
+        leading: Padding(
+          padding: EdgeInsets.only(left: 10),
+          child: Icon(
+            icon,
+            color: colors.darkAccentColor,
+          ),
         ),
         title: Text(
           text,
