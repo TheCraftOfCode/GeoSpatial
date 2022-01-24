@@ -37,8 +37,6 @@ _getUserID() async {
 FamilyMembersCommonDataModel? modelData;
 
 class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
-  var store;
-
   void initState() {
     super.initState();
     setState(() {
@@ -282,9 +280,8 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                               Box individualDataBox =
                                   store.box<FamilyMemberIndividualDataModel>();
 
-                              List<int> i = await individualDataBox.putMany(
+                              await individualDataBox.putMany(
                                   modelData!.individualDataListTransient);
-                              print("ID: $i");
 
                               modelData!.individualDataList.clear();
                               modelData!.individualDataList.addAll(
@@ -347,5 +344,6 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
   void dispose() {
     super.dispose();
     modelData!.individualDataListTransient.clear();
+    modelData = null;
   }
 }
