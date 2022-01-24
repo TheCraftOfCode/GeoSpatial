@@ -76,6 +76,7 @@ class _ChangePasswordState extends State<ChangePassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(36, 37, 56, 1),
       resizeToAvoidBottomInset: true,
       appBar: AppBarBackButton('Change Password'),
       body: Stack(
