@@ -10,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
-final storage = FlutterSecureStorage();
+import '../main.dart';
 
 class Login extends StatefulWidget {
   @override

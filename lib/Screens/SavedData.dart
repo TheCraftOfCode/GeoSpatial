@@ -1,26 +1,13 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Model/CommunityDataModel.dart';
 import 'package:geo_spatial/Model/FamilyDataModels.dart';
 import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
 import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
-import 'package:geo_spatial/Utils/Constants.dart';
+import 'package:geo_spatial/Utils/Utils.dart';
 import 'package:geo_spatial/Utils/StoreInstance.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/objectbox.g.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-final storage = FlutterSecureStorage();
-
-_getUserID() async {
-  var userData = await storage.read(key: USER_DATA_KEY);
-  if (userData == null) return "";
-
-  var dataJson = json.decode(userData);
-  return dataJson[0]["username"];
-}
 
 class SavedDataPage extends StatelessWidget {
   const SavedDataPage({Key? key}) : super(key: key);
@@ -85,10 +72,9 @@ class CommunitySavedListWidget extends StatefulWidget {
 
 class _CommunitySavedListWidgetState extends State<CommunitySavedListWidget> {
   Future<List> getList() async {
-    String userId = await _getUserID();
+    String userId = await getUserID;
     var store = await StoreInstance.getInstance();
     final box = store.box<CommunityDataModel>();
-    //box.query().build().find();
     List? list = box
         .query(CommunityDataModel_.recordCollectingUserId.equals(userId))
         .build()
@@ -176,7 +162,7 @@ class FamilySavedListWidget extends StatefulWidget {
 
 class _FamilySavedListWidgetState extends State<FamilySavedListWidget> {
   Future<List> getList() async {
-    String userId = await _getUserID();
+    String userId = await getUserID;
     var store = await StoreInstance.getInstance();
     final box = store.box<FamilyMembersCommonDataModel>();
     List? list = box

@@ -1,16 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geo_spatial/Utils/Constants.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:geo_spatial/Utils/Utils.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
-
-final storage = FlutterSecureStorage();
 
 class ChangePassword extends StatefulWidget {
   ChangePassword({Key? key, required this.userName}) : super(key: key);
@@ -18,13 +16,6 @@ class ChangePassword extends StatefulWidget {
 
   @override
   _ChangePasswordState createState() => _ChangePasswordState();
-}
-
-Future<String> get jwtToken async {
-  var jwt = await storage.read(key: JWT_STORAGE_KEY);
-
-  if (jwt == null) return "";
-  return jwt;
 }
 
 class _ChangePasswordState extends State<ChangePassword> {

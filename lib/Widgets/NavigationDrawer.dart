@@ -1,21 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:geo_spatial/Utils/Constants.dart';
-import 'package:geo_spatial/Screens/Login.dart';
 import 'package:geo_spatial/Screens/ProfilePage.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:geo_spatial/Utils/Utils.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-final storage = FlutterSecureStorage();
-
-Future<String> get _getUserData async {
-  var userData = await storage.read(key: USER_DATA_KEY);
-
-  if (userData == null) return "";
-  return userData;
-}
 
 class NavigationDrawer extends StatelessWidget {
   NavigationDrawer({Key? key}) : super(key: key);
@@ -24,7 +13,7 @@ class NavigationDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _getUserData,
+        future: getUserData,
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
             {
@@ -90,51 +79,7 @@ class NavigationDrawer extends StatelessWidget {
                         text: 'Sign Out',
                         icon: Icons.logout,
                         onTap: () async {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              backgroundColor: colors.darkScaffoldColor,
-                              title: Text(
-                                "Are you sure?",
-                                style: GoogleFonts.poppins(
-                                    color: colors.darkPrimaryTextColor),
-                              ),
-                              content: Text(
-                                "You will be logged out",
-                                style: GoogleFonts.poppins(
-                                    color: colors.darkPrimaryTextColor),
-                              ),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: Text(
-                                    'No',
-                                    style: GoogleFonts.poppins(
-                                        color: colors.darkPrimaryTextColor),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: colors.darkAccentColor,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20)))),
-                                  child: Text('Yes',
-                                      style: TextStyle(
-                                          color: colors.darkPrimaryTextColor)),
-                                  onPressed: () async {
-                                    await storage.delete(key: JWT_STORAGE_KEY);
-                                    Navigator.of(context).pushAndRemoveUntil(
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()),
-                                        (Route<dynamic> route) => false);
-                                  },
-                                ),
-                              ],
-                            ),
-                          );
+                          logout(context);
                         },
                       ),
                     ],

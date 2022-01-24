@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Model/FamilyDataModels.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:geo_spatial/Utils/Utils.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:geo_spatial/Widgets/CheckBoxAddExtraDialog.dart';
 import 'package:geo_spatial/Widgets/ConditionalRenderWidget.dart';
@@ -159,47 +160,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () async {
-          final result = await showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              backgroundColor: colors.darkScaffoldColor,
-              title: Text(
-                "Are you sure?",
-                style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-              ),
-              content: Text(
-                "All unsaved changes will be lost.",
-                style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: Text(
-                    'No',
-                    style:
-                        GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context, false);
-                  },
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: colors.darkAccentColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20)))),
-                  child: Text(
-                    'Yes',
-                    style:
-                        GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context, true);
-                  },
-                ),
-              ],
-            ),
-          );
-          return result;
+          return await closePage(context);
         },
         child: Scaffold(
             resizeToAvoidBottomInset: true,

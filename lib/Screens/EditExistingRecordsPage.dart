@@ -6,6 +6,7 @@ import 'package:geo_spatial/Model/FamilyDataModels.dart';
 import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/Constants.dart';
+import 'package:geo_spatial/Utils/Utils.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -29,13 +30,6 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
   initState() {
     super.initState();
     _searchList = _dataList;
-  }
-
-  Future<String> get jwtToken async {
-    var jwt = await storage.read(key: JWT_STORAGE_KEY);
-
-    if (jwt == null) return "";
-    return jwt;
   }
 
   Future<http.Response> _getCommonRecords() async {

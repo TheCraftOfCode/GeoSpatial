@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Utils/Constants.dart';
 import 'package:geo_spatial/Model/FamilyDataModels.dart';
 import 'package:geo_spatial/Screens/FamilyDetails.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:geo_spatial/Utils/Utils.dart';
 import 'package:geo_spatial/Utils/StoreInstance.dart';
 import 'package:geo_spatial/Widgets/AddRemoveBoxWidget.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
@@ -16,22 +16,12 @@ import 'package:oktoast/oktoast.dart';
 import 'CollectLocationWidget.dart';
 import 'package:http/http.dart' as http;
 
-final storage = FlutterSecureStorage();
-
 class FamilyHomeScreen extends StatefulWidget {
   FamilyHomeScreen({Key? key, this.modelData}) : super(key: key);
 
   @override
   State<FamilyHomeScreen> createState() => _FamilyHomeScreenState();
   final modelData;
-}
-
-_getUserID() async {
-  var userData = await storage.read(key: USER_DATA_KEY);
-  if (userData == null) return "";
-
-  var dataJson = json.decode(userData);
-  return dataJson[0]["username"];
 }
 
 FamilyMembersCommonDataModel? modelData;
@@ -48,18 +38,11 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
     });
   }
 
-  Future<String> jwtToken() async {
-    var jwt = await storage.read(key: JWT_STORAGE_KEY);
-
-    if (jwt == null) return "";
-    return jwt;
-  }
-
   Future<http.Response> _makeRequest(var data, String node) async {
     String url = NETWORK_ADDRESS;
     var body = json.encode(data);
 
-    var jwt = await jwtToken();
+    var jwt = await jwtToken;
 
     var res = await http
         .post(Uri.https(url, node),
@@ -84,47 +67,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        final result = await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            backgroundColor: colors.darkScaffoldColor,
-            title: Text(
-              "Are you sure?",
-              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-            ),
-            content: Text(
-              "All unsaved changes will be lost.",
-              style: GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: Text(
-                  'No',
-                  style:
-                      GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-                ),
-                onPressed: () {
-                  Navigator.pop(context, false);
-                },
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: colors.darkAccentColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20)))),
-                child: Text(
-                  'Yes',
-                  style:
-                      GoogleFonts.poppins(color: colors.darkPrimaryTextColor),
-                ),
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-              ),
-            ],
-          ),
-        );
-        return result;
+        return await closePage(context);
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -189,7 +132,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                               }
 
                               if (isValid) {
-                                var userId = await _getUserID();
+                                var userId = await getUserID;
                                 modelData!.recordCollectingUserId = userId;
                                 var progressContext;
                                 showDialog(
@@ -269,7 +212,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                                         side:
                                             BorderSide(color: Colors.white)))),
                             onPressed: () async {
-                              var userId = await _getUserID();
+                              var userId = await getUserID;
                               modelData!.recordCollectingUserId = userId;
                               var store = await StoreInstance.getInstance();
                               Box individualDataBox =

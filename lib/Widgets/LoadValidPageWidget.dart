@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:geo_spatial/Utils/Constants.dart';
+import 'package:geo_spatial/Utils/Utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
-final storage = FlutterSecureStorage();
+import '../main.dart';
 
 /***
  * This widget can be used between usual widgets to avoid rendering
@@ -45,10 +45,9 @@ class LoadValidPageWidget extends StatelessWidget {
     return res;
   }
 
-  Future<String> jwtToken(context) async {
-    var jwt = await storage.read(key: JWT_STORAGE_KEY);
+  Future<String> getVerifiedJwt(context) async {
+    var jwt = await jwtToken;
 
-    if (jwt == null) return "";
     try {
       var res = await _validateToken(jwt);
       if (res.statusCode == 401) {
@@ -68,7 +67,7 @@ class LoadValidPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: jwtToken(context),
+        future: getVerifiedJwt(context),
         builder: (context, data) {
           if (!data.hasData)
             return Scaffold(

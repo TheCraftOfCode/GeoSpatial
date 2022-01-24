@@ -1,17 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:geo_spatial/Utils/Constants.dart';
+import 'package:geo_spatial/Utils/Utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
-
-final storage = FlutterSecureStorage();
-
-Future<String> getUserName() async {
-  var jwt = await storage.read(key: USER_ID_KEY);
-
-  if (jwt == null) return "";
-  return jwt;
-}
 
 class FormCard extends StatefulWidget {
   FormCard(this._usernameController, this._passwordController, this._nameError,
@@ -30,7 +20,7 @@ class _FormCardState extends State<FormCard> {
   var _showPassword = false;
 
   setUserName() async {
-    widget._usernameController.text = await getUserName();
+    widget._usernameController.text = await getUserName;
   }
 
   void initState() {

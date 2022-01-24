@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,13 +8,13 @@ import 'package:geo_spatial/Utils/Constants.dart';
 import 'package:geo_spatial/Screens/CommunityDataCollection.dart';
 import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
+import 'package:geo_spatial/Utils/Utils.dart';
 import 'package:geo_spatial/Widgets/DataCard.dart';
 import 'package:geo_spatial/Widgets/NavigationDrawer.dart';
+import 'package:geo_spatial/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:http/http.dart' as http;
-
-import 'EditExistingRecordsPage.dart';
 import 'SavedData.dart';
 
 class Home extends StatefulWidget {
@@ -24,15 +22,6 @@ class Home extends StatefulWidget {
 
   @override
   _HomeWidgetState createState() => _HomeWidgetState();
-}
-
-final storage = FlutterSecureStorage();
-
-Future<String> get _getUserName async {
-  var userName = await storage.read(key: USER_DATA_KEY);
-
-  if (userName == null) return "";
-  return userName;
 }
 
 class _HomeWidgetState extends State<Home> {
@@ -47,20 +36,18 @@ class _HomeWidgetState extends State<Home> {
         showToast(
             "Offline mode, data cannot be uploaded until device is connected to the internet");
       } else {
-        var jwt = await storage.read(key: JWT_STORAGE_KEY);
-        if (jwt != null) {
-          var res = await http
-              .get(Uri.https(NETWORK_ADDRESS, '/api/validateToken'), headers: {
-            "Content-Type": "application/json",
-            'user-auth-token': jwt
-          }).timeout(Duration(seconds: 30));
-          if (res.statusCode == 401) {
-            await storage.delete(key: JWT_STORAGE_KEY);
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => Login()),
-                (Route<dynamic> route) => false);
-            showToast("Invalid token or token not found, logging out");
-          }
+        String jwt = await jwtToken;
+        var res = await http
+            .get(Uri.https(NETWORK_ADDRESS, '/api/validateToken'), headers: {
+          "Content-Type": "application/json",
+          'user-auth-token': jwt
+        }).timeout(Duration(seconds: 30));
+        if (res.statusCode == 401) {
+          await storage.delete(key: JWT_STORAGE_KEY);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => Login()),
+              (Route<dynamic> route) => false);
+          showToast("Invalid token or token not found, logging out");
         }
       }
     });
@@ -118,12 +105,11 @@ class _HomeWidgetState extends State<Home> {
           iconTheme: IconThemeData(color: colors.darkAccentColor),
           elevation: 40,
           title: FutureBuilder(
-            future: _getUserName,
+            future: getUserID,
             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
               if (snapshot.hasData) {
-                var dataJson = json.decode(snapshot.requireData);
                 return Text(
-                  'Hello, ' + dataJson[0]["Name"] + '!',
+                  'Hello, ' + snapshot.requireData + '!',
                   style: GoogleFonts.montserrat(
                       fontSize: 18, color: colors.darkPrimaryTextColor),
                 );
