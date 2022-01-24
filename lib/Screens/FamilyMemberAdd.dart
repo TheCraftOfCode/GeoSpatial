@@ -996,7 +996,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
             },
             submitMessage: "Submit to continue or go back to re-record data",
             note:
-                "The entered fields are automatically saved when moving to next page and doesn't require submit to be clicked to save",
+                "The entered fields are automatically saved when changed and doesn't require submit to be clicked to save locally",
           ),
         ),
       ),
