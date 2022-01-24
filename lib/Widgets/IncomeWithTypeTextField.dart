@@ -48,7 +48,7 @@ class _IncomeWithTypeTextFieldState extends State<IncomeWithTypeTextField> {
             flex: 2,
             child: Card(
               color: colors.darkScaffoldColor,
-              elevation: 10,
+              elevation: 0,
               child: DropdownButtonHideUnderline(
                 child: ButtonTheme(
                   alignedDropdown: true,
