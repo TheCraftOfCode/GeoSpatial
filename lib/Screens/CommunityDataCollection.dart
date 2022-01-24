@@ -250,6 +250,7 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
         return result;
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: colors.darkScaffoldColor,
         appBar: AppBarBackButton('Community Data'),
         body: SingleChildScrollView(

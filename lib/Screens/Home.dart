@@ -113,6 +113,7 @@ class _HomeWidgetState extends State<Home> {
         return result;
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         drawer: NavigationDrawer(),
         backgroundColor: colors.darkScaffoldColor,
         appBar: AppBar(

@@ -31,6 +31,7 @@ class SavedDataPage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           bottom: TabBar(
             tabs: [

@@ -132,7 +132,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ))
                 ],
               ),
-              resizeToAvoidBottomInset: true,
+              resizeToAvoidBottomInset: false,
               body: Stack(children: [
                 SvgPicture.asset('assets/svg/profile_bg.svg',
                     alignment: Alignment.center, fit: BoxFit.fill),

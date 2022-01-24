@@ -128,6 +128,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
         return result;
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBarBackButton('Individual Data'),
         backgroundColor: colors.darkScaffoldColor,
         body: SafeArea(

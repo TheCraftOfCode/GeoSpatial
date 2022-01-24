@@ -85,6 +85,7 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
               }
             } catch (e) {
               return Scaffold(
+                resizeToAvoidBottomInset: false,
                 appBar: AppBarBackButton("Edit Records"),
                 body: Center(
                   child: Text("Could not fetch data from server at this time"),
