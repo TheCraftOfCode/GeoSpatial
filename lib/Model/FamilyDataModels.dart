@@ -86,9 +86,9 @@ class FamilyMemberIndividualDataModel {
   Map<String, bool>? vulnerabilities;
   String? dailyWageWorker;
   String? employed;
-  List<NestedOptionData>? occupationData; //TODO: Make occupationData dependent on employed
-  String? student; //TODO: Add to model, make field dependent on employed
-  String? studentEducationCategory; //TODO: Make value dependent on student and employed, add to model (USE CASE: Education set but then employed changed to yes)
+  List<NestedOptionData>? occupationData;
+  String? student;
+  String? studentEducationCategory;
   String? income;
   String? incomeType;
   String? pension;
@@ -114,8 +114,6 @@ class FamilyMemberIndividualDataModel {
   String? vizhithiruInstalled;
   bool? dataValid = false;
 
-  //String? savedTime = DateFormat('hh:mm a').format(DateTime.now());
-
   Map<String, dynamic> toJson() {
     return {
       "UIN": "",
@@ -130,19 +128,33 @@ class FamilyMemberIndividualDataModel {
           ? buildListForOptionWidget(vulnerabilities!)
           : "<NA>",
       "isADailyWageWorker": parseStringFields(dailyWageWorker),
-      "occupationData": occupationData == null
-          ? "<NA>"
-          : parseOccupationServerResultJSON(occupationData!),
+      "occupationData": parseDependentField(
+          privateClinicServicesUsed,
+          occupationData == null
+              ? "<NA>"
+              : parseOccupationServerResultJSON(occupationData!),
+          "yes"),
       "employed": parseStringFields(employed),
       "income": parseDependentField(employed, parseStringFields(income), "yes"),
       "incomeType":
           parseDependentField(employed, parseStringFields(incomeType), "yes"),
+      "noOfDaysWorking": parseDependentField(
+          employed, parseStringFields(noOfDaysWorking), "yes"),
+      //TODO: Verify if parseDependentField method working for new fields
+      "student":
+          parseDependentField(employed, parseStringFields(student), "no"),
+      "studentEducationCategory": parseDependentField(
+          employed,
+          parseDependentField(parseStringFields(student),
+              parseStringFields(studentEducationCategory), "yes"),
+          "no"),
       "oldAgePension": parseStringFields(pension),
       "businessStatus": parseStringFields(businessStatus),
       "maritalStatus": parseStringFields(maritalStatus),
-      "noOfDaysWorking": parseDependentField(
-          employed, parseStringFields(noOfDaysWorking), "yes"),
-      "specialSkills": specialSkills != null ? (specialSkills!.isNotEmpty ? specialSkills : "<NA>") : "<NA>",
+
+      "specialSkills": specialSkills != null
+          ? (specialSkills!.isNotEmpty ? specialSkills : "<NA>")
+          : "<NA>",
       "workTimings": parseDependentField(employed, workTimings, "yes"),
       "surgeriesUndergone": parseStringFields(surgeries),
       "anganwadiServicesAware": parseStringFields(anganwadiServicesAware),
