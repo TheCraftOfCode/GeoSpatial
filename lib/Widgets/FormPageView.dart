@@ -81,7 +81,6 @@ class _FormPageViewState extends State<FormPageView> {
                       var isDataValid = formKeyList[i].currentState!.validate();
                       isValid &= isDataValid;
                       formKeyList[i].currentState!.save();
-
                       if (isDataValid) {}
                     }
                     widget.onSubmit(isValid);
@@ -195,7 +194,10 @@ class _FormKeepAliveState extends State<FormKeepAlive>
     return Form(
       child: widget.childWidget,
       key: widget._formKey,
-      onChanged: () {},
+      onChanged: () {
+        //TODO: Decide if AutoSave as soon as changed or save after going to next page
+        widget._formKey.currentState!.save(); //AutoSave as each content page content is changed
+      },
     );
   }
 

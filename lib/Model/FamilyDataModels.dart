@@ -12,13 +12,14 @@ String parseStringFields(String? val) {
 }
 
 parseDependentField(
-    String? dependentFieldVal, var returnVal, String requiredValue) {
+    String? dependentFieldVal, var returnVal, String requiredValue,
+    {bool sendEmptyList = false}) {
   if (dependentFieldVal == null || dependentFieldVal == "") {
-    return "<NA>";
+    return sendEmptyList ? [] : "<NA>";
   } else if (dependentFieldVal == requiredValue) {
     return returnVal;
   } else {
-    return "<NA>";
+    return sendEmptyList ? [] : "<NA>";
   }
 }
 
@@ -115,6 +116,13 @@ class FamilyMemberIndividualDataModel {
   bool? dataValid = false;
 
   Map<String, dynamic> toJson() {
+    print(parseDependentField(
+        employed,
+        occupationData == null
+            ? []
+            : parseOccupationServerResultJSON(occupationData!),
+        "yes",
+        sendEmptyList: true));
     return {
       "UIN": "",
       "name": parseStringFields(userName),
@@ -129,11 +137,12 @@ class FamilyMemberIndividualDataModel {
           : "<NA>",
       "isADailyWageWorker": parseStringFields(dailyWageWorker),
       "occupationData": parseDependentField(
-          privateClinicServicesUsed,
+          employed,
           occupationData == null
-              ? "<NA>"
+              ? []
               : parseOccupationServerResultJSON(occupationData!),
-          "yes"),
+          "yes",
+          sendEmptyList: true),
       "employed": parseStringFields(employed),
       "income": parseDependentField(employed, parseStringFields(income), "yes"),
       "incomeType":

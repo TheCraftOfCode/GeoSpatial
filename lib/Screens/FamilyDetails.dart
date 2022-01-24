@@ -152,6 +152,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
       if (element.userName != null) if (element.userName != "")
         list.add(element.userName);
     });
+    if (!list.contains(widget.modelData!.headOfFamily))
+      widget.modelData!.headOfFamily = null;
     return list;
   }
 
@@ -214,6 +216,7 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                     Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: DropDownFormField(
+                          list: _getUserNameList(),
                           defaultValue: widget.modelData!.headOfFamily,
                           onSaved: (value) {
                             widget.modelData!.headOfFamily = value;
@@ -222,7 +225,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           hint: 'Choose the head of family',
                           errorField: 'Please choose a head of family',
                           autoValidateMode: AutovalidateMode.onUserInteraction,
-                          list: _getUserNameList(),
                         )),
                     DropDownFormField(
                         defaultValue: widget.modelData!.villageCode,
