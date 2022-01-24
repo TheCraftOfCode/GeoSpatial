@@ -50,7 +50,6 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
 
   Future<String> jwtToken() async {
     var jwt = await storage.read(key: JWT_STORAGE_KEY);
-    print(JWT_STORAGE_KEY + jwt.toString());
 
     if (jwt == null) return "";
     return jwt;
@@ -181,15 +180,12 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                                                 .darkSecondBackgroundColor)))),
                             onPressed: () async {
                               bool isValid = true;
-                              print("Common ${modelData!.commonDetailsValid}");
-                              print("Location ${modelData!.locationPageValid}");
                               isValid &= modelData!.commonDetailsValid! &&
                                   modelData!.locationPageValid!;
 
                               for (var i
                                   in modelData!.individualDataListTransient) {
                                 isValid &= i.dataValid!;
-                                print("Indv ${i.dataValid}");
                               }
 
                               if (isValid) {
@@ -237,7 +233,6 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                                     showToast("Data entered successfully!");
                                   }
                                 } catch (e) {
-                                  print(e);
                                   showToast(
                                       "Something went wrong, please check your network connection or save your records to upload later",
                                       position: ToastPosition.center,
@@ -249,7 +244,6 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                               } else {
                                 showToast("Please fill all fields!");
                               }
-                              print("Is Valid: $isValid");
                             }),
                       ),
                     ),

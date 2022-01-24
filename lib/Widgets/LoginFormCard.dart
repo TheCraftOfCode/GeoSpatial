@@ -8,7 +8,6 @@ final storage = FlutterSecureStorage();
 
 Future<String> getUserName() async {
   var jwt = await storage.read(key: USER_ID_KEY);
-  print(USER_ID_KEY + jwt.toString());
 
   if (jwt == null) return "";
   return jwt;

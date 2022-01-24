@@ -21,7 +21,6 @@ _getUserID() async {
   if (userData == null) return "";
 
   var dataJson = json.decode(userData);
-  print("dataJson ${dataJson} ${userData}");
   return dataJson[0]["username"];
 }
 
@@ -75,7 +74,6 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
 
   Future<String> jwtToken() async {
     var jwt = await storage.read(key: JWT_STORAGE_KEY);
-    print(JWT_STORAGE_KEY + jwt.toString());
 
     if (jwt == null) return "";
     return jwt;
@@ -110,9 +108,6 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
     modelData = widget.modelData ?? new CommunityDataModel();
 
     _onSubmit(bool isValid) async {
-      print("All data valid");
-      print(isValid.toString());
-
       if (isValid) {
         var userId = await _getUserID();
         modelData.recordCollectingUserId = userId;
@@ -154,7 +149,7 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
             showToast("Data entered successfully!");
           }
         } catch (e) {
-          print(e);
+          debugPrint(e.toString());
           showToast(
               "Something went wrong, please check your network connection or save your records to upload later",
               position: ToastPosition.center,
@@ -167,14 +162,12 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
     }
 
     _onSave() async {
-      print("CLICKED");
       var userId = await _getUserID();
       modelData.recordCollectingUserId = userId;
 
       store = await StoreInstance.getInstance();
       final box = store.box<CommunityDataModel>();
       int id = await box.putAsync(modelData);
-      print("Entering data at id ${id}");
 
       AlertDialog alertDialog = AlertDialog(
         backgroundColor: colors.darkScaffoldColor,
@@ -260,7 +253,6 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
                   defaultValue: modelData.resourceType,
                   list: widget._publicResourceList,
                   onSaved: (data) {
-                    print(data);
                     modelData.resourceType = data;
                   },
                   title: "Choose type of resource to tag",
@@ -271,7 +263,6 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
                 defaultValue: modelData.locationTopLeft,
                 context: context,
                 onSaved: (data) {
-                  print(data);
                   modelData.locationTopLeft = data;
                 },
               ),
@@ -280,7 +271,6 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
                 defaultValue: modelData.locationTopRight,
                 context: context,
                 onSaved: (data) {
-                  print(data);
                   modelData.locationTopRight = data;
                 },
               ),
@@ -289,7 +279,6 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
                 defaultValue: modelData.locationBottomLeft,
                 context: context,
                 onSaved: (data) {
-                  print(data);
                   modelData.locationBottomLeft = data;
                 },
               ),
@@ -298,7 +287,6 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
                 defaultValue: modelData.locationBottomRight,
                 context: context,
                 onSaved: (data) {
-                  print(data);
                   modelData.locationBottomRight = data;
                 },
               ),
@@ -306,7 +294,6 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
                   defaultValue: modelData.villageCode,
                   list: widget._villageCodeName,
                   onSaved: (data) {
-                    print(data);
                     modelData.villageCode = data;
                   },
                   title: "Choose Village Code",

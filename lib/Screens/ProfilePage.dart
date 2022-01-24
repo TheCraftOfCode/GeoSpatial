@@ -21,7 +21,6 @@ final storage = FlutterSecureStorage();
 
 Future<String> jwtToken() async {
   var jwt = await storage.read(key: JWT_STORAGE_KEY);
-  print(JWT_STORAGE_KEY + jwt.toString());
 
   if (jwt == null) return "";
   return jwt;
@@ -43,7 +42,6 @@ Future<http.Response> _getUserDetails() async {
           'Error', 408); // Request Timeout response status code
     },
   );
-  print("RES: ${res.body}");
 
   return res;
 }
@@ -57,7 +55,6 @@ Future<String> get _getUserData async {
       await storage.write(key: USER_DATA_KEY, value: userData);
     }
   } catch (e) {}
-  print("userData " + userData.toString());
 
   if (userData == null) return "";
   return userData;
@@ -216,7 +213,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                         .withOpacity(0.2),
                                   ),
                                   onPressed: () {
-                                    print('Button Clicked');
                                     Route route = MaterialPageRoute(
                                         builder: (context) => ChangePassword(
                                             userName: dataJson[0]["username"]));

@@ -33,7 +33,6 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
 
   Future<String> get jwtToken async {
     var jwt = await storage.read(key: JWT_STORAGE_KEY);
-    print(JWT_STORAGE_KEY + jwt.toString());
 
     if (jwt == null) return "";
     return jwt;
@@ -55,7 +54,6 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
           return http.Response('Error', 408);
         },
       );
-      print("RES: ${res.body}");
       return res;
     } catch (e) {
       return http.Response(e.toString(), 408);
@@ -80,7 +78,6 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
             try {
               var dataJson = json.decode(snapshot.requireData.body);
               for (var i in dataJson) {
-                print(i["FamilyUIN"]);
                 _dataList.add(i["FamilyUIN"]);
               }
             } catch (e) {
@@ -121,7 +118,6 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: TextField(
                         onChanged: (text) {
-                          print("INVOKED");
                           setState(() {
                             _searchList = _dataList
                                 .where((i) => i

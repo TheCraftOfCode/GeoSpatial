@@ -20,7 +20,6 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
   Widget build(BuildContext context) {
     _onSubmit(bool isValid) async {
       if (isValid) {
-        print("Valid!");
         Navigator.pop(context);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -83,7 +82,6 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
                 context: context,
                 defaultValue: widget.modelData?.locationTopLeft,
                 onSaved: (data) {
-                  print(data);
                   widget.modelData?.locationTopLeft = data;
                 },
               ),
@@ -92,7 +90,6 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
                 context: context,
                 defaultValue: widget.modelData?.locationTopRight,
                 onSaved: (data) {
-                  print(data);
                   widget.modelData?.locationTopRight = data;
                 },
               ),
@@ -101,7 +98,6 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
                 context: context,
                 defaultValue: widget.modelData?.locationBottomLeft,
                 onSaved: (data) {
-                  print(data);
                   widget.modelData?.locationBottomLeft = data;
                 },
               ),
@@ -110,13 +106,10 @@ class _CollectLocationWidgetState extends State<CollectLocationWidget> {
                 context: context,
                 defaultValue: widget.modelData?.locationBottomRight,
                 onSaved: (data) {
-                  print(data);
                   widget.modelData?.locationBottomRight = data;
                 },
               ),
             ], _onSubmit, onChange: (isValid) {
-              print(
-                  "IS LOCATION VALID: ${widget.modelData?.locationPageValid}");
               widget.modelData?.locationPageValid = isValid;
             },
                 submitMessage:

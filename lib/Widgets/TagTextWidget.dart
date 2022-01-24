@@ -47,7 +47,6 @@ class TagTextWidget extends FormField<List<String>> {
                             controller: _contentEditingController,
                             onSubmitted: (string) {
                               if (!string.isEmpty) {
-                                print(string);
                                 _contentEditingController.clear();
                                 List<String>? list = state.value;
                                 list?.add(string);
@@ -80,7 +79,6 @@ class TagTextWidget extends FormField<List<String>> {
                           );
                         },
                         onSuggestionSelected: (suggestion) {
-                          print(suggestion);
                           List<String>? list = state.value;
                           list?.add(suggestion.toString());
                           state.didChange(list);

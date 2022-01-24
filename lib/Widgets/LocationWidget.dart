@@ -79,7 +79,6 @@ class LocationWidgetField extends FormField<Position> {
                             _determinePosition(context).then((value) {
                               state.didChange(value);
                             }).catchError((onError, stackTrace) {
-                              print("inner: $onError");
                               state.didChange(null);
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(

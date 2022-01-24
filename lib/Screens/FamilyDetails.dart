@@ -20,9 +20,7 @@ class FamilyDetails extends StatefulWidget {
 
 class _FamilyDetailsState extends State<FamilyDetails> {
   _onSubmit(bool isValid) {
-    print(isValid.toString());
     if (isValid) {
-      print("Valid!");
       Navigator.pop(context);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -230,7 +228,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         defaultValue: widget.modelData!.villageCode,
                         list: _villageCodeName,
                         onSaved: (data) {
-                          print(data);
                           widget.modelData!.villageCode = data;
                         },
                         title: "Choose Village Code",
@@ -243,7 +240,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         ],
                         defaultValue: widget.modelData!.drinkingWater,
                         onSaved: (val) {
-                          print("Value recorded: $val");
                           widget.modelData!.drinkingWater = val;
                         },
                         title: "Do you have drinking water available?"),
@@ -253,7 +249,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       dataMap: widget.modelData!.sourceOfDrinkingWater ??
                           water_sources,
                       onSaved: (val) {
-                        print("Value recorded: $val");
                         widget.modelData!.sourceOfDrinkingWater = val;
                       },
                       hint: "Select source",
@@ -271,7 +266,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           ["No", "no"]
                         ],
                         onSaved: (val) {
-                          print("Value recorded: $val");
                           widget.modelData!.toiletFacility = val;
                         },
                         conditionalPositiveValue: 'yes',
@@ -290,7 +284,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 dataMap: widget.modelData!.noToiletsWhy ??
                                     noToiletsWhy,
                                 onSaved: (val) {
-                                  print("Value recorded: $val");
                                   widget.modelData?.noToiletsWhy = val;
                                 },
                                 errorField: "Please choose a reason",
@@ -305,7 +298,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 ],
                                 defaultValue: widget.modelData!.communityToilet,
                                 onSaved: (val) {
-                                  print("Value recorded: $val");
                                   widget.modelData!.communityToilet = val;
                                 },
                                 title: "Community toilet?"),
@@ -321,7 +313,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         defaultValue:
                             widget.modelData!.environmentSanitationLevel,
                         onSaved: (val) {
-                          print("Value recorded: $val");
                           widget.modelData!.environmentSanitationLevel = val;
                         },
                         title: "Environmental sanitation level: "),
@@ -336,7 +327,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       title: "No. of two wheelers",
                       defaultValue: widget.modelData!.noOfTwoWheelers,
                       onSaved: (val) {
-                        print("Value recorded: $val");
                         widget.modelData!.noOfTwoWheelers = val;
                       },
                       errorField: "Please choose a valid number",
@@ -347,7 +337,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       title: "No. of three wheelers",
                       defaultValue: widget.modelData!.noOfThreeWheelers,
                       onSaved: (val) {
-                        print("Value recorded: $val");
                         widget.modelData!.noOfThreeWheelers = val;
                       },
                       errorField: "Please choose a valid number",
@@ -360,7 +349,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       dataMap: widget.modelData!.twoThreeWheelManufacturer ??
                           two_three_mfg,
                       onSaved: (val) {
-                        print("Value recorded: $val");
                         widget.modelData?.twoThreeWheelManufacturer = val;
                       },
                       errorField: "Please choose a brand",
@@ -374,7 +362,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       errorField: "Please choose a valid number",
                       defaultValue: widget.modelData!.noOfFourWheelers,
                       onSaved: (val) {
-                        print("Value recorded: $val");
                         widget.modelData!.noOfFourWheelers = val;
                       },
                     ),
@@ -386,7 +373,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       dataMap:
                           widget.modelData!.fourWheelManufacturer ?? four_mfg,
                       onSaved: (val) {
-                        print("Value recorded: $val");
                         widget.modelData?.fourWheelManufacturer = val;
                       },
                       validator: (val) {},
@@ -405,7 +391,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                         ],
                         defaultValue: widget.modelData!.runningWaterAvailable,
                         onSaved: (val) {
-                          print("Value recorded: $val");
                           widget.modelData!.runningWaterAvailable = val;
                         },
                         title: "Is running water available?"),
@@ -417,7 +402,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           ["No", "no"]
                         ],
                         onSaved: (val) {
-                          print("Value recorded: $val");
                           widget.modelData!.isCattleOwned = val;
                         },
                         conditionalPositiveValue: 'yes',
@@ -430,7 +414,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 color: colors.darkPrimaryTextColor),
                             initialValue: widget.modelData!.incomeFromCattle,
                             onSaved: (val) {
-                              print("Value recorded: $val");
                               widget.modelData!.incomeFromCattle = val;
                             },
                             decoration: InputDecoration(
@@ -464,7 +447,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           ["No", "no"]
                         ],
                         onSaved: (val) {
-                          print("Value recorded: $val");
                           widget.modelData!.isFarmLandOwned = val;
                         },
                         conditionalPositiveValue: 'yes',
@@ -477,7 +459,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           dataMap: widget.modelData!.cropsCultivated ??
                               seeds_preserved,
                           onSaved: (val) {
-                            print("Value recorded: $val");
                             widget.modelData!.cropsCultivated = val;
                           },
                         ),
@@ -495,7 +476,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           ["No", "no"]
                         ],
                         onSaved: (val) {
-                          print("Value recorded: $val");
                           widget.modelData!.isSeedsPreserved = val;
                         },
                         conditionalPositiveValue: 'yes',
@@ -508,7 +488,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           dataMap: widget.modelData!.preservedSeedsMap ??
                               seeds_preserved,
                           onSaved: (val) {
-                            print("Value recorded: $val");
                             widget.modelData!.preservedSeedsMap = val;
                           },
                         ),
@@ -521,7 +500,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       validator: (val) {},
                       dataMap: widget.modelData!.treesOwnedMap ?? trees_owned,
                       onSaved: (val) {
-                        print("Value recorded: $val");
                         widget.modelData!.treesOwnedMap = val;
                       },
                     ),
@@ -532,7 +510,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       validator: (val) {},
                       dataMap: widget.modelData!.localFoodMap ?? local_food,
                       onSaved: (val) {
-                        print("Value recorded: $val");
                         widget.modelData!.localFoodMap = val;
                       },
                       singleOption: false,
@@ -555,7 +532,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                               ["No", "no"]
                             ],
                             onSaved: (val) {
-                              print("Value recorded: $val");
                               widget.modelData!.isKitchenGardenOwned = val;
                             },
                             conditionalPositiveValue: 'yes',
@@ -571,7 +547,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                     widget.modelData!.kitchenGardenPlants ??
                                         garden_plants,
                                 onSaved: (val) {
-                                  print("Value recorded: $val");
                                   widget.modelData!.kitchenGardenPlants = val;
                                 },
                               ),
@@ -598,7 +573,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 color: colors.darkPrimaryTextColor),
                             initialValue: widget.modelData!.addressOne,
                             onSaved: (val) {
-                              print("Value recorded: $val");
                               widget.modelData!.addressOne = val;
                             },
                             decoration: InputDecoration(
@@ -627,7 +601,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 color: colors.darkPrimaryTextColor),
                             initialValue: widget.modelData!.addressTwo,
                             onSaved: (val) {
-                              print("Value recorded: $val");
                               widget.modelData!.addressTwo = val;
                             },
                             decoration: InputDecoration(
@@ -651,7 +624,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                 color: colors.darkPrimaryTextColor),
                             initialValue: widget.modelData!.city,
                             onSaved: (val) {
-                              print("Value recorded: $val");
                               widget.modelData!.city = val;
                             },
                             decoration: InputDecoration(
@@ -674,8 +646,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
               ],
               _onSubmit,
               onChange: (isValid) {
-                print(isValid);
-                print("IS FAM VALID: ${widget.modelData?.commonDetailsValid}");
                 widget.modelData?.commonDetailsValid = isValid;
               },
               submitMessage: "Submit to Continue or go back to re-record data",

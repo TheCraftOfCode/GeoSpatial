@@ -19,7 +19,6 @@ _getUserID() async {
   if (userData == null) return "";
 
   var dataJson = json.decode(userData);
-  print("dataJson ${dataJson} ${userData}");
   return dataJson[0]["username"];
 }
 

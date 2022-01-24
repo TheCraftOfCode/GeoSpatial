@@ -12,7 +12,6 @@ final storage = FlutterSecureStorage();
 
 Future<String> get _getUserData async {
   var userData = await storage.read(key: USER_DATA_KEY);
-  print("userData " + userData.toString());
 
   if (userData == null) return "";
   return userData;

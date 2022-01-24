@@ -77,7 +77,6 @@ class _MyAppState extends State<Login> {
             'Server Timed out!', 408); // Request Timeout response status code
       },
     );
-    print("RES: ${res.body}");
 
     return res;
   }
@@ -97,7 +96,6 @@ class _MyAppState extends State<Login> {
             'Error', 408); // Request Timeout response status code
       },
     );
-    print("RES: ${res.body}");
 
     return res;
   }
@@ -128,7 +126,6 @@ class _MyAppState extends State<Login> {
       try {
         http.Response loginResponse =
             await _makeLoginRequest(username, password);
-        print("LOGIN RESPONSE ${loginResponse.body}");
         if (loginResponse.statusCode != 200) {
           setState(() {
             _nameError = loginResponse.body;
@@ -137,7 +134,6 @@ class _MyAppState extends State<Login> {
         } else {
           try {
             http.Response userData = await _getUserDetails(loginResponse.body);
-            print("DATA: ${userData.body}");
             if (userData.statusCode != 200) {
               showToast(
                   "Something went wrong, please check your network connection or try again later",
@@ -152,7 +148,7 @@ class _MyAppState extends State<Login> {
                   (Route<dynamic> route) => false);
             }
           } catch (e) {
-            print(e);
+            debugPrint(e.toString());
             showToast(
                 "Something went wrong, please check your network connection or try again later",
                 position: ToastPosition.center,
@@ -160,7 +156,7 @@ class _MyAppState extends State<Login> {
           }
         }
       } catch (e) {
-        print(e);
+        debugPrint(e.toString());
         showToast(
             "Something went wrong, please check your network connection or try again later");
       }

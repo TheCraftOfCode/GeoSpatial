@@ -102,7 +102,6 @@ class _IncomeWithTypeTextFieldState extends State<IncomeWithTypeTextField> {
               ),
               validator: widget.validate ??
                   (value) {
-                    print(value);
                     if (value == "" || value == null) {
                       return "Enter Income";
                     }

@@ -36,13 +36,11 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
   bool dailyWageWorker = false;
 
   _onSubmit(bool isValid) {
-    print(isValid.toString());
     setState(() {
       isPageValid = isValid;
     });
 
     if (isValid) {
-      print("Valid!");
       Navigator.pop(context);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -222,7 +220,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     onSaved: (data) {
                       widget.familyMemberIndividualDataModel!.dateOfBirth =
                           data;
-                      print(data);
                     },
                     validator: (val) {
                       if (val != null) if (val.isAfter(DateTime.now())) {
@@ -235,10 +232,8 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         widget.familyMemberIndividualDataModel?.gender,
                     onChanged: (val) {
                       widget.familyMemberIndividualDataModel?.gender = val;
-                      print("GENDER: $val");
                     },
                     onSaved: (val) {
-                      print("GENDER SAVED: $val");
                     },
                   ),
                   Padding(
@@ -330,17 +325,12 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       ["No", "no"]
                     ],
                     onChanged: (val) {
-                      if (val == "yes") {
-                        print("SELECTED TRUE VAL");
-                      }
-
                       setState(() {
                         dailyWageWorker = val == "yes";
                       });
                     },
                     title: "Daily wage worker?",
                     onSaved: (val) {
-                      print("Value recorded: $val");
                       widget.familyMemberIndividualDataModel!.dailyWageWorker =
                           val;
                     },
@@ -529,7 +519,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                                   ]
                                 : null,
                             onSaved: (List<TimeOfDay>? timeList) {
-                              print(timeList);
                               var timeFinalString = [
                                 "${timeList![0].hour}:${timeList[0].minute} ${timeList[0].period == DayPeriod.am ? "AM" : "PM"}",
                                 "${timeList[1].hour}:${timeList[1].minute} ${timeList[1].period == DayPeriod.am ? "AM" : "PM"}"
@@ -562,8 +551,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                               contentPadding: EdgeInsets.all(7.0),
                             ),
                             validator: (value) {
-                              print(value);
-                              print("value");
                               if (value == null || value == "")
                                 return "Please enter number of work days";
                               else if (int.tryParse(value) == null) {
@@ -575,7 +562,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                               }
                             },
                             onSaved: (val) {
-                              print(val.toString());
                               widget.familyMemberIndividualDataModel!
                                   .noOfDaysWorking = val;
                             },
@@ -591,7 +577,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                                 income;
                             widget.familyMemberIndividualDataModel!.incomeType =
                                 option;
-                            print(income! + " " + option!);
                           },
                           text: 'Income',
                           hintText: 'Enter income',
@@ -666,7 +651,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         ],
                         title: 'Old age pension',
                         onSaved: (val) {
-                          print(val.toString());
                           widget.familyMemberIndividualDataModel!.pension = val;
                         },
                       ),
@@ -681,7 +665,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       ],
                       title: 'Doing/Did business',
                       onSaved: (val) {
-                        print(val.toString());
                         widget.familyMemberIndividualDataModel!.businessStatus =
                             val;
                       },
@@ -699,7 +682,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         ],
                         title: 'Marital Status',
                         onSaved: (val) {
-                          print(val.toString());
                           widget.familyMemberIndividualDataModel!
                               .maritalStatus = val;
                         },
@@ -826,7 +808,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         ["No", "no"]
                       ],
                       onSaved: (val) {
-                        print("Value recorded: $val");
                         widget.familyMemberIndividualDataModel!
                             .anganwadiServicesUsing = val;
                       },
@@ -883,7 +864,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         ["No", "no"]
                       ],
                       onSaved: (val) {
-                        print("Value recorded: $val");
                         widget.familyMemberIndividualDataModel!
                             .privateClinicServicesUsed = val;
                       },
@@ -923,7 +903,6 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         ["No", "no"]
                       ],
                       onSaved: (val) {
-                        print("Value recorded: $val");
                         widget.familyMemberIndividualDataModel!.useOfTobacco =
                             val;
                       },
@@ -989,9 +968,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
             ],
             _onSubmit,
             onChange: (isValid) {
-              print(isValid);
-              print(
-                  "IS FAM VALID: ${widget.familyMemberIndividualDataModel?.dataValid}");
+
               widget.familyMemberIndividualDataModel?.dataValid = isValid;
             },
             submitMessage: "Submit to continue or go back to re-record data",

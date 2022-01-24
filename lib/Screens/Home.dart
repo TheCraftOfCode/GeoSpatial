@@ -30,7 +30,6 @@ final storage = FlutterSecureStorage();
 
 Future<String> get _getUserName async {
   var userName = await storage.read(key: USER_DATA_KEY);
-  print("userData " + userName.toString());
 
   if (userName == null) return "";
   return userName;
@@ -64,7 +63,6 @@ class _HomeWidgetState extends State<Home> {
           }
         }
       }
-      print("CONNECTED: ${source}");
     });
   }
 
@@ -124,7 +122,6 @@ class _HomeWidgetState extends State<Home> {
             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
               if (snapshot.hasData) {
                 var dataJson = json.decode(snapshot.requireData);
-                print("DATA: ${snapshot.requireData}");
                 return Text(
                   'Hello, ' + dataJson[0]["Name"] + '!',
                   style: GoogleFonts.montserrat(

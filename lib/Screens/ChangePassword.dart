@@ -22,7 +22,6 @@ class ChangePassword extends StatefulWidget {
 
 Future<String> get jwtToken async {
   var jwt = await storage.read(key: JWT_STORAGE_KEY);
-  print(JWT_STORAGE_KEY + jwt.toString());
 
   if (jwt == null) return "";
   return jwt;
@@ -68,7 +67,6 @@ class _ChangePasswordState extends State<ChangePassword> {
             'Error', 408); // Request Timeout response status code
       },
     );
-    print("RES: ${res.body}");
 
     return res;
   }

@@ -47,7 +47,6 @@ class LoadValidPageWidget extends StatelessWidget {
 
   Future<String> jwtToken(context) async {
     var jwt = await storage.read(key: JWT_STORAGE_KEY);
-    print(JWT_STORAGE_KEY + " : " + jwt.toString());
 
     if (jwt == null) return "";
     try {
