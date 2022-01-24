@@ -96,8 +96,6 @@ class _IncomeWithTypeTextFieldState extends State<IncomeWithTypeTextField> {
                       GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                 ),
                 hintText: widget.hintText,
-                hintStyle:
-                    GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                 contentPadding: EdgeInsets.all(7.0),
               ),
               validator: widget.validate ??

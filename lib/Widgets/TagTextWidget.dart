@@ -62,8 +62,6 @@ class TagTextWidget extends FormField<List<String>> {
                                     color: colors.darkSecondaryTextColor),
                               ),
                               hintText: hint,
-                              hintStyle: GoogleFonts.poppins(
-                                  color: colors.darkSecondaryTextColor),
                               contentPadding: EdgeInsets.all(7.0),
                             )),
                         suggestionsCallback: (pattern) async {

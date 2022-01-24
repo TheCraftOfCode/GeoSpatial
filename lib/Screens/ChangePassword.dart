@@ -125,8 +125,6 @@ class _ChangePasswordState extends State<ChangePassword> {
                                   color: colors.darkSecondaryTextColor),
                             ),
                             hintText: "Enter password here",
-                            hintStyle: GoogleFonts.poppins(
-                                color: colors.darkSecondaryTextColor),
                             contentPadding: EdgeInsets.all(7.0),
                           ),
                           validator: (value) {
@@ -179,8 +177,6 @@ class _ChangePasswordState extends State<ChangePassword> {
                                   color: colors.darkSecondaryTextColor),
                             ),
                             hintText: "Enter password here",
-                            hintStyle: GoogleFonts.poppins(
-                                color: colors.darkSecondaryTextColor),
                             contentPadding: EdgeInsets.all(7.0),
                           ),
                           validator: (value) {
@@ -237,8 +233,6 @@ class _ChangePasswordState extends State<ChangePassword> {
                                   color: colors.darkSecondaryTextColor),
                             ),
                             hintText: "Enter password here",
-                            hintStyle: GoogleFonts.poppins(
-                                color: colors.darkSecondaryTextColor),
                             contentPadding: EdgeInsets.all(7.0),
                           ),
                           validator: (value) {

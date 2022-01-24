@@ -51,7 +51,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     'Mahindra & Mahindra': false,
     'Force': false,
     'Tempo': false,
-    'None': false
   };
 
   final List<String> _villageCodeName = [
@@ -80,7 +79,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     'Renault': false,
     'Skoda': false,
     'Mitsubishi': false,
-    'None': false
   };
 
   var noToiletsWhy = <String, bool>{
@@ -134,7 +132,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
   };
 
   var water_sources = {
-    'None': false,
     'Lake': false,
     'Pond': false,
     'Groundwater': false,
@@ -204,7 +201,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                           widget.modelData!.drinkingWater = val;
                         },
                         title: "Do you have drinking water available?"),
-                    //TODO: DO we remove None from water source and make field non-mandatory?
                     CheckBoxAddExtraAlertDialog(
                       singleOption: false,
                       dataMap: widget.modelData!.sourceOfDrinkingWater ??
@@ -212,9 +208,9 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                       onSaved: (val) {
                         widget.modelData!.sourceOfDrinkingWater = val;
                       },
-                      hint: "Select source",
+                      validator: (data) {},
+                      hint: "Select source / empty if none",
                       title: "Source of Water",
-                      errorField: "Please choose an option",
                       context: context,
                     ),
                     Padding(
@@ -378,8 +374,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                               widget.modelData!.incomeFromCattle = val;
                             },
                             decoration: InputDecoration(
-                                hintStyle: GoogleFonts.poppins(
-                                    color: colors.darkSecondaryTextColor),
                                 contentPadding: EdgeInsets.all(7.0),
                                 hintText: "Enter income in Rupees",
                                 label: AutoSizeText(
@@ -543,8 +537,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                     color: colors.darkSecondaryTextColor),
                               ),
                               hintText: "Please enter first line",
-                              hintStyle: GoogleFonts.poppins(
-                                  color: colors.darkSecondaryTextColor),
                               contentPadding: EdgeInsets.all(7.0),
                             ),
                             validator: (value) {
@@ -571,8 +563,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                     color: colors.darkSecondaryTextColor),
                               ),
                               hintText: "Please enter second line",
-                              hintStyle: GoogleFonts.poppins(
-                                  color: colors.darkSecondaryTextColor),
                               contentPadding: EdgeInsets.all(7.0),
                             ),
                           ),
@@ -594,8 +584,6 @@ class _FamilyDetailsState extends State<FamilyDetails> {
                                     color: colors.darkSecondaryTextColor),
                               ),
                               hintText: "Please enter city",
-                              hintStyle: GoogleFonts.poppins(
-                                  color: colors.darkSecondaryTextColor),
                               contentPadding: EdgeInsets.all(7.0),
                             ),
                           ),

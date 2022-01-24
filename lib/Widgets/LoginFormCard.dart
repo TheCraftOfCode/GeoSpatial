@@ -50,8 +50,6 @@ class _FormCardState extends State<FormCard> {
               controller: widget._usernameController,
               decoration: InputDecoration(
                   hintText: "Enter username here",
-                  hintStyle:
-                      GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                   label: Text("Username",
                       style: GoogleFonts.poppins(
                           color: colors.darkSecondaryTextColor)),
@@ -92,8 +90,6 @@ class _FormCardState extends State<FormCard> {
                     ),
                   ),
                   hintText: "Enter password here",
-                  hintStyle:
-                      GoogleFonts.poppins(color: colors.darkSecondaryTextColor),
                   focusColor: Color(0xffF5A06D),
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(

@@ -123,40 +123,39 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
                         controller: _textEditingController,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: colors.darkSecondaryTextColor,
-                                    width: 1.0)),
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 10.0),
-                            fillColor: colors.darkScaffoldColor,
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: colors.darkAccentColor,
-                            ),
-                            // suffixIcon: Material(
-                            //   borderRadius: BorderRadius.only(
-                            //       topRight: Radius.circular(4),
-                            //       bottomRight: Radius.circular(4)),
-                            //   child: IconButton(
-                            //     splashRadius: 16,
-                            //     icon: Icon(
-                            //       Icons.clear,
-                            //       color: colors.darkSecondAccentColor,
-                            //     ),
-                            //     onPressed: () {
-                            //       _textEditingController.text = "";
-                            //     },
-                            //   ),
-                            // ),
-                            label: Text(
-                              "Search",
-                              style: GoogleFonts.poppins(
-                                  color: colors.darkSecondaryTextColor),
-                            ),
-                            hintText: "Search for records...",
-                            hintStyle: GoogleFonts.poppins(
-                                color: colors.darkSecondaryTextColor)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: colors.darkSecondaryTextColor,
+                                  width: 1.0)),
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 10.0),
+                          fillColor: colors.darkScaffoldColor,
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: colors.darkAccentColor,
+                          ),
+                          // suffixIcon: Material(
+                          //   borderRadius: BorderRadius.only(
+                          //       topRight: Radius.circular(4),
+                          //       bottomRight: Radius.circular(4)),
+                          //   child: IconButton(
+                          //     splashRadius: 16,
+                          //     icon: Icon(
+                          //       Icons.clear,
+                          //       color: colors.darkSecondAccentColor,
+                          //     ),
+                          //     onPressed: () {
+                          //       _textEditingController.text = "";
+                          //     },
+                          //   ),
+                          // ),
+                          label: Text(
+                            "Search",
+                            style: GoogleFonts.poppins(
+                                color: colors.darkSecondaryTextColor),
+                          ),
+                          hintText: "Search for records...",
+                        ),
                       ),
                     ),
                   ),

@@ -161,8 +161,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                               color: colors.darkSecondaryTextColor),
                         ),
                         hintText: "Please enter name",
-                        hintStyle: GoogleFonts.poppins(
-                            color: colors.darkSecondaryTextColor),
+
                         contentPadding: EdgeInsets.all(7.0),
                       ),
                       validator: (value) {
@@ -215,11 +214,9 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         ),
                         helperText:
                             "Leave empty if person is not willing to share",
-                        helperStyle: GoogleFonts.poppins(
-                            color: colors.darkSecondaryTextColor),
+
                         hintText: "Please enter 10 digit phone",
-                        hintStyle: GoogleFonts.poppins(
-                            color: colors.darkSecondaryTextColor),
+
                         contentPadding: EdgeInsets.all(7.0),
                       ),
                       validator: (value) {
@@ -510,8 +507,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                                     color: colors.darkSecondaryTextColor),
                               ),
                               hintText: "Please enter number of work days",
-                              hintStyle: GoogleFonts.poppins(
-                                  color: colors.darkSecondaryTextColor),
+
                               contentPadding: EdgeInsets.all(7.0),
                             ),
                             validator: (value) {
@@ -578,10 +574,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           hintText: "Please enter 12 digit Aadhaar.",
                           helperText:
                               "Leave empty if person is not willing to share",
-                          helperStyle: GoogleFonts.poppins(
-                              color: colors.darkSecondaryTextColor),
-                          hintStyle: GoogleFonts.poppins(
-                              color: colors.darkSecondaryTextColor),
+
                           contentPadding: EdgeInsets.all(7.0),
                         ),
                         validator: (value) {
@@ -684,7 +677,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           map;
                     },
                     validator: (val) {},
-                    errorField: "Please choose ailments/None",
+                    errorField: "Please choose ailments / None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   SizedBox(
@@ -703,7 +696,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           .communicableDiseases = map;
                     },
                     validator: (val) {},
-                    errorField: "Please choose diseases/None",
+                    errorField: "Please choose diseases / None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   SizedBox(
@@ -722,7 +715,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                           .nonCommunicableDiseases = map;
                     },
                     validator: (val) {},
-                    errorField: "Please choose diseases/None",
+                    errorField: "Please choose diseases / None",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                   ),
                   Padding(
