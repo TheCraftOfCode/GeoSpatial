@@ -85,8 +85,10 @@ class FamilyMemberIndividualDataModel {
   String? aadhaarNumber;
   Map<String, bool>? vulnerabilities;
   String? dailyWageWorker;
-  List<NestedOptionData>? occupationData;
   String? employed;
+  List<NestedOptionData>? occupationData; //TODO: Make occupationData dependent on employed
+  String? student; //TODO: Add to model, make field dependent on employed
+  String? studentEducationCategory; //TODO: Make value dependent on student and employed, add to model (USE CASE: Education set but then employed changed to yes)
   String? income;
   String? incomeType;
   String? pension;

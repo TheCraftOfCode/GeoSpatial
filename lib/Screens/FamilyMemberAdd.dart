@@ -354,8 +354,11 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                         widget.familyMemberIndividualDataModel!.employed,
                     conditionalNegativeWidget: ConditionalRenderWidget(
                       title: 'Student?',
-                      onSaved: (val) {},
-                      defaultValue: null,
+                      onSaved: (val) {
+                        widget.familyMemberIndividualDataModel!.student = val;
+                      },
+                      defaultValue:
+                          widget.familyMemberIndividualDataModel!.student,
                       options: [
                         ["Yes", "yes"],
                         ["No", "no"],
@@ -363,13 +366,17 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                       conditionalPositiveValue: "yes",
                       conditionalNegativeValue: "no",
                       conditionalPositiveWidget: DropDownFormField(
-                        //defaultValue: "Enter value",
+                        defaultValue: widget.familyMemberIndividualDataModel!
+                            .studentEducationCategory,
                         list: [
                           'School',
                           'College',
                           'Vocational',
                         ],
-                        onSaved: (data) {},
+                        onSaved: (data) {
+                          widget.familyMemberIndividualDataModel!
+                              .studentEducationCategory = data;
+                        },
                         hint: "Choose education category",
                         title: "Education",
                         errorField: "Please choose a category",

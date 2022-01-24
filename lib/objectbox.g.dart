@@ -72,7 +72,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(2, 4604626538020621410),
       name: 'FamilyMemberIndividualDataModel',
-      lastPropertyId: const IdUid(45, 8806096688498887024),
+      lastPropertyId: const IdUid(47, 9107986757309043468),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -248,6 +248,16 @@ final _entities = <ModelEntity>[
         ModelProperty(
             id: const IdUid(45, 8806096688498887024),
             name: 'dbOccupationData',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(46, 1773687084148916152),
+            name: 'student',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(47, 9107986757309043468),
+            name: 'studentEducationCategory',
             type: 9,
             flags: 0)
       ],
@@ -685,7 +695,13 @@ ModelDefinition getObjectBoxModel() {
           final dbOccupationDataOffset = object.dbOccupationData == null
               ? null
               : fbb.writeString(object.dbOccupationData!);
-          fbb.startTable(46);
+          final studentOffset =
+              object.student == null ? null : fbb.writeString(object.student!);
+          final studentEducationCategoryOffset =
+              object.studentEducationCategory == null
+                  ? null
+                  : fbb.writeString(object.studentEducationCategory!);
+          fbb.startTable(48);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, userNameOffset);
           fbb.addInt64(2, object.dateOfBirth?.millisecondsSinceEpoch);
@@ -721,6 +737,8 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(42, dbNonCommunicableDiseasesOffset);
           fbb.addOffset(43, dbTobaccoProductsOffset);
           fbb.addOffset(44, dbOccupationDataOffset);
+          fbb.addOffset(45, studentOffset);
+          fbb.addOffset(46, studentEducationCategoryOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -802,7 +820,11 @@ ModelDefinition getObjectBoxModel() {
             ..dbTobaccoProducts = const fb.StringReader()
                 .vTableGetNullable(buffer, rootOffset, 90)
             ..dbOccupationData = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 92);
+                .vTableGetNullable(buffer, rootOffset, 92)
+            ..student = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 94)
+            ..studentEducationCategory = const fb.StringReader()
+                .vTableGetNullable(buffer, rootOffset, 96);
 
           return object;
         }),
@@ -1261,6 +1283,15 @@ class FamilyMemberIndividualDataModel_ {
   static final dbOccupationData =
       QueryStringProperty<FamilyMemberIndividualDataModel>(
           _entities[1].properties[34]);
+
+  /// see [FamilyMemberIndividualDataModel.student]
+  static final student = QueryStringProperty<FamilyMemberIndividualDataModel>(
+      _entities[1].properties[35]);
+
+  /// see [FamilyMemberIndividualDataModel.studentEducationCategory]
+  static final studentEducationCategory =
+      QueryStringProperty<FamilyMemberIndividualDataModel>(
+          _entities[1].properties[36]);
 }
 
 /// [FamilyMembersCommonDataModel] entity fields to define ObjectBox queries.

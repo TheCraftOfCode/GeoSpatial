@@ -59,7 +59,7 @@
     },
     {
       "id": "2:4604626538020621410",
-      "lastPropertyId": "45:8806096688498887024",
+      "lastPropertyId": "47:9107986757309043468",
       "name": "FamilyMemberIndividualDataModel",
       "properties": [
         {
@@ -236,6 +236,16 @@
         {
           "id": "45:8806096688498887024",
           "name": "dbOccupationData",
+          "type": 9
+        },
+        {
+          "id": "46:1773687084148916152",
+          "name": "student",
+          "type": 9
+        },
+        {
+          "id": "47:9107986757309043468",
+          "name": "studentEducationCategory",
           "type": 9
         }
       ],
