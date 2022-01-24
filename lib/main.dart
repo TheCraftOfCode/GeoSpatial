@@ -9,6 +9,8 @@ import 'package:geo_spatial/Widgets/LoadValidPageWidget.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 
+//TODO: Build a modular function for HTTP requests
+
 final storage = FlutterSecureStorage();
 
 Future<void> main() async {
