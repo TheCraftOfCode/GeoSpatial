@@ -160,13 +160,13 @@ class _HomeWidgetState extends State<Home> {
                   CommunityDataCollection(),
                   Color(0xfff54b64),
                   Color(0xfff78361)),
-              DataCard(
-                  'Edit Existing Record',
-                  'Edit information of an existing person',
-                  'assets/svg/male.svg',
-                  EditRecordsScreen(),
-                  Color(0xfff54b64),
-                  Color(0xfff78361)),
+              // DataCard(
+              //     'Edit Existing Record',
+              //     'Edit information of an existing person',
+              //     'assets/svg/male.svg',
+              //     EditRecordsScreen(),
+              //     Color(0xfff54b64),
+              //     Color(0xfff78361)),
               DataCard(
                   'View saved data',
                   'View all data saved in local storage',

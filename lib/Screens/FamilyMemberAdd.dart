@@ -255,7 +255,7 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                               color: colors.darkSecondaryTextColor),
                         ),
                         helperText:
-                        "Leave empty if person is not willing to share",
+                            "Leave empty if person is not willing to share",
                         helperStyle: GoogleFonts.poppins(
                             color: colors.darkSecondaryTextColor),
                         hintText: "Please enter 10 digit phone",
@@ -346,249 +346,259 @@ class _FamilyMemberAddState extends State<FamilyMemberAdd> {
                     },
                   ),
                   ConditionalRenderWidget(
-                      title: "Employed?",
-                      onSaved: (val) {
-                        widget.familyMemberIndividualDataModel!.employed = val;
-                      },
-                      defaultValue:
-                          widget.familyMemberIndividualDataModel!.employed,
-                      conditionalNegativeWidget: ConditionalRenderWidget(
-                        title: 'Student?',
-                        onSaved: (val){},
-                        defaultValue: null,
-                        options: [
-                          ["Yes", "yes"],
-                          ["No", "no"],
-                        ],
-                        conditionalPositiveValue: "yes",
-                        conditionalNegativeValue: "no",
-                        conditionalPositiveWidget: DropDownFormField(
-                          defaultValue: "Enter value",
-                          list: [
-                            'School',
-                            'College',
-                            'Vocational',
-                          ],
-                          onSaved: (data) {},
-                          hint: "Choose category",
-                          title: "Education",
-                          errorField: "Please choose a category",
-                        ),
-                        conditionalNegativeWidget: Container(),
-                      ),
-                      conditionalPositiveWidget: Column(
-                        children: [
-                          NestedOptionWidgetFormField(
-                            onSaved: (val) {
-                              widget.familyMemberIndividualDataModel!.occupationData =
-                                  val;
-                            },
-                            nestedOptionData: widget
-                                .familyMemberIndividualDataModel!.occupationData ??
-                                [
-                                  new NestedOptionData(subOptionDataMap: {
-                                    "Administrative and Commercial Managers": false,
-                                    "Chief Executives, Senior Officials and Legislators":
-                                    false,
-                                    "Production and Specialized Services Managers":
-                                    false,
-                                    "Hospitality, Retail and Other Services Managers":
-                                    false
-                                  }, boxName: 'Managers'),
-                                  new NestedOptionData(subOptionDataMap: {
-                                    "Science and Engineering Professionals": false,
-                                    "Health Professionals": false,
-                                    "Teaching Professionals": false,
-                                    "Business and Administration Professionals": false,
-                                    "Information and Communications Technology Professionals":
-                                    false,
-                                    "Legal, Social and Cultural Professionals": false
-                                  }, boxName: 'Professionals'),
-                                  new NestedOptionData(
-                                      subOptionDataMap: {
-                                        "Science and Engineering Associate Professionals":
-                                        false,
-                                        "Health Associate Professionals": false,
-                                        "Business and Administration Associate Professionals":
-                                        false,
-                                        "Legal, Social, Cultural and Related Associate Professionals":
-                                        false,
-                                        "Information and Communications Technicians":
-                                        false
-                                      },
-                                      boxName:
-                                      'Technicians and Associate Professionals'),
-                                  new NestedOptionData(subOptionDataMap: {
-                                    "General and Keyboard Clerks": false,
-                                    "Customer Services Clerks": false,
-                                    "Numerical and Material Recording Clerks": false,
-                                    "Other Clerical Support Workers": false
-                                  }, boxName: 'Clerical Support Workers'),
-                                  new NestedOptionData(subOptionDataMap: {
-                                    "Personal Services Workers": false,
-                                    "Sales Workers": false,
-                                    "Personal Care Workers": false,
-                                    "Protective Services Workers": false
-                                  }, boxName: 'Services and Sales Workers'),
-                                  new NestedOptionData(
-                                      subOptionDataMap: {
-                                        "Market-oriented Skilled Agricultural Workers":
-                                        false,
-                                        "Market-oriented Skilled Forestry, Fishery and Hunting Workers":
-                                        false,
-                                        "Subsistence Farmers, Fishers, Hunters and Gatherers":
-                                        false
-                                      },
-                                      boxName:
-                                      'Skilled Agricultural, Forestry and Fishery Workers'),
-                                  new NestedOptionData(subOptionDataMap: {
-                                    "Building and Related Trades Workers (excluding Electricians)":
-                                    false,
-                                    "Metal, Machinery and Related Trades Workers":
-                                    false,
-                                    "Handicraft and Printing Workers": false,
-                                    "Electrical and Electronic Trades Workers": false,
-                                    "Food Processing, Woodworking, Garment and Other Craft and Related Trades Workers":
-                                    false
-                                  }, boxName: 'Craft and Related Trades Workers'),
-                                  new NestedOptionData(
-                                      subOptionDataMap: {
-                                        "Stationary Plant and Machine Operators": false,
-                                        "Assemblers": false,
-                                        "Drivers and Mobile Plant Operators": false
-                                      },
-                                      boxName:
-                                      'Plant and Machine Operators and Assemblers'),
-                                  new NestedOptionData(subOptionDataMap: {
-                                    "Cleaners and Helpers": false,
-                                    "Agricultural, Forestry and Fishery Labourers":
-                                    false,
-                                    "Labourers in Mining, Construction, Manufacturing and Transport":
-                                    false,
-                                    "Food Preparation Assistants": false,
-                                    "Street and Related Sales and Services Workers":
-                                    false,
-                                    "Refuse Workers and Other Elementary Workers": false
-                                  }, boxName: 'Elementary Occupations'),
-                                  new NestedOptionData(subOptionDataMap: {
-                                    "Commissioned Armed Forces Officers": false,
-                                    "Non-commissioned Armed Forces Officers": false,
-                                    "Armed Forces Occupations, Other Ranks": false
-                                  }, boxName: 'Armed Forces Occupations'),
-                                ],
-                            title: 'Occupation',
-                            context: context,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15),
-                            child: StartingEndingTimeWidget(
-                              initialValue: widget
-                                          .familyMemberIndividualDataModel!
-                                          .workTimings !=
-                                      null
-                                  ? [
-                                      TimeOfDay(
-                                          hour: int.parse(widget
-                                              .familyMemberIndividualDataModel!
-                                              .workTimings![0]
-                                              .split(":")[0]),
-                                          minute: int.parse(widget
-                                              .familyMemberIndividualDataModel!
-                                              .workTimings![0]
-                                              .split(":")[1]
-                                              .replaceAll(
-                                                  new RegExp(r"\D"), ""))),
-                                      TimeOfDay(
-                                          hour: int.parse(widget
-                                              .familyMemberIndividualDataModel!
-                                              .workTimings![1]
-                                              .split(":")[0]),
-                                          minute: int.parse(widget
-                                              .familyMemberIndividualDataModel!
-                                              .workTimings![1]
-                                              .split(":")[1]
-                                              .replaceAll(
-                                                  new RegExp(r"\D"), "")))
-                                    ]
-                                  : null,
-                              onSaved: (List<TimeOfDay>? timeList) {
-                                print(timeList);
-                                var timeFinalString = [
-                                  "${timeList![0].hour}:${timeList[0].minute} ${timeList[0].period == DayPeriod.am ? "AM" : "PM"}",
-                                  "${timeList[1].hour}:${timeList[1].minute} ${timeList[1].period == DayPeriod.am ? "AM" : "PM"}"
-                                ];
-                                widget.familyMemberIndividualDataModel!
-                                    .workTimings = timeFinalString;
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10.0, vertical: 20.0),
-                            child: TextFormField(
-                              initialValue: widget
-                                  .familyMemberIndividualDataModel!
-                                  .noOfDaysWorking,
-                              keyboardType: TextInputType.number,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              style: darkTheme.DarkTheme.textTheme.bodyText2,
-                              decoration: InputDecoration(
-                                label: Text(
-                                  "Number of work days",
-                                  style: GoogleFonts.poppins(
-                                      color: colors.darkSecondaryTextColor),
-                                ),
-                                hintText: "Please enter number of work days",
-                                hintStyle: GoogleFonts.poppins(
-                                    color: colors.darkSecondaryTextColor),
-                                contentPadding: EdgeInsets.all(7.0),
-                              ),
-                              validator: (value) {
-                                print(value);
-                                print("value");
-                                if (value == null || value == "")
-                                  return "Please enter number of work days";
-                                else if (int.tryParse(value) == null) {
-                                  return "Field can only have numbers";
-                                } else if (int.parse(value) < 1) {
-                                  return "Enter number of work days";
-                                } else if (int.parse(value) > 31) {
-                                  return "Enter a valid number of work days";
-                                }
-                              },
-                              onSaved: (val) {
-                                print(val.toString());
-                                widget.familyMemberIndividualDataModel!
-                                    .noOfDaysWorking = val;
-                              },
-                            ),
-                          ),
-                          IncomeWithTypeTextField(
-                            initialDropdownValue: widget
-                                .familyMemberIndividualDataModel!.incomeType,
-                            initialValue:
-                                widget.familyMemberIndividualDataModel!.income,
-                            onSaved: (income, option) {
-                              widget.familyMemberIndividualDataModel!.income =
-                                  income;
-                              widget.familyMemberIndividualDataModel!
-                                  .incomeType = option;
-                              print(income! + " " + option!);
-                            },
-                            text: 'Income',
-                            hintText: 'Enter income',
-                            listOfOptions: ["Day", "Week", "Month"],
-                          ),
-                        ],
-                      ),
+                    title: "Employed?",
+                    onSaved: (val) {
+                      widget.familyMemberIndividualDataModel!.employed = val;
+                    },
+                    defaultValue:
+                        widget.familyMemberIndividualDataModel!.employed,
+                    conditionalNegativeWidget: ConditionalRenderWidget(
+                      title: 'Student?',
+                      onSaved: (val) {},
+                      defaultValue: null,
                       options: [
                         ["Yes", "yes"],
                         ["No", "no"],
                       ],
                       conditionalPositiveValue: "yes",
                       conditionalNegativeValue: "no",
-                      )
+                      conditionalPositiveWidget: DropDownFormField(
+                        //defaultValue: "Enter value",
+                        list: [
+                          'School',
+                          'College',
+                          'Vocational',
+                        ],
+                        onSaved: (data) {},
+                        hint: "Choose education category",
+                        title: "Education",
+                        errorField: "Please choose a category",
+                      ),
+                      conditionalNegativeWidget: Container(),
+                    ),
+                    conditionalPositiveWidget: Column(
+                      children: [
+                        NestedOptionWidgetFormField(
+                          onSaved: (val) {
+                            widget.familyMemberIndividualDataModel!
+                                .occupationData = val;
+                          },
+                          nestedOptionData: widget
+                                  .familyMemberIndividualDataModel!
+                                  .occupationData ??
+                              [
+                                new NestedOptionData(subOptionDataMap: {
+                                  "Administrative and Commercial Managers":
+                                      false,
+                                  "Chief Executives, Senior Officials and Legislators":
+                                      false,
+                                  "Production and Specialized Services Managers":
+                                      false,
+                                  "Hospitality, Retail and Other Services Managers":
+                                      false
+                                }, boxName: 'Managers'),
+                                new NestedOptionData(subOptionDataMap: {
+                                  "Science and Engineering Professionals":
+                                      false,
+                                  "Health Professionals": false,
+                                  "Teaching Professionals": false,
+                                  "Business and Administration Professionals":
+                                      false,
+                                  "Information and Communications Technology Professionals":
+                                      false,
+                                  "Legal, Social and Cultural Professionals":
+                                      false
+                                }, boxName: 'Professionals'),
+                                new NestedOptionData(
+                                    subOptionDataMap: {
+                                      "Science and Engineering Associate Professionals":
+                                          false,
+                                      "Health Associate Professionals": false,
+                                      "Business and Administration Associate Professionals":
+                                          false,
+                                      "Legal, Social, Cultural and Related Associate Professionals":
+                                          false,
+                                      "Information and Communications Technicians":
+                                          false
+                                    },
+                                    boxName:
+                                        'Technicians and Associate Professionals'),
+                                new NestedOptionData(subOptionDataMap: {
+                                  "General and Keyboard Clerks": false,
+                                  "Customer Services Clerks": false,
+                                  "Numerical and Material Recording Clerks":
+                                      false,
+                                  "Other Clerical Support Workers": false
+                                }, boxName: 'Clerical Support Workers'),
+                                new NestedOptionData(subOptionDataMap: {
+                                  "Personal Services Workers": false,
+                                  "Sales Workers": false,
+                                  "Personal Care Workers": false,
+                                  "Protective Services Workers": false
+                                }, boxName: 'Services and Sales Workers'),
+                                new NestedOptionData(
+                                    subOptionDataMap: {
+                                      "Market-oriented Skilled Agricultural Workers":
+                                          false,
+                                      "Market-oriented Skilled Forestry, Fishery and Hunting Workers":
+                                          false,
+                                      "Subsistence Farmers, Fishers, Hunters and Gatherers":
+                                          false
+                                    },
+                                    boxName:
+                                        'Skilled Agricultural, Forestry and Fishery Workers'),
+                                new NestedOptionData(subOptionDataMap: {
+                                  "Building and Related Trades Workers (excluding Electricians)":
+                                      false,
+                                  "Metal, Machinery and Related Trades Workers":
+                                      false,
+                                  "Handicraft and Printing Workers": false,
+                                  "Electrical and Electronic Trades Workers":
+                                      false,
+                                  "Food Processing, Woodworking, Garment and Other Craft and Related Trades Workers":
+                                      false
+                                }, boxName: 'Craft and Related Trades Workers'),
+                                new NestedOptionData(
+                                    subOptionDataMap: {
+                                      "Stationary Plant and Machine Operators":
+                                          false,
+                                      "Assemblers": false,
+                                      "Drivers and Mobile Plant Operators":
+                                          false
+                                    },
+                                    boxName:
+                                        'Plant and Machine Operators and Assemblers'),
+                                new NestedOptionData(subOptionDataMap: {
+                                  "Cleaners and Helpers": false,
+                                  "Agricultural, Forestry and Fishery Labourers":
+                                      false,
+                                  "Labourers in Mining, Construction, Manufacturing and Transport":
+                                      false,
+                                  "Food Preparation Assistants": false,
+                                  "Street and Related Sales and Services Workers":
+                                      false,
+                                  "Refuse Workers and Other Elementary Workers":
+                                      false
+                                }, boxName: 'Elementary Occupations'),
+                                new NestedOptionData(subOptionDataMap: {
+                                  "Commissioned Armed Forces Officers": false,
+                                  "Non-commissioned Armed Forces Officers":
+                                      false,
+                                  "Armed Forces Occupations, Other Ranks": false
+                                }, boxName: 'Armed Forces Occupations'),
+                              ],
+                          title: 'Occupation',
+                          context: context,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(15),
+                          child: StartingEndingTimeWidget(
+                            initialValue: widget
+                                        .familyMemberIndividualDataModel!
+                                        .workTimings !=
+                                    null
+                                ? [
+                                    TimeOfDay(
+                                        hour: int.parse(widget
+                                            .familyMemberIndividualDataModel!
+                                            .workTimings![0]
+                                            .split(":")[0]),
+                                        minute: int.parse(widget
+                                            .familyMemberIndividualDataModel!
+                                            .workTimings![0]
+                                            .split(":")[1]
+                                            .replaceAll(
+                                                new RegExp(r"\D"), ""))),
+                                    TimeOfDay(
+                                        hour: int.parse(widget
+                                            .familyMemberIndividualDataModel!
+                                            .workTimings![1]
+                                            .split(":")[0]),
+                                        minute: int.parse(widget
+                                            .familyMemberIndividualDataModel!
+                                            .workTimings![1]
+                                            .split(":")[1]
+                                            .replaceAll(new RegExp(r"\D"), "")))
+                                  ]
+                                : null,
+                            onSaved: (List<TimeOfDay>? timeList) {
+                              print(timeList);
+                              var timeFinalString = [
+                                "${timeList![0].hour}:${timeList[0].minute} ${timeList[0].period == DayPeriod.am ? "AM" : "PM"}",
+                                "${timeList[1].hour}:${timeList[1].minute} ${timeList[1].period == DayPeriod.am ? "AM" : "PM"}"
+                              ];
+                              widget.familyMemberIndividualDataModel!
+                                  .workTimings = timeFinalString;
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 20.0),
+                          child: TextFormField(
+                            initialValue: widget
+                                .familyMemberIndividualDataModel!
+                                .noOfDaysWorking,
+                            keyboardType: TextInputType.number,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            style: darkTheme.DarkTheme.textTheme.bodyText2,
+                            decoration: InputDecoration(
+                              label: Text(
+                                "Number of work days",
+                                style: GoogleFonts.poppins(
+                                    color: colors.darkSecondaryTextColor),
+                              ),
+                              hintText: "Please enter number of work days",
+                              hintStyle: GoogleFonts.poppins(
+                                  color: colors.darkSecondaryTextColor),
+                              contentPadding: EdgeInsets.all(7.0),
+                            ),
+                            validator: (value) {
+                              print(value);
+                              print("value");
+                              if (value == null || value == "")
+                                return "Please enter number of work days";
+                              else if (int.tryParse(value) == null) {
+                                return "Field can only have numbers";
+                              } else if (int.parse(value) < 1) {
+                                return "Enter number of work days";
+                              } else if (int.parse(value) > 31) {
+                                return "Enter a valid number of work days";
+                              }
+                            },
+                            onSaved: (val) {
+                              print(val.toString());
+                              widget.familyMemberIndividualDataModel!
+                                  .noOfDaysWorking = val;
+                            },
+                          ),
+                        ),
+                        IncomeWithTypeTextField(
+                          initialDropdownValue: widget
+                              .familyMemberIndividualDataModel!.incomeType,
+                          initialValue:
+                              widget.familyMemberIndividualDataModel!.income,
+                          onSaved: (income, option) {
+                            widget.familyMemberIndividualDataModel!.income =
+                                income;
+                            widget.familyMemberIndividualDataModel!.incomeType =
+                                option;
+                            print(income! + " " + option!);
+                          },
+                          text: 'Income',
+                          hintText: 'Enter income',
+                          listOfOptions: ["Day", "Week", "Month"],
+                        ),
+                      ],
+                    ),
+                    options: [
+                      ["Yes", "yes"],
+                      ["No", "no"],
+                    ],
+                    conditionalPositiveValue: "yes",
+                    conditionalNegativeValue: "no",
+                  )
                 ],
               ),
               Column(
