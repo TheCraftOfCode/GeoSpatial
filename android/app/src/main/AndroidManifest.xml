@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
    <application
-        android:label="geo_spatial"
+        android:label="GeoSpatial"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
