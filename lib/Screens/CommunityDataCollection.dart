@@ -126,6 +126,9 @@ class _CommunityDataCollectionState extends State<CommunityDataCollection> {
           http.Response res = await _makeRequest(
               modelData.toJson(), "/api/addCommunityBuilding");
           if (res.statusCode != 201) {
+            if(res.statusCode == 401){
+              logout(context);
+            }
             showToast(res.body);
           } else {
             Navigator.pop(context);

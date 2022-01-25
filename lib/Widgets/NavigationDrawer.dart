@@ -79,7 +79,7 @@ class NavigationDrawer extends StatelessWidget {
                         text: 'Sign Out',
                         icon: Icons.logout,
                         onTap: () async {
-                          logout(context);
+                          logoutDialog(context);
                         },
                       ),
                     ],

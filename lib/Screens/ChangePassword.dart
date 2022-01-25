@@ -6,6 +6,7 @@ import 'package:geo_spatial/Utils/Constants.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/Utils.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
+import 'package:geo_spatial/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
@@ -302,6 +303,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                                         if (res.statusCode != 200) {
                                           showToast(res.body);
                                         } else {
+                                          // storage.write(
+                                          //     key: JWT_STORAGE_KEY,
+                                          //     value: res.body);
                                           showToast(
                                               "Password changed successfully!");
                                           Navigator.pop(context);

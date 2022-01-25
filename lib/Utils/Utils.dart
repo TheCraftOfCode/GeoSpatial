@@ -31,7 +31,14 @@ Future<String> get getUserName async {
   return storedUserId;
 }
 
-logout(context) {
+logout(context) async {
+  await storage.delete(key: JWT_STORAGE_KEY);
+  Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => Login()),
+          (Route<dynamic> route) => false);
+}
+
+logoutDialog(context) {
   return showDialog(
     context: context,
     builder: (context) => AlertDialog(
@@ -62,10 +69,7 @@ logout(context) {
           child:
               Text('Yes', style: TextStyle(color: colors.darkPrimaryTextColor)),
           onPressed: () async {
-            await storage.delete(key: JWT_STORAGE_KEY);
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => Login()),
-                (Route<dynamic> route) => false);
+            logout(context);
           },
         ),
       ],

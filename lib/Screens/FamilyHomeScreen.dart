@@ -170,6 +170,9 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
                                       modelData!.toJson(),
                                       "/api/IndividualData");
                                   if (res.statusCode != 201) {
+                                    if(res.statusCode == 401){
+                                      logout(context);
+                                    }
                                     showToast(res.body);
                                   } else {
                                     Navigator.pop(context);

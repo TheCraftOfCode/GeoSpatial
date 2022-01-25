@@ -48,6 +48,8 @@ class LoadValidPageWidget extends StatelessWidget {
   Future<String> getVerifiedJwt(context) async {
     var jwt = await jwtToken;
 
+    if(jwt == "") return "";
+
     try {
       var res = await _validateToken(jwt);
       if (res.statusCode == 401) {

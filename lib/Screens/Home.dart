@@ -37,11 +37,13 @@ class _HomeWidgetState extends State<Home> {
             "Offline mode, data cannot be uploaded until device is connected to the internet");
       } else {
         String jwt = await jwtToken;
+        print(jwt);
         var res = await http
             .get(Uri.https(NETWORK_ADDRESS, '/api/validateToken'), headers: {
           "Content-Type": "application/json",
           'user-auth-token': jwt
         }).timeout(Duration(seconds: 30));
+        print(res.statusCode);
         if (res.statusCode == 401) {
           await storage.delete(key: JWT_STORAGE_KEY);
           Navigator.of(context).pushAndRemoveUntil(

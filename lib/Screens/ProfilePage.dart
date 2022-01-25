@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geo_spatial/Utils/Constants.dart';
 import 'package:geo_spatial/Screens/ChangePassword.dart';
-import 'package:geo_spatial/Screens/Login.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/Utils.dart';
 import 'package:geo_spatial/Widgets/AppBarBackButtonWidget.dart';
@@ -70,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   IconButton(
                       splashRadius: 20,
                       onPressed: () async {
-                        logout(context);
+                        logoutDialog(context);
                       },
                       icon: Icon(
                         Icons.login_outlined,
