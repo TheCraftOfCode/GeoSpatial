@@ -7,8 +7,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:icon="@mipmap/ic_launcher"
-        android:label="GeoSpatial">
+        android:icon="@mipmap/ic_samagri_icon"
+        android:roundIcon="@mipmap/ic_samagri_icon_round"
+        android:label="Samagri Spatial">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
