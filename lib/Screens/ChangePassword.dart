@@ -301,6 +301,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                                                 _newPasswordController.text);
 
                                         if (res.statusCode != 200) {
+                                          if(res.statusCode == 401){
+                                            logout(context);
+                                          }
                                           showToast(res.body);
                                         } else {
                                           storage.write(
