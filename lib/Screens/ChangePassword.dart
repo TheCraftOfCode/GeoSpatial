@@ -303,9 +303,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                                         if (res.statusCode != 200) {
                                           showToast(res.body);
                                         } else {
-                                          // storage.write(
-                                          //     key: JWT_STORAGE_KEY,
-                                          //     value: res.body);
+                                          storage.write(
+                                              key: JWT_STORAGE_KEY,
+                                              value: res.body);
                                           showToast(
                                               "Password changed successfully!");
                                           Navigator.pop(context);
