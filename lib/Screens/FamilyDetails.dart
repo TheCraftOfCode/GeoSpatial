@@ -61,7 +61,8 @@ class _FamilyDetailsState extends State<FamilyDetails> {
     'KAP',
     'NEP',
     'CGP',
-    'JJN'
+    'JJN',
+    'ETT'
   ];
 
   var four_mfg = <String, bool>{
