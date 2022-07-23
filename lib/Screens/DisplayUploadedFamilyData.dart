@@ -2,8 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geo_spatial/Model/FamilyDataModels.dart';
-import 'package:geo_spatial/Screens/FamilyHomeScreen.dart';
+import 'package:geo_spatial/Screens/RenderJSONData.dart';
 import 'package:geo_spatial/Utils/Colors.dart' as colors;
 import 'package:geo_spatial/Utils/Constants.dart';
 import 'package:geo_spatial/Utils/Utils.dart';
@@ -13,18 +12,19 @@ import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 
 //TODO: Parse Data into Family Data Object
-class EditRecordsScreen extends StatefulWidget {
-  const EditRecordsScreen({Key? key}) : super(key: key);
+class DisplayFamilyData extends StatefulWidget {
+  const DisplayFamilyData({Key? key}) : super(key: key);
 
   @override
-  State<EditRecordsScreen> createState() => _EditRecordsScreenState();
+  State<DisplayFamilyData> createState() => _DisplayFamilyDataState();
 }
 
-class _EditRecordsScreenState extends State<EditRecordsScreen> {
+class _DisplayFamilyDataState extends State<DisplayFamilyData> {
   bool isSearchOpen = false;
   TextEditingController _textEditingController = new TextEditingController();
 
   List<String> _dataList = <String>[];
+  List _mapData = [];
   late List<String> _searchList;
 
   initState() {
@@ -37,7 +37,7 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
     String jwt = await jwtToken;
 
     try {
-      var res = await http.get(Uri.http(url, '/api/getCommonRecords'),
+      var res = await http.get(Uri.http(url, '/api/getCommonRecords/familyData'),
           headers: {
             "Content-Type": "application/json",
             'user-auth-token': jwt
@@ -48,6 +48,8 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
           return http.Response('Error', 408);
         },
       );
+      print(json.decode(res.body));
+
       return res;
     } catch (e) {
       return http.Response(e.toString(), 408);
@@ -62,7 +64,7 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
           if (snapshot.hasData) {
             if (snapshot.requireData.statusCode != 200) {
               return Scaffold(
-                appBar: AppBarBackButton("Edit Records"),
+                appBar: AppBarBackButton("View Family Data"),
                 body: Center(
                   child: Text("Could not fetch data from server at this time"),
                 ),
@@ -71,13 +73,18 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
 
             try {
               var dataJson = json.decode(snapshot.requireData.body);
+              _dataList.clear();
+              _mapData.clear();
               for (var i in dataJson) {
                 _dataList.add(i["FamilyUIN"]);
+                _mapData.add(i);
+                print(i);
               }
             } catch (e) {
+              print(e);
               return Scaffold(
                 resizeToAvoidBottomInset: false,
-                appBar: AppBarBackButton("Edit Records"),
+                appBar: AppBarBackButton("View Family Data"),
                 body: Center(
                   child: Text("Could not fetch data from server at this time"),
                 ),
@@ -87,7 +94,7 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
             return Scaffold(
               backgroundColor: colors.darkScaffoldColor,
               appBar: AppBarBackButton(
-                'Edit Existing Data',
+                'View Family Data',
                 actions: [
                   IconButton(
                       splashRadius: 20,
@@ -134,21 +141,6 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
                             Icons.search,
                             color: colors.darkAccentColor,
                           ),
-                          // suffixIcon: Material(
-                          //   borderRadius: BorderRadius.only(
-                          //       topRight: Radius.circular(4),
-                          //       bottomRight: Radius.circular(4)),
-                          //   child: IconButton(
-                          //     splashRadius: 16,
-                          //     icon: Icon(
-                          //       Icons.clear,
-                          //       color: colors.darkSecondAccentColor,
-                          //     ),
-                          //     onPressed: () {
-                          //       _textEditingController.text = "";
-                          //     },
-                          //   ),
-                          // ),
                           label: Text(
                             "Search",
                             style: GoogleFonts.poppins(
@@ -194,30 +186,10 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
                                               vertical: 10, horizontal: 20.0),
                                           minLeadingWidth: 30,
                                           onTap: () {
-                                            var modelData =
-                                                FamilyMembersCommonDataModel();
-                                            modelData
-                                                .individualDataListTransient
-                                                .add(
-                                                    FamilyMemberIndividualDataModel());
-                                            modelData
-                                                .individualDataListTransient
-                                                .add(
-                                                    FamilyMemberIndividualDataModel());
-                                            modelData
-                                                .individualDataListTransient
-                                                .add(
-                                                    FamilyMemberIndividualDataModel());
-                                            modelData
-                                                .individualDataListTransient
-                                                .add(
-                                                    FamilyMemberIndividualDataModel());
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        FamilyHomeScreen(
-                                                          modelData: modelData,
-                                                        )));
+                                                        RenderJSONData(data: _mapData[index])));
                                           },
                                           //Pass a function which is called onSaved in the next page and add data to the class object
                                           title: Text(
@@ -228,7 +200,7 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
                                                 fontSize: 20),
                                           ),
                                           subtitle: Text(
-                                            'Click to edit',
+                                            'Click to view data',
                                             style: GoogleFonts.poppins(
                                                 color: colors
                                                     .darkSecondaryTextColor),
@@ -263,7 +235,7 @@ class _EditRecordsScreenState extends State<EditRecordsScreen> {
             );
           } else {
             return Scaffold(
-                appBar: AppBarBackButton("Edit Records"),
+                appBar: AppBarBackButton("View Family Data"),
                 body: Center(
                   child: CircularProgressIndicator(),
                 ));

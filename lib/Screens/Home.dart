@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:geo_spatial/Screens/DisplayUploadedData.dart';
 import 'package:geo_spatial/Screens/Login.dart';
 import 'package:geo_spatial/Utils/CheckNetworkConnectivity.dart';
 import 'package:geo_spatial/Utils/Constants.dart';
@@ -15,6 +16,7 @@ import 'package:geo_spatial/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:http/http.dart' as http;
+import 'DisplayUploadedFamilyData.dart';
 import 'SavedData.dart';
 
 class Home extends StatefulWidget {
@@ -146,13 +148,13 @@ class _HomeWidgetState extends State<Home> {
                   CommunityDataCollection(),
                   Color(0xfff54b64),
                   Color(0xfff78361)),
-              // DataCard(
-              //     'Edit Existing Record',
-              //     'Edit information of an existing person',
-              //     'assets/svg/male.svg',
-              //     EditRecordsScreen(),
-              //     Color(0xfff54b64),
-              //     Color(0xfff78361)),
+              DataCard(
+                  'View Uploaded Records',
+                  'View all records uploaded by you',
+                  'assets/svg/male.svg',
+                  DisplayUploadedData(),
+                  Color(0xfff54b64),
+                  Color(0xfff78361)),
               DataCard(
                   'View saved data',
                   'View all data saved in local storage',
