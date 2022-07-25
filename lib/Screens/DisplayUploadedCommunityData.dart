@@ -37,11 +37,11 @@ class _DisplayVillageDataState extends State<DisplayVillageData> {
     String jwt = await jwtToken;
 
     try {
-      var res = await http.get(Uri.http(url, '/api/getCommonRecords/individualData'),
-          headers: {
-            "Content-Type": "application/json",
-            'user-auth-token': jwt
-          }).timeout(
+      var res = await http
+          .get(Uri.http(url, '/api/getCommonRecords/individualData'), headers: {
+        "Content-Type": "application/json",
+        'user-auth-token': jwt
+      }).timeout(
         const Duration(seconds: 30),
         onTimeout: () {
           showToast("Server Timed out!");
@@ -122,8 +122,8 @@ class _DisplayVillageDataState extends State<DisplayVillageData> {
                           setState(() {
                             _searchList = _dataList
                                 .where((i) => i
-                                .toLowerCase()
-                                .contains(text.toLowerCase()))
+                                    .toLowerCase()
+                                    .contains(text.toLowerCase()))
                                 .toList();
                           });
                         },
@@ -135,7 +135,7 @@ class _DisplayVillageDataState extends State<DisplayVillageData> {
                                   color: colors.darkSecondaryTextColor,
                                   width: 1.0)),
                           contentPadding:
-                          EdgeInsets.symmetric(horizontal: 10.0),
+                              EdgeInsets.symmetric(horizontal: 10.0),
                           fillColor: colors.darkScaffoldColor,
                           prefixIcon: Icon(
                             Icons.search,
@@ -169,63 +169,93 @@ class _DisplayVillageDataState extends State<DisplayVillageData> {
                           padding: EdgeInsets.all(12),
                           child: _searchList.isNotEmpty
                               ? ListView.builder(
-                              itemCount: _searchList.length,
-                              itemBuilder:
-                                  (BuildContext context, int index) {
-                                return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10.0, vertical: 3.0),
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5))),
-                                    elevation: 10,
-                                    color: colors.darkScaffoldColor,
-                                    child: ListTile(
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 10, horizontal: 20.0),
-                                      minLeadingWidth: 30,
-                                      onTap: () {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    RenderJSONData(data: _mapData[index])));
-                                      },
-                                      //Pass a function which is called onSaved in the next page and add data to the class object
-                                      title: Text(
-                                        _searchList[index],
-                                        style: GoogleFonts.poppins(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 20),
+                                  itemCount: _searchList.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10.0, vertical: 3.0),
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5))),
+                                        elevation: 10,
+                                        color: colors.darkScaffoldColor,
+                                        child: ListTile(
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 10, horizontal: 20.0),
+                                          minLeadingWidth: 30,
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        RenderJSONData(
+                                                            data: _mapData[
+                                                                index])));
+                                          },
+                                          //Pass a function which is called onSaved in the next page and add data to the class object
+                                          title: Text(
+                                            _searchList[index],
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 20),
+                                          ),
+                                          subtitle: Text(
+                                            'Click to view data',
+                                            style: GoogleFonts.poppins(
+                                                color: colors
+                                                    .darkSecondaryTextColor),
+                                          ),
+                                          leading: SvgPicture.asset(
+                                            "assets/svg/user-id-icon.svg",
+                                            fit: BoxFit.fill,
+                                          ),
+                                          isThreeLine: true,
+                                          trailing: IconButton(
+                                            icon: Icon(
+                                              Icons.delete_forever,
+                                              color: colors.darkAccentColor,
+                                            ),
+                                            onPressed: () {
+                                              displayDialog(
+                                                context,
+                                                positiveFunction: () async {
+                                                  var record = _mapData[index];
+                                                  Navigator.of(context).pop();
+
+                                                  bool success =
+                                                      await deleteRecord({
+                                                    "id": record["_id"]
+                                                  }, "/api/getCommonRecords/deleteCommunityData",
+                                                          context);
+
+                                                  if (success) {
+                                                    _mapData.removeAt(index);
+                                                    setState(() {});
+                                                  }
+                                                },
+                                                negativeFunction: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                title: 'Delete record',
+                                                subTitle:
+                                                    'Are you sure you want to delete this record?',
+                                              );
+                                            },
+                                          ),
+                                        ),
                                       ),
-                                      subtitle: Text(
-                                        'Click to view data',
-                                        style: GoogleFonts.poppins(
-                                            color: colors
-                                                .darkSecondaryTextColor),
-                                      ),
-                                      leading: SvgPicture.asset(
-                                        "assets/svg/user-id-icon.svg",
-                                        fit: BoxFit.fill,
-                                      ),
-                                      isThreeLine: true,
-                                      trailing: Icon(
-                                        Icons.chevron_right,
-                                        color: colors.darkAccentColor,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              })
+                                    );
+                                  })
                               : Container(
-                              width: double.infinity,
-                              child: Center(
-                                child: Text(
-                                  "No Results Found",
-                                  textAlign: TextAlign.center,
-                                ),
-                              )),
+                                  width: double.infinity,
+                                  child: Center(
+                                    child: Text(
+                                      "No Results Found",
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  )),
                         ),
                       ),
                     ),

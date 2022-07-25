@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geo_spatial/Screens/DisplayUploadedFamilyData.dart';
-import 'package:geo_spatial/Screens/DisplayUploadedVillageData.dart';
+import 'package:geo_spatial/Screens/DisplayUploadedCommunityData.dart';
 
 import '../Widgets/AppBarBackButtonWidget.dart';
 import '../Widgets/DataCard.dart';

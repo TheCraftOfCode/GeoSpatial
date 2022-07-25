@@ -37,11 +37,11 @@ class _DisplayFamilyDataState extends State<DisplayFamilyData> {
     String jwt = await jwtToken;
 
     try {
-      var res = await http.get(Uri.http(url, '/api/getCommonRecords/familyData'),
-          headers: {
-            "Content-Type": "application/json",
-            'user-auth-token': jwt
-          }).timeout(
+      var res = await http
+          .get(Uri.http(url, '/api/getCommonRecords/familyData'), headers: {
+        "Content-Type": "application/json",
+        'user-auth-token': jwt
+      }).timeout(
         const Duration(seconds: 30),
         onTimeout: () {
           showToast("Server Timed out!");
@@ -189,7 +189,9 @@ class _DisplayFamilyDataState extends State<DisplayFamilyData> {
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        RenderJSONData(data: _mapData[index])));
+                                                        RenderJSONData(
+                                                            data: _mapData[
+                                                                index])));
                                           },
                                           //Pass a function which is called onSaved in the next page and add data to the class object
                                           title: Text(
@@ -210,9 +212,37 @@ class _DisplayFamilyDataState extends State<DisplayFamilyData> {
                                             fit: BoxFit.fill,
                                           ),
                                           isThreeLine: true,
-                                          trailing: Icon(
-                                            Icons.chevron_right,
-                                            color: colors.darkAccentColor,
+                                          trailing: IconButton(
+                                            icon: Icon(
+                                              Icons.delete_forever,
+                                              color: colors.darkAccentColor,
+                                            ),
+                                            onPressed: () {
+                                              displayDialog(
+                                                context,
+                                                positiveFunction: () async {
+                                                  var record = _mapData[index];
+                                                  Navigator.of(context).pop();
+
+                                                  bool success =
+                                                      await deleteRecord({
+                                                    "id": record["_id"]
+                                                  }, "/api/getCommonRecords/deleteFamilyData",
+                                                          context);
+
+                                                  if (success) {
+                                                    _mapData.removeAt(index);
+                                                    setState(() {});
+                                                  }
+                                                },
+                                                negativeFunction: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                title: 'Delete record',
+                                                subTitle:
+                                                    'Are you sure you want to delete this record?',
+                                              );
+                                            },
                                           ),
                                         ),
                                       ),
