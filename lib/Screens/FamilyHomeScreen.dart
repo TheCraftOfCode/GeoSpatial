@@ -45,7 +45,7 @@ class _FamilyHomeScreenState extends State<FamilyHomeScreen> {
     var jwt = await jwtToken;
 
     var res = await http
-        .post(Uri.https(url, node),
+        .post(Uri.http(url, node),
             headers: {
               "Content-Type": "application/json",
               "user-auth-token": jwt

@@ -196,7 +196,7 @@ Future<bool> deleteRecord(var data, String node, context) async {
   var jwt = await jwtToken;
 
   var res = await http
-      .post(Uri.https(url, node),
+      .post(Uri.http(url, node),
           headers: {"Content-Type": "application/json", "user-auth-token": jwt},
           body: body)
       .timeout(

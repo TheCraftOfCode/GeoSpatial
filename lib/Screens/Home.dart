@@ -41,7 +41,7 @@ class _HomeWidgetState extends State<Home> {
         String jwt = await jwtToken;
         print(jwt);
         var res = await http
-            .get(Uri.https(NETWORK_ADDRESS, '/api/validateToken'), headers: {
+            .get(Uri.http(NETWORK_ADDRESS, '/api/validateToken'), headers: {
           "Content-Type": "application/json",
           'user-auth-token': jwt
         }).timeout(Duration(seconds: 30));

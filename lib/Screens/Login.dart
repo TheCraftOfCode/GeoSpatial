@@ -67,7 +67,7 @@ class _MyAppState extends State<Login> {
     var body = json.encode({"username": username, "password": password});
 
     var res = await http
-        .post(Uri.https(url, '/api/login'),
+        .post(Uri.http(url, '/api/login'),
             headers: {"Content-Type": "application/json"}, body: body)
         .timeout(
       const Duration(seconds: 30),
@@ -84,7 +84,7 @@ class _MyAppState extends State<Login> {
   Future<http.Response> _getUserDetails(String JWT) async {
     String url = NETWORK_ADDRESS;
 
-    var res = await http.get(Uri.https(url, '/api/getUserData'), headers: {
+    var res = await http.get(Uri.http(url, '/api/getUserData'), headers: {
       "Content-Type": "application/json",
       'user-auth-token': JWT
     }).timeout(

@@ -22,7 +22,7 @@ Future<http.Response> _getUserDetails() async {
   var jwt = await jwtToken;
   String url = NETWORK_ADDRESS;
 
-  var res = await http.get(Uri.https(url, '/api/getUserData'), headers: {
+  var res = await http.get(Uri.http(url, '/api/getUserData'), headers: {
     "Content-Type": "application/json",
     'user-auth-token': jwt
   }).timeout(
